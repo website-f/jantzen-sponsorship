@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SponsorshipController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('sponsorship');
+});
+
+Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
+Route::get('sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack']);
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login-fill', [AuthController::class, 'loginFill']);
+Route::get('/login-admin', [AuthController::class, 'loginAdmin']);
+Route::post('/login-admin-fill', [AuthController::class, 'loginAdminFill']);
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
+    Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
+});
+
+
+
