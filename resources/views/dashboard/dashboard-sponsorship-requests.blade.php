@@ -46,7 +46,32 @@
               <option value="Booth">Booth</option>
               <option value="Space">Space</option>
             </select></div>
-        </div><label for="">Sponsorhip Products</label>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Pickup Location</label>
+            <select id="field-3" name="pickup_location" data-name="Field 3" class="select-field w-select pickup-location">
+              <option value="">Select one...</option>
+              <option value="Puchong">Puchong</option>
+              <option value="Shah Alam">Shah Alam</option>
+            </select>
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Pickup Location Address</label>
+            <input type="text" class="text-field-13 w-input pickup-address" maxlength="256" name="pickup_address" data-name="Field 8" placeholder="" id="field-8" readonly>
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Contact Person</label>
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" name="contact_person" data-name="Field 8" placeholder="" id="field-8" readonly>
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Phone Number</label>
+            <input type="text" class="text-field-13 w-input phone-number" maxlength="256" name="pickup_phone_number" data-name="Field 8" placeholder="" id="field-8" readonly>
+          </div>
+        </div>
+        <label for="">Sponsorhip Products</label>
         <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2b-cdafff14" class="w-layout-layout quick-stack-6 wf-layout-layout">
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2c-cdafff14" class="w-layout-cell cell-10">
             <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" required="">
@@ -223,5 +248,24 @@
     })
 
     totalProducts.textContent = totalCartons + " Bottles and " + ro200mlVal.textContent;
+  </script>
+  <script>
+    const pickup_location = document.querySelector(".pickup-location");
+    const pickup_address = document.querySelector(".pickup-address");
+    const contact_person = document.querySelector(".contact-person");
+    const phone_number = document.querySelector(".phone-number");
+
+    pickup_location.addEventListener("change", function() {
+      if(pickup_location.value == "Puchong") {
+        pickup_address.value = "12, Jalan Tpk 2/4, Taman Perindustrian Kinrara, 47180 Puchong, Selangor"
+        contact_person.value = "Lily"
+        phone_number.value = "011-10607533"
+      } else if(pickup_location.value == "Shah Alam") {
+        pickup_address.value = "75A, Jalan Snuker 13/28, Seksyen 13, 40100 Shah Alam, Selangor"
+        contact_person.value = "Husniza | Yee Yong"
+        phone_number.value = "011-10691533 | 012-7627066"
+      }
+    })
+
   </script>
 @endsection

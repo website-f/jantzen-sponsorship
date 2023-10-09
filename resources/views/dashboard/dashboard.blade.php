@@ -56,8 +56,11 @@
           <div class="div-block-38">
             <div class="div-block-39"><img src="{{asset('assets/images/u_shopping-bag.png')}}" loading="lazy" width="35" height="35" alt="" class="image-20">
               <div>
+                @php
+                    $sponsorApproval = $sponsor->where('states', 'Processing')->count();
+                @endphp
                 <div class="text-block-42">Sponsorship Approval</div>
-                <div class="text-block-43">3</div>
+                <div class="text-block-43">{{$sponsorApproval}}</div>
               </div>
             </div>
             <a href="#" class="button-25 w-button">Approve Now</a>
@@ -65,8 +68,11 @@
         </div>
         <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb57-af0b537c" class="w-layout-cell">
           <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
+            @php
+                $sponsorInProgress = $sponsor->where('states', 'Pending')->count();
+            @endphp
             <div class="text-block-46">In Progressing</div>
-            <div class="text-block-47">3</div>
+            <div class="text-block-47">{{$sponsorInProgress}}</div>
           </div>
         </div>
         <div id="w-node-_7bdbdbaf-1343-07b7-65b4-848aa78fde46-af0b537c" class="w-layout-cell">
@@ -77,8 +83,11 @@
         </div>
         <div id="w-node-_42f58ed2-15ab-09c2-05ee-ef0769c00685-af0b537c" class="w-layout-cell">
           <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
+            @php
+                $sponsored = $sponsor->where('states', 'Completed')->count();
+            @endphp
             <div class="text-block-46">Total event sponsored</div>
-            <div class="text-block-45">3</div>
+            <div class="text-block-45">{{$sponsored}}</div>
           </div>
         </div>
       </div>

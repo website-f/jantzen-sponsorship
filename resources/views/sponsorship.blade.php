@@ -13,19 +13,19 @@
       <form action="/sponsorship-fill-request" id="email-form" name="email-form" data-name="Email Form" method="POST" data-wf-page-id="65168b78f6982fbca96a0e4f" data-wf-element-id="969c18e7-ad77-d567-f01c-3704c21f141b" enctype="multipart/form-data">
         @csrf
               <label for="name-4" class="field-label-2">Name</label>
-              <input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name 3" placeholder="" id="name-3">
+              <input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name 3" placeholder="" id="name-3" required>
               <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f141f-c21f1410" class="w-layout-layout quick-stack-2 wf-layout-layout">
                 <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1420-c21f1410" class="w-layout-cell">
                     <label for="email-6" class="field-label">Your Contact Number</label>
-                    <input type="text" class="text-field-2 w-input" maxlength="256" name="contact" data-name="Email 5" placeholder="E.g., (+60) 456-7890" id="email-5" required="">
+                    <input type="text" class="text-field-2 w-input" maxlength="256" name="contact" data-name="Email 5" placeholder="E.g., (+60) 456-7890" id="email-5" required>
                 </div>
                 <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1424-c21f1410" class="w-layout-cell">
                     <label for="email-6" class="field-label-3">Your Email Address</label>
-                    <input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email 2" placeholder="E.g., johndoe@email.com" id="email-2" required="">
+                    <input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email 2" placeholder="E.g., johndoe@email.com" id="email-2" required>
                 </div>
               </div>
               <label for="field-2" class="field-label-4">Organization/Individual Hosting the Event</label>
-              <input type="text" class="text-field-3 w-input" maxlength="256" name="organization" data-name="Field 2" placeholder="E.g., XYZ Corporation" id="field-2">
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="organization" data-name="Field 2" placeholder="E.g., XYZ Corporation" id="field-2" required>
               <label for="" class="field-label-5">How did you know about Jantzen?</label>
               <label class="w-radio">
                 <input type="radio" data-name="About" id="radio-5" name="about_jantzen" value="Friends/Family" class="w-form-formradioinput radio-button w-radio-input"><span class="w-form-label" for="radio-5">Friends/Family</span>
@@ -53,18 +53,18 @@
                 <label for="email-6" class="field-label-7">Describe the Nature of the Event</label>
                 <input type="text" class="text-field-5 w-input" maxlength="256" name="nature_event" data-name="Email 4" placeholder="E.g., Community, Educational, Fundraising, Marathon, etc." id="email-4" required="">
                 <label for="" class="field-label-8">Event Date</label>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label class="form-label">From</label>
-                      <input type="date" name="from_date" class="form-control">
-                    </div>
-                    <div class="col">
-                        <label class="form-label">To</label>
-                      <input type="date" name="to_date" class="form-control">
-                    </div>
+                <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f141f-c21f1410" class="w-layout-layout quick-stack-2 wf-layout-layout">
+                  <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1420-c21f1410" class="w-layout-cell">
+                      <label class="field-label">From</label>
+                      <input type="date" class="text-field-2 w-input" maxlength="256" name="from_date" required>
                   </div>
+                  <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1424-c21f1410" class="w-layout-cell">
+                      <label class="field-label-3">To</label>
+                      <input type="date" class="text-field-2 w-input" maxlength="256" name="to_date"  required>
+                  </div>
+                </div>
                 <label for="name-4" class="field-label-6">Event Address</label>
-                <input type="text" class="text-field-4 w-input" maxlength="256" name="eventAddress" data-name="Name 2" placeholder="E.g., 123 Main St, City, State, ZIP" id="name-2">
+                <input type="text" class="text-field-4 w-input" maxlength="256" name="eventAddress" data-name="Name 2" placeholder="E.g., 123 Main St, City, State, ZIP" id="name-2" required>
                 <label for="name-4" class="field-label-6">Number of Expected Attendees</label>
                 <input type="text" class="text-field-4 w-input" maxlength="256" name="attendees" data-name="Name 2" placeholder="E.g., Approx. 500 people" id="name-2">
                 <label for="" class="field-label-8">Explanation of Product Use</label>

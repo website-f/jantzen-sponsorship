@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
 Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack']);
 Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
+Route::put('/collector-details/{id}', [SponsorshipController::class, 'collectorDetails'])->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-fill', [AuthController::class, 'loginFill']);

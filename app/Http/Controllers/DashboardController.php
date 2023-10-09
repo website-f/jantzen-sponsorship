@@ -46,6 +46,10 @@ class DashboardController extends Controller
         $sponsor->goodies_bag = $request->goodies_bag;
         $sponsor->others = $request->others;
         $sponsor->remarks = $request->remarks;
+        $sponsor->pickup_location = $request->pickup_location;
+        $sponsor->pickup_address = $request->pickup_address;
+        $sponsor->contact_person = $request->contact_person;
+        $sponsor->pickup_phone_number = $request->pickup_phone_number;
         $sponsor->status = "approval";
         $sponsor->save();
         return redirect("/dashboard");
