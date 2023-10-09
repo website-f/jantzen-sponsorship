@@ -61,10 +61,10 @@
             <div class="text-block-23">Sponsorship</div>
           </div>
           <nav class="dropdown-list w-dropdown-list">
-            <a href="#" class="dropdown-link w-dropdown-link">Request</a>
+            <a href="/dashboard" class="dropdown-link w-dropdown-link">Sponsorship</a>
             <a href="#" class="dropdown-link-2 w-dropdown-link">CSR</a>
             <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
-            <a href="#" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
+            <a href="/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
           </nav>
         </div>
       </nav>
@@ -80,7 +80,7 @@
       </div>
       <nav role="navigation" class="nav-menu-4 w-nav-menu">
         <div class="div-block-17"><img src="{{asset('assets/images/u_home-alt.png')}}" loading="lazy" alt="" class="image-14">
-          <a href="#" class="nav-link-4 w-nav-link">Home</a>
+          <a href="/dashboard" class="nav-link-4 w-nav-link">Home</a>
         </div>
         <div class="div-block-18"><img src="{{asset('assets/images/u_list-ul.png')}}" loading="lazy" alt="" class="image-15">
           <a href="#" class="nav-link-5 w-nav-link">Contents</a>

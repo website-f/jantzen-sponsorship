@@ -110,6 +110,57 @@
       </div>
     </div>
   </div>
+  @elseif($sponsor->status == "collect")
+  <div class="div-block-26">
+    <h3 class="heading-17">For Office Use: Event Sponsorship Collector Details</h3>
+    <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
+    <div class="w-form">
+      <form action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collection Date</label>
+            @if ($sponsor->collection_date !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collection_date}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collection Time Slot</label>
+            @if ($sponsor->collection_time_slot !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collection_time_slot}}" readonly>
+            @endif
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Name</label>
+            @if ($sponsor->collector_name !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_name}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's IC No</label>
+            @if ($sponsor->collector_IC !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_IC}}" readonly>
+            @endif
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Contact Number</label>
+            @if ($sponsor->collector_contact !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_contact}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's Plate Number</label>
+            @if ($sponsor->collector_plate_number !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_plate_number}}" readonly>
+            @endif
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   @endif
     <div class="div-block">
       <h3 class="heading-6">Sponsorship Request Form</h3>

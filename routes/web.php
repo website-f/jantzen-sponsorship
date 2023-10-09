@@ -21,9 +21,10 @@ Route::get('/', function () {
 });
 
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
-Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack']);
+Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack'])->middleware('auth');
 Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
 Route::put('/collector-details/{id}', [SponsorshipController::class, 'collectorDetails'])->middleware('auth');
+Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-fill', [AuthController::class, 'loginFill']);
@@ -35,6 +36,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');
+    Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware('auth');
 });
 
 

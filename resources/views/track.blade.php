@@ -348,7 +348,7 @@
                 </div>
               
             </div>
-            <button style="width: 100%" class="button-2 w-button">Submit Information</button>
+            <button type="submit" style="width: 100%" class="button-2 w-button">Submit Information</button>
           </form>
         <h3 class="heading-14">Pickup Location</h3>
         <p class="paragraph-9">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event..</p>
@@ -432,23 +432,42 @@
         <h3 class="heading-11">After Event</h3>
         <p class="paragraph-7">Ensure the successful conclusion of your event by submitting proof of event execution, completing the sponsorship cycle.</p>
         <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2" data-wf-page-id="651a843389ca3acbb607610e" data-wf-element-id="04650474-5d3e-c95a-cc2d-cfd28aa025b9">
+          <div id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2" data-wf-page-id="651a843389ca3acbb607610e" data-wf-element-id="04650474-5d3e-c95a-cc2d-cfd28aa025b9">
             <div id="w-node-_506c54cc-76a3-857d-5f89-f933e7181fde-b607610e" class="w-layout-layout quick-stack-10 wf-layout-layout">
-              <div id="w-node-_64292ce4-8d9d-772f-fba0-5bef1fd33c1c-b607610e" class="w-layout-cell"><label for="field">Name of the Event / Project</label><input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
-              <div id="w-node-_64d4745f-c093-e430-75ed-a347aa40991b-b607610e" class="w-layout-cell"><label for="field">Event Date</label><input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
-            </div><label for="name">Attachments (Photos)</label>
-            <div class="div-block-5"><img src="images/upload-icon.png" loading="lazy" width="41" alt="" class="image-4">
-              <div class="text-block-14">Drag &amp; drop or browse</div>
+              <div id="w-node-_64292ce4-8d9d-772f-fba0-5bef1fd33c1c-b607610e" class="w-layout-cell">
+                <label for="field">Name of the Event / Project</label>
+                @if ($spon->event_name !== null)
+                <input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->event_name}}" readonly>
+                @endif
+              </div>
+              <div id="w-node-_64d4745f-c093-e430-75ed-a347aa40991b-b607610e" class="w-layout-cell">
+                <label for="field">Event Date</label>
+                @if ($spon->from_date !== null && $spon->to_date !== null)
+                <input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->from_date}} to {{$spon->to_date}}" readonly>
+                @endif
+              </div>
             </div>
-          </form>
-          <div class="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
-          </div>
-          <div class="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <form action="/after-event/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
+              @csrf
+              @method("PUT")
+                 <label for="name">Attachments (Photos)</label>
+                 <div id="file-drop-area" class="div-block-5">
+                  <div style="text-align: center;">
+                      <p>Drag and drop files here, or click to select files</p>
+                      <label for="file-input" id="file-upload-label">
+                          <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                      </label>
+                  </div>
+                  <input type="file" id="file-input" multiple style="display: none;">
+                </div>
+                <ul id="file-list"></ul>
+                <button id="delete-file">Delete Selected File</button>
+                <button id="replace-file">Replace Selected File</button>
+                <input type="hidden" id="file-names-input" name="file_names">
           </div>
         </div>
-        <a href="#" class="button-2 w-button">Submit Attachments</a>
+        <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</button>
+          </form>
       </div>
     </div>
     @endif
