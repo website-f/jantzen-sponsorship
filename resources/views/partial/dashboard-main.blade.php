@@ -99,7 +99,7 @@
           </div>
           <nav class="dropdown-list-2 w-dropdown-list">
             <a href="#" class="dropdown-link-4 w-dropdown-link">Profile</a>
-            <a href="/logout" class="dropdown-link-5 w-dropdown-link">Link 2</a>
+            <a href="/logout" class="dropdown-link-5 w-dropdown-link">Logout</a>
           </nav>
         </div>
       </div>

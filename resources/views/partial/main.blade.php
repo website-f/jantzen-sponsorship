@@ -22,15 +22,19 @@
     <a href="/" class="link-block-2 w-inline-block"><img src="{{asset('assets/images/u_home-alt.png')}}" loading="lazy" alt="">
       <div class="text-block-2">Jantzen Home</div>
     </a>
-    <a href="/login" class="link-block w-inline-block"><img src="{{asset('assets/images/Ellipse-1.png')}}" loading="lazy" alt="">
-      <div class="text-block">
         @auth
+        <a href="/logout" class="link-block w-inline-block"><img src="{{asset('assets/images/Ellipse-1.png')}}" loading="lazy" alt="">
+          <div class="text-block">
             {{Auth::user()->email}}
+          </div>
+        </a>
         @else
+        <a href="/login" class="link-block w-inline-block"><img src="{{asset('assets/images/Ellipse-1.png')}}" loading="lazy" alt="">
+          <div class="text-block">
             login
+          </div>
+        </a>
         @endauth
-      </div>
-    </a>
   </section>
   <section class="section-2">
     <div class="text-block-3">Sponsorship</div>

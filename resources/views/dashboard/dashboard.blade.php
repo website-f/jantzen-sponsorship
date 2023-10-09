@@ -7,7 +7,7 @@
     <div class="div-block-34">
       <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dc-af0b537c" class="w-layout-layout quick-stack-16 wf-layout-layout">
         <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell"></div>
-        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1de-af0b537c" class="w-layout-cell cell-22">
+        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1de-af0b537c" class="w-layout-cell cell-22" style="padding: 10px">
           <h4 class="heading-19">Upcoming Events</h4>
           <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
             <div class="tabs-menu-2 w-tab-menu">
@@ -19,45 +19,31 @@
               </a>
             </div>
             <div class="tabs-content w-tab-content">
-              <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
+              <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active" style="height: 30vh; overflow: scroll;">
+                @foreach ($booth as $booths)
                 <div class="div-block-35">
                   <div class="div-block-36">
-                    <div><strong class="bold-text-2">Event Name</strong></div>
-                    <div class="text-block-38">event location</div>
+                    <div><strong>{{$booths->event_name}}</strong></div>
+                    <div class="text-block-38">{{$booths->eventAddress}}</div>
                   </div>
                   <div class="div-block-37">
-                    <div class="text-block-39">event date</div>
+                    <div class="text-block-39">{{date('M d, Y', strtotime($booths->from_date))}} - {{date('M d, Y', strtotime($booths->to_date))}}</div>
                   </div>
                 </div>
-                <div class="div-block-35">
-                  <div class="div-block-36">
-                    <div><strong class="bold-text-3">Event Name</strong></div>
-                    <div class="text-block-38">event location</div>
-                  </div>
-                  <div class="div-block-37">
-                    <div class="text-block-40">event date</div>
-                  </div>
-                </div>
+                @endforeach
               </div>
-              <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane">
+              <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane" style="height: 30vh; overflow: scroll;">
+                @foreach ($space as $spaces)
                 <div class="div-block-35">
                   <div class="div-block-36">
-                    <div><strong>Event Name</strong></div>
-                    <div class="text-block-38">event location</div>
+                    <div><strong>{{$spaces->event_name}}</strong></div>
+                    <div class="text-block-38">{{$spaces->eventAddress}}</div>
                   </div>
                   <div class="div-block-37">
-                    <div class="text-block-48">event date</div>
+                    <div class="text-block-48">{{date('M d, Y', strtotime($spaces->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}</div>
                   </div>
                 </div>
-                <div class="div-block-35">
-                  <div class="div-block-36">
-                    <div><strong>Event Name</strong></div>
-                    <div class="text-block-38">event location</div>
-                  </div>
-                  <div class="div-block-37">
-                    <div class="text-block-49">event date</div>
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
           </div>
@@ -110,6 +96,7 @@
                 <option value="Pending">Pending</option>
                 <option value="MIA">MIA</option>
                 <option value="Completed">Completed</option>
+                <option value="Rejected">Rejected</option>
               </select><select id="field-2" name="field-2" data-name="Field 2" class="select-field-2 w-select">
                 <option value="">Select Month</option>
                 @foreach ($month as $months)

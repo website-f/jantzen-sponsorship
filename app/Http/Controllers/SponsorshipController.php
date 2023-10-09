@@ -71,4 +71,37 @@ class SponsorshipController extends Controller
         $sponsor = Sponsorship::where('email', Auth::user()->email)->first();
         return view('track', ['spon' => $sponsor]);
     }
+
+    public function proofAgreement(Request $request, $id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $fileDataJson = $request->input('file_names');
+        $fileData = json_decode($fileDataJson);
+        $files = [];
+    foreach ($fileData as $fileInfo) {
+        // Extract information from the file data
+        $name = $fileInfo->name;
+        $base64Data = $fileInfo->data;
+        $extension = $fileInfo->extension;
+
+        // Generate a unique filename based on the current date and time
+        $currentDate = now(); // Use Laravel's now() helper function
+        $timestamp = $currentDate->timestamp; // Unique timestamp
+        $fileName = $name . $timestamp . '.' . $extension;
+
+        // Decode the base64 data and save it with the unique filename
+        $decodedData = base64_decode($base64Data);
+        $destinationPath = public_path('agreement');
+        $path = $destinationPath . '/' . $fileName;
+        $files[] = "agreement/" . $fileName;
+
+        file_put_contents($path, $decodedData);
+
+        // Optionally, you can save the $uniqueFileName to your database for future reference
+    }
+        $sponsor->attachements_agreement_proof = json_encode($files);
+        $sponsor->status = "proof";
+        $sponsor->save();
+        return redirect("/sponsorship-tracking");
+
+    }
 }

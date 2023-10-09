@@ -1726,6 +1726,10 @@
   margin-top: auto;
 }
 
+.text-field-12, .text-field-13 {
+  border-radius: 6px;
+}
+
 @media screen and (min-width: 1440px) {
   .container {
     max-width: 1000px;

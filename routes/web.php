@@ -21,7 +21,8 @@ Route::get('/', function () {
 });
 
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
-Route::get('sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack']);
+Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack']);
+Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-fill', [AuthController::class, 'loginFill']);
@@ -32,6 +33,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
+    Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');
 });
 
 

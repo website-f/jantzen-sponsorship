@@ -18,11 +18,36 @@ class DashboardController extends Controller
                  ->map(function ($monthNumber) {
                      return Carbon::create()->month($monthNumber)->format('F');
                  });
-        return view('dashboard.dashboard', ['sponsor' => $sponsor, 'month' => $months]);
+        $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
+        $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
+        return view('dashboard.dashboard', ['sponsor' => $sponsor, 
+                                            'month' => $months,
+                                            'booth' => $booth,
+                                            'space' => $space]);
     }
 
     public function viewRequest($id) {
         $sponsor = Sponsorship::findOrFail($id);
         return view('dashboard.dashboard-sponsorship-requests', ['sponsor' => $sponsor]);
+    }
+
+    public function requestSubmit(Request $request, $id) {
+        $attending = explode(",", $request->attending);
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->states = $request->states;
+        $sponsor->attending = json_encode($attending);
+        $sponsor->handle_by = $request->handle_by;
+        $sponsor->booth_space = $request->booth_space;
+        $sponsor->confirmro_200ml = $request->confirmro_200ml;
+        $sponsor->confirmro_500ml = $request->confirmro_500ml;
+        $sponsor->confirmro_11L = $request->confirmro_11L;
+        $sponsor->confirmro_350ml = $request->confirmro_350ml;
+        $sponsor->paper_cup = $request->paper_cup;
+        $sponsor->goodies_bag = $request->goodies_bag;
+        $sponsor->others = $request->others;
+        $sponsor->remarks = $request->remarks;
+        $sponsor->status = "approval";
+        $sponsor->save();
+        return redirect("/dashboard");
     }
 }

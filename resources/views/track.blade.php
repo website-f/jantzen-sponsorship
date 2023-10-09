@@ -174,63 +174,177 @@
           <h3 class="heading-11">Provide Proof of Agreement</h3>
           <p class="paragraph-7">Submit the necessary documentation to verify the agreement, ensuring both parties are aligned and clear on the terms and expectations for sponsorship.</p>
           <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2" data-wf-page-id="651a75b9a44b12668a602bcd" data-wf-element-id="791222a0-c66d-9c9a-0042-32e67d071088">
+            <div id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2" data-wf-page-id="651a75b9a44b12668a602bcd" data-wf-element-id="791222a0-c66d-9c9a-0042-32e67d071088">
               <div id="w-node-_97e9f80b-0284-b5c0-9bb5-7b2338246096-8a602bcd" class="w-layout-layout quick-stack-5 wf-layout-layout">
-                <div id="w-node-_84109cec-69d3-af54-a833-2ce5548b1b24-8a602bcd" class="w-layout-cell"><label for="name-2">Name of the Event / Project</label><input type="text" class="text-field-6 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-                <div id="w-node-_18bce5b6-8dde-39ac-1125-a617aa6831e9-8a602bcd" class="w-layout-cell"><label for="email-2">Event Date</label><input type="email" class="text-field-7 w-input" maxlength="256" name="email-2" data-name="Email 2" placeholder="" id="email-2" required=""></div>
+                <div id="w-node-_84109cec-69d3-af54-a833-2ce5548b1b24-8a602bcd" class="w-layout-cell">
+                  <label for="name-2">Name of the Event / Project</label>
+                  <input type="text" class="text-field-6 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2" value="{{$spon->event_name}}" readonly></div>
+                <div id="w-node-_18bce5b6-8dde-39ac-1125-a617aa6831e9-8a602bcd" class="w-layout-cell">
+                  <label for="email-2">Event Date</label>
+                  <input type="email" class="text-field-7 w-input" maxlength="256" name="email-2" data-name="Email 2" placeholder="" id="email-2" required="" value="{{date('M d, Y', strtotime($spon->from_date))}} - {{date('M d, Y', strtotime($spon->to_date))}}" readonly></div>
               </div><label for="name-3">Sponsors Products</label>
               <div id="w-node-_8932e1af-3436-9e3d-1d86-46937411dace-8a602bcd" class="w-layout-layout quick-stack-6 wf-layout-layout">
                 <div id="w-node-eac3d2a3-addf-e1fc-a317-0ea1a17d583d-8a602bcd" class="w-layout-cell cell-10">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->confirmro_200ml !== null)
+                          {{$spon->confirmro_200ml}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">RO 200ml x Cartons</div>
                 </div>
                 <div id="w-node-_538d45a1-23f0-5699-7d84-b0eca4bf210b-8a602bcd" class="w-layout-cell cell-11">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->confirmro_500ml !== null)
+                          {{$spon->confirmro_500ml}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">RO 500ml x Cartons</div>
                 </div>
                 <div id="w-node-_86c5c743-ca18-2c5a-951c-9c481083b402-8a602bcd" class="w-layout-cell cell-12">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->confirmro_11L !== null)
+                          {{$spon->confirmro_11L}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">RO 11L x Bottles</div>
                 </div>
                 <div id="w-node-_52001511-2c65-53dc-012d-10054b9bb9ad-8a602bcd" class="w-layout-cell cell-13">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->confirmro_350ml !== null)
+                          {{$spon->confirmro_350ml}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">Mineral 350ml x Cartons</div>
                 </div>
                 <div id="w-node-_7c9fde84-49e1-f616-fba7-10af24d82441-8a602bcd" class="w-layout-cell cell-14">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->paper_cup !== null)
+                          {{$spon->paper_cup}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">Jantzen’s Paper Cup</div>
                 </div>
                 <div id="w-node-_79105295-813d-e5b9-298e-8e77444ebea3-8a602bcd" class="w-layout-cell cell-15">
                   <div class="div-block-9">
-                    <div>0</div>
+                    <div>
+                      @if ($spon->goodies_bag !== null)
+                          {{$spon->goodies_bag}}
+                      @endif
+                    </div>
                   </div>
                   <div class="text-block-19">Jantzen’s Goodie Bags</div>
                 </div>
-              </div><label for="field">Others</label><textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input"></textarea><label for="name-3">Attachments (Proof Of Agreement)</label>
-              <div class="div-block-5"><img src="images/upload-icon.png" loading="lazy" width="41" alt="" class="image-4">
-                <div class="text-block-14">Drag &amp; drop or browse</div>
+              </div><label for="field">Others</label>
+              <textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input" readonly>
+              @if ($spon->others !== null)
+              {{$spon->others}}
+              @endif
+              </textarea>
+            </div>
+            <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
+              @csrf
+              @method("PUT")
+              <div id="file-drop-area" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop files here, or click to select files</p>
+                    <label for="file-input" id="file-upload-label">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input" multiple style="display: none;">
               </div>
-            </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
+              <ul id="file-list"></ul>
+              <button id="delete-file">Delete Selected File</button>
+              <button id="replace-file">Replace Selected File</button>
+              <input type="hidden" id="file-names-input" name="file_names">
           </div>
-          <a href="#" class="button-2 w-button">Submit Attachments</a>
+          <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</a>
+        </form>
         </div>
       </div>
+    @elseif($spon->status == "proof")
+    <div class="div-block-10">
+      <div class="div-block-7">
+        <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
+        <p>Easily Track and Monitor Your Sponsorship Application Progress</p>
+        <div id="w-node-d36984f1-ac39-1c3b-9da1-809852102ff1-135ef160" class="w-layout-layout quick-stack-7 wf-layout-layout">
+          <div id="w-node-d36984f1-ac39-1c3b-9da1-809852102ff2-135ef160" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 1</div>
+            <div class="text-block-16">Submit Sponsorship<br>Request Form</div>
+            <p class="paragraph-5">Begin your journey by filling out and submitting the sponsorship request form, ensuring all details are accurate and complete.</p>
+            <a href="#" class="button-14 w-button">Completed</a>
+          </div>
+          <div id="w-node-d36984f1-ac39-1c3b-9da1-809852102ffe-135ef160" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 2</div>
+            <div class="text-block-16">Await Approval / Contact(3-7 Working Days)</div>
+            <p class="paragraph-5">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
+            <a href="#" class="button-10 w-button">Completed</a>
+          </div>
+          <div id="w-node-d36984f1-ac39-1c3b-9da1-809852103008-135ef160" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 3</div>
+            <div class="text-block-16">Provide Proof of Agreement</div>
+            <p class="paragraph-5">Confirm your commitment by providing necessary proof of agreement, solidifying the partnership and support.</p>
+            <a href="#" class="button-9 w-button">Completed</a>
+          </div>
+          <div id="w-node-d36984f1-ac39-1c3b-9da1-809852103012-135ef160" class="w-layout-cell cell-9"><img src="{{asset('assets/images/tickProgress.png')}}" loading="lazy" alt="" class="image-7">
+            <div class="text-block-17">STEP 4</div>
+            <div class="text-block-18">Collect Sponsored Goods at Pickup Location</div>
+            <p class="paragraph-6">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event.</p>
+            <a href="#" class="button-17 w-button">In Progress</a>
+          </div>
+        </div>
+        <h3 class="heading-11">NOTICES</h3>
+        <p class="paragraph-7">Please submit collector Information us a week in advance when the goods need to be collected, as we require time to prepare. We regret to inform you that if your team does not notify us a week prior to collection, we cannot guarantee that the goods will be ready on time.</p>
+        <p class="paragraph-10">Factory Operating Days: <strong>Monday - Friday</strong><br>Working Hours: <strong>Weekdays 10am - 5pm</strong><br>Lunchtime: <strong>12pm - 2pm</strong><br>Public Holidays: <strong>Closed</strong></p>
+        <h3 class="heading-12">Collector Information</h3>
+        <p class="paragraph-8">Please complete the collector information section to inform us about who will be collecting the sponsored goods. This ensures a smooth and secure pickup process, helping us to verify the identity of the individual authorized to receive the products.</p>
+        <div class="w-form">
+          <form id="email-form" name="email-form" data-name="Email Form" method="get" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="755869db-c9d2-baa0-bac4-55e8e267b9be">
+            <div id="w-node-ecaacf26-9d06-d63f-b401-b0a26d279abe-135ef160" class="w-layout-layout quick-stack-8 wf-layout-layout">
+              <div id="w-node-_67e156f1-9e69-65ef-580d-1e3d6ae653ef-135ef160" class="w-layout-cell"><label for="field">Collection Date</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_383f54d8-e8d2-d05f-4d86-0e15f88a2fe2-135ef160" class="w-layout-cell"><label for="field-2">Collection Time Slot</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" id="field-2" required=""></div>
+              <div id="w-node-eda0622b-81d2-5d7d-86f4-b2971351bacd-135ef160" class="w-layout-cell"><label for="field">Collector’s name</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_89f5612b-df97-c386-923a-92d96f2df5f7-135ef160" class="w-layout-cell"><label for="field">Collector’s IC No</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_1db2a402-1b0d-02bb-b11e-df60e459c356-135ef160" class="w-layout-cell"><label for="field">Collector’s contact number</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-b61df816-5f01-6d5a-a6c9-683c35616739-135ef160" class="w-layout-cell"><label for="field">Collector’s Car Plate number</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_16f0378e-9cf8-8025-8b09-785ab1516dc6-135ef160" class="w-layout-cell"><label for="field">Name of the Event / Project</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-b2c8b863-f67e-4662-bc1e-001136c56a1c-135ef160" class="w-layout-cell"><label for="field">Event Date</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+            </div>
+          </form>
+          <div class="w-form-done"></div>
+          <div class="w-form-fail"></div>
+        </div>
+        <a href="#" class="button-2 w-button">Submit Information</a>
+        <h3 class="heading-14">Pickup Location</h3>
+        <p class="paragraph-9">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event..</p>
+        <div class="w-form">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="57d63657-b5f2-aa05-a6b9-5be7504cb6d9">
+            <div id="w-node-_88014fb9-7e3d-34ea-4ff9-a964ddca77f4-135ef160" class="w-layout-layout quick-stack-9 wf-layout-layout">
+              <div id="w-node-_44cfb97f-aae7-a688-05ca-cc2087a8fedb-135ef160" class="w-layout-cell"><label for="field">Pick Up Location</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-e83f2ba4-62c7-3d06-510a-f3b331108f1e-135ef160" class="w-layout-cell"><label for="field">Pick Up Location Address</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_42dc478c-4726-af14-725c-4d5767d2c183-135ef160" class="w-layout-cell"><label for="field">Contact Person</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+              <div id="w-node-_2d621f14-8f40-866a-71d6-d3836b5051cd-135ef160" class="w-layout-cell"><label for="field">Phone Number</label><input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" required=""></div>
+            </div>
+          </form>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+    </div>
     @endif
 
   <script>
