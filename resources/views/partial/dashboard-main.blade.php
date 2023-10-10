@@ -10,7 +10,6 @@
   <meta content="Webflow" name="generator">
   <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/css/dropdown.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">

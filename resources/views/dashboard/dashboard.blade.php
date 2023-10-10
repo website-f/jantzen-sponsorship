@@ -77,8 +77,19 @@
         </div>
         <div id="w-node-_7bdbdbaf-1343-07b7-65b4-848aa78fde46-af0b537c" class="w-layout-cell">
           <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
+            @php
+                $totalCartons = 0;
+                foreach ($sponsor as $spon) {
+                  $int_ro200ml = (int)$spon->ro_200ml;
+                  $int_ro500ml = (int)$spon->ro_500ml;
+                  $int_ro11L = (int)$spon->ro_11L;
+                  $int_ro350ml = (int)$spon->ro_350ml;
+                  $tots = $int_ro200ml + $int_ro500ml + $int_ro11L + $int_ro350ml;
+                  $totalCartons += $tots;
+                }
+            @endphp
             <div class="text-block-46">Total Sponsor Cartons</div>
-            <div class="text-block-45">3</div>
+            <div class="text-block-45">{{$totalCartons}}</div>
           </div>
         </div>
         <div id="w-node-_42f58ed2-15ab-09c2-05ee-ef0769c00685-af0b537c" class="w-layout-cell">
@@ -112,14 +123,8 @@
                 <option value="{{$months}}">{{$months}}</option>
                 @endforeach
               </select>
-              <a href="#" class="button-26 w-button">Export</a>
+              <button id="exportButton" class="button-26 w-button">Export</button>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
       </div>
@@ -157,7 +162,7 @@
         <div class="tableDiv" style="overflow-x: auto;">
           <table class="table">
             <tr class="table-head">
-              <th class="leftThead"><input type="checkbox"></th>
+              <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th>
               <th>PROJECT NAME</th>
               <th>PROJECT DATES</th>
               <th>LOCATION</th>
@@ -175,7 +180,7 @@
                 $sponsorCartons = $int_ro200ml + $int_ro500ml + $int_ro11L +$int_ro350ml
             @endphp
             <tr class="divLists">
-              <td class="leftThead"><input type="checkbox"></td>
+              <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
@@ -211,5 +216,49 @@
       });
     });
     
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+      document.getElementById('selectAllCheckbox').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('.select-checkbox');
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = this.checked;
+        });
+      });
+      // Function to export selected rows to Excel
+      function exportSelectedToExcel() {
+        const table = document.querySelector('.table'); // Select your table by class or ID
+        const checkboxes = table.querySelectorAll('.select-checkbox:checked'); // Select checked checkboxes
+    
+        if (checkboxes.length === 0) {
+          alert('Please select at least one row to export.');
+          return;
+        }
+    
+        const selectedRows = [];
+        checkboxes.forEach((checkbox) => {
+          const row = checkbox.closest('tr'); // Get the closest row for each checked checkbox
+          selectedRows.push(row);
+        });
+    
+        // Create a new table that includes the header row and selected rows
+        const selectedTable = document.createElement('table');
+        const headerRow = table.querySelector('.table-head'); // Get the header row
+        selectedTable.appendChild(headerRow.cloneNode(true)); // Clone the header row
+        selectedRows.forEach((row) => {
+          selectedTable.appendChild(row.cloneNode(true)); // Clone the selected rows
+        });
+    
+        const ws = XLSX.utils.table_to_sheet(selectedTable);
+    
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+        // Save the Excel file
+        XLSX.writeFile(wb, 'selected_data_with_header.xlsx');
+      }
+    
+      // Add an event listener to trigger the export on button click
+      document.getElementById('exportButton').addEventListener('click', exportSelectedToExcel);
     </script>
 @endsection
