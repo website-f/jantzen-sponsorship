@@ -46,8 +46,8 @@ return new class extends Migration
             $table->string('contact_person')->nullable();
             $table->string('pickup_phone_number')->nullable();
             $table->json('after_events_attachments')->nullable();
-            $table->enum('status', ['none','submit', 'approval', 'reject', 'proof', 'collect'])->default('none');
-            $table->enum('states', ['Processing','Pending', 'MIA', 'Completed', 'Rejected'])->default('Processing');
+            $table->enum('status', ['none','submit', 'approval', 'reject', 'proof', 'collect', 'complete'])->default('none');
+            $table->enum('states', ['Processing','Pending', 'Collected', 'MIA', 'Completed', 'Rejected'])->default('Processing');
             $table->string('booth_space')->nullable();
             $table->string('remarks')->nullable();
             $table->json('attending')->nullable();

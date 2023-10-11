@@ -11,6 +11,8 @@
   <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
+  <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -63,7 +65,7 @@
             <a href="/dashboard" class="dropdown-link w-dropdown-link">Sponsorship</a>
             <a href="#" class="dropdown-link-2 w-dropdown-link">CSR</a>
             <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
-            <a href="/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
+            <a href="/dashboard/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
           </nav>
         </div>
       </nav>
@@ -121,6 +123,11 @@
 
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65168b78f6982fbca96a0e4a" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="{{asset('assets/js/webflow.js')}}" type="text/javascript"></script>
+  <script src="{{asset('assets/fullcalendar/packages/core/main.js')}}"></script>
+  <script src="{{asset('assets/fullcalendar/packages/interaction/main.js')}}"></script>
+  <script src="{{asset('assets/fullcalendar/packages/daygrid/main.js')}}"></script>
+  <script src="{{asset('assets/fullcalendar/packages/timegrid/main.js')}}"></script>
+  <script src="{{asset('assets/fullcalendar/packages/list/main.js')}}"></script>
   <script>
     const profileDropdown = document.getElementById('profileDropdown');
     const dropdownContent = document.getElementById('dropdownContent');

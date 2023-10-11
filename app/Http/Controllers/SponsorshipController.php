@@ -64,7 +64,7 @@ class SponsorshipController extends Controller
     $user->email = $request->email;
     $user->role_id = 3;
     $user->save();
-    return redirect("/");
+    return redirect("/login");
     }
 
     public function sponsorshipTrack() {

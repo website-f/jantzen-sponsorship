@@ -54,4 +54,9 @@ class DashboardController extends Controller
         $sponsor->save();
         return redirect("/dashboard");
     }
+
+    public function calendar() {
+        $sponsor = Sponsorship::all();
+        return view('dashboard.dashboard-calendar', ['sponsor' => $sponsor]);
+    }
 }
