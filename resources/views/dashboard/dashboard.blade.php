@@ -185,7 +185,7 @@
             <tr class="divLists">
               <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
-              <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
+              <td class="clickable-row monthFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">
                 @if ($inCharge !== null)
@@ -197,7 +197,7 @@
                 @endif
               </td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorCartons}}</td>
-              <td class="rightThead clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->states}}</td>
+              <td class="rightThead clickable-row statusFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->states}}</td>
             </tr>
             @endforeach
           </table>
@@ -288,4 +288,36 @@
         var chart = new ApexCharts(document.querySelector("#page-views-chart"), options);
         chart.render();
         </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const statusSelect = document.getElementById("field");
+          const monthSelect = document.getElementById("field-2");
+          const reqElements = document.querySelectorAll(".divLists");
+  
+          function filterPosts() {
+              const selectedStatus = statusSelect.value;
+              const selectedMonth = monthSelect.value;
+             
+              reqElements.forEach(function (reqElement) {
+                  const ReqStatus = reqElement.querySelector(".statusFilter").textContent;
+                  const postDate = reqElement.querySelector(".monthFilter").textContent;
+                  const postMonth = postDate.split(" ")[0];
+                  if (
+                      (selectedStatus === "" || selectedStatus === postCategory) &&
+                      (selectedMonth === "" || selectedMonth === postMonth) 
+                  ) {
+                      postElement.classList.remove("blog-filter-hiddden")
+                  } else {
+                      postElement.classList.add("blog-filter-hiddden");
+                  }
+              });
+          }
+  
+          statusSelect.addEventListener("change", filterPosts);
+          monthSelect.addEventListener("change", filterPosts);
+  
+          // Initial filtering when the page loads
+          filterPosts();
+      });
+  </script>
 @endsection
