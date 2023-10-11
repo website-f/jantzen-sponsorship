@@ -6,7 +6,10 @@
 <div class="div-block-27">
     <div class="div-block-34">
       <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dc-af0b537c" class="w-layout-layout quick-stack-16 wf-layout-layout">
-        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell"></div>
+        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell" style="border: 1px solid #EEEEEE; padding: 50px; border-radius: 8px">
+          <h4 class="heading-19">Status</h4>
+          <div style="width: 100%" id="page-views-chart"></div>
+        </div>
         <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1de-af0b537c" class="w-layout-cell cell-22" style="padding: 10px">
           <h4 class="heading-19">Upcoming Events</h4>
           <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
@@ -19,7 +22,7 @@
               </a>
             </div>
             <div class="tabs-content w-tab-content">
-              <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active" style="height: 30vh; overflow: scroll;">
+              <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
                 @foreach ($booth as $booths)
                 <div class="div-block-35">
                   <div class="div-block-36">
@@ -32,7 +35,7 @@
                 </div>
                 @endforeach
               </div>
-              <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane" style="height: 30vh; overflow: scroll;">
+              <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane">
                 @foreach ($space as $spaces)
                 <div class="div-block-35">
                   <div class="div-block-36">
@@ -201,6 +204,9 @@
         </div>
       </div>
     </div>
+    @php
+        
+    @endphp
   </div>
     </div>
   </div>
@@ -261,4 +267,25 @@
       // Add an event listener to trigger the export on button click
       document.getElementById('exportButton').addEventListener('click', exportSelectedToExcel);
     </script>
+    <script src="{{asset('assets/vendor/apexcharts/js/apexcharts.min.js')}}"></script>
+    <script>
+        const pageLabels = @json($statusCounts->keys());
+        const pageData = @json($statusCounts->values());
+        
+        var options = {
+            chart: {
+                type: 'bar',
+            },
+            series: [{
+                name: 'Page Views',
+                data: pageData,
+            }],
+            xaxis: {
+                categories: pageLabels,
+            },
+        };
+        
+        var chart = new ApexCharts(document.querySelector("#page-views-chart"), options);
+        chart.render();
+        </script>
 @endsection

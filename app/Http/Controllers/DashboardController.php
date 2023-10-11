@@ -20,10 +20,13 @@ class DashboardController extends Controller
                  });
         $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
         $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
+        $statusCounts = $sponsor->groupBy('states')->map->count();
         return view('dashboard.dashboard', ['sponsor' => $sponsor, 
                                             'month' => $months,
                                             'booth' => $booth,
-                                            'space' => $space]);
+                                            'space' => $space,
+                                            'statusCounts' => $statusCounts
+                                        ]);
     }
 
     public function viewRequest($id) {

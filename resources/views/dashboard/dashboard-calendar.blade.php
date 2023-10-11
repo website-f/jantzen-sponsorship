@@ -4,7 +4,7 @@
     
 @section('content')
   <div class="div-block-41">
-    <div class="div-block-42">
+    <div class="div-block-42" style="padding: 30px">
         <div id='calendar-container'>
             <div id='calendar'></div>
           </div>
@@ -30,6 +30,11 @@
   const day = new Date().getDate();
   const date = year + "-" + month + "-" + day;
   var events = @json($eventData); // Convert PHP array to JavaScript array
+  events.forEach(function(event) {
+    var endDate = new Date(event.end);
+    endDate.setDate(endDate.getDate() + 1);
+    event.end = endDate.toISOString().split('T')[0]; // Convert the modified date back to a string
+  })
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],

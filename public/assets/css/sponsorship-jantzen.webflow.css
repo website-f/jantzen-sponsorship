@@ -2900,3 +2900,9 @@ li {
   width: 200px;
   height: 200px;
 }
+
+.attachments-image {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}

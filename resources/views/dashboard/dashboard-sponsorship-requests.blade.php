@@ -208,7 +208,31 @@
             <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$sponsor->explaination_product}}" readonly id="name-2">
             <label for="" class="field-label-9">Can we place booth in your event?</label>
             <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$sponsor->booth}}" readonly id="name-2">
-            <label for="name-4" class="field-label-9">Sponsorship Attachments</label><input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="3 - Files" id="name-2"></form>
+            <label for="name-4" class="field-label-9">Sponsorship Attachments</label>
+              @php
+                  $attach = json_decode($sponsor->sposorship_attachments);
+
+                  if ($attach !== null) {
+                    $attachCounts = count($attach);
+                  } else {
+                    $attachCounts = 0;
+                  }
+              @endphp
+            <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$attachCounts}} - Files" id="name-2" readonly>
+            <div class="attachments-image">
+              @if ($attach !== null)
+                  @foreach ($attach as $item)
+                     @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                        <a href="{{asset($item)}}" target="_blank">
+                          <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                        </a>                        
+                     @else
+                        <a href="{{ asset($item) }}" target="_blank">View File</a>
+                     @endif
+                  @endforeach
+              @endif
+            </div>
+          </form>
           <div class="w-form-done">
             <div>Thank you! Your submission has been received!</div>
           </div>
