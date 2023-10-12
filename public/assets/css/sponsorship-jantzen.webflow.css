@@ -2906,3 +2906,7 @@ li {
   grid-template-columns: auto auto auto;
   padding: 10px;
 }
+
+.filter-hidden {
+  display: none;
+}

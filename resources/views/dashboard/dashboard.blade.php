@@ -277,7 +277,7 @@
                 type: 'bar',
             },
             series: [{
-                name: 'Page Views',
+                name: 'Total',
                 data: pageData,
             }],
             xaxis: {
@@ -293,7 +293,24 @@
           const statusSelect = document.getElementById("field");
           const monthSelect = document.getElementById("field-2");
           const reqElements = document.querySelectorAll(".divLists");
-  
+
+          // Map full month names to abbreviated forms
+          const monthMap = {
+              "Jan": "January",
+              "Feb": "February",
+              "Mar": "March",
+              "Apr": "April",
+              "May": "May",
+              "Jun": "June",
+              "Jul": "July",
+              "Aug": "August",
+              "September": "September",
+              "Oct": "October",
+              "Nov": "November",
+              "Dec": "December"
+          };
+
+         
           function filterPosts() {
               const selectedStatus = statusSelect.value;
               const selectedMonth = monthSelect.value;
@@ -301,14 +318,19 @@
               reqElements.forEach(function (reqElement) {
                   const ReqStatus = reqElement.querySelector(".statusFilter").textContent;
                   const postDate = reqElement.querySelector(".monthFilter").textContent;
-                  const postMonth = postDate.split(" ")[0];
+                  const allFromMonth = postDate.split("-")[0]
+                  const allToMonth = postDate.split("-")[1]
+                  const fromMonth = allFromMonth.split(" ")[0]
+                  const toMonth = allToMonth.split(" ")[1]
+                  const fromDate = monthMap[fromMonth];
+                  const todate = monthMap[toMonth];
                   if (
-                      (selectedStatus === "" || selectedStatus === postCategory) &&
-                      (selectedMonth === "" || selectedMonth === postMonth) 
+                      (selectedStatus === "" || selectedStatus === ReqStatus) &&
+                      (selectedMonth === "" || selectedMonth === fromDate || selectedMonth === todate) 
                   ) {
-                      postElement.classList.remove("blog-filter-hiddden")
+                      reqElement.classList.remove("filter-hidden")
                   } else {
-                      postElement.classList.add("blog-filter-hiddden");
+                      reqElement.classList.add("filter-hidden");
                   }
               });
           }
