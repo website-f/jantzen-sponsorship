@@ -110,12 +110,31 @@
       </div>
     </div>
   </div>
-  @elseif($sponsor->status == "collect")
+  @elseif($sponsor->status == "complete")
   <div class="div-block-26">
     <h3 class="heading-17">For Office Use: Event Sponsorship Collector Details</h3>
     <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
+    <form action="/dashboard/status-update/{{$sponsor->id}}" method="POST">
+      @csrf
+      @method('PUT')
+    <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
+        <button type="submit" class="button-21 w-button">Update</button>
+      </div>
+      <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
+        <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
+          <option value="">Update Status</option>
+          <option value="Processing">Processing</option>
+          <option value="Pending">Pending</option>
+          <option value="MIA">MIA</option>
+          <option value="Completed">Completed</option>
+          <option value="Collected">Collected</option>
+        </select>
+      </div>
+    </form>
+    </div>
     <div class="w-form">
-      <form action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
+      <div action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Collection Date</label>
@@ -158,7 +177,7 @@
             @endif
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
   @endif

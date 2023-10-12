@@ -37,6 +37,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');
     Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware('auth');
+    Route::put('/status-update/{id}', [DashboardController::class, 'statusUpdate'])->middleware('auth');
 });
 
 

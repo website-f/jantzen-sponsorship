@@ -146,6 +146,7 @@ class SponsorshipController extends Controller
         }
         $sponsor->after_events_attachments = json_encode($files);
         $sponsor->states = "Completed";
+        $sponsor->status = "complete";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
     }

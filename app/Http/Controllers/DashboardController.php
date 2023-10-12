@@ -62,4 +62,11 @@ class DashboardController extends Controller
         $sponsor = Sponsorship::all();
         return view('dashboard.dashboard-calendar', ['sponsor' => $sponsor]);
     }
+
+    public function statusUpdate(Request $request, $id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->states = $request->states;
+        $sponsor->save();
+        return redirect("/dashboard/view-request/" . $id);
+    }
 }

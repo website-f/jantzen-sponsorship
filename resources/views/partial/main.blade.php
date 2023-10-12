@@ -38,7 +38,7 @@
   </section>
   <section class="section-2">
     <div class="text-block-3">Sponsorship</div>
-    <a href="#" class="link-block-3 w-inline-block"><img src="{{asset('assets/images/u_plus.png')}}" loading="lazy" alt="" class="image-2">
+    <a href="/" class="link-block-3 w-inline-block"><img src="{{asset('assets/images/u_plus.png')}}" loading="lazy" alt="" class="image-2">
       <div class="text-block-5">Request Sponsorship</div>
     </a>
   </section>
