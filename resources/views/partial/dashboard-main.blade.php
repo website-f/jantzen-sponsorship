@@ -19,7 +19,7 @@
   <script type="text/javascript">WebFont.load({  google: {    families: ["Poppins:regular"]  }});</script>
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="{{asset('assets/images/favicon.ico')}}" rel="shortcut icon" type="image/x-icon">
-  <link href="{{asset('assets/images/webclip.png')}}" rel="apple-touch-icon">
+  <link href="{{asset('assets/images/apple-touch-icon.png')}}" rel="apple-touch-icon">
 </head>
 <body class="body-7">
   <div data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
