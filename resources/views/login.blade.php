@@ -56,7 +56,7 @@
                   </button>
                 </form>
                   <hr class="my-4">
-      
+                  <a class="btn btn-outline-info btn-sm" href="/"><i class="bi bi-arrow-left"></i> Go to request sponsorship</a>
                 </div>
               </div>
             </div>

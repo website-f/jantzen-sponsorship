@@ -38,6 +38,10 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');
     Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware('auth');
     Route::put('/status-update/{id}', [DashboardController::class, 'statusUpdate'])->middleware('auth');
+    Route::get('/delete/{id}', [DashboardController::class, 'delete'])->middleware('auth');
+    Route::get('/trash', [DashboardController::class, 'trash'])->middleware('auth');
+    Route::get('/restore/{id}', [DashboardController::class, 'restore'])->middleware('auth');
+    Route::get('/permanent-delete/{id}', [DashboardController::class, 'permanentDelete'])->middleware('auth');
 });
 
 

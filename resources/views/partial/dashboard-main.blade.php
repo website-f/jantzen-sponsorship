@@ -11,6 +11,7 @@
   <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
   <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -66,6 +67,7 @@
             <a href="#" class="dropdown-link-2 w-dropdown-link">CSR</a>
             <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
             <a href="/dashboard/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
+            <a href="/dashboard/trash" class="dropdown-link-3 w-dropdown-link">Trash</a>
           </nav>
         </div>
       </nav>

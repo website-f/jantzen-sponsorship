@@ -4,9 +4,12 @@
     
 @section('content')
 <div class="div-block-27">
+        @if (Session::has('status'))
+          <div class="alert-delete-success">{{Session::get('message')}}</div>
+        @endif
     <div class="div-block-34">
       <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dc-af0b537c" class="w-layout-layout quick-stack-16 wf-layout-layout">
-        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell" style="border: 1px solid #EEEEEE; padding: 50px; border-radius: 8px">
+        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell" style="border: 1px solid #EEEEEE; border-radius: 8px">
           <h4 class="heading-19">Status</h4>
           <div style="width: 100%" id="page-views-chart"></div>
         </div>
@@ -166,6 +169,7 @@
           <table class="table">
             <tr class="table-head">
               <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th>
+              <th>#</th>
               <th>PROJECT NAME</th>
               <th>PROJECT DATES</th>
               <th>LOCATION</th>
@@ -184,6 +188,32 @@
             @endphp
             <tr class="divLists">
               <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
+              <td>
+                <button class="open-modal-btn modal-btn" data-modal="myModal{{$sponsorship->id}}">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                   </svg>
+                </button>
+                 <!-- The Modal -->
+                 <div id="myModal{{$sponsorship->id}}" class="modal">
+                  
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="close close-modal" data-modal="myModal{{$sponsorship->id}}">&times;</span>
+                      <h3>Confirm delete this event ?</h3>
+                      <hr>
+                    </div>
+                    <div class="modal-body">
+                      <button class="close-btn close-modal" data-modal="myModal{{$sponsorship->id}}">
+                        Close
+                      </button>
+                      <a href="/dashboard/delete/{{$sponsorship->id}}" class="delete-confirm-btn close-modal" data-modal="myModal{{$sponsorship->id}}">Confirm</a>
+                    </div>
+                  </div>
+                
+                </div>
+              </td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
               <td class="clickable-row monthFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
               <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
@@ -342,4 +372,63 @@
           filterPosts();
       });
   </script>
+ <script>
+  // Get all elements with class "open-modal-btn"
+  const openModalButtons = document.querySelectorAll('.open-modal-btn');
+
+  const alert = document.querySelector('.alert-delete-success')
+
+  // Get all elements with class "modal"
+  const modals = document.querySelectorAll('.modal');
+
+  // Get all elements with class "close-modal"
+  const closeButtons = document.querySelectorAll('.close-modal');
+
+  // Add click event listeners to open modal buttons
+  openModalButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          const modalId = this.getAttribute('data-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) {
+              modal.style.display = 'block';
+          }
+      });
+  });
+
+  // Add click event listeners to close buttons
+  closeButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          const modalId = this.getAttribute('data-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) {
+              modal.style.display = 'none';
+          }
+      });
+  });
+
+  // Close modals when clicking outside the modal content
+  modals.forEach(modal => {
+      modal.addEventListener('click', function (event) {
+          if (event.target === this) {
+              modal.style.display = 'none';
+          }
+      });
+  });
+
+  // Prevent clicks inside modals from closing the modal
+  modals.forEach(modal => {
+      modal.addEventListener('click', function (event) {
+          event.stopPropagation();
+      });
+  });
+
+  // Add click event listener to the document body
+document.body.addEventListener('click', function (event) {
+    // Check if the event target is not the alert element or any of its children
+    if (!alert.contains(event.target)) {
+        alert.style.display = 'none';
+    }
+});
+</script>
+
 @endsection

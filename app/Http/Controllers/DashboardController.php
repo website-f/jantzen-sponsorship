@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -68,5 +69,35 @@ class DashboardController extends Controller
         $sponsor->states = $request->states;
         $sponsor->save();
         return redirect("/dashboard/view-request/" . $id);
+    }
+
+    public function delete($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->delete();
+        if($sponsor) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Item moved to trash');
+        }
+        return redirect("/dashboard");
+    }
+
+    public function trash() {
+        $sponsor = Sponsorship::onlyTrashed()->get();
+        return view('dashboard.dashboard-sponsorship-archive', ['sponsor' => $sponsor]);
+    }
+
+    public function restore($id) {
+        $sponsor = Sponsorship::withTrashed()->where('id', $id)->restore();
+
+        if ($sponsor) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Item restored !');
+        }
+
+        return redirect("/dashboard/trash");
+    }
+
+    public function permanentDelete($id) {
+        
     }
 }

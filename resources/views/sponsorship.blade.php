@@ -7,6 +7,7 @@
     <div class="div-block">
       <h3 class="heading-6">Sponsorship Request Form</h3>
       <p class="paragraph-2">Call for In-Kind Sponsorship Applications: Please Note We Do Not Offer Financial Support</p>
+      <hr>
       <h3 class="heading-7">Person In Charge Details</h3>
       <p class="paragraph-3">We will contact person in charge for further information</p>
       <div class="form-block w-form">
