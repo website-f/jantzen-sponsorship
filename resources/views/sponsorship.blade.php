@@ -13,15 +13,15 @@
       <div class="form-block w-form">
       <form action="/sponsorship-fill-request" id="email-form" name="email-form" data-name="Email Form" method="POST" data-wf-page-id="65168b78f6982fbca96a0e4f" data-wf-element-id="969c18e7-ad77-d567-f01c-3704c21f141b" enctype="multipart/form-data">
         @csrf
-              <label for="name-4" class="field-label-2">Name</label>
+              <label for="name-4" class="field-label-2">Name *</label>
               <input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name 3" placeholder="" id="name-3" required>
               <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f141f-c21f1410" class="w-layout-layout quick-stack-2 wf-layout-layout">
                 <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1420-c21f1410" class="w-layout-cell">
-                    <label for="email-6" class="field-label">Your Contact Number</label>
+                    <label for="email-6" class="field-label">Your Contact Number *</label>
                     <input type="text" class="text-field-2 w-input" maxlength="256" name="contact" data-name="Email 5" placeholder="E.g., (+60) 456-7890" id="email-5" required>
                 </div>
                 <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1424-c21f1410" class="w-layout-cell">
-                    <label for="email-6" class="field-label-3">Your Email Address</label>
+                    <label for="email-6" class="field-label-3">Your Email Address *</label>
                     <input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email 2" placeholder="E.g., johndoe@email.com" id="email-2" required>
                 </div>
               </div>
@@ -40,6 +40,19 @@
               <label class="w-radio">
                   <input type="radio" data-name="About" id="radio-5" name="about_jantzen" value="I’m Jantzen User" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-5">I’m Jantzen User</span>
               </label>
+              <label class="w-radio">
+                <input type="radio" data-name="About" id="aboutJantzen" name="about_jantzen" value="" class="w-form-formradioinput w-radio-input">
+                <input type="text" placeholder="Other" onchange="updateCheckboxValue(this)">
+              </label>
+              <script>
+                function updateCheckboxValue(inputElement) {
+                    // Get the checkbox element by ID
+                    var checkbox = document.getElementById('aboutJantzen');
+                    
+                    // Set the value of the checkbox to the value of the text input
+                    checkbox.value = inputElement.value;
+                }
+            </script>
   
         </div>
         </div>
@@ -84,6 +97,7 @@
                 <label class="radio-button-field w-radio">
                     <input type="radio" data-name="Product" id="radio-10" name="explaination_product" value="Others" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-10">Others</span>
                 </label>
+                <img src="{{asset('assets/images/booth.png')}}" loading="lazy" alt="" class="image" style="margin-left: 20px;">
                 <label for="" class="field-label-9">Can we place booth in your event?</label>
                 <label class="w-radio">
                     <input type="radio" data-name="Radio 11" id="radio-11" name="booth" value="Yes" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-11">Yes</span>
@@ -109,7 +123,7 @@
           </div>
           <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1485-c21f1410" class="w-layout-cell cell-3">
             <h3 class="heading-5">Request Products</h3>
-            <div class="text-block-7">RO Water - 200ml (48 bottles/carton)</div>
+            <div class="text-block-7"><b>RO Water - 200ml (48 bottles/carton)</b></div>
             <img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
             <div class="form-block-3 w-form">
                 <div id="w-node-ddf6d3ae-f2bd-ac9f-5a98-8bb1423a2d8f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
@@ -120,7 +134,7 @@
                 </div>
                 <div class="text-block-10 ro200mlvalue"></div>
             </div>
-            <div class="text-block-11">RO Water - 500ml (24 bottles/carton)</div>
+            <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div>
             <img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-_11307f2d-d07e-7500-506a-a278c48e222f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
@@ -131,7 +145,7 @@
                 </div>
                 <div class="text-block-10 ro500mlvalue"></div>
             </div>
-            <div class="text-block-11">RO Water - 11L (1 bottles)</div>
+            <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div>
             <img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-_6728f9e0-336d-494e-93d0-5d3357791365-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
@@ -142,7 +156,7 @@
                 </div>
                 <div class="text-block-10 ro11Lvalue"></div>
             </div>
-            <div class="text-block-11">Mineral Water - 350ml (24 bottles/carton)</div>
+            <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div>
             <img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-c458fcda-7303-d430-afe7-45dfe6a8c641-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
@@ -153,29 +167,34 @@
                 </div>
                 <div class="text-block-10 ro350mlvalue"></div>
             </div>
-            <div class="text-block-12">Estimated Sponsor Product in total</div>
-            <div class="text-block-13 totalItemCupsBottles"></div>
+            <div class="text-block-12">Estimated Sponsor Product in total: </div><br>
+            <div class="text-block-13 totalItemCupsBottles">
+              <p><b class="total200ml"></b></p>
+              <p><b class="total500ml"></b></p>
+              <p><b class="total11l"></b></p>
+              <p><b class="total350ml"></b></p>
+            </div>
           </div>
         </div>
         <button style="display: block; width: 100%" type="submit" class="button w-button">Apply Sponsorship</button>
       </form>
 </div>
 <script>
-    const quantityInputs = document.querySelectorAll('.quantityInput');
-    const totalCartonsInput = document.querySelector('.totalItemCupsBottles');
+    // const quantityInputs = document.querySelectorAll('.quantityInput');
+    // const totalCartonsInput = document.querySelector('.totalItemCupsBottles');
 
-    quantityInputs.forEach(input => {
-        input.addEventListener('input', calculateTotalCartons);
-    });
+    // quantityInputs.forEach(input => {
+    //     input.addEventListener('input', calculateTotalCartons);
+    // });
 
-    function calculateTotalCartons() {
-        let totalCartons = 0;
-        quantityInputs.forEach(input => {
-            const quantity = parseInt(input.value) || 0;
-            totalCartons += quantity;
-        });
-        totalCartonsInput.textContent = totalCartons;
-    }
+    // function calculateTotalCartons() {
+    //     let totalCartons = 0;
+    //     quantityInputs.forEach(input => {
+    //         const quantity = parseInt(input.value) || 0;
+    //         totalCartons += quantity;
+    //     });
+    //     totalCartonsInput.textContent = totalCartons;
+    // }
 </script>
 <script>
   let ro200ml = document.querySelector('.ro200ml')
@@ -187,6 +206,11 @@
   let ro350ml = document.querySelector('.ro350ml')
   let ro350mlvalue = document.querySelector('.ro350mlvalue')
 
+  let total200ml = document.querySelector(".total200ml");
+  let total500ml = document.querySelector(".total500ml");
+  let total11l = document.querySelector(".total11l");
+  let total350ml = document.querySelector(".total350ml");
+
   ro200ml.addEventListener('input', calculaterowater);
 
   function calculaterowater() {
@@ -194,7 +218,8 @@
     const quantity = parseInt(ro200ml.value) || 0
     totalcups *= quantity;
 
-    ro200mlvalue.textContent = totalcups + " Cups"
+    ro200mlvalue.textContent = totalcups + " Cups - In total";
+    total200ml.textContent = `RO Water - 200ml x ${ro200ml.value} cartons`;
   }
 
   ro500ml.addEventListener('input', calculaterowaterbottle);
@@ -204,7 +229,8 @@
     const quantityBottle = parseInt(ro500ml.value) || 0
     totalbottles *= quantityBottle;
 
-    ro500mlvalue.textContent = totalbottles + " Bottles"
+    ro500mlvalue.textContent = totalbottles + " Bottles - In total";
+    total500ml.textContent = "RO Water - 500ml x " + ro500ml.value + " cartons";
   }
 
   ro11L.addEventListener('input', calculaterowaterbottleL);
@@ -214,7 +240,8 @@
     const quantityBottleL = parseInt(ro11L.value) || 0
     totalbottlesL *= quantityBottleL;
 
-    ro11Lvalue.textContent = totalbottlesL + " Bottles"
+    ro11Lvalue.textContent = totalbottlesL + " Bottles - In total";
+    total11l.textContent = "RO Water - 11L x " + ro11L.value + " cartons";
   }
 
   ro350ml.addEventListener('input', calculaterowaterbottleM);
@@ -224,7 +251,8 @@
     const quantityBottleL = parseInt(ro350ml.value) || 0
     totalbottlesL *= quantityBottleL;
 
-    ro350mlvalue.textContent = totalbottlesL + " Bottles"
+    ro350mlvalue.textContent = totalbottlesL + " Bottles - In total";
+    total350ml.textContent = "Mineral Water - 350ml x " + ro350ml.value + " cartons";
   }
 </script>
 @endsection

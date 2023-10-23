@@ -95,7 +95,7 @@
             </div>
             <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4ae9c-8a579776" class="w-layout-cell cell-3">
               <h3 class="heading-5">Request Products</h3>
-              <div class="text-block-7">RO Water - 200ml (48 Cups/carton)</div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
+              <div class="text-block-7"><b>RO Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aea2-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro200ml">{{$spon->ro_200ml}}</div>
@@ -105,7 +105,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro200mlVal"></div>
-              <div class="text-block-11">RO Water - 500ml (24 bottles/carton)</div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aeae-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro500ml">{{$spon->ro_500ml}}</div>
@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro500mlVal quantTotal"></div>
-              <div class="text-block-11">RO Water - 11L (1 bottles)</div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aeba-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro11L">{{$spon->ro_11L}}</div>
@@ -125,7 +125,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro11LVal quantTotal"></div>
-              <div class="text-block-11">Mineral Water - 350ml (24 bottles/carton)</div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aec6-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro350ml">{{$spon->ro_350ml}}</div>
@@ -135,8 +135,13 @@
                 </div>
               </div>
               <div class="text-block-10 ro350mlVal quantTotal"></div>
-              <div class="text-block-12"><b>Estimated Sponsor Product in total</b></div>
-              <div class="text-block-13 totalProductEstimated"></div>
+              <div class="text-block-12">Estimated Sponsor Product in total:</div><br>
+              <div class="text-block-13 totalProductEstimated">
+                <p><b>RO Water - 200ml x {{$spon->ro_200ml}} cartons</b></p>
+                <p><b>RO Water - 500ml x {{$spon->ro_500ml}} cartons</b></p>
+                <p><b>RO Water - 11L x {{$spon->ro_11L}} cartons</b></p>
+                <p><b>Mineral Water - 350ml x {{$spon->ro_350ml}} cartons</b></p>
+              </div>
             </div>
         </div>
     </div>
@@ -541,6 +546,6 @@
         totalCartons += quant;
     })
 
-    totalProducts.textContent = totalCartons + " Bottles and " + ro200mlVal.textContent;
+    
   </script>
 @endsection
