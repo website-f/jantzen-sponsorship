@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
@@ -59,17 +60,30 @@ class SponsorshipController extends Controller
     $sponsor->status = "submit";
     $sponsor->save();
 
-    $user = new User;
-    $user->name = "public user";
-    $user->email = $request->email;
-    $user->role_id = 3;
-    $user->save();
+    $existingUser = User::where('email', $request->email)->first();
+
+    if (!$existingUser) {
+        $user = new User;
+        $user->name = "public user";
+        $user->email = $request->email;
+        $user->role_id = 3;
+        $user->save();
+    }
+
     return redirect("/login");
     }
 
     public function sponsorshipTrack() {
-        $sponsor = Sponsorship::where('email', Auth::user()->email)->first();
-        return view('track', ['spon' => $sponsor]);
+        $sponsor = Sponsorship::where('email', Auth::user()->email)->latest('created_at')->first();
+        $sponsors = Sponsorship::where('email', Auth::user()->email)->orderBy('created_at', 'desc')->get();
+        $months = Sponsorship::selectRaw('MONTH(from_date) as month')
+                 ->distinct()
+                 ->orderBy('month', 'asc')
+                 ->pluck('month')
+                 ->map(function ($monthNumber) {
+                     return Carbon::create()->month($monthNumber)->format('F');
+                 });
+        return view('track', ['spon' => $sponsor, 'sponsor' => $sponsors, 'month' => $months]);
     }
 
     public function proofAgreement(Request $request, $id) {

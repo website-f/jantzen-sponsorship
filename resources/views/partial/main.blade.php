@@ -9,6 +9,7 @@
   <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>

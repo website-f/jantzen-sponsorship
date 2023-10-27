@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function dashboard() {
         $sponsor = Sponsorship::orderBy('created_at', 'desc')->get();
-        $months = Sponsorship::selectRaw('MONTH(created_at) as month')
+        $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
                  ->pluck('month')

@@ -145,6 +145,7 @@
             </div>
         </div>
     </div>
+
     @elseif($spon->status == "approval")
     <div class="div-block-8">
         <div class="div-block-7">
@@ -276,7 +277,8 @@
           <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</a>
         </form>
         </div>
-      </div>
+    </div>
+
     @elseif($spon->status == "proof")
     <div class="div-block-10">
       <div class="div-block-7">
@@ -403,6 +405,7 @@
         </div>
       </div>
     </div>
+
     @elseif($spon->status == "collect")
     <div class="div-block-11">
       <div class="div-block-7">
@@ -475,6 +478,7 @@
           </form>
       </div>
     </div>
+
     @elseif($spon->status == "complete")
     <div class="div-block-11">
       <div class="div-block-7">
@@ -510,7 +514,100 @@
         <p class="paragraph-7">Thank For Choosing Us !</p>
       </div>
     </div>
+
     @endif
+
+    <div class="div-block-11">
+      <div class="div-block-7">
+        <div id="w-node-daee3445-1c0c-b96d-f427-2e09cfa0ab21-af0b537c" class="w-layout-layout quick-stack-19 wf-layout-layout">
+          <div id="w-node-bed7cd22-49d6-d440-89aa-b96ff1159735-af0b537c" class="w-layout-cell">
+            <h3 class="heading-22">Request History</h3>
+            
+          </div>
+          <div id="w-node-_4aa9ebf9-ce73-bc9a-c68b-98f83dd0035d-af0b537c" class="w-layout-cell cell-23">
+            <div class="form-block-4 w-form">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-4" data-wf-page-id="651bc3682699bcc1af0b537c" data-wf-element-id="9ed34261-eece-d5c7-13c4-b94a594fbde4">
+                <select id="statusFilt" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Status</option>
+                  <option value="Processing">Processing</option>
+                  <option value="Pending">Pending</option>
+                  <option value="MIA">MIA</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Rejected">Rejected</option>
+                </select><select id="monthFilt" name="field-2" data-name="Field 2" class="select-field-2 w-select">
+                  <option value="">Select Month</option>
+                  @foreach ($month as $months)
+                  <option value="{{$months}}">{{$months}}</option>
+                  @endforeach
+                </select>
+                <button id="exportButton" class="button-26 w-button">Export</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="w-embed">
+          <style>
+           table {
+             border-collapse: collapse;
+             width: 100%;
+             border-radius: 70px;
+           }
+           th, td {
+             text-align: center;
+             padding: 12px;
+           }
+           .table-head {
+           background-color: #f2f4f5;
+           border-radius: 70px;
+           font-family: 'Poppins', Arial, sans-serif;
+           font-size: 14px;
+           }
+           .leftThead {
+           border-radius: 10px 0px 0px 10px;
+           }
+           .rightThead {
+           border-radius: 0px 10px 10px 0px;
+           }
+           .divLists:hover {
+           background-color: #ebf0fd;
+           cursor: pointer;
+           }
+           .tableDiv {
+            margin: 10px 10px 40px 10px;
+           }
+           </style>
+          <div class="tableDiv" style="overflow-x: auto;">
+            <table class="table">
+              <tr class="table-head">
+                <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th>
+                <th>PROJECT NAME</th>
+                <th>PROJECT DATES</th>
+                <th>LOCATION</th>
+                <th>SPONSOR CARTONS</th>
+                <th class="rightThead">STATUS</th>
+              </tr>
+              @foreach ($sponsor as $sponsorship)
+              @php
+                  $int_ro200ml = (int)$sponsorship->ro_200ml;
+                  $int_ro500ml = (int)$sponsorship->ro_500ml;
+                  $int_ro11L = (int)$sponsorship->ro_11L;
+                  $int_ro350ml = (int)$sponsorship->ro_350ml;
+                  $sponsorCartons = $int_ro200ml + $int_ro500ml + $int_ro11L +$int_ro350ml
+              @endphp
+              <tr class="divLists">
+                <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
+                <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
+                <td class="clickable-row monthFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
+                <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
+                <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorCartons}}</td>
+                <td class="rightThead clickable-row statusFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->states}}</td>
+              </tr>
+              @endforeach
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <script>
     const ro200ml = document.querySelector(".ro200ml");
@@ -548,4 +645,102 @@
 
     
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script>
+    document.getElementById('selectAllCheckbox').addEventListener('change', function () {
+      const checkboxes = document.querySelectorAll('.select-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+    });
+    // Function to export selected rows to Excel
+    function exportSelectedToExcel() {
+      const table = document.querySelector('.table'); // Select your table by class or ID
+      const checkboxes = table.querySelectorAll('.select-checkbox:checked'); // Select checked checkboxes
+  
+      if (checkboxes.length === 0) {
+        alert('Please select at least one row to export.');
+        return;
+      }
+  
+      const selectedRows = [];
+      checkboxes.forEach((checkbox) => {
+        const row = checkbox.closest('tr'); // Get the closest row for each checked checkbox
+        selectedRows.push(row);
+      });
+  
+      // Create a new table that includes the header row and selected rows
+      const selectedTable = document.createElement('table');
+      const headerRow = table.querySelector('.table-head'); // Get the header row
+      selectedTable.appendChild(headerRow.cloneNode(true)); // Clone the header row
+      selectedRows.forEach((row) => {
+        selectedTable.appendChild(row.cloneNode(true)); // Clone the selected rows
+      });
+  
+      const ws = XLSX.utils.table_to_sheet(selectedTable);
+  
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+      // Save the Excel file
+      XLSX.writeFile(wb, 'selected_data_with_header.xlsx');
+    }
+  
+    // Add an event listener to trigger the export on button click
+    document.getElementById('exportButton').addEventListener('click', exportSelectedToExcel);
+  </script>
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const statusSelect = document.getElementById("statusFilt");
+      const monthSelect = document.getElementById("monthFilt");
+      const reqElements = document.querySelectorAll(".divLists");
+
+      // Map full month names to abbreviated forms
+      const monthMap = {
+          "Jan": "January",
+          "Feb": "February",
+          "Mar": "March",
+          "Apr": "April",
+          "May": "May",
+          "Jun": "June",
+          "Jul": "July",
+          "Aug": "August",
+          "September": "September",
+          "Oct": "October",
+          "Nov": "November",
+          "Dec": "December"
+      };
+
+     
+      function filterPosts() {
+          const selectedStatus = statusSelect.value;
+          const selectedMonth = monthSelect.value;
+         
+          reqElements.forEach(function (reqElement) {
+              const ReqStatus = reqElement.querySelector(".statusFilter").textContent;
+              const postDate = reqElement.querySelector(".monthFilter").textContent;
+              const allFromMonth = postDate.split("-")[0]
+              const allToMonth = postDate.split("-")[1]
+              const fromMonth = allFromMonth.split(" ")[0]
+              const toMonth = allToMonth.split(" ")[1]
+              const fromDate = monthMap[fromMonth];
+              const todate = monthMap[toMonth];
+              if (
+                  (selectedStatus === "" || selectedStatus === ReqStatus) &&
+                  (selectedMonth === "" || selectedMonth === fromDate || selectedMonth === todate) 
+              ) {
+                  reqElement.classList.remove("filter-hidden")
+              } else {
+                  reqElement.classList.add("filter-hidden");
+              }
+          });
+      }
+
+      statusSelect.addEventListener("change", filterPosts);
+      monthSelect.addEventListener("change", filterPosts);
+
+      // Initial filtering when the page loads
+      filterPosts();
+  });
+</script>
 @endsection
