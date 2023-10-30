@@ -152,25 +152,25 @@
           <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
           <p>Easily Track and Monitor Your Sponsorship Application Progress</p>
           <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee360-8a602bcd" class="w-layout-layout quick-stack-7 wf-layout-layout">
-            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee361-8a602bcd" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee361-8a602bcd" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
               <div class="text-block-15">STEP 1</div>
               <div class="text-block-16">Submit Sponsorship<br>Request Form</div>
               <p class="paragraph-5">Begin your journey by filling out and submitting the sponsorship request form, ensuring all details are accurate and complete.</p>
               <a href="#" class="button-3 w-button">Completed</a>
             </div>
-            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee36d-8a602bcd" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee36d-8a602bcd" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
               <div class="text-block-15">STEP 2</div>
               <div class="text-block-16">Await Approval / Contact (3-7 Working Days)</div>
               <p class="paragraph-5">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
               <a href="#" class="button-11 w-button">Completed</a>
             </div>
-            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee377-8a602bcd" class="w-layout-cell cell-9"><img src="images/tickProgress.png" loading="lazy" alt="" class="image-7">
+            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee377-8a602bcd" class="w-layout-cell cell-9"><img src="{{asset('assets/images/tickProgress.png')}}" loading="lazy" alt="" class="image-7">
               <div class="text-block-17">STEP 3</div>
               <div class="text-block-18">Provide Proof of Agreement</div>
               <p class="paragraph-6">Confirm your commitment by providing necessary proof of agreement, solidifying the partnership and support.</p>
               <a href="#" class="button-7 w-button">In Progress</a>
             </div>
-            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee381-8a602bcd" class="w-layout-cell cell-9"><img src="images/tickPending.png" loading="lazy" alt="" class="image-7">
+            <div id="w-node-d44ad59a-153c-27a7-a4e7-e5cfd98ee381-8a602bcd" class="w-layout-cell cell-9"><img src="{{asset('assets/images/tickPending.png')}}" loading="lazy" alt="" class="image-7">
               <div class="text-block-17">STEP 4</div>
               <div class="text-block-18">Collect Sponsored Goods at Pickup Location</div>
               <p class="paragraph-6">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event.</p>
@@ -412,25 +412,25 @@
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
         <p>Easily Track and Monitor Your Sponsorship Application Progress</p>
         <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d3-b607610e" class="w-layout-layout quick-stack-7 wf-layout-layout">
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d4-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 1</div>
             <div class="text-block-16">Submit Sponsorship<br>Request Form</div>
             <p class="paragraph-5">Begin your journey by filling out and submitting the sponsorship request form, ensuring all details are accurate and complete.</p>
             <a href="#" class="button-3 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61e0-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61e0-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 2</div>
             <div class="text-block-16">Await Approval / Contact(3-7 Working Days)</div>
             <p class="paragraph-5">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
             <a href="#" class="button-11 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61ea-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61ea-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 3</div>
             <div class="text-block-16">Provide Proof of Agreement</div>
             <p class="paragraph-5">Confirm your commitment by providing necessary proof of agreement, solidifying the partnership and support.</p>
             <a href="#" class="button-18 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61f4-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61f4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 4</div>
             <div class="text-block-16">Collect Sponsored Goods at Pickup Location</div>
             <p class="paragraph-5">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event.</p>
@@ -485,25 +485,25 @@
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
         <p>Easily Track and Monitor Your Sponsorship Application Progress</p>
         <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d3-b607610e" class="w-layout-layout quick-stack-7 wf-layout-layout">
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d4-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 1</div>
             <div class="text-block-16">Submit Sponsorship<br>Request Form</div>
             <p class="paragraph-5">Begin your journey by filling out and submitting the sponsorship request form, ensuring all details are accurate and complete.</p>
             <a href="#" class="button-3 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61e0-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61e0-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 2</div>
             <div class="text-block-16">Await Approval / Contact(3-7 Working Days)</div>
             <p class="paragraph-5">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
             <a href="#" class="button-11 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61ea-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61ea-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 3</div>
             <div class="text-block-16">Provide Proof of Agreement</div>
             <p class="paragraph-5">Confirm your commitment by providing necessary proof of agreement, solidifying the partnership and support.</p>
             <a href="#" class="button-18 w-button">Completed</a>
           </div>
-          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61f4-b607610e" class="w-layout-cell cell-6"><img src="images/tickComplete.png" loading="lazy" alt="" class="image-5">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61f4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
             <div class="text-block-15">STEP 4</div>
             <div class="text-block-16">Collect Sponsored Goods at Pickup Location</div>
             <p class="paragraph-5">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event.</p>

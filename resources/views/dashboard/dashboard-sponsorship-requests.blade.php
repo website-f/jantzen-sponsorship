@@ -20,7 +20,7 @@
             <a href="/reject" class="button-22 w-button">Reject</a>
           </div>
           <div id="w-node-_13dc5bac-0e05-9751-0da2-f7cc29ea8657-cdafff14" class="w-layout-cell"><label for="field-3">States</label>
-            <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
+            <select id="field-3" name="states" data-name="Field 3" class="select-field w-select" required>
               <option value="">Select one...</option>
               <option value="Processing">Processing</option>
               <option value="Pending">Pending</option>
@@ -40,7 +40,7 @@
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
             <label for="field-3">Booth / Space</label>
-            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select">
+            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select" required>
               <option value="">Select one...</option>
               <option value="First">None</option>
               <option value="Booth">Booth</option>
@@ -50,7 +50,7 @@
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Pickup Location</label>
-            <select id="field-3" name="pickup_location" data-name="Field 3" class="select-field w-select pickup-location">
+            <select id="field-3" name="pickup_location" data-name="Field 3" class="select-field w-select pickup-location" required>
               <option value="">Select one...</option>
               <option value="Puchong">Puchong</option>
               <option value="Shah Alam">Shah Alam</option>
@@ -74,27 +74,27 @@
         <label for="">Sponsorhip Products</label>
         <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2b-cdafff14" class="w-layout-layout quick-stack-6 wf-layout-layout">
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2c-cdafff14" class="w-layout-cell cell-10">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">RO 200ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c32-cdafff14" class="w-layout-cell cell-11">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">RO 500ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c38-cdafff14" class="w-layout-cell cell-12">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">RO 11L x Bottles</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c3e-cdafff14" class="w-layout-cell cell-13">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">Mineral 350ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c44-cdafff14" class="w-layout-cell cell-14">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">Jantzen’s Paper Cup</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c4a-cdafff14" class="w-layout-cell cell-15">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" required="">
+            <input type="text" class="text-field-10 w-input" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" >
             <div class="text-block-19">Jantzen’s Goodie Bags</div>
           </div>
         </div><label for="field-5">Others</label>
@@ -107,6 +107,76 @@
       </div>
       <div class="w-form-fail">
         <div>Oops! Something went wrong while submitting the form.</div>
+      </div>
+    </div>
+  </div>
+  @elseif($sponsor->status == "collect")
+  <div class="div-block-26">
+    <h3 class="heading-17">For Office Use: Event Sponsorship Collector Details</h3>
+    <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
+    <form action="/dashboard/status-update/{{$sponsor->id}}" method="POST">
+      @csrf
+      @method('PUT')
+    <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
+        <button type="submit" class="button-21 w-button">Update</button>
+      </div>
+      <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
+        <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
+          <option value="">Update Status</option>
+          <option value="Processing">Processing</option>
+          <option value="Pending">Pending</option>
+          <option value="MIA">MIA</option>
+          <option value="Completed">Completed</option>
+          <option value="Collected">Collected</option>
+        </select>
+      </div>
+    </form>
+    </div>
+    <div class="w-form">
+      <div action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collection Date</label>
+            @if ($sponsor->collection_date !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collection_date}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collection Time Slot</label>
+            @if ($sponsor->collection_time_slot !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collection_time_slot}}" readonly>
+            @endif
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Name</label>
+            @if ($sponsor->collector_name !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_name}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's IC No</label>
+            @if ($sponsor->collector_IC !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_IC}}" readonly>
+            @endif
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Contact Number</label>
+            @if ($sponsor->collector_contact !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_contact}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's Plate Number</label>
+            @if ($sponsor->collector_plate_number !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_plate_number}}" readonly>
+            @endif
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -243,9 +313,9 @@
               @if ($attach !== null)
                   @foreach ($attach as $item)
                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                        <a href="{{asset($item)}}" target="_blank">
+                     <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                           <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                        </a>                        
+                      </a>                        
                      @else
                         <a href="{{ asset($item) }}" target="_blank">View File</a>
                      @endif
@@ -263,7 +333,7 @@
       </div>
       <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fb4-cdafff14" class="w-layout-cell cell-3">
         <h3 class="heading-5">Request Products</h3>
-        <div class="text-block-7">RO Water - 200ml (48 Cups/carton)</div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
+        <div class="text-block-7"><b>Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fba-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro200ml">{{$sponsor->ro_200ml}}</div>
@@ -273,7 +343,7 @@
           </div>
         </div>
         <div class="text-block-10 ro200mlVal"></div>
-        <div class="text-block-11">RO Water - 500ml (24 bottles/carton)</div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fc6-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro500ml">{{$sponsor->ro_500ml}}</div>
@@ -283,7 +353,7 @@
           </div>
         </div>
         <div class="text-block-10 ro500mlVal quantTotal"></div>
-        <div class="text-block-11">RO Water - 11L (1 bottles)</div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fd2-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro11L">{{$sponsor->ro_11L}}</div>
@@ -293,7 +363,7 @@
           </div>
         </div>
         <div class="text-block-10 ro11LVal quantTotal"></div>
-        <div class="text-block-11">Mineral Water - 350ml (24 bottles/carton)</div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fde-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro350ml">{{$sponsor->ro_350ml}}</div>

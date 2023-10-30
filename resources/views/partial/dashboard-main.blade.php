@@ -14,6 +14,7 @@
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
   <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/glightbox/css/glightbox.css')}}">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -130,6 +131,7 @@
   <script src="{{asset('assets/fullcalendar/packages/daygrid/main.js')}}"></script>
   <script src="{{asset('assets/fullcalendar/packages/timegrid/main.js')}}"></script>
   <script src="{{asset('assets/fullcalendar/packages/list/main.js')}}"></script>
+  <script src="{{asset('assets/glightbox/js/glightbox.js')}}"></script>
   <script>
     const profileDropdown = document.getElementById('profileDropdown');
     const dropdownContent = document.getElementById('dropdownContent');
