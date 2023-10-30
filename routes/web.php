@@ -42,6 +42,8 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/trash', [DashboardController::class, 'trash'])->middleware('auth');
     Route::get('/restore/{id}', [DashboardController::class, 'restore'])->middleware('auth');
     Route::get('/permanent-delete/{id}', [DashboardController::class, 'permanentDelete'])->middleware('auth');
+    Route::get('/ongoing-event-report', [DashboardController::class, 'ongoingEventReport'])->middleware('auth');
+    Route::get('/event-report/{id}', [DashboardController::class, 'eventReport'])->middleware('auth');
 });
 
 

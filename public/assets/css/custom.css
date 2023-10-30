@@ -104,3 +104,43 @@
   color: white;
   font-weight: 15px;
 }
+
+.projectNameFilter {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border-radius: 6px;
+  height: 40px;
+}
+
+.accordion-btn {
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #0275d8;
+  color: white;
+}
+
+.active, .accordion-btn:hover {
+  background-color: #2f5ebc; 
+}
+
+.panel-btn {
+  padding-left: 20px;
+  margin-bottom: 10px;
+  display: none;
+  overflow: hidden;
+}
+
+.export-btn {
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #f0ad4e;
+  color: white;
+}
+
+@media only screen and (max-width: 767px) {
+  .export-btn, .accordion-btn {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

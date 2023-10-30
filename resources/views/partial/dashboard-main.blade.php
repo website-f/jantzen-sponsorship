@@ -14,6 +14,7 @@
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
   <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
+  <link href="{{asset('assets/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/glightbox/css/glightbox.css')}}">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -65,6 +66,7 @@
           </div>
           <nav class="dropdown-list w-dropdown-list">
             <a href="/dashboard" class="dropdown-link w-dropdown-link">Sponsorship</a>
+            <a href="/dashboard/ongoing-event-report" class="dropdown-link w-dropdown-link">Ongoing Event Report</a>
             <a href="#" class="dropdown-link-2 w-dropdown-link">CSR</a>
             <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
             <a href="/dashboard/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>

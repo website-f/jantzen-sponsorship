@@ -100,4 +100,29 @@ class DashboardController extends Controller
     public function permanentDelete($id) {
         
     }
+
+    public function ongoingEventReport() {
+        $sponsor = Sponsorship::whereIn('states', ['Processing', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();
+        $months = Sponsorship::selectRaw('MONTH(from_date) as month')
+                 ->distinct()
+                 ->orderBy('month', 'asc')
+                 ->pluck('month')
+                 ->map(function ($monthNumber) {
+                     return Carbon::create()->month($monthNumber)->format('F');
+                 });
+        $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
+        $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
+        $statusCounts = $sponsor->groupBy('states')->map->count();
+        return view('dashboard.dashboard-ongoing-event-report', ['sponsor' => $sponsor, 
+                                            'month' => $months,
+                                            'booth' => $booth,
+                                            'space' => $space,
+                                            'statusCounts' => $statusCounts
+                                        ]);
+    }
+
+    public function eventReport($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        return view('dashboard.dashboard-event-report', ['sponsor' => $sponsor]);
+    }
 }
