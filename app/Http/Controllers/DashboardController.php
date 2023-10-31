@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use App\Models\ongoingEventReport;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
@@ -102,7 +103,7 @@ class DashboardController extends Controller
     }
 
     public function ongoingEventReport() {
-        $sponsor = Sponsorship::whereIn('states', ['Processing', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();
+        $sponsor = Sponsorship::whereIn('states', ['Pending', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
@@ -123,6 +124,7 @@ class DashboardController extends Controller
 
     public function eventReport($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        return view('dashboard.dashboard-event-report', ['sponsor' => $sponsor]);
+        $ongoing = ongoingEventReport::all();
+        return view('dashboard.dashboard-event-report', ['sponsor' => $sponsor, 'ongoing' => $ongoing]);
     }
 }
