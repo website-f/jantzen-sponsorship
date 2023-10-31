@@ -129,7 +129,8 @@
         </table>
         <button class="addRowBtn" type="button" id="addRowBtnSale"><i class="bi bi-plus-lg"></i> Add Row</button>
         <input type="text" class="totalCash" id="totalSale" placeholder="Total" name="total_sale">
-        <input type="hidden" class="totalCashHidden cashOnHandTotal" id="totalSaleHide" placeholder="Total">
+        <input type="hidden" class="totalCashHidden cashOnHandTotal
+        " id="totalSaleHide" placeholder="Total">
         <script>
         document.addEventListener("DOMContentLoaded", function () {
         const siblingsTableSale = document.getElementById("siblingsTableSale");
