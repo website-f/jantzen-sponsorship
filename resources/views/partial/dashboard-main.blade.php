@@ -7,6 +7,7 @@
   <meta content="Dashboard-request" property="og:title">
   <meta content="Dashboard-request" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta content="Webflow" name="generator">
   <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">

@@ -44,6 +44,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/permanent-delete/{id}', [DashboardController::class, 'permanentDelete'])->middleware('auth');
     Route::get('/ongoing-event-report', [DashboardController::class, 'ongoingEventReport'])->middleware('auth');
     Route::get('/event-report/{id}', [DashboardController::class, 'eventReport'])->middleware('auth');
+    Route::post('/submit-report/{id}', [DashboardController::class, 'submitReport'])->middleware('auth');
 });
 
 

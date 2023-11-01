@@ -163,7 +163,7 @@
   overflow-x: auto;
 }
 
-#siblingsTable, #siblingsTableSale {
+#siblingsTable, #siblingsTableSale, #tableDisplay {
   width: 100%;
 }
 
@@ -171,6 +171,11 @@ table .table-header th {
   background-color: rgb(210, 208, 208);
   padding: 10px;
   border-radius: 6px;
+}
+
+.tableBody {
+  border: 1px solid rgba(180, 180, 180, 0.8);
+  padding: 10px;
 }
 
 .addRowBtn {
@@ -216,10 +221,45 @@ table .table-header th {
 }
 
 .panel {
-  padding: 0 18px;
+  padding: 18px;
   display: none;
   background-color: white;
   overflow: hidden;
+}
+
+.submit-report-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #0275d8;
+  color: white;
+}
+
+.close-edit-report-btn {
+  padding: 7px 14px;
+  border-radius: 6px;
+  color: white;
+  background-color: #d9534f;
+}
+
+
+.edit-report-btn {
+  padding: 7px;
+  border-radius: 6px;
+  color: white;
+  background-color: #0275d8;
+}
+
+.tabcontent {
+  display: none;
+}
+
+.hideClose {
+  display: none;
+}
+
+.table-edit {
+  width: 100%;
 }
 
 @media only screen and (max-width: 767px) {

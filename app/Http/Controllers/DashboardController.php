@@ -127,4 +127,26 @@ class DashboardController extends Controller
         $ongoing = ongoingEventReport::all();
         return view('dashboard.dashboard-event-report', ['sponsor' => $sponsor, 'ongoing' => $ongoing]);
     }
+
+    public function submitreport(Request $request, $id) {
+        $cashOutReport = json_decode($request->input('cashOutTableData'));
+        $stockInHand = json_decode($request->input('salesTableData'));
+
+        $cashOutReport = json_encode($cashOutReport);
+        $stockInHand = json_encode($stockInHand);
+
+        $report = new ongoingEventReport();
+        $report->day = $request->input('date');
+        $report->cash_in_report = $request->input('cash_in_report');
+        $report->total_cash_out = $request->input('total_cash_out');
+        $report->total_sale = $request->input('total_sale');
+        $report->cash_on_hand = $request->input('cash_on_hand');
+        $report->tng = $request->input('tng');
+        $report->others = $request->input('others');
+        $report->cash_out_report = $cashOutReport;
+        $report->stock_on_hand = $stockInHand;
+        $report->save();
+        return redirect('/dashboard/event-report/' . $id);
+        
+    }
 }
