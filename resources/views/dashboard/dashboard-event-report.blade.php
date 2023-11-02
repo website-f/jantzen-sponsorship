@@ -253,7 +253,7 @@
             </table>
             <button class="addRowBtn" type="button" id="addRowBtn{{$index}}"><i class="bi bi-plus-lg"></i> Add Row</button>
             <input type="text" class="totalCash" id="totalCash{{$index}}" placeholder="Total" name="total_cash_out{{$index}}" value="{{$item->total_cash_out}}">
-            <input type="text" class="totalCashHidden cashOnHandTotal" id="totalCashHide{{$index}}" name="total_cash_out_num{{$index}}" placeholder="Total" value="{{$item->total_cash_out_num}}">
+            <input type="hidden" class="totalCashHidden cashOnHandTotal" id="totalCashHide{{$index}}" name="total_cash_out_num{{$index}}" placeholder="Total" value="{{$item->total_cash_out_num}}">
             </div>
     
             <div class="custom-table">
@@ -278,7 +278,7 @@
             </table>
             <button class="addRowBtn" type="button" id="addRowBtnSale{{$index}}"><i class="bi bi-plus-lg"></i> Add Row</button>
             <input type="text" class="totalCash" id="totalSale{{$index}}" placeholder="Total" name="total_sale{{$index}}" value="{{$item->total_sale}}">
-            <input type="text" class="totalCashHidden cashOnHandTotal" id="totalSaleHide{{$index}}" name="total_sale_num{{$index}}" placeholder="Total" value="{{$item->total_sale_num}}">
+            <input type="hidden" class="totalCashHidden cashOnHandTotal" id="totalSaleHide{{$index}}" name="total_sale_num{{$index}}" placeholder="Total" value="{{$item->total_sale_num}}">
             </div>
             <div class="grid-col-2">
               <div class="grid-item">
