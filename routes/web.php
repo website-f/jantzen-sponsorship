@@ -45,6 +45,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/ongoing-event-report', [DashboardController::class, 'ongoingEventReport'])->middleware('auth');
     Route::get('/event-report/{id}', [DashboardController::class, 'eventReport'])->middleware('auth');
     Route::post('/submit-report/{id}', [DashboardController::class, 'submitReport'])->middleware('auth');
+    Route::put('/edit-report/{id}/{repID}', [DashboardController::class, 'submitEditReport'])->middleware('auth');
 });
 
 

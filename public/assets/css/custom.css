@@ -262,6 +262,28 @@ table .table-header th {
   width: 100%;
 }
 
+.exportPDFCard {
+  width: 600px;
+  padding: 10px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.pdf-panel {
+  display: none;
+}
+
+.export-btn-report {
+  padding: 10px 28px;
+  border-radius: 7px;
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.center-btn {
+  text-align: center;
+}
+
 @media only screen and (max-width: 767px) {
   .export-btn, .accordion-btn {
     padding: 8px;
@@ -271,6 +293,10 @@ table .table-header th {
 
   .grid-col-2 {
     grid-template-columns: auto;
+  }
+
+  .exportPDFCard {
+    width: auto;
   }
 }
 

@@ -124,11 +124,11 @@ class DashboardController extends Controller
 
     public function eventReport($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $ongoing = ongoingEventReport::all();
+        $ongoing = ongoingEventReport::where('sponsorship_id', $id)->get();
         return view('dashboard.dashboard-event-report', ['sponsor' => $sponsor, 'ongoing' => $ongoing]);
     }
 
-    public function submitreport(Request $request, $id) {
+    public function submitReport(Request $request, $id) {
         $cashOutReport = json_decode($request->input('cashOutTableData'));
         $stockInHand = json_decode($request->input('salesTableData'));
 
@@ -139,14 +139,42 @@ class DashboardController extends Controller
         $report->day = $request->input('date');
         $report->cash_in_report = $request->input('cash_in_report');
         $report->total_cash_out = $request->input('total_cash_out');
+        $report->total_cash_out_num = $request->input('total_cash_out_num');
         $report->total_sale = $request->input('total_sale');
+        $report->total_sale_num = $request->input('total_sale_num');
         $report->cash_on_hand = $request->input('cash_on_hand');
         $report->tng = $request->input('tng');
         $report->others = $request->input('others');
         $report->cash_out_report = $cashOutReport;
         $report->stock_on_hand = $stockInHand;
+        $report->sponsorship_id = $id;
         $report->save();
         return redirect('/dashboard/event-report/' . $id);
+        
+    }
+
+    public function submitEditReport(Request $request, $id, $repID) {
+        //dd($request->all());
+        $cashOutReport = json_decode($request->input('cashOutTableData'));
+        $stockInHand = json_decode($request->input('salesTableData'));
+
+        $cashOutReport = json_encode($cashOutReport);
+        $stockInHand = json_encode($stockInHand);
+
+        $report = ongoingEventReport::findOrFail($id);
+        $report->day = $request->input('date');
+        $report->cash_in_report = $request->input('cash_in_report');
+        $report->total_cash_out = $request->input('total_cash_out');
+        $report->total_cash_out_num = $request->input('total_cash_out_num');
+        $report->total_sale = $request->input('total_sale');
+        $report->total_sale_num = $request->input('total_sale_num');
+        $report->cash_on_hand = $request->input('cash_on_hand');
+        $report->tng = $request->input('tng');
+        $report->others = $request->input('others');
+        $report->cash_out_report = $cashOutReport;
+        $report->stock_on_hand = $stockInHand;
+        $report->sponsorship_id = $repID;
+        $report->save();
         
     }
 }
