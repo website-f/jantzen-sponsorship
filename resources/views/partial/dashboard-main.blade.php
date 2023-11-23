@@ -13,6 +13,7 @@
   <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
   <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
   <link href="{{asset('assets/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet" type="text/css">
@@ -119,9 +120,6 @@
         <div class="text-block-27">Add Content </div>
       </div>
     </div>
-    <div class="div-block-22">
-      <div class="text-block-27">Search Content</div><img src="{{asset('assets/images/u_search.png')}}" loading="lazy" width="20" alt="" class="image-18">
-    </div>
   </section>
 
   @yield('content')
@@ -135,6 +133,7 @@
   <script src="{{asset('assets/fullcalendar/packages/timegrid/main.js')}}"></script>
   <script src="{{asset('assets/fullcalendar/packages/list/main.js')}}"></script>
   <script src="{{asset('assets/glightbox/js/glightbox.js')}}"></script>
+  <script src="{{asset('assets/select2/js/select2.full.min.js')}}"></script>
   <script>
     const profileDropdown = document.getElementById('profileDropdown');
     const dropdownContent = document.getElementById('dropdownContent');
@@ -150,6 +149,17 @@
     profileDropdown.addEventListener('click', function(event) {
       event.preventDefault(); // Prevent the default behavior of the anchor tag
       toggleDropdown();
+    });
+    
+  </script>
+  <script>
+    $(document).ready(function() { 
+    $("#e1").select2(); 
+
+    $('#e1').on('change', function() {
+                var selectedValues = $(this).val();
+                $('#selectedValues').val(selectedValues);
+            });
     });
   </script>
 </body>

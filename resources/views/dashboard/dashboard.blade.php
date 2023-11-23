@@ -23,6 +23,9 @@
               <a data-w-tab="Tab 2" class="tab-link-tab-2-2 w-inline-block w-tab-link">
                 <div class="text-block-37">Space</div>
               </a>
+              <a data-w-tab="None" class="tab-link-tab-3-2 w-inline-block w-tab-link w--current">
+                <div class="text-block-51">None</div>
+              </a>
             </div>
             <div class="tabs-content w-tab-content">
               <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
@@ -47,6 +50,19 @@
                   </div>
                   <div class="div-block-37">
                     <div class="text-block-48">{{date('M d, Y', strtotime($spaces->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}</div>
+                  </div>
+                </div>
+                @endforeach
+              </div>
+              <div data-w-tab="None" class="tab-pane-none w-tab-pane w--tab-active">
+                @foreach ($none as $nones)
+                <div class="div-block-35">
+                  <div class="div-block-36">
+                    <div><strong>{{$nones->event_name}}</strong></div>
+                    <div class="text-block-38">{{$nones->eventAddress}}</div>
+                  </div>
+                  <div class="div-block-37">
+                    <div class="text-block-48">{{date('M d, Y', strtotime($nones->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}</div>
                   </div>
                 </div>
                 @endforeach

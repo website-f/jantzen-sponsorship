@@ -14,14 +14,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert([
-            'name' => 'master',
-            'email' => 'master@jantzen.com.my',
-            'role_id' => 1,
-            'password' => '$2a$12$2Yga4Wi3t6Huc36lcruffujLg7hAzM7tZtwqfF463VWG.EaBkntgW',
-            'vendor_id' => 1,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        $user = [
+            ['name' => 'Umi', 'email' => 'umi@jantzen.com.my', 'role_id' => 1, 'vendor_id' => 1],
+            ['name' => 'Hanis', 'email' => 'hanis@jantzen.com.my', 'role_id' => 1, 'vendor_id' => 1]
+        ];
+
+        foreach ($user as $value) {
+            User::insert([
+                'name' => $value['name'],
+                'email' => $value['email'],
+                'role_id' => $value['role_id'],
+                'password' => '$2a$12$59fajpvpEtn/yV1Ea5OQNOf0TcMTgHZ87yr76R7NcP6NWoO1hr1n2',
+                'vendor_id' => $value['vendor_id'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
     }
 }

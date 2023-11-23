@@ -19,7 +19,10 @@
           <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
             <a href="/reject" class="button-22 w-button">Reject</a>
           </div>
-          <div id="w-node-_13dc5bac-0e05-9751-0da2-f7cc29ea8657-cdafff14" class="w-layout-cell"><label for="field-3">States</label>
+          <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
+            <a href="/block" class="button-22 w-button">Add to blocklist</a>
+          </div>
+          {{-- <div id="w-node-_13dc5bac-0e05-9751-0da2-f7cc29ea8657-cdafff14" class="w-layout-cell"><label for="field-3">States</label>
             <select id="field-3" name="states" data-name="Field 3" class="select-field w-select" required>
               <option value="">Select one...</option>
               <option value="Processing">Processing</option>
@@ -27,22 +30,27 @@
               <option value="MIA">MIA</option>
               <option value="Completed">Completed</option>
             </select>
-          </div>
+          </div> --}}
             <div id="w-node-_73a60d0b-7991-42d7-9bba-ecc75d81f7d2-cdafff14" class="w-layout-cell">
               <label for="field-7">Attending</label>
-              <input type="text" class="text-field-12 w-input" maxlength="256" name="attending" data-name="Field 7" placeholder="" id="field-7" required="">
+              <select id="e1" name="attending" class="select-field w-select" multiple>
+                @foreach ($user as $item)
+                <option value="{{$item->name}}">{{$item->name}}</option>
+                @endforeach
+              </select>
+              <input type="hidden"  name="attending" id="selectedValues">
             </div>
         </div>
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Sposorship Handle By</label>
-            <input type="text" class="text-field-13 w-input" maxlength="256" name="handle_by" data-name="Field 8" placeholder="" id="field-8" required="">
+            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" required="">
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
             <label for="field-3">Booth / Space</label>
             <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select" required>
               <option value="">Select one...</option>
-              <option value="First">None</option>
+              <option value="None">None</option>
               <option value="Booth">Booth</option>
               <option value="Space">Space</option>
             </select></div>
@@ -74,27 +82,27 @@
         <label for="">Sponsorhip Products</label>
         <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2b-cdafff14" class="w-layout-layout quick-stack-6 wf-layout-layout">
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2c-cdafff14" class="w-layout-cell cell-10">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">RO 200ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c32-cdafff14" class="w-layout-cell cell-11">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">RO 500ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c38-cdafff14" class="w-layout-cell cell-12">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">RO 11L x Bottles</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c3e-cdafff14" class="w-layout-cell cell-13">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">Mineral 350ml x Cartons</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c44-cdafff14" class="w-layout-cell cell-14">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">Jantzen’s Paper Cup</div>
           </div>
           <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c4a-cdafff14" class="w-layout-cell cell-15">
-            <input type="text" class="text-field-10 w-input" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" >
+            <input type="number" class="text-field-10 w-input" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" value="0">
             <div class="text-block-19">Jantzen’s Goodie Bags</div>
           </div>
         </div><label for="field-5">Others</label>

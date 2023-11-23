@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Models\ongoingEventReport;
@@ -22,24 +23,26 @@ class DashboardController extends Controller
                  });
         $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
         $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
+        $none = Sponsorship::where("booth_space", "None")->orderBy('created_at', 'desc')->get();
         $statusCounts = $sponsor->groupBy('states')->map->count();
         return view('dashboard.dashboard', ['sponsor' => $sponsor, 
                                             'month' => $months,
                                             'booth' => $booth,
                                             'space' => $space,
+                                            'none' => $none,
                                             'statusCounts' => $statusCounts
                                         ]);
     }
 
     public function viewRequest($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        return view('dashboard.dashboard-sponsorship-requests', ['sponsor' => $sponsor]);
+        $user = User::where('role_id', 1)->get();
+        return view('dashboard.dashboard-sponsorship-requests', ['sponsor' => $sponsor, 'user' => $user]);
     }
 
     public function requestSubmit(Request $request, $id) {
         $attending = explode(",", $request->attending);
         $sponsor = Sponsorship::findOrFail($id);
-        $sponsor->states = $request->states;
         $sponsor->attending = json_encode($attending);
         $sponsor->handle_by = $request->handle_by;
         $sponsor->booth_space = $request->booth_space;
@@ -55,6 +58,7 @@ class DashboardController extends Controller
         $sponsor->pickup_address = $request->pickup_address;
         $sponsor->contact_person = $request->contact_person;
         $sponsor->pickup_phone_number = $request->pickup_phone_number;
+        $sponsor->states = "Pending";
         $sponsor->status = "approval";
         $sponsor->save();
         return redirect("/dashboard");
@@ -113,11 +117,13 @@ class DashboardController extends Controller
                  });
         $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
         $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
+        $none = Sponsorship::where("booth_space", "None")->orderBy('created_at', 'desc')->get();
         $statusCounts = $sponsor->groupBy('states')->map->count();
         return view('dashboard.dashboard-ongoing-event-report', ['sponsor' => $sponsor, 
                                             'month' => $months,
                                             'booth' => $booth,
                                             'space' => $space,
+                                            'none' => $none,
                                             'statusCounts' => $statusCounts
                                         ]);
     }
