@@ -124,7 +124,7 @@
           <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1485-c21f1410" class="w-layout-cell cell-3">
             <h3 class="heading-5">Request Products</h3>
             <div class="text-block-7"><b>RO Water - 200ml (48 bottles/carton)</b></div>
-            <img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
+            <img src="{{asset('assets/images/200mlRo.jpg')}}" loading="lazy" alt="" class="image">
             <div class="form-block-3 w-form">
                 <div id="w-node-ddf6d3ae-f2bd-ac9f-5a98-8bb1423a2d8f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
@@ -135,7 +135,7 @@
                 <div class="text-block-10 ro200mlvalue"></div>
             </div>
             <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div>
-            <img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+            <img src="{{asset('assets/images/500mlRo.jpg')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-_11307f2d-d07e-7500-506a-a278c48e222f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
@@ -146,7 +146,7 @@
                 <div class="text-block-10 ro500mlvalue"></div>
             </div>
             <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div>
-            <img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
+            <img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-_6728f9e0-336d-494e-93d0-5d3357791365-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
@@ -157,7 +157,7 @@
                 <div class="text-block-10 ro11Lvalue"></div>
             </div>
             <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div>
-            <img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+            <img src="{{asset('assets/images/350mlMinearl.jpg')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-c458fcda-7303-d430-afe7-45dfe6a8c641-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">

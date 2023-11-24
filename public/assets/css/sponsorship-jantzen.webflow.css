@@ -672,6 +672,7 @@
   float: left;
   clear: none;
   position: fixed;
+
 }
 
 .container-3 {
@@ -796,7 +797,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 20px;
-  padding: 5px 10px 5px 5px;
+  padding: 5px 10px 10px 5px;
   display: flex;
 }
 
@@ -2343,7 +2344,6 @@
 
   .menu-button-2 {
     flex: 0 auto;
-    padding-left: 6px;
   }
 
   .menu-button-2.w--open {
@@ -2363,6 +2363,16 @@
   .icon-3 {
     color: #fff;
     padding-left: 10px;
+  }
+
+  .icon-31 {
+    color: #000000;
+    padding-left: 10px;
+  }
+
+  .icon-34 {
+    color: #000000;
+    padding-left: 15px;
   }
 
   .section-4 {

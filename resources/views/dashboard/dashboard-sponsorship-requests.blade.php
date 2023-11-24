@@ -44,7 +44,7 @@
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Sposorship Handle By</label>
-            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" required="">
+            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" required="" value="{{Auth::user()->name}}">
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
             <label for="field-3">Booth / Space</label>
@@ -118,9 +118,157 @@
       </div>
     </div>
   </div>
+  @elseif($sponsor->status == "approval")
+  <div class="div-block-26">
+    <h3 class="heading-17">Waiting for proof of agreement from the user</h3>
+    <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
+    <form action="/dashboard/status-update/{{$sponsor->id}}" method="POST">
+      @csrf
+      @method('PUT')
+    <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
+        <button type="submit" class="button-21 w-button">Update</button>
+      </div>
+      <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
+        <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
+          <option value="Pending">Pending</option>
+          <option value="MIA">MIA</option>
+          <option value="Completed">Completed</option>
+          <option value="Collected">Collected</option>
+        </select>
+      </div>
+    </form>
+    </div>
+    <div class="w-form">
+      <div action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Sposorship Handle By</label>
+            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" value="{{$sponsor->handle_by}}">
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Booth / Space</label>
+            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select">
+              @if ($sponsor->booth_space == "Booth")
+                <option value="None">None</option>
+                <option value="Booth" selected>Booth</option>
+                <option value="Space">Space</option>
+              @elseif ($sponsor->booth_space == "Space")
+                <option value="None">None</option>
+                <option value="Booth">Booth</option>
+                <option value="Space" selected>Space</option>
+              @else
+                <option value="None" selected>None</option>
+                <option value="Booth">Booth</option>
+                <option value="Space">Space</option>
+              @endif
+            </select></div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Pickup Location</label>
+            <select id="field-3" name="pickup_location" data-name="Field 3" class="select-field w-select pickup-location" required>
+              @if ($sponsor->pickup_location == "Puchong")
+                <option value="Puchong" selected>Puchong</option>
+                <option value="Shah Alam">Shah Alam</option>
+              @elseif ($sponsor->pickup_location == "Shah Alam")
+                <option value="Puchong">Puchong</option>
+                <option value="Shah Alam" selected>Shah Alam</option>
+              @else
+                <option value="Puchong" selected>Puchong</option>
+                <option value="Shah Alam">Shah Alam</option>
+              @endif
+            </select>
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Pickup Location Address</label>
+            <input type="text" class="text-field-13 w-input pickup-address" maxlength="256" name="pickup_address" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->pickup_address}}" readonly>
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Contact Person</label>
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" name="contact_person" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->contact_person}}" readonly>
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Phone Number</label>
+            <input type="text" class="text-field-13 w-input phone-number" maxlength="256" name="pickup_phone_number" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->pickup_phone_number}}" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @elseif($sponsor->status == "proof")
+  <div class="div-block-26">
+    <h3 class="heading-17">Waiting for the user to fill in the collector details</h3>
+    <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
+    <form action="/dashboard/status-update/{{$sponsor->id}}" method="POST">
+      @csrf
+      @method('PUT')
+    <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
+        <button type="submit" class="button-21 w-button">Update</button>
+      </div>
+      <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
+        <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
+          <option value="Pending">Pending</option>
+          <option value="MIA">MIA</option>
+          <option value="Completed">Completed</option>
+          <option value="Collected">Collected</option>
+        </select>
+      </div>
+    </form>
+    </div>
+    <div class="w-form">
+      <div action="#" id="email-form-3" name="email-form-3" data-name="Email Form 3" method="POST" data-wf-page-id="651b71c3c78416c9cdafff14" data-wf-element-id="5618a528-0df1-6a8d-61a3-261f3d36d73c">
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Sposorship Handle By</label>
+            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" required="">
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Booth / Space</label>
+            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select" required>
+              <option value="">Select one...</option>
+              <option value="None">None</option>
+              <option value="Booth">Booth</option>
+              <option value="Space">Space</option>
+            </select></div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Name</label>
+            @if ($sponsor->collector_name !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_name}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's IC No</label>
+            @if ($sponsor->collector_IC !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_IC}}" readonly>
+            @endif
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Collector's Contact Number</label>
+            @if ($sponsor->collector_contact !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_contact}}" readonly>
+            @endif
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Collector's Plate Number</label>
+            @if ($sponsor->collector_plate_number !== null)
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_plate_number}}" readonly>
+            @endif
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   @elseif($sponsor->status == "collect")
   <div class="div-block-26">
-    <h3 class="heading-17">For Office Use: Event Sponsorship Collector Details</h3>
+    <h3 class="heading-17">Waiting for collection</h3>
     <p class="paragraph-11">Detailed Assessment and Final Decision on Proposed Sponsorship Requests</p>
     <form action="/dashboard/status-update/{{$sponsor->id}}" method="POST">
       @csrf
@@ -341,7 +489,7 @@
       </div>
       <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fb4-cdafff14" class="w-layout-cell cell-3">
         <h3 class="heading-5">Request Products</h3>
-        <div class="text-block-7"><b>Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
+        <div class="text-block-7"><b>Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/200mlRo.jpg')}}" loading="lazy" alt="" class="image">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fba-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro200ml">{{$sponsor->ro_200ml}}</div>
@@ -351,7 +499,7 @@
           </div>
         </div>
         <div class="text-block-10 ro200mlVal"></div>
-        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/500mlRo.jpg')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fc6-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro500ml">{{$sponsor->ro_500ml}}</div>
@@ -361,7 +509,7 @@
           </div>
         </div>
         <div class="text-block-10 ro500mlVal quantTotal"></div>
-        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fd2-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro11L">{{$sponsor->ro_11L}}</div>
@@ -371,7 +519,7 @@
           </div>
         </div>
         <div class="text-block-10 ro11LVal quantTotal"></div>
-        <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+        <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/350mlMinearl.jpg')}}" loading="lazy" alt="" class="image-3">
         <div id="w-node-_836aa450-96fc-3d8a-1d2b-ccd606ea9fde-cdafff14" class="w-layout-layout quick-stack-3 wf-layout-layout">
           <div class="w-layout-cell cell-5">
             <div class="text-block-9 ro350ml">{{$sponsor->ro_350ml}}</div>

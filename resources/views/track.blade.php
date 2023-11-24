@@ -36,7 +36,8 @@
             </div>
             <h3 class="heading-11" style="margin-top: 10px">Await Approval / Contact</h3>
             <p class="paragraph-7">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
-            <a href="#" class="button-20 w-button">Approval in Progress</a>
+            {{-- <a href="#" class="button-20 w-button">Approval in Progress</a> --}}
+            <progress id="progresstrack" value="32" max="100"> 32% </progress>
         </div>
         <div class="div-block">
             <h3 class="heading-6">Sponsorship Request Form</h3>
@@ -95,7 +96,7 @@
             </div>
             <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4ae9c-8a579776" class="w-layout-cell cell-3">
               <h3 class="heading-5">Request Products</h3>
-              <div class="text-block-7"><b>RO Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/rowater.png')}}" loading="lazy" alt="" class="image">
+              <div class="text-block-7"><b>RO Water - 200ml (48 Cups/carton)</b></div><img src="{{asset('assets/images/200mlRo.jpg')}}" loading="lazy" alt="" class="image">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aea2-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro200ml">{{$spon->ro_200ml}}</div>
@@ -105,7 +106,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro200mlVal"></div>
-              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 500ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/500mlRo.jpg')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aeae-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro500ml">{{$spon->ro_500ml}}</div>
@@ -115,7 +116,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro500mlVal quantTotal"></div>
-              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/rowater3.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aeba-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro11L">{{$spon->ro_11L}}</div>
@@ -125,7 +126,7 @@
                 </div>
               </div>
               <div class="text-block-10 ro11LVal quantTotal"></div>
-              <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/rowater1.png')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>Mineral Water - 350ml (24 bottles/carton)</b></div><img src="{{asset('assets/images/350mlMinearl.jpg')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aec6-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro350ml">{{$spon->ro_350ml}}</div>
@@ -540,7 +541,7 @@
                   <option value="{{$months}}">{{$months}}</option>
                   @endforeach
                 </select>
-                <button id="exportButton" class="button-26 w-button">Export</button>
+                {{-- <button id="exportButton" class="button-26 w-button">Export</button> --}}
               </form>
             </div>
           </div>
@@ -579,9 +580,9 @@
           <div class="tableDiv" style="overflow-x: auto;">
             <table class="table">
               <tr class="table-head">
-                <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th>
-                <th>PROJECT NAME</th>
-                <th>PROJECT DATES</th>
+                {{-- <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th> --}}
+                <th>EVENT NAME</th>
+                <th>EVENT DATES</th>
                 <th>LOCATION</th>
                 <th>SPONSOR CARTONS</th>
                 <th class="rightThead">STATUS</th>
@@ -595,7 +596,7 @@
                   $sponsorCartons = $int_ro200ml + $int_ro500ml + $int_ro11L +$int_ro350ml
               @endphp
               <tr class="divLists">
-                <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
+                {{-- <td class="leftThead"><input class="select-checkbox" type="checkbox"></td> --}}
                 <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
                 <td class="clickable-row monthFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
                 <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
@@ -645,7 +646,7 @@
 
     
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
   <script>
     document.getElementById('selectAllCheckbox').addEventListener('change', function () {
       const checkboxes = document.querySelectorAll('.select-checkbox');
@@ -688,7 +689,7 @@
   
     // Add an event listener to trigger the export on button click
     document.getElementById('exportButton').addEventListener('click', exportSelectedToExcel);
-  </script>
+  </script> --}}
  <script>
   document.addEventListener("DOMContentLoaded", function () {
       const statusSelect = document.getElementById("statusFilt");

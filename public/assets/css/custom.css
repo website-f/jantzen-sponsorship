@@ -353,3 +353,7 @@ li {
 .filter-hidden {
   display: none;
 }
+
+#progresstrack {
+  width: 100%;
+}

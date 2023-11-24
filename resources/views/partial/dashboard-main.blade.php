@@ -76,15 +76,15 @@
           </nav>
         </div>
       </nav>
-      <div class="w-nav-button">
-        <div class="w-icon-nav-menu"></div>
+      <div class="menu-button-2 w-nav-button">
+        <div class="icon-3 w-icon-nav-menu"></div>
       </div>
     </div>
   </div>
   <div data-animation="default" data-collapse="small" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-3 w-nav">
     <div class="div-block-21">
       <div class="menu-button-2 w-nav-button">
-        <div class="icon-3 w-icon-nav-menu"></div>
+        <div class="icon-31 w-icon-nav-menu"></div>
       </div>
       <nav role="navigation" class="nav-menu-4 w-nav-menu">
         <div class="div-block-17"><img src="{{asset('assets/images/u_home-alt.png')}}" loading="lazy" alt="" class="image-14">

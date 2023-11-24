@@ -74,7 +74,7 @@
       <h3 class="heading-20">Recently Sponsor Events</h3>
       <p class="paragraph-12">An In-depth Overview of Latest Sponsored Events and Updates</p>
       <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb55-af0b537c" class="w-layout-layout quick-stack-17 wf-layout-layout">
-        <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb56-af0b537c" class="w-layout-cell">
+        {{-- <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb56-af0b537c" class="w-layout-cell">
           <div class="div-block-38">
             <div class="div-block-39"><img src="{{asset('assets/images/u_shopping-bag.png')}}" loading="lazy" width="35" height="35" alt="" class="image-20">
               <div>
@@ -86,6 +86,15 @@
               </div>
             </div>
             <a href="#" class="button-25 w-button">Approve Now</a>
+          </div>
+        </div> --}}
+        <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb57-af0b537c" class="w-layout-cell">
+          <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
+            @php
+            $sponsorApproval = $sponsor->where('states', 'Processing')->count();
+            @endphp
+            <div class="text-block-46">Sponsorship Approval</div>
+            <div class="text-block-47">{{$sponsorApproval}}</div>
           </div>
         </div>
         <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb57-af0b537c" class="w-layout-cell">

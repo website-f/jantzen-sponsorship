@@ -1673,7 +1673,7 @@ textarea.w-select {
 .w-nav-button {
   position: relative;
   float: right;
-  padding: 18px;
+  padding: 2px;
   font-size: 24px;
   display: none;
   cursor: pointer;
@@ -1689,7 +1689,7 @@ textarea.w-select {
 }
 .w-nav-button.w--open {
   background-color: #C8C8C8;
-  color: white;
+  color: black;
 }
 .w-nav[data-collapse="all"] .w-nav-menu {
   display: none;

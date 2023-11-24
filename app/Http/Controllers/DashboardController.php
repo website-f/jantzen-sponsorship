@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
     public function viewRequest($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $user = User::where('role_id', 1)->get();
+        $user = User::where('role_id', 2)->get();
         return view('dashboard.dashboard-sponsorship-requests', ['sponsor' => $sponsor, 'user' => $user]);
     }
 
