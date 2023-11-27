@@ -137,6 +137,25 @@
           <option value="Collected">Collected</option>
         </select>
       </div>
+      <div id="w-node-_73a60d0b-7991-42d7-9bba-ecc75d81f7d2-cdafff14" class="w-layout-cell">
+        <label for="field-7">Attending</label>
+        <select id="e2" name="attending" class="select-field w-select" multiple>
+          @php
+              $userattend = json_decode($sponsor->attending);
+          @endphp
+          @if ($userattend !== null)
+          @foreach ($userattend as $attendee)
+          <option value="{{$attendee}}" selected>{{$attendee}}</option>
+          @endforeach
+          @endif
+          @foreach ($user as $item)
+            @if ($userattend === null || !in_array($item->name, $userattend))
+              <option value="{{ $item->name }}">{{ $item->name }}</option>
+            @endif
+          @endforeach
+        </select>
+        <input type="hidden"  name="attending" id="selectedValuesEdit">
+      </div>
     </form>
     </div>
     <div class="w-form">
@@ -446,6 +465,14 @@
             <label for="email-6" class="field-label-7">Describe the Nature of the Event</label>
             <input type="email" class="text-field-5 w-input" maxlength="256" name="email-4" data-name="Email 4"  value="{{$sponsor->nature_event}}" readonly id="email-4">
             <label for="" class="field-label-8">Event Date</label>
+            <div id="w-node-_5cd54321-b9e9-5121-92a7-8d675ced8b50-cdafff14" class="w-layout-layout quick-stack-2 wf-layout-layout">
+              <div id="w-node-_5cd54321-b9e9-5121-92a7-8d675ced8b51-cdafff14" class="w-layout-cell">
+                  <label for="email" class="field-label">From</label>
+                  <input type="text" class="text-field-2 w-input" maxlength="256" name="email-5" data-name="Email 5"  id="email-5" value="{{$sponsor->from_date}}" readonly></div>
+              <div id="w-node-_5cd54321-b9e9-5121-92a7-8d675ced8b55-cdafff14" class="w-layout-cell">
+                  <label for="email" class="field-label-3">To</label>
+                  <input type="email" class="text-field-2 w-input" maxlength="256" name="email-2" data-name="Email 2" id="email-2" value="{{$sponsor->to_date}}" readonly></div>
+            </div>
             <label for="name-4" class="field-label-6">Event Address</label>
             <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$sponsor->eventAddress}}" readonly id="name-2">
             <label for="name-4" class="field-label-6">Number of Expected Attendees</label>
@@ -465,15 +492,25 @@
                   }
               @endphp
             <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$attachCounts}} - Files" id="name-2" readonly>
+            <div class="downloadAllBtnDiv">
+              <a class="downloadAllButton" href="#" >Download All</a>
+            </div>
             <div class="attachments-image">
               @if ($attach !== null)
                   @foreach ($attach as $item)
                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                     <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                     {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                           <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                      </a>                        
+                      </a>                         --}}
+                      <div>
+                        <a href="{{asset($item)}}">
+                          <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                        </a>
+                      </div>
                      @else
-                        <a href="{{ asset($item) }}" target="_blank">View File</a>
+                     <div class="viewFileDiv">
+                        <a class="viewFileButton" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                     </div>
                      @endif
                   @endforeach
               @endif
@@ -530,45 +567,58 @@
         </div>
         <div class="text-block-10 ro350mlVal quantTotal"></div>
         <div class="text-block-12">Estimated Sponsor Product in total</div>
-        <div class="text-block-13 totalProductEstimated"></div>
+        <div class="text-block-13 totalProductEstimated">
+          <p><b class="total200ml"></b></p>
+          <p><b class="total500ml"></b></p>
+          <p><b class="total11l"></b></p>
+          <p><b class="total350ml"></b></p>
+        </div>
       </div>
     </div>
   </div>
   <script>
     const ro200ml = document.querySelector(".ro200ml");
     const ro200mlVal = document.querySelector(".ro200mlVal");
+    const total200ml = document.querySelector(".total200ml");
 
     ro200mlInt = parseInt(ro200ml.textContent, 10) * 48
     ro200mlVal.textContent = ro200mlInt + " Cups"
+    total200ml.textContent = `RO Water - 200ml x ${ro200ml.textContent} cartons`
 
     const ro500ml = document.querySelector(".ro500ml");
     const ro500mlVal = document.querySelector(".ro500mlVal");
+    const total500ml = document.querySelector(".total500ml");
 
     ro500mlInt = parseInt(ro500ml.textContent, 10) * 24
     ro500mlVal.textContent = ro500mlInt + " Bottles"
+    total500ml.textContent = "RO Water - 500ml x " + ro500ml.textContent + " cartons"
 
     const ro11L = document.querySelector(".ro11L");
     const ro11LVal = document.querySelector(".ro11LVal");
+    const total11L = document.querySelector(".total11l");
 
     ro11LInt = parseInt(ro11L.textContent, 10) * 12
     ro11LVal.textContent = ro11LInt + " Bottles"
+    total11L.textContent = "RO Water - 11L x " + ro11L.textContent + " cartons";
 
     const ro350ml = document.querySelector(".ro350ml");
     const ro350mlVal = document.querySelector(".ro350mlVal");
+    const total350ml = document.querySelector(".total350ml");
 
     ro350mlInt = parseInt(ro350ml.textContent, 10) * 24
     ro350mlVal.textContent = ro350mlInt + " Bottles"
+    total350ml.textContent = "Mineral Water - 350ml x " + ro350ml.textContent + " cartons";
 
-    const totalAll = document.querySelectorAll(".quantTotal")
-    const totalProducts = document.querySelector(".totalProductEstimated")
+    // const totalAll = document.querySelectorAll(".quantTotal")
+    // const totalProducts = document.querySelector(".totalProductEstimated")
 
-    let totalCartons = 0
-    totalAll.forEach(bottles => {
-        const quant = parseInt(bottles.textContent, 10);
-        totalCartons += quant;
-    })
+    // let totalCartons = 0
+    // totalAll.forEach(bottles => {
+    //     const quant = parseInt(bottles.textContent, 10);
+    //     totalCartons += quant;
+    // })
 
-    totalProducts.textContent = totalCartons + " Bottles and " + ro200mlVal.textContent;
+    // totalProducts.textContent = totalCartons + " Bottles and " + ro200mlVal.textContent;
   </script>
   <script>
     const pickup_location = document.querySelector(".pickup-location");

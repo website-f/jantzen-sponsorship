@@ -13,7 +13,6 @@
 {{-- Intro Lines --}}
 <p>Hi, theres a request for sponsorship for you to preview</p>
 
-@endforeach
 
 {{-- Action Button --}}
 @isset($actionText)

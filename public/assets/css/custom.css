@@ -345,8 +345,9 @@ li {
 }
 
 .attachments-image {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px dashed rgb(149, 149, 149);
   padding: 10px;
 }
 
@@ -356,4 +357,40 @@ li {
 
 #progresstrack {
   width: 100%;
+}
+
+.viewFileButton {
+  text-decoration: none;
+  color: white;
+  background-color: #d89802;
+  padding: 15px 32px;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  border-radius: 7px;
+  margin: 30px;
+}
+
+.downloadAllButton {
+  text-decoration: none;
+  color: white;
+  background-color: #0275d8;
+  padding: 10px 28px;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  border-radius: 7px;
+  margin-bottom: 20px;
+}
+
+.downloadAllBtnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewFileDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -161,6 +161,15 @@
                 $('#selectedValues').val(selectedValues);
             });
     });
+
+    $(document).ready(function() { 
+    $("#e2").select2(); 
+
+    $('#e2').on('change', function() {
+                var selectedValues = $(this).val();
+                $('#selectedValuesEdit').val(selectedValues);
+            });
+    });
   </script>
 </body>
 </html>

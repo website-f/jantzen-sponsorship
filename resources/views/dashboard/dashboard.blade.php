@@ -62,7 +62,7 @@
                     <div class="text-block-38">{{$nones->eventAddress}}</div>
                   </div>
                   <div class="div-block-37">
-                    <div class="text-block-48">{{date('M d, Y', strtotime($nones->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}</div>
+                    <div class="text-block-48">{{date('M d, Y', strtotime($nones->from_date))}} - {{date('M d, Y', strtotime($nones->to_date))}}</div>
                   </div>
                 </div>
                 @endforeach

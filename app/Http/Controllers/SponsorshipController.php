@@ -8,6 +8,9 @@ use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use App\Notifications\RequestNotification;
+use Illuminate\Support\Facades\Notification;
 
 class SponsorshipController extends Controller
 {
@@ -28,15 +31,28 @@ class SponsorshipController extends Controller
         $fileName = $name . $timestamp . '.' . $extension;
 
         // Decode the base64 data and save it with the unique filename
-        $decodedData = base64_decode($base64Data);
-        $destinationPath = public_path('uploads');
-        $path = $destinationPath . '/' . $fileName;
+        // $decodedData = base64_decode($base64Data);
+        // $destinationPath = public_path('uploads');
+        // $path = $destinationPath . '/' . $fileName;
+        if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+            $image = Image::make($base64Data);
+            $image->encode($extension, 10);
+            $destinationPath = public_path('uploads');
+            $path = $destinationPath . '/' . $fileName;
+            $image->save($path);
+        }
+        else {
+            $decodedData = base64_decode($base64Data);
+            $destinationPath = public_path('uploads');
+            $path = $destinationPath . '/' . $fileName;
+            file_put_contents($path, $decodedData);
+        }
         $files[] = "uploads/" . $fileName;
-
-        file_put_contents($path, $decodedData);
 
         // Optionally, you can save the $uniqueFileName to your database for future reference
     }
+
+    Notification::route('mail', 'gitdev1234@gmail.com')->notify(new RequestNotification());
       
     $sponsor = new Sponsorship;
     $sponsor->fullname = $request->name;
@@ -66,7 +82,7 @@ class SponsorshipController extends Controller
         $user = new User;
         $user->name = "public user";
         $user->email = $request->email;
-        $user->role_id = 3;
+        $user->role_id = 4;
         $user->save();
     }
 

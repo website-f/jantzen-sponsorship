@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
 
         // Check if the user has the 'admin' role
-        if ($user->role_id === 1) {
+        if ($user->role_id === 1 || $user->role_id === 2) {
             // Redirect admin users to a different login page
             return redirect('/login-admin')->with('email', $request->email); // Change 'admin.login' to the actual route name
         } else {
