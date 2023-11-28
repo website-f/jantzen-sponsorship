@@ -91,6 +91,11 @@ class DashboardController extends Controller
         return view('dashboard.dashboard-sponsorship-archive', ['sponsor' => $sponsor]);
     }
 
+    public function block() {
+        $sponsor = Sponsorship::onlyTrashed()->get();
+        return view('dashboard.dashboard-blocklists', ['sponsor' => $sponsor]);
+    }
+
     public function restore($id) {
         $sponsor = Sponsorship::withTrashed()->where('id', $id)->restore();
 

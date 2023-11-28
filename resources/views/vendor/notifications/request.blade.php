@@ -38,7 +38,7 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+Jantzen
 @endif
 
 {{-- Subcopy --}}

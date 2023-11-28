@@ -40,9 +40,9 @@
     plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     height: 'parent',
     header: {
-      left: 'prev,next today',
+      left: 'today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'prev,next'
     },
     defaultView: 'dayGridMonth',
     defaultDate: date,

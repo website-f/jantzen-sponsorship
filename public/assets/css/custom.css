@@ -363,7 +363,7 @@ li {
   text-decoration: none;
   color: white;
   background-color: #d89802;
-  padding: 15px 32px;
+  padding: 10px 25px;
   text-align: center;
   justify-content: center;
   display: inline-block;
@@ -393,4 +393,8 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hideInput {
+  display: none;
 }

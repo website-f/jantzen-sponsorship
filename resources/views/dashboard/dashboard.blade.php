@@ -148,6 +148,7 @@
                 <option value="MIA">MIA</option>
                 <option value="Completed">Completed</option>
                 <option value="Rejected">Rejected</option>
+                <option value="Collected">Collected</option>
               </select><select id="field-2" name="field-2" data-name="Field 2" class="select-field-2 w-select">
                 <option value="">Select Month</option>
                 @foreach ($month as $months)

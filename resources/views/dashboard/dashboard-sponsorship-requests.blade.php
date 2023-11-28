@@ -127,7 +127,11 @@
       @method('PUT')
     <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
       <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
-        <button type="submit" class="button-21 w-button">Update</button>
+        <button id="updatebtn" type="submit" class="button-21 w-button hideInput">Update</button>
+        <button id="editAndUpdate" type="button" class="button-21 w-button">Edit</button>
+      </div>
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21 hideInput cancelDiv">
+        <button id="cancelbtn" type="button" class="button-22 w-button hideInput">Cancel</button>
       </div>
       <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
         <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
@@ -163,7 +167,7 @@
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Sposorship Handle By</label>
-            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" value="{{$sponsor->handle_by}}">
+            <input type="text" class="text-field-12 w-input handleBy" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" readonly value="{{$sponsor->handle_by}}">
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
             <label for="field-3">Booth / Space</label>
@@ -181,7 +185,8 @@
                 <option value="Booth">Booth</option>
                 <option value="Space">Space</option>
               @endif
-            </select></div>
+            </select>
+          </div>
         </div>
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
@@ -215,8 +220,86 @@
           </div>
         </div>
       </div>
+      <label for="">Sponsorhip Products</label>
+      <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2b-cdafff14" class="w-layout-layout quick-stack-6 wf-layout-layout">
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2c-cdafff14" class="w-layout-cell cell-10">
+          <input type="number" class="text-field-10 w-input ro200mle" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_200ml}}">
+          <div class="text-block-19">RO 200ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c32-cdafff14" class="w-layout-cell cell-11">
+          <input type="number" class="text-field-10 w-input ro500mle" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_500ml}}">
+          <div class="text-block-19">RO 500ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c38-cdafff14" class="w-layout-cell cell-12">
+          <input type="number" class="text-field-10 w-input ro11le" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_11L}}">
+          <div class="text-block-19">RO 11L x Bottles</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c3e-cdafff14" class="w-layout-cell cell-13">
+          <input type="number" class="text-field-10 w-input min350mle" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_350ml}}">
+          <div class="text-block-19">Mineral 350ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c44-cdafff14" class="w-layout-cell cell-14">
+          <input type="number" class="text-field-10 w-input paperCupe" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->paper_cup}}">
+          <div class="text-block-19">Jantzen’s Paper Cup</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c4a-cdafff14" class="w-layout-cell cell-15">
+          <input type="number" class="text-field-10 w-input goodiese" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->goodies_bag}}">
+          <div class="text-block-19">Jantzen’s Goodie Bags</div>
+        </div>
+      </div>
+      <label for="field-5">Others</label>
+        <textarea placeholder="" maxlength="5000" id="field-5" name="others" data-name="Field 5" class="textarea-2 w-input otherse" readonly>{{$sponsor->others}}</textarea>
+        <label for="field-6">Remarks (Office only)</label>
+        <textarea placeholder="" maxlength="5000" id="field-6" name="remarks" data-name="Field 6" class="textarea-3 w-input remarkse" readonly>{{$sponsor->remarks}}</textarea>
     </div>
   </div>
+  <script>
+    const updatebtn = document.getElementById("updatebtn");
+    const cancelbtn = document.getElementById("cancelbtn");
+    const cancelDiv = document.querySelector(".cancelDiv");
+    const editAndUpdate = document.getElementById("editAndUpdate");
+    const handleBy = document.querySelector(".handleBy");
+    const ro200mle = document.querySelector(".ro200mle");
+    const ro500mle = document.querySelector(".ro500mle");
+    const ro11le = document.querySelector(".ro11le");
+    const min350mle = document.querySelector(".min350mle");
+    const paperCupe = document.querySelector(".paperCupe");
+    const goodiese = document.querySelector(".goodiese");
+    const otherse = document.querySelector(".otherse");
+    const remarkse = document.querySelector(".remarkse");
+
+    editAndUpdate.addEventListener("click", function() {
+      editAndUpdate.classList.add("hideInput");
+      cancelbtn.classList.remove("hideInput");
+      updatebtn.classList.remove("hideInput");
+      cancelDiv.classList.remove("hideInput");
+      handleBy.removeAttribute("readonly");
+      ro200mle.removeAttribute("readonly");
+      ro500mle.removeAttribute("readonly");
+      ro11le.removeAttribute("readonly");
+      min350mle.removeAttribute("readonly");
+      paperCupe.removeAttribute("readonly");
+      goodiese.removeAttribute("readonly");
+      otherse.removeAttribute("readonly");
+      remarkse.removeAttribute("readonly");
+    });
+
+    cancelbtn.addEventListener("click", function() {
+      editAndUpdate.classList.remove("hideInput");
+      cancelbtn.classList.add("hideInput");
+      updatebtn.classList.add("hideInput");
+      cancelDiv.classList.add("hideInput");
+      handleBy.setAttribute("readonly", "readonly");
+      ro200mle.setAttribute("readonly", "readonly");
+      ro500mle.setAttribute("readonly", "readonly");
+      ro11le.setAttribute("readonly", "readonly");
+      min350mle.setAttribute("readonly", "readonly");
+      paperCupe.setAttribute("readonly", "readonly");
+      goodiese.setAttribute("readonly", "readonly");
+      otherse.setAttribute("readonly", "readonly");
+      remarkse.setAttribute("readonly", "readonly");
+    })
+  </script>
   @elseif($sponsor->status == "proof")
   <div class="div-block-26">
     <h3 class="heading-17">Waiting for the user to fill in the collector details</h3>
@@ -226,7 +309,11 @@
       @method('PUT')
     <div id="w-node-b98f2e41-65b2-848d-4014-fb62040c099d-cdafff14" class="w-layout-layout quick-stack-12 wf-layout-layout">
       <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21">
-        <button type="submit" class="button-21 w-button">Update</button>
+        <button id="updatebtn" type="submit" class="button-21 w-button hideInput">Update</button>
+        <button id="editAndUpdate" type="button" class="button-21 w-button">Edit</button>
+      </div>
+      <div id="w-node-_0f4ba253-0549-c968-19aa-e90290beb9b8-cdafff14" class="w-layout-cell cell-21 hideInput cancelDiv">
+        <button id="cancelbtn" type="button" class="button-22 w-button hideInput">Cancel</button>
       </div>
       <div id="w-node-cbda6b4b-7b52-5dc4-4975-e5ec33c53443-cdafff14" class="w-layout-cell cell-20">
         <select id="field-3" name="states" data-name="Field 3" class="select-field w-select">
@@ -236,6 +323,25 @@
           <option value="Collected">Collected</option>
         </select>
       </div>
+      <div id="w-node-_73a60d0b-7991-42d7-9bba-ecc75d81f7d2-cdafff14" class="w-layout-cell">
+        <label for="field-7">Attending</label>
+        <select id="e2" name="attending" class="select-field w-select" multiple>
+          @php
+              $userattend = json_decode($sponsor->attending);
+          @endphp
+          @if ($userattend !== null)
+          @foreach ($userattend as $attendee)
+          <option value="{{$attendee}}" selected>{{$attendee}}</option>
+          @endforeach
+          @endif
+          @foreach ($user as $item)
+            @if ($userattend === null || !in_array($item->name, $userattend))
+              <option value="{{ $item->name }}">{{ $item->name }}</option>
+            @endif
+          @endforeach
+        </select>
+        <input type="hidden"  name="attending" id="selectedValuesEdit">
+      </div>
     </form>
     </div>
     <div class="w-form">
@@ -243,48 +349,139 @@
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
             <label for="field-8">Sposorship Handle By</label>
-            <input type="text" class="text-field-12 w-input" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" required="">
+            <input type="text" class="text-field-12 w-input handleBy" maxlength="256" name="handle_by" data-name="Field 7" placeholder="" id="field-7" readonly value="{{$sponsor->handle_by}}">
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
             <label for="field-3">Booth / Space</label>
-            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select" required>
-              <option value="">Select one...</option>
-              <option value="None">None</option>
-              <option value="Booth">Booth</option>
-              <option value="Space">Space</option>
-            </select></div>
-        </div>
-        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
-          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
-            <label for="field-8">Collector's Name</label>
-            @if ($sponsor->collector_name !== null)
-            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_name}}" readonly>
-            @endif
-          </div>
-          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
-            <label for="field-3">Collector's IC No</label>
-            @if ($sponsor->collector_IC !== null)
-            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_IC}}" readonly>
-            @endif
+            <select id="field-3" name="booth_space" data-name="Field 3" class="select-field w-select">
+              @if ($sponsor->booth_space == "Booth")
+                <option value="None">None</option>
+                <option value="Booth" selected>Booth</option>
+                <option value="Space">Space</option>
+              @elseif ($sponsor->booth_space == "Space")
+                <option value="None">None</option>
+                <option value="Booth">Booth</option>
+                <option value="Space" selected>Space</option>
+              @else
+                <option value="None" selected>None</option>
+                <option value="Booth">Booth</option>
+                <option value="Space">Space</option>
+              @endif
+            </select>
           </div>
         </div>
         <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
-            <label for="field-8">Collector's Contact Number</label>
-            @if ($sponsor->collector_contact !== null)
-            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_contact}}" readonly>
-            @endif
+            <label for="field-8">Pickup Location</label>
+            <select id="field-3" name="pickup_location" data-name="Field 3" class="select-field w-select pickup-location" required>
+              @if ($sponsor->pickup_location == "Puchong")
+                <option value="Puchong" selected>Puchong</option>
+                <option value="Shah Alam">Shah Alam</option>
+              @elseif ($sponsor->pickup_location == "Shah Alam")
+                <option value="Puchong">Puchong</option>
+                <option value="Shah Alam" selected>Shah Alam</option>
+              @else
+                <option value="Puchong" selected>Puchong</option>
+                <option value="Shah Alam">Shah Alam</option>
+              @endif
+            </select>
           </div>
           <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
-            <label for="field-3">Collector's Plate Number</label>
-            @if ($sponsor->collector_plate_number !== null)
-            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->collector_plate_number}}" readonly>
-            @endif
+            <label for="field-3">Pickup Location Address</label>
+            <input type="text" class="text-field-13 w-input pickup-address" maxlength="256" name="pickup_address" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->pickup_address}}" readonly>
+          </div>
+        </div>
+        <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec6-cdafff14" class="w-layout-layout quick-stack-13 wf-layout-layout">
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec7-cdafff14" class="w-layout-cell">
+            <label for="field-8">Contact Person</label>
+            <input type="text" class="text-field-13 w-input contact-person" maxlength="256" name="contact_person" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->contact_person}}" readonly>
+          </div>
+          <div id="w-node-_9cb880a3-a9ed-2a6e-4816-ced8c351eec8-cdafff14" class="w-layout-cell">
+            <label for="field-3">Phone Number</label>
+            <input type="text" class="text-field-13 w-input phone-number" maxlength="256" name="pickup_phone_number" data-name="Field 8" placeholder="" id="field-8" value="{{$sponsor->pickup_phone_number}}" readonly>
           </div>
         </div>
       </div>
+      <label for="">Sponsorhip Products</label>
+      <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2b-cdafff14" class="w-layout-layout quick-stack-6 wf-layout-layout">
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c2c-cdafff14" class="w-layout-cell cell-10">
+          <input type="number" class="text-field-10 w-input ro200mle" maxlength="256" name="confirmro_200ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_200ml}}">
+          <div class="text-block-19">RO 200ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c32-cdafff14" class="w-layout-cell cell-11">
+          <input type="number" class="text-field-10 w-input ro500mle" maxlength="256" name="confirmro_500ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_500ml}}">
+          <div class="text-block-19">RO 500ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c38-cdafff14" class="w-layout-cell cell-12">
+          <input type="number" class="text-field-10 w-input ro11le" maxlength="256" name="confirmro_11L" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_11L}}">
+          <div class="text-block-19">RO 11L x Bottles</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c3e-cdafff14" class="w-layout-cell cell-13">
+          <input type="number" class="text-field-10 w-input min350mle" maxlength="256" name="confirmro_350ml" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->confirmro_350ml}}">
+          <div class="text-block-19">Mineral 350ml x Cartons</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c44-cdafff14" class="w-layout-cell cell-14">
+          <input type="number" class="text-field-10 w-input paperCupe" maxlength="256" name="paper_cup" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->paper_cup}}">
+          <div class="text-block-19">Jantzen’s Paper Cup</div>
+        </div>
+        <div id="w-node-_33e61cbb-361b-84a1-20f5-bb6bab036c4a-cdafff14" class="w-layout-cell cell-15">
+          <input type="number" class="text-field-10 w-input goodiese" maxlength="256" name="goodies_bag" data-name="Field 4" placeholder="" id="field-4" readonly value="{{$sponsor->goodies_bag}}">
+          <div class="text-block-19">Jantzen’s Goodie Bags</div>
+        </div>
+      </div>
+      <label for="field-5">Others</label>
+        <textarea placeholder="" maxlength="5000" id="field-5" name="others" data-name="Field 5" class="textarea-2 w-input otherse" readonly>{{$sponsor->others}}</textarea>
+        <label for="field-6">Remarks (Office only)</label>
+        <textarea placeholder="" maxlength="5000" id="field-6" name="remarks" data-name="Field 6" class="textarea-3 w-input remarkse" readonly>{{$sponsor->remarks}}</textarea>
     </div>
   </div>
+  <script>
+    const updatebtn = document.getElementById("updatebtn");
+    const cancelbtn = document.getElementById("cancelbtn");
+    const cancelDiv = document.querySelector(".cancelDiv");
+    const editAndUpdate = document.getElementById("editAndUpdate");
+    const handleBy = document.querySelector(".handleBy");
+    const ro200mle = document.querySelector(".ro200mle");
+    const ro500mle = document.querySelector(".ro500mle");
+    const ro11le = document.querySelector(".ro11le");
+    const min350mle = document.querySelector(".min350mle");
+    const paperCupe = document.querySelector(".paperCupe");
+    const goodiese = document.querySelector(".goodiese");
+    const otherse = document.querySelector(".otherse");
+    const remarkse = document.querySelector(".remarkse");
+
+    editAndUpdate.addEventListener("click", function() {
+      editAndUpdate.classList.add("hideInput");
+      cancelbtn.classList.remove("hideInput");
+      updatebtn.classList.remove("hideInput");
+      cancelDiv.classList.remove("hideInput");
+      handleBy.removeAttribute("readonly");
+      ro200mle.removeAttribute("readonly");
+      ro500mle.removeAttribute("readonly");
+      ro11le.removeAttribute("readonly");
+      min350mle.removeAttribute("readonly");
+      paperCupe.removeAttribute("readonly");
+      goodiese.removeAttribute("readonly");
+      otherse.removeAttribute("readonly");
+      remarkse.removeAttribute("readonly");
+    });
+
+    cancelbtn.addEventListener("click", function() {
+      editAndUpdate.classList.remove("hideInput");
+      cancelbtn.classList.add("hideInput");
+      updatebtn.classList.add("hideInput");
+      cancelDiv.classList.add("hideInput");
+      handleBy.setAttribute("readonly", "readonly");
+      ro200mle.setAttribute("readonly", "readonly");
+      ro500mle.setAttribute("readonly", "readonly");
+      ro11le.setAttribute("readonly", "readonly");
+      min350mle.setAttribute("readonly", "readonly");
+      paperCupe.setAttribute("readonly", "readonly");
+      goodiese.setAttribute("readonly", "readonly");
+      otherse.setAttribute("readonly", "readonly");
+      remarkse.setAttribute("readonly", "readonly");
+    })
+  </script>
   @elseif($sponsor->status == "collect")
   <div class="div-block-26">
     <h3 class="heading-17">Waiting for collection</h3>
@@ -515,6 +712,43 @@
                   @endforeach
               @endif
             </div>
+
+              @php
+                  $proof = json_decode($sponsor->attachements_agreement_proof);
+
+                  if ($proof !== null) {
+                    $proofCounts = count($proof);
+                  } else {
+                    $proofCounts = 0;
+                  }
+              @endphp
+            @if ($proof !== null)
+            <label for="name-4" class="field-label-9" style="margin-top: 30px">Proof of Agreement</label>
+            <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$proofCounts}} - Files" id="name-2" readonly>
+            <div class="downloadAllBtnDiv">
+              <a class="downloadAllButton" href="#" >Download All</a>
+            </div>
+            <div class="attachments-image">
+              @if ($proof !== null)
+                  @foreach ($proof as $item)
+                     @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                     {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                          <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                      </a>                         --}}
+                      <div>
+                        <a href="{{asset($item)}}">
+                          <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                        </a>
+                      </div>
+                     @else
+                     <div class="viewFileDiv">
+                        <a class="viewFileButton" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                     </div>
+                     @endif
+                  @endforeach
+              @endif
+            </div>
+            @endif
           </form>
           <div class="w-form-done">
             <div>Thank you! Your submission has been received!</div>

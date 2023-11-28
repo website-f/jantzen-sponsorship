@@ -253,9 +253,9 @@
                 </div>
               </div><label for="field">Others</label>
               <textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input" readonly>
-              @if ($spon->others !== null)
-              {{$spon->others}}
-              @endif
+@if ($spon->others !== null)
+{{$spon->others}}
+@endif
               </textarea>
             </div>
             <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  

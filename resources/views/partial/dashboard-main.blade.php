@@ -73,6 +73,7 @@
             <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
             <a href="/dashboard/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
             <a href="/dashboard/trash" class="dropdown-link-3 w-dropdown-link">Trash</a>
+            <a href="/dashboard/blocklists" class="dropdown-link-3 w-dropdown-link">Blocklists</a>
           </nav>
         </div>
       </nav>
@@ -135,7 +136,7 @@
   <script src="{{asset('assets/glightbox/js/glightbox.js')}}"></script>
   <script src="{{asset('assets/select2/js/select2.full.min.js')}}"></script>
   <script>
-    const profileDropdown = document.getElementById('profileDropdown');
+    // const profileDropdown = document.getElementById('profileDropdown');
     const dropdownContent = document.getElementById('dropdownContent');
     const profileLink = document.getElementById('profileLink');
     const logoutLink = document.getElementById('logoutLink');
@@ -146,10 +147,10 @@
     }
     
     // Attach event listener to the profile dropdown
-    profileDropdown.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the default behavior of the anchor tag
-      toggleDropdown();
-    });
+    // profileDropdown.addEventListener('click', function(event) {
+    //   event.preventDefault(); // Prevent the default behavior of the anchor tag
+    //   toggleDropdown();
+    // });
     
   </script>
   <script>
