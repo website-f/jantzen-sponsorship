@@ -21,9 +21,21 @@ class DashboardController extends Controller
                  ->map(function ($monthNumber) {
                      return Carbon::create()->month($monthNumber)->format('F');
                  });
-        $booth = Sponsorship::where("booth_space", "Booth")->orderBy('created_at', 'desc')->get();
-        $space = Sponsorship::where("booth_space", "Space")->orderBy('created_at', 'desc')->get();
-        $none = Sponsorship::where("booth_space", "None")->orderBy('created_at', 'desc')->get();
+        $booth = Sponsorship::where("booth_space", "Booth")
+                 ->where("status", "!=", "completed")
+                 ->orderBy('created_at', 'desc')
+                 ->get();
+             
+        $space = Sponsorship::where("booth_space", "Space")
+                 ->where("status", "!=", "completed")
+                 ->orderBy('created_at', 'desc')
+                 ->get();
+             
+        $none = Sponsorship::where("booth_space", "None")
+                 ->where("status", "!=", "completed")
+                 ->orderBy('created_at', 'desc')
+                 ->get();
+             
         $statusCounts = $sponsor->groupBy('states')->map->count();
         return view('dashboard.dashboard', ['sponsor' => $sponsor, 
                                             'month' => $months,

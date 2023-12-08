@@ -1,176 +1,349 @@
-<!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Wed Oct 04 2023 09:00:20 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="651bc3682699bcc1af0b537c" data-wf-site="65168b78f6982fbca96a0e4a">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>@yield("title")t</title>
-  <meta content="Dashboard-request" property="og:title">
-  <meta content="Dashboard-request" property="twitter:title">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta content="Webflow" name="generator">
-  <link href="{{asset('assets/css/normalize.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/css/webflow.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/css/sponsorship-jantzen.webflow.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('assets/fullcalendar/packages/core/main.css')}}" rel='stylesheet' />
-  <link href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
-  <link href="{{asset('assets/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="{{asset('assets/glightbox/css/glightbox.css')}}">
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Poppins:regular"]  }});</script>
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-  <link href="{{asset('assets/images/favicon.ico')}}" rel="shortcut icon" type="image/x-icon">
-  <link href="{{asset('assets/images/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <title>@yield('title')</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/jqvmap/jqvmap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/plugins/fullcalendar/main.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/daterangepicker/daterangepicker.css')}}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
 </head>
-<body class="body-7">
-  <div data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
-    <div class="container-3 w-container">
-      <a href="#" class="brand w-nav-brand">
-        <div class="div-block-16"><img src="{{asset('assets/images/Ellipse-1-1.png')}}" loading="lazy" alt="" class="image-12">
-          <div class="text-block-25"><strong class="bold-text">Jantzen</strong></div>
-        </div>
-      </a>
-      <nav role="navigation" class="nav-menu-2 nav-link w-nav-menu">
-        <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
-          <div class="dropdown-toggle w-dropdown-toggle"><img src="{{asset('assets/images/darhboard.png')}}" loading="lazy" alt="" height="17" width="17" class="image-11">
-            <div class="w-icon-dropdown-toggle"></div>
-            <div class="text-block-24">Social Media</div>
-          </div>
-          <nav class="dropdown-list w-dropdown-list">
-            <a href="#" class="dropdown-link w-dropdown-link">FB &amp; IG</a>
-            <a href="#" class="dropdown-link-2 w-dropdown-link">XHS Content</a>
-            <a href="#" class="dropdown-link-3 w-dropdown-link">Google Reviews</a>
-            <a href="#" class="dropdown-link w-dropdown-link">LinkedIn</a>
-            <a href="#" class="dropdown-link w-dropdown-link">Youtube</a>
-            <a href="#" class="dropdown-link w-dropdown-link">KOL Reviews</a>
-          </nav>
-        </div>
-        <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
-          <div class="dropdown-toggle w-dropdown-toggle"><img src="{{asset('assets/images/darhboard.png')}}" loading="lazy" alt="" height="17" width="17" class="image-11">
-            <div class="icon w-icon-dropdown-toggle"></div>
-            <div class="text-block-20">Content Creator</div>
-          </div>
-          <nav class="dropdown-list w-dropdown-list">
-            <a href="#" class="dropdown-link w-dropdown-link">Design</a>
-            <a href="#" class="dropdown-link-2 w-dropdown-link">Videography</a>
-            <a href="#" class="dropdown-link-3 w-dropdown-link">Photography</a>
-            <a href="#" class="dropdown-link w-dropdown-link">SEO Articles</a>
-          </nav>
-        </div>
-        <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
-          <div class="dropdown-toggle w-dropdown-toggle"><img src="{{asset('assets/images/darhboard.png')}}" loading="lazy" alt="" height="17" width="17" class="image-11">
-            <div class="w-icon-dropdown-toggle"></div>
-            <div class="text-block-23">Sponsorship</div>
-          </div>
-          <nav class="dropdown-list w-dropdown-list">
-            <a href="/dashboard" class="dropdown-link w-dropdown-link">Sponsorship</a>
-            <a href="/dashboard/ongoing-event-report" class="dropdown-link w-dropdown-link">Ongoing Event Report</a>
-            <a href="#" class="dropdown-link-2 w-dropdown-link">CSR</a>
-            <a href="#" class="dropdown-link-3 w-dropdown-link">Report</a>
-            <a href="/dashboard/calendar" class="dropdown-link-3 w-dropdown-link">Events Calendar</a>
-            <a href="/dashboard/trash" class="dropdown-link-3 w-dropdown-link">Trash</a>
-            <a href="/dashboard/blocklists" class="dropdown-link-3 w-dropdown-link">Blocklists</a>
-          </nav>
-        </div>
-      </nav>
-      <div class="menu-button-2 w-nav-button">
-        <div class="icon-3 w-icon-nav-menu"></div>
-      </div>
-    </div>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{asset('assets/images/Ellipse-1-1.png')}}" alt="jantzen" height="60" width="60">
   </div>
-  <div data-animation="default" data-collapse="small" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-3 w-nav">
-    <div class="div-block-21">
-      <div class="menu-button-2 w-nav-button">
-        <div class="icon-31 w-icon-nav-menu"></div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/dashboard" class="brand-link" style="background-color: white">
+      <img src="{{asset('assets/images/Ellipse-1-1.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span style="color: black" class="brand-text font-weight-bold">JANTZEN</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
+        {{-- <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div> --}}
+        <div class="info text-center">
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+        </div>
       </div>
-      <nav role="navigation" class="nav-menu-4 w-nav-menu">
-        <div class="div-block-17"><img src="{{asset('assets/images/u_home-alt.png')}}" loading="lazy" alt="" class="image-14">
-          <a href="/dashboard" class="nav-link-4 w-nav-link">Home</a>
-        </div>
-        <div class="div-block-18"><img src="{{asset('assets/images/u_list-ul.png')}}" loading="lazy" alt="" class="image-15">
-          <a href="#" class="nav-link-5 w-nav-link">Contents</a>
-        </div>
-        <div class="div-block-19"><img src="{{asset('assets/images/u_list-ui-alt.png')}}" loading="lazy" alt="" class="image-16">
-          <a href="#" class="nav-link-7 w-nav-link">Categories</a>
-        </div>
-        <div class="div-block-20"><img src="{{asset('assets/images/u_cog.png')}}" loading="lazy" alt="" class="image-17">
-          <a href="#" class="nav-link-8 w-nav-link">Settings</a>
-        </div>
-      </nav>
-      <div class="div-block-13"><img src="{{asset('assets/images/Ellipse-1.png')}}" loading="lazy" alt="">
-        <div data-hover="false" data-delay="0" class="dropdown-2 w-dropdown">
-          <div class="dropdown-toggle-2 w-dropdown-toggle">
-            <div class="text-block-50">{{Auth::user()->name}}</div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
           </div>
-          <nav class="dropdown-list-2 w-dropdown-list">
-            <a href="#" class="dropdown-link-4 w-dropdown-link">Profile</a>
-            <a href="/logout" class="dropdown-link-5 w-dropdown-link">Logout</a>
-          </nav>
         </div>
       </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-video"></i>
+              <p>
+                Social Media
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FB & IG</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>XHS Content</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Google Reviews</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>LinkedIn</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Youtube</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>KOL Reviews</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-laptop"></i>
+              <p>
+                Content Creator
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Design</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Videography</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Photography</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>SEO Articles</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-layer-group"></i>
+              <p>
+                Sponsorship
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : ' ' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sponsorship</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/ongoing-event-report" class="nav-link {{ Request::is('ongoing-event-report') ? 'active' : ' ' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ongoing Event Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>CSR</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/calendar" class="nav-link {{ Request::is('dashboard/calendar') ? 'active' : ' ' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Events Calendar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/trash" class="nav-link {{ Request::is('dashboard/trash') ? 'active' : ' ' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Trash</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Blocklists</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Widgets
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-  </div>
-  <section class="section-4">
-    <div class="div-block-23">
-      <h3 class="heading-15">Sponsorship</h3>
-      <div class="div-block-24"><img src="{{asset('assets/images/u_plus.png')}}" loading="lazy" alt="" class="image-19">
-        <div class="text-block-27">Add Content </div>
-      </div>
-    </div>
-  </section>
+    <!-- /.sidebar -->
+  </aside>
 
   @yield('content')
+  <footer class="main-footer">
+    {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.2.0
+    </div> --}}
+  </footer>
 
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65168b78f6982fbca96a0e4a" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="{{asset('assets/js/webflow.js')}}" type="text/javascript"></script>
-  <script src="{{asset('assets/fullcalendar/packages/core/main.js')}}"></script>
-  <script src="{{asset('assets/fullcalendar/packages/interaction/main.js')}}"></script>
-  <script src="{{asset('assets/fullcalendar/packages/daygrid/main.js')}}"></script>
-  <script src="{{asset('assets/fullcalendar/packages/timegrid/main.js')}}"></script>
-  <script src="{{asset('assets/fullcalendar/packages/list/main.js')}}"></script>
-  <script src="{{asset('assets/glightbox/js/glightbox.js')}}"></script>
-  <script src="{{asset('assets/select2/js/select2.full.min.js')}}"></script>
-  <script>
-    // const profileDropdown = document.getElementById('profileDropdown');
-    const dropdownContent = document.getElementById('dropdownContent');
-    const profileLink = document.getElementById('profileLink');
-    const logoutLink = document.getElementById('logoutLink');
-    
-    // Function to toggle the dropdown
-    function toggleDropdown() {
-      dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
-    }
-    
-    // Attach event listener to the profile dropdown
-    // profileDropdown.addEventListener('click', function(event) {
-    //   event.preventDefault(); // Prevent the default behavior of the anchor tag
-    //   toggleDropdown();
-    // });
-    
-  </script>
-  <script>
-    $(document).ready(function() { 
-    $("#e1").select2(); 
-
-    $('#e1').on('change', function() {
-                var selectedValues = $(this).val();
-                $('#selectedValues').val(selectedValues);
-            });
-    });
-
-    $(document).ready(function() { 
-    $("#e2").select2(); 
-
-    $('#e2').on('change', function() {
-                var selectedValues = $(this).val();
-                $('#selectedValuesEdit').val(selectedValues);
-            });
-    });
-  </script>
+<!-- jQuery -->
+<script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- ChartJS -->
+<script src="{{asset('assets/plugins/chart.js/Chart.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{asset('assets/plugins/sparklines/sparkline.js')}}"></script>
+<!-- JQVMap -->
+<script src="{{asset('assets/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{asset('assets/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<!-- daterangepicker -->
+<script src="{{asset('assets/plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('assets/plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Summernote -->
+<script src="{{asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
 </body>
 </html>

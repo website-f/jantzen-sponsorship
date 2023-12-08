@@ -3,112 +3,72 @@
 @section('title', 'Dashboard')
     
 @section('content')
-<div class="div-block-27">
-        @if (Session::has('status'))
-          <div class="alert-delete-success">{{Session::get('message')}}</div>
-        @endif
-    <div class="div-block-34">
-      <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dc-af0b537c" class="w-layout-layout quick-stack-16 wf-layout-layout">
-        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1dd-af0b537c" class="w-layout-cell" style="border: 1px solid #EEEEEE; border-radius: 8px">
-          <h4 class="heading-19">Status</h4>
-          <div style="width: 100%" id="page-views-chart"></div>
-        </div>
-        <div id="w-node-_76cf77d8-8b71-bb16-3135-886b28d0e1de-af0b537c" class="w-layout-cell cell-22" style="padding: 10px">
-          <h4 class="heading-19">Upcoming Events</h4>
-          <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
-            <div class="tabs-menu-2 w-tab-menu">
-              <a data-w-tab="Tab 1" class="tab-link-tab-1-2 w-inline-block w-tab-link w--current">
-                <div class="text-block-36">Booth</div>
-              </a>
-              <a data-w-tab="Tab 2" class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                <div class="text-block-37">Space</div>
-              </a>
-              <a data-w-tab="None" class="tab-link-tab-3-2 w-inline-block w-tab-link w--current">
-                <div class="text-block-51">None</div>
-              </a>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              @php
+              $sponsorApproval = $sponsor->where('states', 'Processing')->count();
+              @endphp
+              <h3>{{$sponsorApproval}}</h3>
+
+              <p>Sponsorship Approval</p>
             </div>
-            <div class="tabs-content w-tab-content">
-              <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
-                @foreach ($booth as $booths)
-                <div class="div-block-35">
-                  <div class="div-block-36">
-                    <div><strong>{{$booths->event_name}}</strong></div>
-                    <div class="text-block-38">{{$booths->eventAddress}}</div>
-                  </div>
-                  <div class="div-block-37">
-                    <div class="text-block-39">{{date('M d, Y', strtotime($booths->from_date))}} - {{date('M d, Y', strtotime($booths->to_date))}}</div>
-                  </div>
-                </div>
-                @endforeach
-              </div>
-              <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane">
-                @foreach ($space as $spaces)
-                <div class="div-block-35">
-                  <div class="div-block-36">
-                    <div><strong>{{$spaces->event_name}}</strong></div>
-                    <div class="text-block-38">{{$spaces->eventAddress}}</div>
-                  </div>
-                  <div class="div-block-37">
-                    <div class="text-block-48">{{date('M d, Y', strtotime($spaces->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}</div>
-                  </div>
-                </div>
-                @endforeach
-              </div>
-              <div data-w-tab="None" class="tab-pane-none w-tab-pane w--tab-active">
-                @foreach ($none as $nones)
-                <div class="div-block-35">
-                  <div class="div-block-36">
-                    <div><strong>{{$nones->event_name}}</strong></div>
-                    <div class="text-block-38">{{$nones->eventAddress}}</div>
-                  </div>
-                  <div class="div-block-37">
-                    <div class="text-block-48">{{date('M d, Y', strtotime($nones->from_date))}} - {{date('M d, Y', strtotime($nones->to_date))}}</div>
-                  </div>
-                </div>
-                @endforeach
-              </div>
+            <div class="icon">
+              <i class="ion ion-thumbsup"></i>
             </div>
+            {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
           </div>
         </div>
-      </div>
-      <h3 class="heading-20">Recently Sponsor Events</h3>
-      <p class="paragraph-12">An In-depth Overview of Latest Sponsored Events and Updates</p>
-      <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb55-af0b537c" class="w-layout-layout quick-stack-17 wf-layout-layout">
-        {{-- <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb56-af0b537c" class="w-layout-cell">
-          <div class="div-block-38">
-            <div class="div-block-39"><img src="{{asset('assets/images/u_shopping-bag.png')}}" loading="lazy" width="35" height="35" alt="" class="image-20">
-              <div>
-                @php
-                    $sponsorApproval = $sponsor->where('states', 'Processing')->count();
-                @endphp
-                <div class="text-block-42">Sponsorship Approval</div>
-                <div class="text-block-43">{{$sponsorApproval}}</div>
-              </div>
-            </div>
-            <a href="#" class="button-25 w-button">Approve Now</a>
-          </div>
-        </div> --}}
-        <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb57-af0b537c" class="w-layout-cell">
-          <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
-            @php
-            $sponsorApproval = $sponsor->where('states', 'Processing')->count();
-            @endphp
-            <div class="text-block-46">Sponsorship Approval</div>
-            <div class="text-block-47">{{$sponsorApproval}}</div>
-          </div>
-        </div>
-        <div id="w-node-ded6f5bb-745a-da0e-b9cb-3c808e36fb57-af0b537c" class="w-layout-cell">
-          <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
-            @php
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              @php
                 $sponsorInProgress = $sponsor->where('states', 'Pending')->count();
-            @endphp
-            <div class="text-block-46">In Progressing</div>
-            <div class="text-block-47">{{$sponsorInProgress}}</div>
+              @endphp
+              <h3>{{$sponsorInProgress}}</h3>
+
+              <p>In Progress</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
           </div>
         </div>
-        <div id="w-node-_7bdbdbaf-1343-07b7-65b4-848aa78fde46-af0b537c" class="w-layout-cell">
-          <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
-            @php
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              @php
                 $totalCartons = 0;
                 foreach ($sponsor as $spon) {
                   $int_ro200ml = (int)$spon->ro_200ml;
@@ -118,343 +78,445 @@
                   $tots = $int_ro200ml + $int_ro500ml + $int_ro11L + $int_ro350ml;
                   $totalCartons += $tots;
                 }
-            @endphp
-            <div class="text-block-46">Total Sponsor Cartons</div>
-            <div class="text-block-45">{{$totalCartons}}</div>
+               @endphp
+              <h3>{{$totalCartons}}</h3>
+
+              <p>Total Sponsor Cartons</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-clipboard"></i>
+            </div>
+           
           </div>
         </div>
-        <div id="w-node-_42f58ed2-15ab-09c2-05ee-ef0769c00685-af0b537c" class="w-layout-cell">
-          <div class="div-block-40"><img src="{{asset('assets/images/u_shop.png')}}" loading="lazy" alt="">
-            @php
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-primary">
+            <div class="inner">
+              @php
                 $sponsored = $sponsor->where('states', 'Completed')->count();
-            @endphp
-            <div class="text-block-46">Total event sponsored</div>
-            <div class="text-block-45">{{$sponsored}}</div>
+              @endphp
+              <h3>{{$sponsored}}</h3>
+
+              <p>Total Events Sponsored</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            
           </div>
         </div>
+        <!-- ./col -->
       </div>
-      <div id="w-node-daee3445-1c0c-b96d-f427-2e09cfa0ab21-af0b537c" class="w-layout-layout quick-stack-19 wf-layout-layout">
-        <div id="w-node-bed7cd22-49d6-d440-89aa-b96ff1159735-af0b537c" class="w-layout-cell">
-          <h3 class="heading-22">Sponsor Events</h3>
-          <p class="paragraph-14">An In-depth Overview of Latest Sponsored Events and Updates</p>
-        </div>
-        <div id="w-node-_4aa9ebf9-ce73-bc9a-c68b-98f83dd0035d-af0b537c" class="w-layout-cell cell-23">
-          <div class="form-block-4 w-form">
-            <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-4" data-wf-page-id="651bc3682699bcc1af0b537c" data-wf-element-id="9ed34261-eece-d5c7-13c4-b94a594fbde4">
-              <select id="field" name="field" data-name="Field" class="select-field-2 w-select">
-                <option value="">Status</option>
-                <option value="Processing">Processing</option>
-                <option value="Pending">Pending</option>
-                <option value="MIA">MIA</option>
-                <option value="Completed">Completed</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Collected">Collected</option>
-              </select><select id="field-2" name="field-2" data-name="Field 2" class="select-field-2 w-select">
-                <option value="">Select Month</option>
-                @foreach ($month as $months)
-                <option value="{{$months}}">{{$months}}</option>
-                @endforeach
-              </select>
-              <button id="exportButton" class="button-26 w-button">Export</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="w-embed">
-        <style>
-         table {
-           border-collapse: collapse;
-           width: 100%;
-           border-radius: 70px;
-         }
-         th, td {
-           text-align: center;
-           padding: 12px;
-         }
-         .table-head {
-         background-color: #f2f4f5;
-         border-radius: 70px;
-         font-family: 'Poppins', Arial, sans-serif;
-         font-size: 14px;
-         }
-         .leftThead {
-         border-radius: 10px 0px 0px 10px;
-         }
-         .rightThead {
-         border-radius: 0px 10px 10px 0px;
-         }
-         .divLists:hover {
-         background-color: #ebf0fd;
-         cursor: pointer;
-         }
-         .tableDiv {
-          margin: 10px 10px 40px 10px;
-         }
-         </style>
-        <div class="tableDiv" style="overflow-x: auto;">
-          <table class="table">
-            <tr class="table-head">
-              <th class="leftThead"><input id="selectAllCheckbox" type="checkbox"></th>
-              <th>#</th>
-              <th>PROJECT NAME</th>
-              <th>PROJECT DATES</th>
-              <th>LOCATION</th>
-              <th>IN CHARGE</th>
-              <th>SPONSOR CARTONS</th>
-              <th class="rightThead">STATUS</th>
-            </tr>
-            @foreach ($sponsor as $sponsorship)
-            @php
-                $inCharge = json_decode($sponsorship->attending);
-                $int_ro200ml = (int)$sponsorship->ro_200ml;
-                $int_ro500ml = (int)$sponsorship->ro_500ml;
-                $int_ro11L = (int)$sponsorship->ro_11L;
-                $int_ro350ml = (int)$sponsorship->ro_350ml;
-                $sponsorCartons = $int_ro200ml + $int_ro500ml + $int_ro11L +$int_ro350ml
-            @endphp
-            <tr class="divLists">
-              <td class="leftThead"><input class="select-checkbox" type="checkbox"></td>
-              <td>
-                <button class="open-modal-btn modal-btn" data-modal="myModal{{$sponsorship->id}}">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                   </svg>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-6 connectedSortable">
+           <!-- PIE CHART -->
+           <div class="card ">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-chart-pie mr-1"></i> Status</h3>
+
+              {{-- <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
                 </button>
-                 <!-- The Modal -->
-                 <div id="myModal{{$sponsorship->id}}" class="modal">
-                  
-                  <!-- Modal content -->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <span class="close close-modal" data-modal="myModal{{$sponsorship->id}}">&times;</span>
-                      <h3>Confirm delete this event ?</h3>
-                      <hr>
-                    </div>
-                    <div class="modal-body">
-                      <button class="close-btn close-modal" data-modal="myModal{{$sponsorship->id}}">
-                        Close
-                      </button>
-                      <a href="/dashboard/delete/{{$sponsorship->id}}" class="delete-confirm-btn close-modal" data-modal="myModal{{$sponsorship->id}}">Confirm</a>
-                    </div>
-                  </div>
-                
-                </div>
-              </td>
-              <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->event_name}}</td>
-              <td class="clickable-row monthFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}</td>
-              <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->eventAddress}}</td>
-              <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">
-                @if ($inCharge !== null)
-                    @foreach ($inCharge as $item)
-                        - {{$item}} <br>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div> --}}
+            </div>
+            <div class="card-body">
+              <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-6 connectedSortable">
+
+          <div class="card card-info card-tabs">
+            <div class="card-header text-center p-0 pt-1">
+              <ul class="nav nav-tabs justify-content-center" id="custom-tabs-one-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">BOOTH</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">SPACE</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">NONE</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content" id="custom-tabs-one-tabContent">
+                <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>Event </th>
+                      <th>Address</th>
+                      <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($booth as $booths)
+                      <tr>
+                        <td>{{$booths->event_name}}</td>
+                        <td>{{$booths->eventAddress}}</td>
+                        <td>
+                          {{date('M d, Y', strtotime($booths->from_date))}} - {{date('M d, Y', strtotime($booths->to_date))}}
+                        </td>
+                        
+                      </tr>
                     @endforeach
-                @else
-                Not approved yet
-                @endif
-              </td>
-              <td class="clickable-row" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorCartons}}</td>
-              <td class="rightThead clickable-row statusFilter" data-href="/dashboard/view-request/{{$sponsorship->id}}">{{$sponsorship->states}}</td>
-            </tr>
-            @endforeach
-          </table>
-        </div>
+                    
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                  <table id="example3" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>Event </th>
+                      <th>Address</th>
+                      <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($space as $spaces)
+                      <tr>
+                        <td>{{$spaces->event_name}}</td>
+                        <td>{{$spaces->eventAddress}}</td>
+                        <td>
+                          {{date('M d, Y', strtotime($spaces->from_date))}} - {{date('M d, Y', strtotime($spaces->to_date))}}
+                        </td>
+                        
+                      </tr>
+                    @endforeach
+                    
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                  <table id="example4" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>Event </th>
+                      <th>Address</th>
+                      <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($none as $nones)
+                      <tr>
+                        <td>{{$nones->event_name}}</td>
+                        <td>{{$nones->eventAddress}}</td>
+                        <td>
+                          {{date('M d, Y', strtotime($nones->from_date))}} - {{date('M d, Y', strtotime($nones->to_date))}}
+                        </td>
+                        
+                      </tr>
+                    @endforeach
+                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+          
+        </section>
+        <!-- right col -->
       </div>
-    </div>
-    @php
-        
-    @endphp
-  </div>
-    </div>
-  </div>
-  <script>
-    // Add a click event listener to all elements with the "clickable-row" class
-    const clickableRows = document.querySelectorAll('.clickable-row');
-    clickableRows.forEach(row => {
-      row.addEventListener('click', () => {
-        const href = row.getAttribute('data-href');
-        if (href) {
-          window.location.href = href; // Redirect to the specified URL
-        }
-      });
-    });
-    
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script>
-      document.getElementById('selectAllCheckbox').addEventListener('change', function () {
-        const checkboxes = document.querySelectorAll('.select-checkbox');
-        checkboxes.forEach(checkbox => {
-          checkbox.checked = this.checked;
-        });
-      });
-      // Function to export selected rows to Excel
-      function exportSelectedToExcel() {
-        const table = document.querySelector('.table'); // Select your table by class or ID
-        const checkboxes = table.querySelectorAll('.select-checkbox:checked'); // Select checked checkboxes
-    
-        if (checkboxes.length === 0) {
-          alert('Please select at least one row to export.');
-          return;
-        }
-    
-        const selectedRows = [];
-        checkboxes.forEach((checkbox) => {
-          const row = checkbox.closest('tr'); // Get the closest row for each checked checkbox
-          selectedRows.push(row);
-        });
-    
-        // Create a new table that includes the header row and selected rows
-        const selectedTable = document.createElement('table');
-        const headerRow = table.querySelector('.table-head'); // Get the header row
-        selectedTable.appendChild(headerRow.cloneNode(true)); // Clone the header row
-        selectedRows.forEach((row) => {
-          selectedTable.appendChild(row.cloneNode(true)); // Clone the selected rows
-        });
-    
-        const ws = XLSX.utils.table_to_sheet(selectedTable);
-    
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    
-        // Save the Excel file
-        XLSX.writeFile(wb, 'selected_data_with_header.xlsx');
-      }
-    
-      // Add an event listener to trigger the export on button click
-      document.getElementById('exportButton').addEventListener('click', exportSelectedToExcel);
-    </script>
-    <script src="{{asset('assets/vendor/apexcharts/js/apexcharts.min.js')}}"></script>
-    <script>
-        const pageLabels = @json($statusCounts->keys());
-        const pageData = @json($statusCounts->values());
-        
-        var options = {
-            chart: {
-                type: 'bar',
-            },
-            series: [{
-                name: 'Total',
-                data: pageData,
-            }],
-            xaxis: {
-                categories: pageLabels,
-            },
-        };
-        
-        var chart = new ApexCharts(document.querySelector("#page-views-chart"), options);
-        chart.render();
-        </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const statusSelect = document.getElementById("field");
-          const monthSelect = document.getElementById("field-2");
-          const reqElements = document.querySelectorAll(".divLists");
 
-          // Map full month names to abbreviated forms
-          const monthMap = {
-              "Jan": "January",
-              "Feb": "February",
-              "Mar": "March",
-              "Apr": "April",
-              "May": "May",
-              "Jun": "June",
-              "Jul": "July",
-              "Aug": "August",
-              "September": "September",
-              "Oct": "October",
-              "Nov": "November",
-              "Dec": "December"
-          };
+      {{-- <div class="row">
+        <div class="col-12">
+        
+          <div class="card bg-gradient-info">
+            <div class="card-header border-0">
+              <h3 class="card-title">
+                <i class="fas fa-th mr-1"></i>
+                Sales Graph
+              </h3>
 
-         
-          function filterPosts() {
-              const selectedStatus = statusSelect.value;
-              const selectedMonth = monthSelect.value;
+              
+            </div>
+            <div class="card-body">
+              <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+          
+            <div class="card-footer bg-transparent">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                         data-fgColor="#39CCCC">
+
+                  <div class="text-white">Mail-Orders</div>
+                </div>
+              
+                <div class="col-4 text-center">
+                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                         data-fgColor="#39CCCC">
+
+                  <div class="text-white">Online</div>
+                </div>
+              
+                <div class="col-4 text-center">
+                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                         data-fgColor="#39CCCC">
+
+                  <div class="text-white">In-Store</div>
+                </div>
+              
+              </div>
              
-              reqElements.forEach(function (reqElement) {
-                  const ReqStatus = reqElement.querySelector(".statusFilter").textContent;
-                  const postDate = reqElement.querySelector(".monthFilter").textContent;
-                  const allFromMonth = postDate.split("-")[0]
-                  const allToMonth = postDate.split("-")[1]
-                  const fromMonth = allFromMonth.split(" ")[0]
-                  const toMonth = allToMonth.split(" ")[1]
-                  const fromDate = monthMap[fromMonth];
-                  const todate = monthMap[toMonth];
-                  if (
-                      (selectedStatus === "" || selectedStatus === ReqStatus) &&
-                      (selectedMonth === "" || selectedMonth === fromDate || selectedMonth === todate) 
-                  ) {
-                      reqElement.classList.remove("filter-hidden")
-                  } else {
-                      reqElement.classList.add("filter-hidden");
-                  }
-              });
-          }
-  
-          statusSelect.addEventListener("change", filterPosts);
-          monthSelect.addEventListener("change", filterPosts);
-  
-          // Initial filtering when the page loads
-          filterPosts();
-      });
-  </script>
- <script>
-  // Get all elements with class "open-modal-btn"
-  const openModalButtons = document.querySelectorAll('.open-modal-btn');
+            </div>
+           
+          </div>
 
-  const alert = document.querySelector('.alert-delete-success')
+        </div>
 
-  // Get all elements with class "modal"
-  const modals = document.querySelectorAll('.modal');
+      </div> --}}
 
-  // Get all elements with class "close-modal"
-  const closeButtons = document.querySelectorAll('.close-modal');
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Sponsor Events</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Event Name</th>
+                  <th>Event Date</th>
+                  <th>Location</th>
+                  <th>In Charge</th>
+                  <th>Sponsor Cartons</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($sponsor as $sponsorship)
+                  @php
+                    $inCharge = json_decode($sponsorship->attending);
+                    $int_ro200ml = (int)$sponsorship->ro_200ml;
+                    $int_ro500ml = (int)$sponsorship->ro_500ml;
+                    $int_ro11L = (int)$sponsorship->ro_11L;
+                    $int_ro350ml = (int)$sponsorship->ro_350ml;
+                    $sponsorCartons = $int_ro200ml + $int_ro500ml + $int_ro11L +$int_ro350ml
+                  @endphp
+                  <tr>
+                    <td>
+                      <button class="btn btn-primary"><i class="ion ion-eye"></i></button>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
+                        <i class="ion ion-ios-trash"></i>
+                      </button>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="modal{{$sponsorship->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Are you sure want to remove {{$sponsorship->event_name}} ?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href="/dashboard/delete/{{$sponsorship->id}}" class="btn btn-danger">Confirm</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{$sponsorship->event_name}}</td>
+                    <td>
+                      {{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}
+                    </td>
+                    <td>{{$sponsorship->eventAddress}}</td>
+                    <td>
+                      @if ($inCharge !== null)
+                      @foreach ($inCharge as $item)
+                          - {{$item}} <br>
+                      @endforeach
+                      @else
+                      Not approved yet
+                      @endif
+                    </td>
+                    <td>{{$sponsorCartons}}</td>
+                    <td>{{$sponsorship->states}}</td>
+                  </tr>
+                  @endforeach
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
-  // Add click event listeners to open modal buttons
-  openModalButtons.forEach(button => {
-      button.addEventListener('click', function () {
-          const modalId = this.getAttribute('data-modal');
-          const modal = document.getElementById(modalId);
-          if (modal) {
-              modal.style.display = 'block';
-          }
-      });
-  });
+<script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<script>
+  const pageLabels = @json($statusCounts->keys());
+  const pageData = @json($statusCounts->values());
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
 
-  // Add click event listeners to close buttons
-  closeButtons.forEach(button => {
-      button.addEventListener('click', function () {
-          const modalId = this.getAttribute('data-modal');
-          const modal = document.getElementById(modalId);
-          if (modal) {
-              modal.style.display = 'none';
-          }
-      });
-  });
-
-  // Close modals when clicking outside the modal content
-  modals.forEach(modal => {
-      modal.addEventListener('click', function (event) {
-          if (event.target === this) {
-              modal.style.display = 'none';
-          }
-      });
-  });
-
-  // Prevent clicks inside modals from closing the modal
-  modals.forEach(modal => {
-      modal.addEventListener('click', function (event) {
-          event.stopPropagation();
-      });
-  });
-
-  // Add click event listener to the document body
-document.body.addEventListener('click', function (event) {
-    // Check if the event target is not the alert element or any of its children
-    if (!alert.contains(event.target)) {
-        alert.style.display = 'none';
+    
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutData        = {
+      labels: pageLabels,
+      datasets: [
+        {
+          data: pageData,
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        }
+      ]
     }
-});
+
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = donutData;
+    var pieOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
+    })
+
+    // Sales graph chart
+  var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')
+  // $('#revenue-chart').get(0).getContext('2d');
+
+  var salesGraphChartData = {
+    labels: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2'],
+    datasets: [
+      {
+        label: 'Digital Goods',
+        fill: false,
+        borderWidth: 2,
+        lineTension: 0,
+        spanGaps: true,
+        borderColor: '#efefef',
+        pointRadius: 3,
+        pointHoverRadius: 7,
+        pointColor: '#efefef',
+        pointBackgroundColor: '#efefef',
+        data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432]
+      }
+    ]
+  }
+
+  var salesGraphChartOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontColor: '#efefef'
+        },
+        gridLines: {
+          display: false,
+          color: '#efefef',
+          drawBorder: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          stepSize: 5000,
+          fontColor: '#efefef'
+        },
+        gridLines: {
+          display: true,
+          color: '#efefef',
+          drawBorder: false
+        }
+      }]
+    }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'line',
+    data: salesGraphChartData,
+    options: salesGraphChartOptions
+  })
+
+   
+  })
+</script>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#example3').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#example4').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
 </script>
 
 @endsection
