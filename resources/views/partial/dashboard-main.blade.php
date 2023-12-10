@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="{{asset('assets/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -229,7 +230,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/ongoing-event-report" class="nav-link {{ Request::is('ongoing-event-report') ? 'active' : ' ' }}">
+                <a href="/dashboard/ongoing-event-report" class="nav-link {{ Request::is('dashboard/ongoing-event-report') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ongoing Event Report</p>
                 </a>
