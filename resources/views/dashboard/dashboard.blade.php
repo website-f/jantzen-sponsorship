@@ -318,7 +318,7 @@
                   @endphp
                   <tr>
                     <td>
-                      <button class="btn btn-primary"><i class="ion ion-eye"></i></button>
+                      <a href="/dashboard/view-request/{{$sponsorship->id}}" class="btn btn-primary"><i class="ion ion-eye"></i></a>
                       <!-- Button trigger modal -->
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
                         <i class="ion ion-ios-trash"></i>
