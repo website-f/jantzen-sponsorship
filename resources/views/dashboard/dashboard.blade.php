@@ -71,10 +71,10 @@
               @php
                 $totalCartons = 0;
                 foreach ($sponsor as $spon) {
-                  $int_ro200ml = (int)$spon->ro_200ml;
-                  $int_ro500ml = (int)$spon->ro_500ml;
-                  $int_ro11L = (int)$spon->ro_11L;
-                  $int_ro350ml = (int)$spon->ro_350ml;
+                  $int_ro200ml = (int)$spon->confirmro_200ml;
+                  $int_ro500ml = (int)$spon->confirmro_500ml;
+                  $int_ro11L = (int)$spon->confirmro_11L;
+                  $int_ro350ml = (int)$spon->confirmro_350ml;
                   $tots = $int_ro200ml + $int_ro500ml + $int_ro11L + $int_ro350ml;
                   $totalCartons += $tots;
                 }
@@ -487,7 +487,8 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "excel", "pdf", "print"]
+      "buttons": ["copy", "excel", "pdf", "print"],
+      "order": [[0, "desc"]]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -497,6 +498,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      "order": [[0, "desc"]]
     });
     $('#example3').DataTable({
       "paging": true,
@@ -506,6 +508,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      "order": [[0, "desc"]]
     });
     $('#example4').DataTable({
       "paging": true,
@@ -515,6 +518,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      "order": [[0, "desc"]]
     });
   });
 </script>
