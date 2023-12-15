@@ -32,12 +32,15 @@ Route::get('/login-admin', [AuthController::class, 'loginAdmin']);
 Route::post('/login-admin-fill', [AuthController::class, 'loginAdminFill']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
+Route::post('/sendMailTemplate/{email}', [DashboardController::class, 'sendMail'])->middleware('auth');
+
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');
     Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware('auth');
     Route::put('/status-update/{id}', [DashboardController::class, 'statusUpdate'])->middleware('auth');
+    Route::put('/request-update/{id}', [DashboardController::class, 'requestUpdate'])->middleware('auth');
     Route::get('/delete/{id}', [DashboardController::class, 'delete'])->middleware('auth');
     Route::get('/trash', [DashboardController::class, 'trash'])->middleware('auth');
     Route::get('/restore/{id}', [DashboardController::class, 'restore'])->middleware('auth');

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('sponsorships', function (Blueprint $table) {
             $table->string('confirmro_200ml')->nullable();
             $table->string('confirmro_500ml')->nullable();
+            $table->string('confirmro_1p5L')->nullable();
             $table->string('confirmro_11L')->nullable();
             $table->string('confirmro_350ml')->nullable();
         });

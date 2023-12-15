@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use App\Mail\SubmitNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use App\Notifications\RequestNotification;
 use Illuminate\Support\Facades\Notification;
@@ -52,7 +54,7 @@ class SponsorshipController extends Controller
         // Optionally, you can save the $uniqueFileName to your database for future reference
     }
 
-    Notification::route('mail', 'gitdev1234@gmail.com')->notify(new RequestNotification());
+    Mail::to('gitdev1234@gmail.com')->send(new SubmitNotification());
       
     $sponsor = new Sponsorship;
     $sponsor->fullname = $request->name;
