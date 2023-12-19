@@ -360,7 +360,27 @@
                       @endif
                     </td>
                     <td>{{$sponsorCartons}}</td>
-                    <td>{{$sponsorship->states}}</td>
+                    <td>
+                      @if ($sponsorship->states == "Processing")
+                      <button class="btn btn-warning">{{$sponsorship->states}}</button>            
+                      @elseif ($sponsorship->states == "Approved")  
+                      <button class="btn btn-success">{{$sponsorship->states}}</button> 
+                      @elseif ($sponsorship->states == "Pending")  
+                      <button class="btn btn-info">{{$sponsorship->states}}</button> 
+                      @elseif ($sponsorship->states == "Collected")  
+                      <button class="btn btn-primary">{{$sponsorship->states}}</button>   
+                      @elseif ($sponsorship->states == "Blacklist")  
+                      <button class="btn btn-dark">{{$sponsorship->states}}</button> 
+                      @elseif ($sponsorship->states == "MIA")  
+                      <button class="btn btn-secondary">{{$sponsorship->states}}</button>    
+                      @elseif ($sponsorship->states == "Rejected")  
+                      <button class="btn btn-danger">{{$sponsorship->states}}</button>
+                      @elseif ($sponsorship->states == "Completed")  
+                      <button class="btn btn-danger">{{$sponsorship->states}}</button>
+                      @else
+                      {{$sponsorship->states}}
+                      @endif
+                    </td>
                   </tr>
                   @endforeach
               </table>
@@ -488,7 +508,7 @@
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "excel", "pdf", "print"],
-      "order": [[0, "desc"]]
+
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

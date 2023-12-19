@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template 1</title>
-</head>
-<body>
+
+
     <p>Dear ,
-        Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor 7 cartons of 500ml Jantzen water for the Shah Alam collection only.</p><br>
+        Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor {{$confirmro_200ml}} cartons of 200ml, {{$confirmro_500ml}} cartons of 500ml,
+        {{$confirmro_11L}} cartons of 11L, {{$confirmro_350ml}} cartons of 350ml(Mineral) Jantzen water for the {{$pickup_location}} collection only.</p><br>
         
-        <p>In return, we kindly request the following from your team:</p><br>
+        <p>In return, we kindly request the following from your teammss:</p><br>
         
         <p>1. Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.</p><br>
         
@@ -23,7 +21,7 @@
         <p>5. Take 30 photos of Jantzen being used at the event and send them to us within 3 days after the event. You can share them via Google Drive and provide me with the link.</p><br>
         
         <p>6. Ensure that 50 people follow us on TikTok and provide screenshots for verification.
-        (https://www.tiktok.com/@jantzenwater?_t=8f4dGwUvMUE&_r=1)</p><br>
+        (https://www.tiktok.com/@jantzenwater?_t=8f4dGwUvMUE&amp;_r=1)</p><br>
         
         <p>7. Can you create two pieces of content about sharing Jantzen? It can be related to your event or any content you prefer (TIKTOK / XHS) personal acc *send me draft before you posting *</p><br>
         
@@ -32,5 +30,3 @@
         <p>Best regards,</p>
         <p>Naomis</p>
         <p>Jantzen Water Marketing Team</p><br>
-</body>
-</html>

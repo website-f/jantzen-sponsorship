@@ -65,10 +65,37 @@ class DashboardController extends Controller
         return view('dashboard.dashboard-sponsorship-requests', ['sponsor' => $sponsor, 'user' => $user, 'alluser' => $alluser, 'templates' => $templates]);
     }
 
-    public function sendMail(Request $request, $email) {
+    public function sendMail(Request $request, $email, $id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->pickup_location = $request->pickup_location;
+        $sponsor->pickup_address = $request->pickup_address;
+        $sponsor->contact_person = $request->contact_person;
+        $sponsor->pickup_phone_number = $request->pickup_phone_number;
+        $sponsor->save();
+        $confirmro_200ml = $sponsor->confirmro_200ml;
+        $confirmro_500ml = $sponsor->confirmro_500ml;
+        $confirmro_11L = $sponsor->confirmro_11L;
+        $confirmro_350ml = $sponsor->confirmro_350ml;
+        $pickup_location = $request->pickup_location;
         $template = $request->input('template');
-        Mail::to('fitri@jantzen.com.my')->send(new SponsorshipNotification($template));
+        dd($template);
+        Mail::to($email)->send(new SponsorshipNotification($template, $confirmro_200ml, $confirmro_500ml, $confirmro_350ml, $confirmro_11L, $pickup_location));
+        return redirect("/dashboard/view-request/" . $id);
     }
+
+    public function saveTemplate(Request $request, $templatename, $id) {
+        $content = $request->input('content');
+        $templatePath = resource_path('views/emails/template/' . $templatename . '.blade.php');
+        
+        try {
+            File::put($templatePath, $content);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+        
+    }
+
 
     public function requestSubmit(Request $request, $id) {
         $attending = explode(",", $request->attending);
@@ -148,6 +175,14 @@ class DashboardController extends Controller
     public function block() {
         $sponsor = Sponsorship::onlyTrashed()->get();
         return view('dashboard.dashboard-blocklists', ['sponsor' => $sponsor]);
+    }
+
+    public function reject($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = 'reject';
+        $sponsor->states = 'Rejected';
+        $sponsor->save();
+        return redirect('/dashboard/view-request/' . $id);
     }
 
     public function restore($id) {

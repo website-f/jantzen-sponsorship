@@ -261,9 +261,10 @@
             <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
+              <label>Reviews</label>
               <div id="file-drop-area" class="div-block-5">
                 <div style="text-align: center;">
-                    <p>Drag and drop files here, or click to select files</p>
+                    <p>Drag and drop review files here, or click to select review files</p>
                     <label for="file-input" id="file-upload-label">
                         <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
                     </label>
@@ -274,6 +275,36 @@
               <button id="delete-file">Delete Selected File</button>
               <button id="replace-file">Replace Selected File</button>
               <input type="hidden" id="file-names-input" name="file_names">
+
+              <label style="margin-top: 30px">Photos</label>
+              <div id="file-drop-area-photos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop photo files here, or click to select photo files</p>
+                    <label for="file-input-photos" id="file-upload-label-photos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-photos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-photos"></ul>
+              <button id="delete-file-photos">Delete Selected File</button>
+              <button id="replace-file-photos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-photos" name="file_names_photos">
+
+              <label style="margin-top: 30px">Videos</label>
+              <div id="file-drop-area-videos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-videos" id="file-upload-label-videos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-videos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-videos"></ul>
+              <button id="delete-file-videos">Delete Selected File</button>
+              <button id="replace-file-videos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-videos" name="file_names_videos">
           </div>
           <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</a>
         </form>

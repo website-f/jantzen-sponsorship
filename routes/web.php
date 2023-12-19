@@ -32,7 +32,7 @@ Route::get('/login-admin', [AuthController::class, 'loginAdmin']);
 Route::post('/login-admin-fill', [AuthController::class, 'loginAdminFill']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-Route::post('/sendMailTemplate/{email}', [DashboardController::class, 'sendMail'])->middleware('auth');
+Route::put('/sendMailTemplate/{email}/{id}', [DashboardController::class, 'sendMail'])->middleware('auth');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
@@ -50,7 +50,10 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/submit-report/{id}', [DashboardController::class, 'submitReport'])->middleware('auth');
     Route::put('/edit-report/{id}/{repID}', [DashboardController::class, 'submitEditReport'])->middleware('auth');
     Route::get('/blocklists', [DashboardController::class, 'block'])->middleware('auth');
+    Route::get('/reject/{id}', [DashboardController::class, 'reject'])->middleware('auth');
 });
+
+Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware('auth');
 
 
 
