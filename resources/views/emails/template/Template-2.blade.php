@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template 2</title>
-</head>
-<body>
+
+
     <p>You need to self-collect the sponsored items from our factory located in Shah Alam.</p>
 
-        <p><B>SHAH ALAM COLLECTION</B></p>
+        <p><b>SHAH ALAM COLLECTION</b></p>
         <p>My colleague, Yee Yoong, will be in charge of collecting the sponsorship goods on the designated day in Shah Alam. You can retrieve your items at the following address: 12, Jalan Pasaran 23/5, Sek 23, 40300 Shah Alam. Kindly call Yee Yoong at either 03 51106880 or 011-1069 1533 upon your arrival at the factory.</p>
         
         <p><b>COLLECTION APPOINTMENT</b></p>
@@ -46,5 +43,3 @@
         
         <p>(Before you proceed with the collection, please inform me via WhatsApp.)</p>
         <p>(Please immediately notify me if you are unable to come on the collection date.)</p>
-</body>
-</html>

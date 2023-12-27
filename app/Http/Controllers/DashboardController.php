@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\BlockList;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Mail\SubmitNotification;
@@ -150,6 +151,14 @@ class DashboardController extends Controller
         return redirect("/dashboard/view-request/" . $id);
     }
 
+    public function collected($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = "collected";
+        $sponsor->states = "Collected";
+        $sponsor->save();
+        return redirect("/dashboard/view-request/" . $id);
+    }
+
     public function statusUpdate(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->states = $request->states;
@@ -172,9 +181,35 @@ class DashboardController extends Controller
         return view('dashboard.dashboard-sponsorship-archive', ['sponsor' => $sponsor]);
     }
 
-    public function block() {
-        $sponsor = Sponsorship::onlyTrashed()->get();
-        return view('dashboard.dashboard-blocklists', ['sponsor' => $sponsor]);
+    public function block($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = "blacklist";
+        $sponsor->states = "Blacklist";
+        $sponsor->save();
+
+        $blacklist = new BlockList;
+        $blacklist->email = $sponsor->email;
+        $blacklist->company_name = $sponsor->organization;
+        $blacklist->contact_number = $sponsor->contact;
+        $blacklist->name = $sponsor->fullname;
+        $blacklist->save();
+        return redirect("/dashboard/view-request/" . $id);
+    }
+
+    public function blocklists() {
+        $sponsor = BlockList::all();
+        return view("dashboard.dashboard-blocklists", ['sponsor' => $sponsor]);
+    }
+
+    public function removeBlacklist($id, $email) {
+        $blacklist = BlockList::findOrFail($id);
+        $blacklist->delete();
+
+        $sponsor = Sponsorship::where('email', $email)->first();
+        $sponsor->status = "submit";
+        $sponsor->states = "Processing";
+        $sponsor->save();
+        return redirect('/dashboard/blocklists');
     }
 
     public function reject($id) {
@@ -184,6 +219,8 @@ class DashboardController extends Controller
         $sponsor->save();
         return redirect('/dashboard/view-request/' . $id);
     }
+
+    //---TRASH--------------------------------------------------------------------------------------------------------------
 
     public function restore($id) {
         $sponsor = Sponsorship::withTrashed()->where('id', $id)->restore();
@@ -199,6 +236,8 @@ class DashboardController extends Controller
     public function permanentDelete($id) {
         
     }
+
+    //-----AFTER EVENT RERPORT-------------------------------------------------------------------------------------------------
 
     public function ongoingEventReport() {
         $sponsor = Sponsorship::whereIn('states', ['Pending', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();

@@ -8,7 +8,7 @@
         Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor {{$confirmro_200ml}} cartons of 200ml, {{$confirmro_500ml}} cartons of 500ml,
         {{$confirmro_11L}} cartons of 11L, {{$confirmro_350ml}} cartons of 350ml(Mineral) Jantzen water for the {{$pickup_location}} collection only.</p><br>
         
-        <p>In return, we kindly request the following from your teammss:</p><br>
+        <p>In return, we kindly request the following from your teams:</p><br>
         
         <p>1. Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.</p><br>
         

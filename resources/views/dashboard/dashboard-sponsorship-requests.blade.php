@@ -81,10 +81,10 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <hr>
-              <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a>
+              {{-- <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a> --}}
           </div>
           
-          @elseif($sponsor->status == "complete")
+          @elseif($sponsor->status == "collected")
 
           <div class="alert alert-secondary alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -93,7 +93,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <hr>
-              <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a>
+              {{-- <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a> --}}
           </div>
 
           @elseif($sponsor->status == "reject")
@@ -101,6 +101,18 @@
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
             <p>This Sponsorship Request is rejected</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <hr>
+              
+          </div>
+
+          @elseif($sponsor->status == "blacklist")
+
+          <div class="alert alert-dark alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Hi!</h4>
+            <p>This Sponsorship Request is in the blacklists</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -580,7 +592,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/reject" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -606,7 +618,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/block" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -1003,7 +1015,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/reject" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -1029,7 +1041,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/block" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -1327,7 +1339,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/reject" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -1353,7 +1365,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/block" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -1690,6 +1702,1425 @@
             <!-- /.card-body -->
           </div>
         </div>
+
+        @elseif($sponsor->status == "collect")
+        <div class="col-lg-5">
+          <div class="card card-primary collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approved</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <p>Current Status: 
+                      @if ($sponsor->states == "Processing")
+                      <button class="btn btn-warning btn-sm">{{$sponsor->states}}</button>            
+                      @elseif ($sponsor->states == "Approved")  
+                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Pending")  
+                      <button class="btn btn-info btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Collected")  
+                      <button class="btn btn-primary btn-sm">{{$sponsor->states}}</button>   
+                      @elseif ($sponsor->states == "Blacklist")  
+                      <button class="btn btn-dark btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "MIA")  
+                      <button class="btn btn-secondary btn-sm">{{$sponsor->states}}</button>    
+                      @elseif ($sponsor->states == "Rejected")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @elseif ($sponsor->states == "Completed")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @else
+                      {{$sponsor->states}}
+                      @endif
+                  </p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-info w-100 mb-3" data-toggle="modal" data-target="#editRequest">
+                Edit <i class="fas fa-edit"></i>
+              </button><br>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="editRequest" tabindex="-1" role="dialog" aria-labelledby="editRequest" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Edit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Attending</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
+                              @php
+                                  $attendees = json_decode($sponsor->attending);
+                                  $attender = isset($attendees) ? $attendees : [];
+                                  $selectedValues = isset($attendees) ? implode(',', $attendees) : '';
+                              @endphp
+                              
+                              @foreach ($user as $item)
+                                <option value="{{$item->name}}" {{ in_array($item->name, $attender) ? 'selected' : '' }}>{{$item->name}}</option>
+                              @endforeach
+                            </select>
+                            <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Handle By</label>
+                            <select name="handle_by" class="form-control" required>
+                              <option value="">Select one...</option>
+                              @foreach ($alluser as $item)
+                                  <option value="{{ $item->name }}" {{ $sponsor->handle_by == $item->name ? 'selected' : '' }}>
+                                      {{ $item->name }}
+                                  </option>
+                              @endforeach
+                            </select>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Booth / Space</label>
+                              <select name="booth_space" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="None" {{$sponsor->booth_space == 'None' ? 'selected' : ''}}>None</option>
+                                <option value="Booth" {{$sponsor->booth_space == 'Booth' ? 'selected' : ''}}>Booth</option>
+                                <option value="Space" {{$sponsor->booth_space == 'Space' ? 'selected' : ''}}>Space</option>
+                              </select>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectRequestEdit">
+                              <i class="fas fa-times-circle"></i> Reject
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="rejectRequestEdit" tabindex="-1" role="dialog" aria-labelledby="rejectRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to reject {{$sponsor->event_name}} sponsorship ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#blockRequestEdit">
+                              <i class="fas fa-minus-circle"></i> Add to Blocklist
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="blockRequestEdit" tabindex="-1" role="dialog" aria-labelledby="blockRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to add {{$sponsor->event_name}} sponsorship to blocklists ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Confirm Sponsorship Products</h4>
+                            <hr>
+                          </div> 
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 200ml x Cartons</label>
+                            <input type="number" name="confirmro_200ml" class="form-control" value="{{$sponsor->confirmro_200ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 500ml x Cartons</label>
+                            <input type="number" name="confirmro_500ml" class="form-control" value="{{$sponsor->confirmro_500ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 11L x Bottles</label>
+                            <input type="number" name="confirmro_11L" class="form-control" value="{{$sponsor->confirmro_11L}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Mineral 350ml x Cartons</label>
+                            <input type="number" name="confirmro_350ml" class="form-control" value="{{$sponsor->confirmro_350ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Paper Cup</label>
+                            <input type="number" name="paper_cup" class="form-control" value="{{$sponsor->paper_cup}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Goodie Bags</label>
+                            <input type="number" name="goodies_bag" class="form-control" value="{{$sponsor->goodies_bag}}">
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <hr>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Others</label>
+                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Remarks</label>
+                            @if ($sponsor->remarks !== null)
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ...">{{$sponsor->remarks}}</textarea>
+                            @else
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ..."></textarea>
+                            @endif
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Change Status</h4>
+                            <hr>
+                          </div> 
+
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Status</label>
+                              <select name="states" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="Approved" {{$sponsor->states == 'Approved' ? 'selected' : ''}}>Approved</option>
+                                <option value="Pending" {{$sponsor->states == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                <option value="Collected" {{$sponsor->states == 'Collected' ? 'selected' : ''}}>Collected</option>
+                                <option value="MIA" {{$sponsor->states == 'MIA' ? 'selected' : ''}}>MIA</option>
+                                <option value="Closed" {{$sponsor->states == 'Closed' ? 'selected' : ''}}>Closed</option>
+                                <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
+                                <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
+                                <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Attending</label>
+                    @php
+                        $attending = json_decode($sponsor->attending);
+                        $attendees = "";
+                        if ($attending !== null) {
+                          foreach ($attending as $attend) {
+                            $attendees .= $attend . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($attending !== null)
+                        <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Handle By</label>
+                    <input type="text" class="form-control" value="{{$sponsor->handle_by}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Booth / Space</label>
+                      <input type="text" class="form-control" value="{{$sponsor->booth_space}}" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <h4>Confirm Sponsorship Products</h4>
+                    <hr>
+                  </div> 
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 200ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_200ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 500ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_500ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 11L x Bottles</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_11L}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Mineral 350ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_350ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Paper Cup</label>
+                    <input type="text" class="form-control" value="{{$sponsor->paper_cup}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Goodie Bags</label>
+                    <input type="text" class="form-control" value="{{$sponsor->goodies_bag}}" readonly>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Others</label>
+                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea class="form-control" rows="3" placeholder="Remarks ..." readonly>{{$sponsor->remarks}}</textarea>
+                  </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-success collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-envelope"></i> <b>Send Mail</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form action="/sendMailTemplate/{{$sponsor->email}}/{{$sponsor->id}}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Pickup Location</label>
+                      <select name="pickup_location" class="form-control pickup-location" required>
+                        <option value="">Select one...</option>
+                        <option value="Puchong" {{$sponsor->pickup_location == "Puchong" ? 'selected' : ''}}>Puchong</option>
+                        <option value="Shah Alam" {{$sponsor->pickup_location == "Shah Alam" ? 'selected' : ''}}>Shah Alam</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Pickup Location Address</label>
+                    @if ($sponsor->pickup_address !== null)
+                    <input type="text" name="pickup_address" class="form-control pickup-address" readonly value="{{$sponsor->pickup_address}}">
+                    @else
+                    <input type="text" name="pickup_address" class="form-control pickup-address" readonly>
+                    @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Contact Person</label>
+                    @if ($sponsor->contact_person !== null)
+                    <input type="text" name="contact_person" class="form-control contact-person" readonly value="{{$sponsor->contact_person}}">
+                    @else
+                    <input type="text" name="contact_person" class="form-control contact-person" readonly>
+                    @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Phone Number</label>
+                    @if ($sponsor->pickup_phone_number !== null)
+                    <input type="text" name="pickup_phone_number" class="form-control phone-number" readonly value="{{$sponsor->pickup_phone_number}}">
+                    @else
+                    <input type="text" name="pickup_phone_number" class="form-control phone-number" readonly>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="row">
+                  @foreach($templates as $template)
+                    <div class="col-lg-6 mb-3">
+                      <div class="card">
+                          <div class="card-body">
+                              <h5 class="card-title mb-2">{{ basename($template, '.blade.php') }}</h5>
+                              <p class="card-text">
+    
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#view{{ basename($template, '.blade.php') }}">
+                                  View Template
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="view{{ basename($template, '.blade.php') }}" tabindex="-1" role="dialog" aria-labelledby="view{{ basename($template, '.blade.php') }}" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{ basename($template, '.blade.php') }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <input type="hidden" id="template-id-{{ basename($template, '.blade.php') }}" value="{{$sponsor->id}}">
+                                        <button type="button" class="btn btn-primary editTemplate" data-target="{{ basename($template, '.blade.php') }}">Edit Template</button>
+                                        <button type="button" class="btn btn-success saveChanges" data-target="{{ basename($template, '.blade.php') }}" style="display:none;">Save Changes</button>
+                                        <div id="template-content-{{ basename($template, '.blade.php') }}">{!! file_get_contents($template) !!}</div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                  
+                                
+                              </p>
+                              <input style="font-style: 30px;" type="radio" class="btn-check" name="template" id="{{ basename($template, '.blade.php') }}" autocomplete="off" value="{{ basename($template, '.blade.php') }}">
+                              <label class="btn btn-outline-primary btn-sm" for="{{ basename($template, '.blade.php') }}">Select Template</label>
+                          </div>
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  
+                  Send Email
+                </button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-warning collapsed-card" id="proofAttachments">
+            <div class="card-header">
+              @php
+                    $proof = json_decode($sponsor->attachements_agreement_proof);
+  
+                    if ($proof !== null) {
+                      $proofCounts = count($proof);
+                    } else {
+                      $proofCounts = 0;
+                    }
+              @endphp
+              <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <a href="#" class="btn btn-primary w-100 mb-3">
+                Download All
+              </a>
+                <div class="row">
+                  @if ($proof !== null)
+                      @foreach ($proof as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-secondary collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-people-carry"></i> <b>Collector Details</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Collection Date</label>
+                      <input type="text" class="form-control" readonly value="{{$sponsor->collection_date}}">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collection Time Slot</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collection_time_slot}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Name</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_name}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector IC</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_IC}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Contact</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_contact}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Plate Number</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_plate_number}}">
+                  </div>
+
+                   <!-- Button trigger modal -->
+                   <button type="button" class="btn btn-primary mb-3 w-100" data-toggle="modal" data-target="#view-collected">
+                    Collected
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="view-collected" tabindex="-1" role="dialog" aria-labelledby="view-collected" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Collected</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/collected/{{$sponsor->id}}" class="btn btn-primary">Sure</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+        @elseif($sponsor->status == "collected")
+        <div class="col-lg-5">
+          <div class="card card-primary collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approved</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <p>Current Status: 
+                      @if ($sponsor->states == "Processing")
+                      <button class="btn btn-warning btn-sm">{{$sponsor->states}}</button>            
+                      @elseif ($sponsor->states == "Approved")  
+                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Pending")  
+                      <button class="btn btn-info btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Collected")  
+                      <button class="btn btn-primary btn-sm">{{$sponsor->states}}</button>   
+                      @elseif ($sponsor->states == "Blacklist")  
+                      <button class="btn btn-dark btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "MIA")  
+                      <button class="btn btn-secondary btn-sm">{{$sponsor->states}}</button>    
+                      @elseif ($sponsor->states == "Rejected")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @elseif ($sponsor->states == "Completed")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @else
+                      {{$sponsor->states}}
+                      @endif
+                  </p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-info w-100 mb-3" data-toggle="modal" data-target="#editRequest">
+                Edit <i class="fas fa-edit"></i>
+              </button><br>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="editRequest" tabindex="-1" role="dialog" aria-labelledby="editRequest" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Edit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Attending</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
+                              @php
+                                  $attendees = json_decode($sponsor->attending);
+                                  $attender = isset($attendees) ? $attendees : [];
+                                  $selectedValues = isset($attendees) ? implode(',', $attendees) : '';
+                              @endphp
+                              
+                              @foreach ($user as $item)
+                                <option value="{{$item->name}}" {{ in_array($item->name, $attender) ? 'selected' : '' }}>{{$item->name}}</option>
+                              @endforeach
+                            </select>
+                            <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Handle By</label>
+                            <select name="handle_by" class="form-control" required>
+                              <option value="">Select one...</option>
+                              @foreach ($alluser as $item)
+                                  <option value="{{ $item->name }}" {{ $sponsor->handle_by == $item->name ? 'selected' : '' }}>
+                                      {{ $item->name }}
+                                  </option>
+                              @endforeach
+                            </select>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Booth / Space</label>
+                              <select name="booth_space" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="None" {{$sponsor->booth_space == 'None' ? 'selected' : ''}}>None</option>
+                                <option value="Booth" {{$sponsor->booth_space == 'Booth' ? 'selected' : ''}}>Booth</option>
+                                <option value="Space" {{$sponsor->booth_space == 'Space' ? 'selected' : ''}}>Space</option>
+                              </select>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectRequestEdit">
+                              <i class="fas fa-times-circle"></i> Reject
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="rejectRequestEdit" tabindex="-1" role="dialog" aria-labelledby="rejectRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to reject {{$sponsor->event_name}} sponsorship ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#blockRequestEdit">
+                              <i class="fas fa-minus-circle"></i> Add to Blocklist
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="blockRequestEdit" tabindex="-1" role="dialog" aria-labelledby="blockRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to add {{$sponsor->event_name}} sponsorship to blocklists ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Confirm Sponsorship Products</h4>
+                            <hr>
+                          </div> 
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 200ml x Cartons</label>
+                            <input type="number" name="confirmro_200ml" class="form-control" value="{{$sponsor->confirmro_200ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 500ml x Cartons</label>
+                            <input type="number" name="confirmro_500ml" class="form-control" value="{{$sponsor->confirmro_500ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 11L x Bottles</label>
+                            <input type="number" name="confirmro_11L" class="form-control" value="{{$sponsor->confirmro_11L}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Mineral 350ml x Cartons</label>
+                            <input type="number" name="confirmro_350ml" class="form-control" value="{{$sponsor->confirmro_350ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Paper Cup</label>
+                            <input type="number" name="paper_cup" class="form-control" value="{{$sponsor->paper_cup}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Goodie Bags</label>
+                            <input type="number" name="goodies_bag" class="form-control" value="{{$sponsor->goodies_bag}}">
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <hr>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Others</label>
+                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Remarks</label>
+                            @if ($sponsor->remarks !== null)
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ...">{{$sponsor->remarks}}</textarea>
+                            @else
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ..."></textarea>
+                            @endif
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Change Status</h4>
+                            <hr>
+                          </div> 
+
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Status</label>
+                              <select name="states" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="Approved" {{$sponsor->states == 'Approved' ? 'selected' : ''}}>Approved</option>
+                                <option value="Pending" {{$sponsor->states == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                <option value="Collected" {{$sponsor->states == 'Collected' ? 'selected' : ''}}>Collected</option>
+                                <option value="MIA" {{$sponsor->states == 'MIA' ? 'selected' : ''}}>MIA</option>
+                                <option value="Closed" {{$sponsor->states == 'Closed' ? 'selected' : ''}}>Closed</option>
+                                <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
+                                <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
+                                <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Attending</label>
+                    @php
+                        $attending = json_decode($sponsor->attending);
+                        $attendees = "";
+                        if ($attending !== null) {
+                          foreach ($attending as $attend) {
+                            $attendees .= $attend . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($attending !== null)
+                        <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Handle By</label>
+                    <input type="text" class="form-control" value="{{$sponsor->handle_by}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Booth / Space</label>
+                      <input type="text" class="form-control" value="{{$sponsor->booth_space}}" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <h4>Confirm Sponsorship Products</h4>
+                    <hr>
+                  </div> 
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 200ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_200ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 500ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_500ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 11L x Bottles</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_11L}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Mineral 350ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_350ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Paper Cup</label>
+                    <input type="text" class="form-control" value="{{$sponsor->paper_cup}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Goodie Bags</label>
+                    <input type="text" class="form-control" value="{{$sponsor->goodies_bag}}" readonly>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Others</label>
+                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea class="form-control" rows="3" placeholder="Remarks ..." readonly>{{$sponsor->remarks}}</textarea>
+                  </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-success collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-envelope"></i> <b>Send Mail</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form action="/sendMailTemplate/{{$sponsor->email}}/{{$sponsor->id}}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Pickup Location</label>
+                      <select name="pickup_location" class="form-control pickup-location" required>
+                        <option value="">Select one...</option>
+                        <option value="Puchong" {{$sponsor->pickup_location == "Puchong" ? 'selected' : ''}}>Puchong</option>
+                        <option value="Shah Alam" {{$sponsor->pickup_location == "Shah Alam" ? 'selected' : ''}}>Shah Alam</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Pickup Location Address</label>
+                    @if ($sponsor->pickup_address !== null)
+                    <input type="text" name="pickup_address" class="form-control pickup-address" readonly value="{{$sponsor->pickup_address}}">
+                    @else
+                    <input type="text" name="pickup_address" class="form-control pickup-address" readonly>
+                    @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Contact Person</label>
+                    @if ($sponsor->contact_person !== null)
+                    <input type="text" name="contact_person" class="form-control contact-person" readonly value="{{$sponsor->contact_person}}">
+                    @else
+                    <input type="text" name="contact_person" class="form-control contact-person" readonly>
+                    @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Phone Number</label>
+                    @if ($sponsor->pickup_phone_number !== null)
+                    <input type="text" name="pickup_phone_number" class="form-control phone-number" readonly value="{{$sponsor->pickup_phone_number}}">
+                    @else
+                    <input type="text" name="pickup_phone_number" class="form-control phone-number" readonly>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="row">
+                  @foreach($templates as $template)
+                    <div class="col-lg-6 mb-3">
+                      <div class="card">
+                          <div class="card-body">
+                              <h5 class="card-title mb-2">{{ basename($template, '.blade.php') }}</h5>
+                              <p class="card-text">
+    
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#view{{ basename($template, '.blade.php') }}">
+                                  View Template
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="view{{ basename($template, '.blade.php') }}" tabindex="-1" role="dialog" aria-labelledby="view{{ basename($template, '.blade.php') }}" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{ basename($template, '.blade.php') }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <input type="hidden" id="template-id-{{ basename($template, '.blade.php') }}" value="{{$sponsor->id}}">
+                                        <button type="button" class="btn btn-primary editTemplate" data-target="{{ basename($template, '.blade.php') }}">Edit Template</button>
+                                        <button type="button" class="btn btn-success saveChanges" data-target="{{ basename($template, '.blade.php') }}" style="display:none;">Save Changes</button>
+                                        <div id="template-content-{{ basename($template, '.blade.php') }}">{!! file_get_contents($template) !!}</div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                  
+                                
+                              </p>
+                              <input style="font-style: 30px;" type="radio" class="btn-check" name="template" id="{{ basename($template, '.blade.php') }}" autocomplete="off" value="{{ basename($template, '.blade.php') }}">
+                              <label class="btn btn-outline-primary btn-sm" for="{{ basename($template, '.blade.php') }}">Select Template</label>
+                          </div>
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  
+                  Send Email
+                </button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-warning collapsed-card" id="proofAttachments">
+            <div class="card-header">
+              @php
+                    $proof = json_decode($sponsor->attachements_agreement_proof);
+  
+                    if ($proof !== null) {
+                      $proofCounts = count($proof);
+                    } else {
+                      $proofCounts = 0;
+                    }
+              @endphp
+              <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <a href="#" class="btn btn-primary w-100 mb-3">
+                Download All
+              </a>
+                <div class="row">
+                  @if ($proof !== null)
+                      @foreach ($proof as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+          <div class="card card-secondary collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-people-carry"></i> <b>Collector Details</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Collection Date</label>
+                      <input type="text" class="form-control" readonly value="{{$sponsor->collection_date}}">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collection Time Slot</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collection_time_slot}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Name</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_name}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector IC</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_IC}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Contact</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_contact}}">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Collector Plate Number</label>
+                    <input type="text" class="form-control" readonly value="{{$sponsor->collector_plate_number}}">
+                  </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+        @elseif($sponsor->status == "blacklist")
+        <div class="col-lg-5">
+          <div class="card card-dark collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-times-circle"></i> <b>Blacklisted</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <p>Current Status: 
+                      @if ($sponsor->states == "Processing")
+                      <button class="btn btn-warning btn-sm">{{$sponsor->states}}</button>            
+                      @elseif ($sponsor->states == "Approved")  
+                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Pending")  
+                      <button class="btn btn-info btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Collected")  
+                      <button class="btn btn-primary btn-sm">{{$sponsor->states}}</button>   
+                      @elseif ($sponsor->states == "Blacklist")  
+                      <button class="btn btn-dark btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "MIA")  
+                      <button class="btn btn-secondary btn-sm">{{$sponsor->states}}</button>    
+                      @elseif ($sponsor->states == "Rejected")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @elseif ($sponsor->states == "Completed")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @else
+                      {{$sponsor->states}}
+                      @endif
+                  </p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-info w-100 mb-3" data-toggle="modal" data-target="#editRequest">
+                Edit <i class="fas fa-edit"></i>
+              </button><br>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="editRequest" tabindex="-1" role="dialog" aria-labelledby="editRequest" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Edit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Attending</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
+                              @php
+                                  $attendees = json_decode($sponsor->attending);
+                                  $attender = isset($attendees) ? $attendees : [];
+                                  $selectedValues = isset($attendees) ? implode(',', $attendees) : '';
+                              @endphp
+                              
+                              @foreach ($user as $item)
+                                <option value="{{$item->name}}" {{ in_array($item->name, $attender) ? 'selected' : '' }}>{{$item->name}}</option>
+                              @endforeach
+                            </select>
+                            <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Handle By</label>
+                            <select name="handle_by" class="form-control" required>
+                              <option value="">Select one...</option>
+                              @foreach ($alluser as $item)
+                                  <option value="{{ $item->name }}" {{ $sponsor->handle_by == $item->name ? 'selected' : '' }}>
+                                      {{ $item->name }}
+                                  </option>
+                              @endforeach
+                            </select>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Booth / Space</label>
+                              <select name="booth_space" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="None" {{$sponsor->booth_space == 'None' ? 'selected' : ''}}>None</option>
+                                <option value="Booth" {{$sponsor->booth_space == 'Booth' ? 'selected' : ''}}>Booth</option>
+                                <option value="Space" {{$sponsor->booth_space == 'Space' ? 'selected' : ''}}>Space</option>
+                              </select>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectRequestEdit">
+                              <i class="fas fa-times-circle"></i> Reject
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="rejectRequestEdit" tabindex="-1" role="dialog" aria-labelledby="rejectRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to reject {{$sponsor->event_name}} sponsorship ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/reject" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#blockRequestEdit">
+                              <i class="fas fa-minus-circle"></i> Add to Blocklist
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="blockRequestEdit" tabindex="-1" role="dialog" aria-labelledby="blockRequestEdit" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure want to add {{$sponsor->event_name}} sponsorship to blocklists ?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="/block" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Confirm Sponsorship Products</h4>
+                            <hr>
+                          </div> 
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 200ml x Cartons</label>
+                            <input type="number" name="confirmro_200ml" class="form-control" value="{{$sponsor->confirmro_200ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 500ml x Cartons</label>
+                            <input type="number" name="confirmro_500ml" class="form-control" value="{{$sponsor->confirmro_500ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">RO 11L x Bottles</label>
+                            <input type="number" name="confirmro_11L" class="form-control" value="{{$sponsor->confirmro_11L}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Mineral 350ml x Cartons</label>
+                            <input type="number" name="confirmro_350ml" class="form-control" value="{{$sponsor->confirmro_350ml}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Paper Cup</label>
+                            <input type="number" name="paper_cup" class="form-control" value="{{$sponsor->paper_cup}}">
+                          </div>
+        
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Jantzen’s Goodie Bags</label>
+                            <input type="number" name="goodies_bag" class="form-control" value="{{$sponsor->goodies_bag}}">
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <hr>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Others</label>
+                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                          </div>
+        
+                          <div class="col-lg-12 mb-3">
+                            <label class="form-label">Remarks</label>
+                            @if ($sponsor->remarks !== null)
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ...">{{$sponsor->remarks}}</textarea>
+                            @else
+                            <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ..."></textarea>
+                            @endif
+                          </div>
+        
+                          <div class="col-lg-12">
+                            <h4>Change Status</h4>
+                            <hr>
+                          </div> 
+
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-group">
+                              <label class="form-label">Status</label>
+                              <select name="states" class="form-control" required>
+                                <option value="">Select one...</option>
+                                <option value="Approved" {{$sponsor->states == 'Approved' ? 'selected' : ''}}>Approved</option>
+                                <option value="Pending" {{$sponsor->states == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                <option value="Collected" {{$sponsor->states == 'Collected' ? 'selected' : ''}}>Collected</option>
+                                <option value="MIA" {{$sponsor->states == 'MIA' ? 'selected' : ''}}>MIA</option>
+                                <option value="Closed" {{$sponsor->states == 'Closed' ? 'selected' : ''}}>Closed</option>
+                                <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
+                                <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
+                                <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Attending</label>
+                    @php
+                        $attending = json_decode($sponsor->attending);
+                        $attendees = "";
+                        if ($attending !== null) {
+                          foreach ($attending as $attend) {
+                            $attendees .= $attend . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($attending !== null)
+                        <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Handle By</label>
+                    <input type="text" class="form-control" value="{{$sponsor->handle_by}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Booth / Space</label>
+                      <input type="text" class="form-control" value="{{$sponsor->booth_space}}" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <h4>Confirm Sponsorship Products</h4>
+                    <hr>
+                  </div> 
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 200ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_200ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 500ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_500ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 11L x Bottles</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_11L}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Mineral 350ml x Cartons</label>
+                    <input type="text" class="form-control" value="{{$sponsor->confirmro_350ml}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Paper Cup</label>
+                    <input type="text" class="form-control" value="{{$sponsor->paper_cup}}" readonly>
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Goodie Bags</label>
+                    <input type="text" class="form-control" value="{{$sponsor->goodies_bag}}" readonly>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Others</label>
+                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea class="form-control" rows="3" placeholder="Remarks ..." readonly>{{$sponsor->remarks}}</textarea>
+                  </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+        
 
         @endif
 
