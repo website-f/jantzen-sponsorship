@@ -50,13 +50,14 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/event-report/{id}', [DashboardController::class, 'eventReport'])->middleware('auth');
     Route::post('/submit-report/{id}', [DashboardController::class, 'submitReport'])->middleware('auth');
     Route::put('/edit-report/{id}/{repID}', [DashboardController::class, 'submitEditReport'])->middleware('auth');
-    Route::get('/blocklists', [DashboardController::class, 'blocklists'])->middleware('auth');
+    Route::get('/blacklists', [DashboardController::class, 'blocklists'])->middleware('auth');
     Route::get('/reject/{id}', [DashboardController::class, 'reject'])->middleware('auth');
     Route::get('/block/{id}', [DashboardController::class, 'block']);
     Route::get('/remove-blacklist/{id}/{email}', [DashboardController::class, 'removeBlacklist'])->middleware('auth');
 });
 
 Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware('auth');
-
+Route::get('downloadAll/{type}/{id}', [DashboardController::class, 'downloadAll'])->middleware('auth');
+Route::get('/Blacklisted', [SponsorshipController::class, 'blacklisted']);
 
 

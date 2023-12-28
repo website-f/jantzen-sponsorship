@@ -263,9 +263,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/blocklists" class="nav-link">
+                <a href="/dashboard/blacklists" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Blocklists</p>
+                  <p>Blacklists</p>
                 </a>
               </li>
             </ul>

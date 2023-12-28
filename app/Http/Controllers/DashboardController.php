@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use ZipArchive;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\BlockList;
@@ -315,5 +316,78 @@ class DashboardController extends Controller
         $report->sponsorship_id = $repID;
         $report->save();
         
+    }
+
+    public function downloadAll($type, $id)
+    {
+        $items = "";
+        if ($type == "proof") {
+            $items = Sponsorship::findOrFail($id)->attachements_agreement_proof;
+        } elseif ($type == "after") {
+            $items = Sponsorship::findOrFail($id)->after_events_attachments;
+        } elseif ($type == "events") {
+            $items = Sponsorship::findOrFail($id)->sposorship_attachments;
+        }
+
+        // Create a unique temporary directory for the zip file
+        $tempDirectory = storage_path('temp_download');
+        if (!is_dir($tempDirectory)) {
+            mkdir($tempDirectory);
+        }
+
+        $data = json_decode($items, true);
+        // Extract and copy paths for both images and files
+        if (is_array($data)) {
+            foreach ($data as $path) {
+                $filePath = public_path($path);
+                copy($filePath, $tempDirectory . '/' . basename($filePath));
+            }
+        }
+
+        // Create a zip file
+        $zipFileName = 'download_all.zip';
+        $zip = new ZipArchive;
+        $zip->open(storage_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($tempDirectory),
+            \RecursiveIteratorIterator::LEAVES_ONLY
+        );
+        
+
+        foreach ($files as $name => $file) {
+            if (!$file->isDir()) {
+                $filePath = $file->getRealPath();
+                $relativePath = substr($filePath, strlen($tempDirectory) + 1);
+
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+
+        $zip->close();
+
+        // Cleanup: Delete the temporary directory
+        $this->rrmdir($tempDirectory);
+
+        // Download the zip file
+        return response()->download(storage_path($zipFileName))->deleteFileAfterSend(true);
+    }
+
+    // Recursive function to remove a directory and its contents
+    private function rrmdir($dir)
+    {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir . "/" . $object)) {
+                        $this->rrmdir($dir . "/" . $object);
+                    } else {
+                        unlink($dir . "/" . $object);
+                    }
+                }
+            }
+            rmdir($dir);
+        }
     }
 }

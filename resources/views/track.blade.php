@@ -490,20 +490,153 @@
             <form action="/after-event/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
-                 <label for="name">Attachments (Photos)</label>
-                 <div id="file-drop-area" class="div-block-5">
-                  <div style="text-align: center;">
-                      <p>Drag and drop files here, or click to select files</p>
-                      <label for="file-input" id="file-upload-label">
-                          <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
-                      </label>
-                  </div>
-                  <input type="file" id="file-input" multiple style="display: none;">
+              <label>Reviews</label>
+              <div id="file-drop-area" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop review files here, or click to select review files</p>
+                    <label for="file-input" id="file-upload-label">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
                 </div>
-                <ul id="file-list"></ul>
-                <button id="delete-file">Delete Selected File</button>
-                <button id="replace-file">Replace Selected File</button>
-                <input type="hidden" id="file-names-input" name="file_names">
+                <input type="file" id="file-input" multiple style="display: none;">
+              </div>
+              <ul id="file-list"></ul>
+              <button id="delete-file">Delete Selected File</button>
+              <button id="replace-file">Replace Selected File</button>
+              <input type="hidden" id="file-names-input" name="file_names">
+
+              <label style="margin-top: 30px">Photos</label>
+              <div id="file-drop-area-photos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop photo files here, or click to select photo files</p>
+                    <label for="file-input-photos" id="file-upload-label-photos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-photos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-photos"></ul>
+              <button id="delete-file-photos">Delete Selected File</button>
+              <button id="replace-file-photos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-photos" name="file_names_photos">
+
+              <label style="margin-top: 30px">Videos</label>
+              <div id="file-drop-area-videos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-videos" id="file-upload-label-videos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-videos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-videos"></ul>
+              <button id="delete-file-videos">Delete Selected File</button>
+              <button id="replace-file-videos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+          </div>
+        </div>
+        <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</button>
+          </form>
+      </div>
+    </div>
+
+    @elseif($spon->status == "collected")
+    <div class="div-block-11">
+      <div class="div-block-7">
+        <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
+        <p>Easily Track and Monitor Your Sponsorship Application Progress</p>
+        <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d3-b607610e" class="w-layout-layout quick-stack-7 wf-layout-layout">
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61d4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 1</div>
+            <div class="text-block-16">Submit Sponsorship<br>Request Form</div>
+            <p class="paragraph-5">Begin your journey by filling out and submitting the sponsorship request form, ensuring all details are accurate and complete.</p>
+            <a href="#" class="button-3 w-button">Completed</a>
+          </div>
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61e0-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 2</div>
+            <div class="text-block-16">Await Approval / Contact(3-7 Working Days)</div>
+            <p class="paragraph-5">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
+            <a href="#" class="button-11 w-button">Completed</a>
+          </div>
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61ea-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 3</div>
+            <div class="text-block-16">Provide Proof of Agreement</div>
+            <p class="paragraph-5">Confirm your commitment by providing necessary proof of agreement, solidifying the partnership and support.</p>
+            <a href="#" class="button-18 w-button">Completed</a>
+          </div>
+          <div id="w-node-_408562b4-2931-746a-83ee-acb55f2d61f4-b607610e" class="w-layout-cell cell-6"><img src="{{asset('assets/images/tickComplete.png')}}" loading="lazy" alt="" class="image-5">
+            <div class="text-block-15">STEP 4</div>
+            <div class="text-block-16">Collect Sponsored Goods at Pickup Location</div>
+            <p class="paragraph-5">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event.</p>
+            <a href="#" class="button-19 w-button">Completed</a>
+          </div>
+        </div>
+        <h3 class="heading-11">After Event</h3>
+        <p class="paragraph-7">Ensure the successful conclusion of your event by submitting proof of event execution, completing the sponsorship cycle.</p>
+        <div class="w-form">
+          <div id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2" data-wf-page-id="651a843389ca3acbb607610e" data-wf-element-id="04650474-5d3e-c95a-cc2d-cfd28aa025b9">
+            <div id="w-node-_506c54cc-76a3-857d-5f89-f933e7181fde-b607610e" class="w-layout-layout quick-stack-10 wf-layout-layout">
+              <div id="w-node-_64292ce4-8d9d-772f-fba0-5bef1fd33c1c-b607610e" class="w-layout-cell">
+                <label for="field">Name of the Event / Project</label>
+                @if ($spon->event_name !== null)
+                <input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->event_name}}" readonly>
+                @endif
+              </div>
+              <div id="w-node-_64d4745f-c093-e430-75ed-a347aa40991b-b607610e" class="w-layout-cell">
+                <label for="field">Event Date</label>
+                @if ($spon->from_date !== null && $spon->to_date !== null)
+                <input type="text" class="text-field-9 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->from_date}} to {{$spon->to_date}}" readonly>
+                @endif
+              </div>
+            </div>
+            <form action="/after-event/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
+              @csrf
+              @method("PUT")
+              <label>Reviews</label>
+              <div id="file-drop-area" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop review files here, or click to select review files</p>
+                    <label for="file-input" id="file-upload-label">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input" multiple style="display: none;">
+              </div>
+              <ul id="file-list"></ul>
+              <button id="delete-file">Delete Selected File</button>
+              <button id="replace-file">Replace Selected File</button>
+              <input type="hidden" id="file-names-input" name="file_names">
+
+              <label style="margin-top: 30px">Photos</label>
+              <div id="file-drop-area-photos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop photo files here, or click to select photo files</p>
+                    <label for="file-input-photos" id="file-upload-label-photos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-photos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-photos"></ul>
+              <button id="delete-file-photos">Delete Selected File</button>
+              <button id="replace-file-photos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-photos" name="file_names_photos">
+
+              <label style="margin-top: 30px">Videos</label>
+              <div id="file-drop-area-videos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-videos" id="file-upload-label-videos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-videos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-videos"></ul>
+              <button id="delete-file-videos">Delete Selected File</button>
+              <button id="replace-file-videos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-videos" name="file_names_videos">
           </div>
         </div>
         <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</button>
@@ -543,7 +676,7 @@
           </div>
         </div>
         <h3 class="heading-11">After Event</h3>
-        <p class="paragraph-7">Thank For Choosing Us !</p>
+        <p class="paragraph-7">Thanks For Choosing Us !</p>
       </div>
     </div>
 

@@ -376,7 +376,7 @@
                       @elseif ($sponsorship->states == "Rejected")  
                       <button class="btn btn-danger">{{$sponsorship->states}}</button>
                       @elseif ($sponsorship->states == "Completed")  
-                      <button class="btn btn-danger">{{$sponsorship->states}}</button>
+                      <button class="btn btn-success">{{$sponsorship->states}}</button>
                       @else
                       {{$sponsorship->states}}
                       @endif
