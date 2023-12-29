@@ -321,12 +321,18 @@ class DashboardController extends Controller
     public function downloadAll($type, $id)
     {
         $items = "";
+        $filename = "";
+        $sponsorship = Sponsorship::findOrFail($id);
+        $sponsorshipDate = date("mdy", strtotime($sponsorship->from_date));
         if ($type == "proof") {
             $items = Sponsorship::findOrFail($id)->attachements_agreement_proof;
+            $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-proofOfAggreement";
         } elseif ($type == "after") {
             $items = Sponsorship::findOrFail($id)->after_events_attachments;
+            $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-afterEvents";
         } elseif ($type == "events") {
             $items = Sponsorship::findOrFail($id)->sposorship_attachments;
+            $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-sponsorshipAttachments";
         }
 
         // Create a unique temporary directory for the zip file
@@ -345,7 +351,7 @@ class DashboardController extends Controller
         }
 
         // Create a zip file
-        $zipFileName = 'download_all.zip';
+        $zipFileName = $filename . ".zip";
         $zip = new ZipArchive;
         $zip->open(storage_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
