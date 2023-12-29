@@ -86,6 +86,24 @@
               <div class="card-body p-0">
                 <!-- THE CALENDAR -->
                 <div id="calendar"></div>
+                <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p id="eventTitle"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -192,6 +210,14 @@
       themeSystem: 'bootstrap',
       //Random default events
       events: event,
+      eventClick: function(info) {
+        const startDate = info.event.start.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+        const endDate = info.event.end.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+        document.getElementById('eventTitle').innerHTML = `<p>Event: ${info.event.title}</p>
+                                                             <p>Date: ${startDate} - ${endDate} `;
+        // Show the modal
+        $('#eventModal').modal('show');
+      },
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
