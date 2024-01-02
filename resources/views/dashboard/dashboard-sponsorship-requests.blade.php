@@ -1721,7 +1721,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -1743,7 +1743,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2260,7 +2260,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2282,7 +2282,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2872,7 +2872,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2894,7 +2894,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -3783,7 +3783,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -3805,7 +3805,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     

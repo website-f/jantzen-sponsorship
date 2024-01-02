@@ -58,7 +58,7 @@ class SponsorshipController extends Controller
                 // Optionally, you can save the $uniqueFileName to your database for future reference
             }
         
-            Mail::to('gitdev1234@gmail.com')->send(new SubmitNotification());
+            Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification());
               
             $sponsor = new Sponsorship;
             $sponsor->fullname = $request->name;
