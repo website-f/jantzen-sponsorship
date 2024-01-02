@@ -274,8 +274,8 @@
                 </div>
 
                 <div class="col-lg-6">
-                  <label class="form-label">RO Water - 11L (1 bottles)</label>
-                  <input type="text" class="form-control" readonly value="{{$sponsor->ro_11L}} Cartons"><br>
+                  <label class="form-label">RO Water - 11L (1 bottle)</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->ro_11L}} Bottles"><br>
                 </div>
 
                 <div class="col-lg-6">

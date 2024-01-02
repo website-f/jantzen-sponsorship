@@ -145,14 +145,14 @@
                 </div>
                 <div class="text-block-10 ro500mlvalue"></div>
             </div>
-            <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div>
+            <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottle)</b></div>
             <img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
             <div class="form-block-3 w-form">
                 <div id="w-node-_6728f9e0-336d-494e-93d0-5d3357791365-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
                     <input type="text" class="text-field-11 w-input quantityInput ro11L" maxlength="256" name="ro_11L" data-name="Field 4" placeholder="" id="field-4" required="" value="0">
                   </div>
-                  <div class="w-layout-cell"><label for="" class="field-label-10">Cartons</label></div>
+                  <div class="w-layout-cell"><label for="" class="field-label-10">Bottles</label></div>
                 </div>
                 <div class="text-block-10 ro11Lvalue"></div>
             </div>
@@ -236,12 +236,12 @@
   ro11L.addEventListener('input', calculaterowaterbottleL);
 
   function calculaterowaterbottleL() {
-    let totalbottlesL = 12;
+    let totalbottlesL = 1;
     const quantityBottleL = parseInt(ro11L.value) || 0
     totalbottlesL *= quantityBottleL;
 
     ro11Lvalue.textContent = totalbottlesL + " Bottles - In total";
-    total11l.textContent = "RO Water - 11L x " + ro11L.value + " cartons";
+    total11l.textContent = "RO Water - 11L x " + ro11L.value + " bottles";
   }
 
   ro350ml.addEventListener('input', calculaterowaterbottleM);
