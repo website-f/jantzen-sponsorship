@@ -28,17 +28,17 @@ class DashboardController extends Controller
                      return Carbon::create()->month($monthNumber)->format('F');
                  });
         $booth = Sponsorship::where("booth_space", "Booth")
-                 ->where("status", "!=", "completed")
+                 ->where("states", "!=", "Completed")
                  ->orderBy('created_at', 'desc')
                  ->get();
              
         $space = Sponsorship::where("booth_space", "Space")
-                 ->where("status", "!=", "completed")
+                 ->where("states", "!=", "Completed")
                  ->orderBy('created_at', 'desc')
                  ->get();
              
         $none = Sponsorship::where("booth_space", "None")
-                 ->where("status", "!=", "completed")
+                 ->where("states", "!=", "Completed")
                  ->orderBy('created_at', 'desc')
                  ->get();
              
@@ -80,9 +80,8 @@ class DashboardController extends Controller
         $confirmro_350ml = $sponsor->confirmro_350ml;
         $pickup_location = $request->pickup_location;
         $template = $request->input('template');
-        dd($template);
         Mail::to($email)->send(new SponsorshipNotification($template, $confirmro_200ml, $confirmro_500ml, $confirmro_350ml, $confirmro_11L, $pickup_location));
-        return redirect("/dashboard/view-request/" . $id);
+        return redirect("/view-request/" . $id);
     }
 
     public function saveTemplate(Request $request, $templatename, $id) {
@@ -117,10 +116,9 @@ class DashboardController extends Controller
         // $sponsor->pickup_address = $request->pickup_address;
         // $sponsor->contact_person = $request->contact_person;
         // $sponsor->pickup_phone_number = $request->pickup_phone_number;
-        $sponsor->states = "Pending";
-        $sponsor->status = "approval";
+        $sponsor->states = "Approved";
         $sponsor->save();
-        return redirect("/dashboard");
+        return redirect("/view-request/" . $id);
     }
 
     public function calendar() {
@@ -147,17 +145,15 @@ class DashboardController extends Controller
         // $sponsor->contact_person = $request->contact_person;
         // $sponsor->pickup_phone_number = $request->pickup_phone_number;
         $sponsor->states = $request->states;
-        $sponsor->status = "approval";
         $sponsor->save();
-        return redirect("/dashboard/view-request/" . $id);
+        return redirect("/view-request/" . $id);
     }
 
     public function collected($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $sponsor->status = "collected";
         $sponsor->states = "Collected";
         $sponsor->save();
-        return redirect("/dashboard/view-request/" . $id);
+        return redirect("/view-request/" . $id);
     }
 
     public function statusUpdate(Request $request, $id) {
@@ -174,7 +170,7 @@ class DashboardController extends Controller
             Session::flash('status', 'success');
             Session::flash('message', 'Item moved to trash');
         }
-        return redirect("/dashboard");
+        return redirect("/");
     }
 
     public function trash() {
@@ -184,7 +180,6 @@ class DashboardController extends Controller
 
     public function block($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $sponsor->status = "blacklist";
         $sponsor->states = "Blacklist";
         $sponsor->save();
 
@@ -194,7 +189,7 @@ class DashboardController extends Controller
         $blacklist->contact_number = $sponsor->contact;
         $blacklist->name = $sponsor->fullname;
         $blacklist->save();
-        return redirect("/dashboard/view-request/" . $id);
+        return redirect("/view-request/" . $id);
     }
 
     public function blocklists() {
@@ -207,18 +202,16 @@ class DashboardController extends Controller
         $blacklist->delete();
 
         $sponsor = Sponsorship::where('email', $email)->first();
-        $sponsor->status = "submit";
         $sponsor->states = "Processing";
         $sponsor->save();
-        return redirect('/dashboard/blocklists');
+        return redirect('/blacklists');
     }
 
     public function reject($id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $sponsor->status = 'reject';
         $sponsor->states = 'Rejected';
         $sponsor->save();
-        return redirect('/dashboard/view-request/' . $id);
+        return redirect('/view-request/' . $id);
     }
 
     //---TRASH--------------------------------------------------------------------------------------------------------------
@@ -231,7 +224,7 @@ class DashboardController extends Controller
             Session::flash('message', 'Item restored !');
         }
 
-        return redirect("/dashboard/trash");
+        return redirect("/trash");
     }
 
     public function permanentDelete($id) {
@@ -241,7 +234,7 @@ class DashboardController extends Controller
     //-----AFTER EVENT RERPORT-------------------------------------------------------------------------------------------------
 
     public function ongoingEventReport() {
-        $sponsor = Sponsorship::whereIn('states', ['Pending', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();
+        $sponsor = Sponsorship::whereIn('states', ['Approved', 'Pending', 'Completed', 'Collected'])->orderBy('created_at', 'desc')->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
@@ -289,7 +282,7 @@ class DashboardController extends Controller
         $report->stock_on_hand = $stockInHand;
         $report->sponsorship_id = $id;
         $report->save();
-        return redirect('/dashboard/event-report/' . $id);
+        return redirect('/event-report/' . $id);
         
     }
 
@@ -324,14 +317,21 @@ class DashboardController extends Controller
         $filename = "";
         $sponsorship = Sponsorship::findOrFail($id);
         $sponsorshipDate = date("mdy", strtotime($sponsorship->from_date));
+
         if ($type == "proof") {
-            $items = Sponsorship::findOrFail($id)->attachements_agreement_proof;
+            $items1 = Sponsorship::findOrFail($id)->attachements_agreement_proof_review;
+            $items2 = Sponsorship::findOrFail($id)->attachements_agreement_proof_photo;
+            $items3 = Sponsorship::findOrFail($id)->attachements_agreement_proof_video;
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-proofOfAggreement";
-        } elseif ($type == "after") {
-            $items = Sponsorship::findOrFail($id)->after_events_attachments;
+        } elseif ($type == "after") {           
+            $items1 = Sponsorship::findOrFail($id)->after_events_attachments_review;
+            $items2 = Sponsorship::findOrFail($id)->after_events_attachments_photo;
+            $items3 = Sponsorship::findOrFail($id)->after_events_attachments_video;
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-afterEvents";
         } elseif ($type == "events") {
-            $items = Sponsorship::findOrFail($id)->sposorship_attachments;
+            $items1 = Sponsorship::findOrFail($id)->sponsorship_attachments;
+            $items2 = "[]";
+            $items3 = "[]";
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-sponsorshipAttachments";
         }
 
@@ -341,13 +341,43 @@ class DashboardController extends Controller
             mkdir($tempDirectory);
         }
 
-        $data = json_decode($items, true);
-        // Extract and copy paths for both images and files
-        if (is_array($data)) {
-            foreach ($data as $path) {
+        $data1 = json_decode($items1, true);
+        $data2 = json_decode($items2, true);
+        $data3 = json_decode($items3, true);
+        // Extract and copy paths for both images and files for items1
+        if (is_array($data1)) {
+            $subfolderPath = $tempDirectory . '/Review';
+            mkdir($subfolderPath);
+    
+            foreach ($data1 as $path) {
                 $filePath = public_path($path);
-                copy($filePath, $tempDirectory . '/' . basename($filePath));
+                copy($filePath, $subfolderPath . '/' . basename($filePath));
             }
+
+        }
+    
+        // Extract and copy paths for both images and files for items2
+        if (is_array($data2)) {
+            $subfolderPath = $tempDirectory . '/Photos';
+            mkdir($subfolderPath);
+    
+            foreach ($data2 as $path) {
+                $filePath = public_path($path);
+                copy($filePath, $subfolderPath . '/' . basename($filePath));
+            }
+
+        }
+    
+        // Extract and copy paths for both images and files for items3
+        if (is_array($data3)) {
+            $subfolderPath = $tempDirectory . '/Videos';
+            mkdir($subfolderPath);
+    
+            foreach ($data3 as $path) {
+                $filePath = public_path($path);
+                copy($filePath, $subfolderPath . '/' . basename($filePath));
+            }
+
         }
 
         // Create a zip file
@@ -359,8 +389,8 @@ class DashboardController extends Controller
             new \RecursiveDirectoryIterator($tempDirectory),
             \RecursiveIteratorIterator::LEAVES_ONLY
         );
+    
         
-
         foreach ($files as $name => $file) {
             if (!$file->isDir()) {
                 $filePath = $file->getRealPath();

@@ -16,7 +16,7 @@ use App\Http\Controllers\SponsorshipController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/sponsorship', function () {
     return view('sponsorship');
 });
 
@@ -28,14 +28,14 @@ Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->m
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-fill', [AuthController::class, 'loginFill']);
-Route::get('/login-admin', [AuthController::class, 'loginAdmin']);
+Route::get('/login-admin', [AuthController::class, 'loginAdmin'])->name('admin.login');
 Route::post('/login-admin-fill', [AuthController::class, 'loginAdminFill']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::put('/sendMailTemplate/{email}/{id}', [DashboardController::class, 'sendMail'])->middleware('auth');
 Route::get('/collected/{id}', [DashboardController::class, 'collected'])->middleware('auth');
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware('auth');
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware('auth');
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware('auth');

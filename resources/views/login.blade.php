@@ -58,7 +58,7 @@
                   </button>
                 </form>
                   <hr class="my-4">
-                  <a style="width: 100%" class="btn btn-secondary" href="/"><i class="bi bi-arrow-left"></i> Go to request sponsorship</a>
+                  <a style="width: 100%" class="btn btn-secondary" href="/sponsorship"><i class="bi bi-arrow-left"></i> Go to request sponsorship</a>
                 </div>
               </div>
             </div>

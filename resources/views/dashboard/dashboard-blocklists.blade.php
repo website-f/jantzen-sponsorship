@@ -14,7 +14,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">Blacklisted</li>
           </ol>
         </div><!-- /.col -->
@@ -71,7 +71,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <a href="/dashboard/remove-blacklist/{{$sponsorship->id}}/{{$sponsorship->email}}" class="btn btn-danger">Confirm</a>
+                              <a href="/remove-blacklist/{{$sponsorship->id}}/{{$sponsorship->email}}" class="btn btn-danger">Confirm</a>
                             </div>
                           </div>
                         </div>

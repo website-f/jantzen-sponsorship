@@ -27,7 +27,7 @@ class AuthController extends Controller
         // Check if the user has the 'admin' role
         if ($user->role_id === 1 || $user->role_id === 2) {
             // Redirect admin users to a different login page
-            return redirect('/login-admin')->with('email', $request->email); // Change 'admin.login' to the actual route name
+            return redirect()->route('admin.login', ['email' => $request->email]); // Change 'admin.login' to the actual route name
         } else {
             // If the user has the 'public' role, proceed without a password check
             Auth::login($user);
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect("/dashboard");
+            return redirect("/");
         } else {
             return redirect()->back()->withInput()->withErrors(['password' => 'Invalid credentials. Please try again.']);
         }

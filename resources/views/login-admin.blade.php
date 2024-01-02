@@ -56,7 +56,7 @@
                       </button>
                       
                     </div>
-                    <input type="hidden" name="email" value="{{ session('email') }}">
+                    <input type="hidden" name="email" value="{{ request('email') }}">
                   </div>
          <!--
                   <div class="form-outline mb-4">

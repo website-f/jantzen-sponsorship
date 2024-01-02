@@ -92,12 +92,12 @@
                     <input type="radio" data-name="Product" id="radio-8" name="explaination_product" value="For Use at Exhibitor Stalls" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-8">For Use at Exhibitor Stalls</span>
                 </label>
                 <label class="w-radio">
-                    <input type="radio" data-name="Product" id="radio-9" name="explaination_product" value="For Team/Crew Utilization9" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-9">For Team/Crew Utilization9</span>
+                    <input type="radio" data-name="Product" id="radio-9" name="explaination_product" value="For Team/Crew Utilization" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-9">For Team/Crew Utilization</span>
                 </label>
                 <label class="radio-button-field w-radio">
                     <input type="radio" data-name="Product" id="radio-10" name="explaination_product" value="Others" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-10">Others</span>
                 </label>
-                <img src="{{asset('assets/images/booth.png')}}" loading="lazy" alt="" class="image" style="margin-left: 20px;">
+                
                 <label for="" class="field-label-9">Can we place booth in your event?</label>
                 <label class="w-radio">
                     <input type="radio" data-name="Radio 11" id="radio-11" name="booth" value="Yes" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-11">Yes</span>
@@ -128,7 +128,7 @@
             <div class="form-block-3 w-form">
                 <div id="w-node-ddf6d3ae-f2bd-ac9f-5a98-8bb1423a2d8f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
-                    <input type="text" class="text-field-11 w-input quantityInput ro200ml" maxlength="256" name="ro_200ml" data-name="Field 4" placeholder="" id="field-4" required="">
+                    <input type="text" class="text-field-11 w-input quantityInput ro200ml" maxlength="256" name="ro_200ml" data-name="Field 4" placeholder="" id="field-4" required="" value="0">
                   </div>
                   <div class="w-layout-cell"><label for="" class="field-label-10">Cartons</label></div>
                 </div>
@@ -139,7 +139,7 @@
             <div class="form-block-3 w-form">
                 <div id="w-node-_11307f2d-d07e-7500-506a-a278c48e222f-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
-                    <input type="text" class="text-field-11 w-input quantityInput ro500ml" maxlength="256" name="ro_500ml" data-name="Field 4" placeholder="" id="field-4" required="">
+                    <input type="text" class="text-field-11 w-input quantityInput ro500ml" maxlength="256" name="ro_500ml" data-name="Field 4" placeholder="" id="field-4" required="" value="0">
                   </div>
                   <div class="w-layout-cell"><label for="" class="field-label-10">Cartons</label></div>
                 </div>
@@ -150,7 +150,7 @@
             <div class="form-block-3 w-form">
                 <div id="w-node-_6728f9e0-336d-494e-93d0-5d3357791365-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
-                    <input type="text" class="text-field-11 w-input quantityInput ro11L" maxlength="256" name="ro_11L" data-name="Field 4" placeholder="" id="field-4" required="">
+                    <input type="text" class="text-field-11 w-input quantityInput ro11L" maxlength="256" name="ro_11L" data-name="Field 4" placeholder="" id="field-4" required="" value="0">
                   </div>
                   <div class="w-layout-cell"><label for="" class="field-label-10">Cartons</label></div>
                 </div>
@@ -161,7 +161,7 @@
             <div class="form-block-3 w-form">
                 <div id="w-node-c458fcda-7303-d430-afe7-45dfe6a8c641-c21f1410" class="w-layout-layout quick-stack-15 wf-layout-layout">
                   <div class="w-layout-cell">
-                    <input type="text" class="text-field-11 w-input quantityInput ro350ml" maxlength="256" name="ro_350ml" data-name="Field 4" placeholder="" id="field-4" required="">
+                    <input type="text" class="text-field-11 w-input quantityInput ro350ml" maxlength="256" name="ro_350ml" data-name="Field 4" placeholder="" id="field-4" required="" value="0">
                   </div>
                   <div class="w-layout-cell"><label for="" class="field-label-10">Cartons</label></div>
                 </div>

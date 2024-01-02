@@ -13,7 +13,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">Sponsorship Request</li>
           </ol>
         </div><!-- /.col -->
@@ -49,7 +49,7 @@
               <a style="text-decoration: none" href="#approvalWaiting" class="btn btn-info">Show Me</a>
           </div>
   
-          @elseif($sponsor->status == "approval")
+          @elseif($sponsor->states == "Approved")
 
           <div class="alert alert-info alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -60,7 +60,7 @@
             <hr>
           </div>
           
-          @elseif($sponsor->status == "proof")
+          @elseif($sponsor->states == "Pending")
 
           <div class="alert alert-light alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -72,7 +72,7 @@
               <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a>
           </div>
           
-          @elseif($sponsor->status == "collect")
+          @elseif($sponsor->states == "Delay")
 
           <div class="alert alert-primary alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -84,7 +84,7 @@
               {{-- <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a> --}}
           </div>
           
-          @elseif($sponsor->status == "collected")
+          @elseif($sponsor->states == "Collected")
 
           <div class="alert alert-secondary alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -96,7 +96,7 @@
               {{-- <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a> --}}
           </div>
 
-          @elseif($sponsor->status == "reject")
+          @elseif($sponsor->states == "Rejected")
 
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -108,7 +108,7 @@
               
           </div>
 
-          @elseif($sponsor->status == "blacklist")
+          @elseif($sponsor->states == "Blacklist")
 
           <div class="alert alert-dark alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -120,7 +120,7 @@
               
           </div>
 
-          @elseif($sponsor->status == "complete")
+          @elseif($sponsor->states == "Completed")
 
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -209,7 +209,7 @@
                 <div class="col-lg-12 mb-3">
                   <label class="form-label">Sponsorhip Attachments</label><br>
                   @php
-                    $attach = json_decode($sponsor->sposorship_attachments);
+                    $attach = json_decode($sponsor->sponsorship_attachments);
   
                     if ($attach !== null) {
                       $attachCounts = count($attach);
@@ -292,7 +292,7 @@
 
         @if ($sponsor->states == "Processing")
         <div class="col-lg-5" id="approvalWaiting">
-          <div class="card card-primary collapsed-card">
+          <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approval</b></h3>
 
@@ -300,7 +300,7 @@
                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                   <i class="fas fa-expand"></i>
                 </button>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
               </div>
               <!-- /.card-tools -->
@@ -332,7 +332,7 @@
                   </p>
                 </div>
               </div>
-              <form action="/dashboard/request-submit/{{$sponsor->id}}" method="POST">
+              <form action="/request-submit/{{$sponsor->id}}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -393,7 +393,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                            <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                           </div>
                         </div>
                       </div>
@@ -419,7 +419,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                            <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                           </div>
                         </div>
                       </div>
@@ -482,7 +482,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "approval")
+        @elseif($sponsor->states == "Approved")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -538,7 +538,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -604,7 +604,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -630,7 +630,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -905,7 +905,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "reject")
+        @elseif($sponsor->states == "Rejected")
         <div class="col-lg-5">
           <div class="card card-danger collapsed-card">
             <div class="card-header">
@@ -961,7 +961,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -1027,7 +1027,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -1053,7 +1053,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -1229,7 +1229,7 @@
           </div>   
         </div>
 
-        @elseif($sponsor->status == "proof")
+        @elseif($sponsor->states == "Pending")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -1285,7 +1285,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -1351,7 +1351,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -1377,7 +1377,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -1666,13 +1666,21 @@
           <div class="card card-warning collapsed-card" id="proofAttachments">
             <div class="card-header">
               @php
-                    $proof = json_decode($sponsor->attachements_agreement_proof);
-  
-                    if ($proof !== null) {
-                      $proofCounts = count($proof);
-                    } else {
-                      $proofCounts = 0;
-                    }
+                    $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
+                    $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
+                    $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofCounts = 0;
+                    if ($proofReview !== null) {
+                      $proofCounts += count($proofReview);
+                    } 
+
+                    if ($proofPhoto !== null) {
+                      $proofCounts += count($proofPhoto);
+                    } 
+
+                    if ($proofVideo !== null) {
+                      $proofCounts += count($proofVideo);
+                    } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
 
@@ -1691,8 +1699,53 @@
                 Download All
               </a>
                 <div class="row">
-                  @if ($proof !== null)
-                      @foreach ($proof as $item)
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofReview !== null)
+                      @foreach ($proofReview as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofPhoto !== null)
+                      @foreach ($proofPhoto as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofVideo !== null)
+                      @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                          {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                               <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
@@ -1715,7 +1768,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "collect")
+        @elseif($sponsor->states == "Delay")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -1771,7 +1824,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -1837,7 +1890,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -1863,7 +1916,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -2152,13 +2205,21 @@
           <div class="card card-warning collapsed-card" id="proofAttachments">
             <div class="card-header">
               @php
-                    $proof = json_decode($sponsor->attachements_agreement_proof);
-  
-                    if ($proof !== null) {
-                      $proofCounts = count($proof);
-                    } else {
-                      $proofCounts = 0;
-                    }
+                    $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
+                    $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
+                    $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofCounts = 0;
+                    if ($proofReview !== null) {
+                      $proofCounts += count($proofReview);
+                    } 
+
+                    if ($proofPhoto !== null) {
+                      $proofCounts += count($proofPhoto);
+                    } 
+
+                    if ($proofVideo !== null) {
+                      $proofCounts += count($proofVideo);
+                    } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
 
@@ -2177,8 +2238,53 @@
                 Download All
               </a>
                 <div class="row">
-                  @if ($proof !== null)
-                      @foreach ($proof as $item)
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofReview !== null)
+                      @foreach ($proofReview as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofPhoto !== null)
+                      @foreach ($proofPhoto as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofVideo !== null)
+                      @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                          {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                               <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
@@ -2274,7 +2380,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "collected")
+        @elseif($sponsor->states == "Collected")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -2330,7 +2436,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -2396,7 +2502,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -2422,7 +2528,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -2711,13 +2817,21 @@
           <div class="card card-warning collapsed-card" id="proofAttachments">
             <div class="card-header">
               @php
-                    $proof = json_decode($sponsor->attachements_agreement_proof);
-  
-                    if ($proof !== null) {
-                      $proofCounts = count($proof);
-                    } else {
-                      $proofCounts = 0;
-                    }
+                    $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
+                    $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
+                    $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofCounts = 0;
+                    if ($proofReview !== null) {
+                      $proofCounts += count($proofReview);
+                    } 
+
+                    if ($proofPhoto !== null) {
+                      $proofCounts += count($proofPhoto);
+                    } 
+
+                    if ($proofVideo !== null) {
+                      $proofCounts += count($proofVideo);
+                    } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
 
@@ -2736,8 +2850,53 @@
                 Download All
               </a>
                 <div class="row">
-                  @if ($proof !== null)
-                      @foreach ($proof as $item)
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofReview !== null)
+                      @foreach ($proofReview as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofPhoto !== null)
+                      @foreach ($proofPhoto as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofVideo !== null)
+                      @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                          {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                               <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
@@ -2808,7 +2967,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "blacklist")
+        @elseif($sponsor->states == "Blacklist")
         <div class="col-lg-5">
           <div class="card card-dark collapsed-card">
             <div class="card-header">
@@ -2864,7 +3023,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -3132,7 +3291,7 @@
           </div>
         </div>
 
-        @elseif($sponsor->status == "complete")
+        @elseif($sponsor->states == "Completed")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -3188,7 +3347,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="/dashboard/request-update/{{$sponsor->id}}" method="POST">
+                    <form action="/request-update/{{$sponsor->id}}" method="POST">
                       @csrf
                       @method('PUT')
                       <div class="modal-body">
@@ -3254,7 +3413,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                                    <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
                                   </div>
                                 </div>
                               </div>
@@ -3280,7 +3439,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/dashboard/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                                    <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
                                   </div>
                                 </div>
                               </div>
@@ -3569,13 +3728,21 @@
           <div class="card card-warning collapsed-card" id="proofAttachments">
             <div class="card-header">
               @php
-                    $proof = json_decode($sponsor->attachements_agreement_proof);
-  
-                    if ($proof !== null) {
-                      $proofCounts = count($proof);
-                    } else {
-                      $proofCounts = 0;
-                    }
+                    $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
+                    $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
+                    $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofCounts = 0;
+                    if ($proofReview !== null) {
+                      $proofCounts += count($proofReview);
+                    } 
+
+                    if ($proofPhoto !== null) {
+                      $proofCounts += count($proofPhoto);
+                    } 
+
+                    if ($proofVideo !== null) {
+                      $proofCounts += count($proofVideo);
+                    } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
 
@@ -3594,8 +3761,53 @@
                 Download All
               </a>
                 <div class="row">
-                  @if ($proof !== null)
-                      @foreach ($proof as $item)
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofReview !== null)
+                      @foreach ($proofReview as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofPhoto !== null)
+                      @foreach ($proofPhoto as $item)
+                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                          </a>                         --}}
+                          <div class="col-lg-3 mb-2">
+                            <a href="{{asset($item)}}">
+                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                            </a>
+                          </div>
+                         @else
+                         <div class="col-lg-3 mb-2">
+                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                         </div>
+                         @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  @if ($proofVideo !== null)
+                      @foreach ($proofVideo as $item)
                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                          {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
                               <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
@@ -3668,13 +3880,21 @@
           <div class="card card-info collapsed-card" id="afterEvent">
             <div class="card-header">
               @php
-                    $after = json_decode($sponsor->after_events_attachments);
-  
-                    if ($after !== null) {
-                      $afterCounts = count($after);
-                    } else {
-                      $afterCounts = 0;
-                    }
+                    $afterReview = json_decode($sponsor->after_events_attachments_review);
+                    $afterPhoto= json_decode($sponsor->after_events_attachments_photo);
+                    $afterVideo = json_decode($sponsor->after_events_attachments_video);
+                    $afterCounts = 0;
+                    if ($afterReview !== null) {
+                      $afterCounts += count($afterReview);
+                    } 
+
+                    if ($afterPhoto !== null) {
+                      $afterCounts += count($afterPhoto);
+                    } 
+
+                    if ($afterVideo !== null) {
+                      $afterCounts += count($afterVideo);
+                    } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>After event attachments ({{$afterCounts}})</b></h3>
 
@@ -3692,26 +3912,71 @@
               <a href="/downloadAll/after/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>
-                <div class="row">
-                  @if ($after !== null)
-                      @foreach ($after as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
-                      @endforeach
-                  @endif
-                </div>
+              <div class="row">
+                <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                @if ($afterReview !== null)
+                    @foreach ($afterReview as $item)
+                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                       {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                            <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                        </a>                         --}}
+                        <div class="col-lg-3 mb-2">
+                          <a href="{{asset($item)}}">
+                            <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                          </a>
+                        </div>
+                       @else
+                       <div class="col-lg-3 mb-2">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                       </div>
+                       @endif
+                    @endforeach
+                @endif
+              </div>
+
+              <div class="row">
+                <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
+                @if ($afterPhoto !== null)
+                    @foreach ($afterPhoto as $item)
+                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                       {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                            <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                        </a>                         --}}
+                        <div class="col-lg-3 mb-2">
+                          <a href="{{asset($item)}}">
+                            <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                          </a>
+                        </div>
+                       @else
+                       <div class="col-lg-3 mb-2">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                       </div>
+                       @endif
+                    @endforeach
+                @endif
+              </div>
+
+              <div class="row">
+                <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
+                @if ($afterVideo !== null)
+                    @foreach ($afterVideo as $item)
+                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                       {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
+                            <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
+                        </a>                         --}}
+                        <div class="col-lg-3 mb-2">
+                          <a href="{{asset($item)}}">
+                            <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                          </a>
+                        </div>
+                       @else
+                       <div class="col-lg-3 mb-2">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                       </div>
+                       @endif
+                    @endforeach
+                @endif
+              </div>
             </div>
             <!-- /.card-body -->
           </div>

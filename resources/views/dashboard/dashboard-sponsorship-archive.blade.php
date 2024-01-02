@@ -58,7 +58,7 @@
                     @endphp
                     <tr>
                       <td>
-                        <a href="/dashboard/restore/{{$sponsorship->id}}" class="btn btn-primary">Restore</a>
+                        <a href="/restore/{{$sponsorship->id}}" class="btn btn-primary">Restore</a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
                           <i class="ion ion-ios-trash"></i>
@@ -79,7 +79,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <a href="/dashboard/permanent-delete/{{$sponsorship->id}}" class="btn btn-danger">Confirm</a>
+                                <a href="/permanent-delete/{{$sponsorship->id}}" class="btn btn-danger">Confirm</a>
                               </div>
                             </div>
                           </div>

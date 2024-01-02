@@ -227,13 +227,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : ' ' }}">
+                <a href="/" class="nav-link {{ Request::is('') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sponsorship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/ongoing-event-report" class="nav-link {{ Request::is('dashboard/ongoing-event-report') ? 'active' : ' ' }}">
+                <a href="/ongoing-event-report" class="nav-link {{ Request::is('ongoing-event-report') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ongoing Event Report</p>
                 </a>
@@ -251,21 +251,39 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/calendar" class="nav-link {{ Request::is('dashboard/calendar') ? 'active' : ' ' }}">
+                <a href="/calendar" class="nav-link {{ Request::is('calendar') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Events Calendar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/trash" class="nav-link {{ Request::is('dashboard/trash') ? 'active' : ' ' }}">
+                <a href="/trash" class="nav-link {{ Request::is('trash') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Trash</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard/blacklists" class="nav-link">
+                <a href="blacklists" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Blacklists</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Account
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/logout" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Logout</p>
                 </a>
               </li>
             </ul>

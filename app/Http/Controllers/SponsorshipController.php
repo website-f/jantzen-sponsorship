@@ -74,12 +74,11 @@ class SponsorshipController extends Controller
             $sponsor->attendees = $request->attendees;
             $sponsor->explaination_product = $request->explaination_product;
             $sponsor->booth = $request->booth;
-            $sponsor->sposorship_attachments = json_encode($files);
+            $sponsor->sponsorship_attachments = json_encode($files);
             $sponsor->ro_200ml = $request->ro_200ml;
             $sponsor->ro_500ml = $request->ro_500ml;
             $sponsor->ro_11L = $request->ro_11L;
             $sponsor->ro_350ml = $request->ro_350ml;
-            $sponsor->status = "submit";
             $sponsor->save();
         
             $existingUser = User::where('email', $request->email)->first();
@@ -117,11 +116,20 @@ class SponsorshipController extends Controller
 
     public function proofAgreement(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $fileDataJson = $request->input('file_names');
-        $fileData = json_decode($fileDataJson);
-        $files = [];
+        //Review
+        $fileDataJsonReview = $request->input('file_names');
+        $fileDataReview = json_decode($fileDataJsonReview);
+        $filesReview = [];
+        //Photo
+        $fileDataJsonPhoto = $request->input('file_names_photos');
+        $fileDataPhoto = json_decode($fileDataJsonPhoto);
+        $filesPhoto = [];
+        //Video
+        $fileDataJsonVideo = $request->input('file_names_videos');
+        $fileDataVideo = json_decode($fileDataJsonVideo);
+        $filesVideo = [];
 
-        foreach ($fileData as $fileInfo) {
+        foreach ($fileDataReview as $fileInfo) {
             // Extract information from the file data
             $name = $fileInfo->name;
             $base64Data = $fileInfo->data;
@@ -144,11 +152,65 @@ class SponsorshipController extends Controller
                 $path = $destinationPath . '/' . $fileName;
                 file_put_contents($path, $decodedData);
             }
-            $files[] = "agreement/" . $fileName;
+            $filesReview[] = "agreement/" . $fileName;
+        }
+
+        foreach ($fileDataPhoto as $fileInfo) {
+            // Extract information from the file data
+            $name = $fileInfo->name;
+            $base64Data = $fileInfo->data;
+            $extension = $fileInfo->extension;
+    
+            $currentDate = now(); // Use Laravel's now() helper function
+            $timestamp = $currentDate->timestamp; // Unique timestamp
+            $fileName = $name . $timestamp . '.' . $extension;
+    
+            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                $image = Image::make($base64Data);
+                $image->encode($extension, 10);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                $image->save($path);
+            }
+            else {
+                $decodedData = base64_decode($base64Data);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                file_put_contents($path, $decodedData);
+            }
+            $filesPhoto[] = "agreement/" . $fileName;
+        }
+
+        foreach ($fileDataVideo as $fileInfo) {
+            // Extract information from the file data
+            $name = $fileInfo->name;
+            $base64Data = $fileInfo->data;
+            $extension = $fileInfo->extension;
+    
+            $currentDate = now(); // Use Laravel's now() helper function
+            $timestamp = $currentDate->timestamp; // Unique timestamp
+            $fileName = $name . $timestamp . '.' . $extension;
+    
+            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                $image = Image::make($base64Data);
+                $image->encode($extension, 10);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                $image->save($path);
+            }
+            else {
+                $decodedData = base64_decode($base64Data);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                file_put_contents($path, $decodedData);
+            }
+            $filesVideo[] = "agreement/" . $fileName;
         }
     
-        $sponsor->attachements_agreement_proof = json_encode($files);
-        $sponsor->status = "proof";
+        $sponsor->attachements_agreement_proof_review = json_encode($filesReview);
+        $sponsor->attachements_agreement_proof_photo = json_encode($filesPhoto);
+        $sponsor->attachements_agreement_proof_video = json_encode($filesVideo);
+        $sponsor->states = "Pending";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
 
@@ -162,17 +224,27 @@ class SponsorshipController extends Controller
         $sponsor->collector_IC = $request->collector_IC;
         $sponsor->collector_contact = $request->collector_contact;
         $sponsor->collector_plate_number = $request->collector_plate_number;
-        $sponsor->status = "collect";
+        $sponsor->states = "Delay";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
     }
 
     public function afterEvent(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
-        $fileDataJson = $request->input('file_names');
-        $fileData = json_decode($fileDataJson);
-        $files = [];
-        foreach ($fileData as $fileInfo) {
+        //Review
+        $fileDataJsonReview = $request->input('file_names');
+        $fileDataReview = json_decode($fileDataJsonReview);
+        $filesReview = [];
+        //Photo
+        $fileDataJsonPhoto = $request->input('file_names_photos');
+        $fileDataPhoto = json_decode($fileDataJsonPhoto);
+        $filesPhoto = [];
+        //Video
+        $fileDataJsonVideo = $request->input('file_names_videos');
+        $fileDataVideo = json_decode($fileDataJsonVideo);
+        $filesVideo = [];
+
+        foreach ($fileDataReview as $fileInfo) {
             // Extract information from the file data
             $name = $fileInfo->name;
             $base64Data = $fileInfo->data;
@@ -195,11 +267,65 @@ class SponsorshipController extends Controller
                 $path = $destinationPath . '/' . $fileName;
                 file_put_contents($path, $decodedData);
             }
-            $files[] = "agreement/" . $fileName;
+            $filesReview[] = "agreement/" . $fileName;
         }
-        $sponsor->after_events_attachments = json_encode($files);
+
+        foreach ($fileDataPhoto as $fileInfo) {
+            // Extract information from the file data
+            $name = $fileInfo->name;
+            $base64Data = $fileInfo->data;
+            $extension = $fileInfo->extension;
+    
+            $currentDate = now(); // Use Laravel's now() helper function
+            $timestamp = $currentDate->timestamp; // Unique timestamp
+            $fileName = $name . $timestamp . '.' . $extension;
+    
+            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                $image = Image::make($base64Data);
+                $image->encode($extension, 10);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                $image->save($path);
+            }
+            else {
+                $decodedData = base64_decode($base64Data);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                file_put_contents($path, $decodedData);
+            }
+            $filesPhoto[] = "agreement/" . $fileName;
+        }
+
+        foreach ($fileDataVideo as $fileInfo) {
+            // Extract information from the file data
+            $name = $fileInfo->name;
+            $base64Data = $fileInfo->data;
+            $extension = $fileInfo->extension;
+    
+            $currentDate = now(); // Use Laravel's now() helper function
+            $timestamp = $currentDate->timestamp; // Unique timestamp
+            $fileName = $name . $timestamp . '.' . $extension;
+    
+            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                $image = Image::make($base64Data);
+                $image->encode($extension, 10);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                $image->save($path);
+            }
+            else {
+                $decodedData = base64_decode($base64Data);
+                $destinationPath = public_path('agreement');
+                $path = $destinationPath . '/' . $fileName;
+                file_put_contents($path, $decodedData);
+            }
+            $filesVideo[] = "agreement/" . $fileName;
+        }
+       
+        $sponsor->after_events_attachments_review = json_encode($filesReview);
+        $sponsor->after_events_attachments_photo = json_encode($filesPhoto);
+        $sponsor->after_events_attachments_video = json_encode($filesVideo);
         $sponsor->states = "Completed";
-        $sponsor->status = "complete";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
     }

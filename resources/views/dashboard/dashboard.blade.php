@@ -318,7 +318,7 @@
                   @endphp
                   <tr>
                     <td>
-                      <a href="/dashboard/view-request/{{$sponsorship->id}}" class="btn btn-primary"><i class="ion ion-eye"></i></a>
+                      <a href="/view-request/{{$sponsorship->id}}" class="btn btn-primary"><i class="ion ion-eye"></i></a>
                       <!-- Button trigger modal -->
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
                         <i class="ion ion-ios-trash"></i>
@@ -339,7 +339,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <a href="/dashboard/delete/{{$sponsorship->id}}" class="btn btn-danger">Confirm</a>
+                              <a href="/delete/{{$sponsorship->id}}" class="btn btn-danger">Confirm</a>
                             </div>
                           </div>
                         </div>

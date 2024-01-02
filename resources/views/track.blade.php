@@ -3,7 +3,7 @@
 @section('content')
 
 
-    @if ($spon->status == "submit")
+    @if ($spon->states == "Processing")
     <div class="div-block-6">
         <div class="div-block-7">
             <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -147,7 +147,7 @@
         </div>
     </div>
 
-    @elseif($spon->status == "approval")
+    @elseif($spon->states == "Approved")
     <div class="div-block-8">
         <div class="div-block-7">
           <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -311,7 +311,7 @@
         </div>
     </div>
 
-    @elseif($spon->status == "proof")
+    @elseif($spon->states == "Pending")
     <div class="div-block-10">
       <div class="div-block-7">
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -438,7 +438,7 @@
       </div>
     </div>
 
-    @elseif($spon->status == "collect")
+    @elseif($spon->states == "Delay")
     <div class="div-block-11">
       <div class="div-block-7">
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -541,7 +541,7 @@
       </div>
     </div>
 
-    @elseif($spon->status == "collected")
+    @elseif($spon->states == "Collected")
     <div class="div-block-11">
       <div class="div-block-7">
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -644,7 +644,7 @@
       </div>
     </div>
 
-    @elseif($spon->status == "complete")
+    @elseif($spon->states == "Completed")
     <div class="div-block-11">
       <div class="div-block-7">
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>
@@ -680,7 +680,7 @@
       </div>
     </div>
 
-    @elseif($spon->status == "blacklist")
+    @elseif($spon->states == "Blacklist")
     <div class="div-block-11">
       <div class="div-block-7">
         <h3 class="heading-9">Your Are in the Blacklist</h3>
