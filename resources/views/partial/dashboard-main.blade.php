@@ -263,7 +263,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="blacklists" class="nav-link">
+                <a href="/blacklists" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Blacklists</p>
                 </a>
