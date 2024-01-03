@@ -34,10 +34,10 @@
                 <a href="#" class="button-12 w-button">Pending</a>
               </div>
             </div>
-            <h3 class="heading-11" style="margin-top: 10px">Await Approval / Contact</h3>
-            <p class="paragraph-7">Be patient as our team reviews your application. Expect a response or further contact within 3 to 7 working days.</p>
-            {{-- <a href="#" class="button-20 w-button">Approval in Progress</a> --}}
-            <progress id="progresstrack" value="32" max="100"> 32% </progress>
+            <div style="background-color: #FFF500; border-radius: 9px; padding: 10px; margin-top: 10px">
+              <h3 class="heading-11" style="margin-top: 10px">Waiting For Approval</h3>
+              <p class="paragraph-7">Be patient as our team reviews your application. Expect a response or further contact within <b>3 to 7 working days.</b></p>
+            </div>
         </div>
         <div class="div-block">
             <h3 class="heading-6">Sponsorship Request Form</h3>
@@ -116,13 +116,13 @@
                 </div>
               </div>
               <div class="text-block-10 ro500mlVal quantTotal"></div>
-              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottles)</b></div><img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
+              <div class="text-block-7" style="margin-top: 10px"><b>RO Water - 11L (1 bottle)</b></div><img src="{{asset('assets/images/11L.jpg')}}" loading="lazy" alt="" class="image-3">
               <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4aeba-8a579776" class="w-layout-layout quick-stack-3 wf-layout-layout">
                 <div class="w-layout-cell cell-5">
                   <div class="text-block-9 ro11L">{{$spon->ro_11L}}</div>
                 </div>
                 <div class="w-layout-cell cell-4">
-                  <div class="text-block-8">Cartons</div>
+                  <div class="text-block-8">Bottles</div>
                 </div>
               </div>
               <div class="text-block-10 ro11LVal quantTotal"></div>
@@ -252,10 +252,10 @@
                   <div class="text-block-19">Jantzen’s Goodie Bags</div>
                 </div>
               </div><label for="field">Others</label>
-              <textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input" readonly>
-              @if ($spon->others !== null)
-              {{$spon->others}}
-              @endif
+              <textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input" readonly rows="10">
+@if ($spon->others !== null)
+{{$spon->others}}
+@endif
               </textarea>
             </div>
             <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
@@ -703,7 +703,9 @@
                 <select id="statusFilt" name="field" data-name="Field" class="select-field-2 w-select">
                   <option value="">Status</option>
                   <option value="Processing">Processing</option>
+                  <option value="Approved">Approved</option>
                   <option value="Pending">Pending</option>
+                  <option value="Delay">Delay</option>
                   <option value="MIA">MIA</option>
                   <option value="Completed">Completed</option>
                   <option value="Rejected">Rejected</option>

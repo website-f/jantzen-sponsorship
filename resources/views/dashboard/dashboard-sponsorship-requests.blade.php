@@ -264,12 +264,18 @@
                 </div> 
 
                 <div class="col-lg-6">
-                  <label class="form-label">Water - 200ml (48 Cups/carton)</label>
+                  @php
+                      $totalCups = 48 * (int)$sponsor->ro_200ml;
+                  @endphp
+                  <label class="form-label">Ro Water - 200ml (48 Cups/carton)</label> ({{$totalCups}} cups)
                   <input type="text" class="form-control" readonly value="{{$sponsor->ro_200ml}} Cartons"><br>
                 </div>
 
                 <div class="col-lg-6">
-                  <label class="form-label">RO Water - 500ml (24 bottles/carton)</label>
+                  @php
+                      $totalRoBottles = 24 * (int)$sponsor->ro_500ml;
+                  @endphp
+                  <label class="form-label">RO Water - 500ml (24 bottles/carton)</label> ({{$totalRoBottles}} Bottles)
                   <input type="text" class="form-control" readonly value="{{$sponsor->ro_500ml}} Cartons"><br>
                 </div>
 
@@ -279,7 +285,10 @@
                 </div>
 
                 <div class="col-lg-6">
-                  <label class="form-label">Mineral Water - 350ml (24 bottles/carton)</label>
+                  @php
+                      $totalMineralBottles = 24 * (int)$sponsor->ro_350ml;
+                  @endphp
+                  <label class="form-label">Mineral Water - 350ml (24 bottles/carton)</label> ({{$totalMineralBottles}} Bottles)
                   <input type="text" class="form-control" readonly value="{{$sponsor->ro_350ml}} Cartons"><br>
                 </div>
 
@@ -369,6 +378,81 @@
                     </div>
                   </div>
 
+                  <div class="col-lg-12">
+                    <h4>Confirm Sponsorship Products</h4>
+                    <hr>
+                  </div> 
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 200ml x Cartons</label>
+                    <input type="number" name="confirmro_200ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 500ml x Cartons</label>
+                    <input type="number" name="confirmro_500ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 11L x Bottles</label>
+                    <input type="number" name="confirmro_11L" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Mineral 350ml x Cartons</label>
+                    <input type="number" name="confirmro_350ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Paper Cup</label>
+                    <input type="number" name="paper_cup" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Goodie Bags</label>
+                    <input type="number" name="goodies_bag" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Others</label>
+                    <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>
+Dear ,
+Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor  cartons of 200ml,  cartons of 500ml, cartons of 11L,  cartons of 350ml(Mineral) Jantzen water for the  collection only.
+        
+In return, we kindly request the following from your teams:
+        
+1. Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.
+        
+2. If your team writes an article about the event on your school website, please hyperlink it to our website ( www.jantzen.com.my ).
+        
+3. Obtain 50 Google reviews from personal accounts. We will provide the copywriting, and you'll only need to copy and paste it. (To be completed within 3 weeks.)
+        
+4. Post 20 Instagram stories and tag @jantzenwater, while encouraging people to follow our account. Our goal is to have at least 20 people follow us. NEED SCREENSHOT
+        
+5. Take 30 photos of Jantzen being used at the event and send them to us within 3 days after the event. You can share them via Google Drive and provide me with the link.
+        
+6. Ensure that 50 people follow us on TikTok and provide screenshots for verification.
+  (https://www.tiktok.com/@jantzenwater?_t=8f4dGwUvMUE&amp;_r=1)
+        
+7. Can you create two pieces of content about sharing Jantzen? It can be related to your event or any content you prefer (TIKTOK / XHS) personal acc *send me draft before you posting *
+        
+If your team agrees to these terms and conditions, please let us know by replying to this message on WhatsApp as soon as possible. We are eagerly looking forward to collaborating with you!
+        
+Best regards,
+Naomis
+Jantzen Water Marketing Team
+                    </textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ..."></textarea>
+                  </div>
+
                   <div class="col-lg-6 mb-3">
                     <button type="submit" class="btn btn-primary w-100"><i class="fas fa-check"></i> Approve</button>
                   </div>
@@ -424,55 +508,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="col-lg-12">
-                    <h4>Confirm Sponsorship Products</h4>
-                    <hr>
-                  </div> 
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 200ml x Cartons</label>
-                    <input type="number" name="confirmro_200ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 500ml x Cartons</label>
-                    <input type="number" name="confirmro_500ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 11L x Bottles</label>
-                    <input type="number" name="confirmro_11L" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Mineral 350ml x Cartons</label>
-                    <input type="number" name="confirmro_350ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Jantzen’s Paper Cup</label>
-                    <input type="number" name="paper_cup" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Jantzen’s Goodie Bags</label>
-                    <input type="number" name="goodies_bag" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-12">
-                    <hr>
-                  </div>
-
-                  <div class="col-lg-12 mb-3">
-                    <label class="form-label">Others</label>
-                    <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required></textarea>
-                  </div>
-
-                  <div class="col-lg-12 mb-3">
-                    <label class="form-label">Remarks</label>
-                    <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ..."></textarea>
                   </div>
 
                 </div>
@@ -678,7 +713,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -792,7 +827,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -1101,7 +1136,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -1215,7 +1250,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -1425,7 +1460,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -1539,7 +1574,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -1964,7 +1999,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -2078,7 +2113,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -2576,7 +2611,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -2690,7 +2725,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -3163,7 +3198,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -3277,7 +3312,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">
@@ -3487,7 +3522,7 @@
         
                           <div class="col-lg-12 mb-3">
                             <label class="form-label">Others</label>
-                            <textarea name="others" class="form-control" rows="3" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
+                            <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>{{$sponsor->others}}</textarea>
                           </div>
         
                           <div class="col-lg-12 mb-3">
@@ -3601,7 +3636,7 @@
 
                   <div class="col-lg-12 mb-3">
                     <label class="form-label">Others</label>
-                    <textarea class="form-control" rows="3" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
+                    <textarea class="form-control" rows="10" placeholder="Others ..." readonly>{{$sponsor->others}}</textarea>
                   </div>
 
                   <div class="col-lg-12 mb-3">

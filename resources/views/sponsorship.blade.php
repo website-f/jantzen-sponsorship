@@ -105,7 +105,7 @@
                 <label class="radio-button-field-2 w-radio">
                     <input type="radio" data-name="Radio 11" id="radio-12" name="booth" value="No" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-12">No</span>
                 </label>
-                <label for="" class="field-label-9">Sponsorship Attachments</label>
+                <label for="" class="field-label-9">Sponsorship Attachments (optional)</label>
                   <div id="file-drop-area" class="div-block-5">
                     <div style="text-align: center;">
                         <p>Drag and drop files here, or click to select files</p>

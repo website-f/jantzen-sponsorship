@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('ro_350ml')->nullable();
             $table->string('paper_cup')->nullable();
             $table->string('goodies_bag')->nullable();
-            $table->string('others')->nullable();
+            $table->text('others')->nullable();
             $table->json('attachements_agreement_proof_review')->nullable();
             $table->json('attachements_agreement_proof_photo')->nullable();
             $table->json('attachements_agreement_proof_video')->nullable();
