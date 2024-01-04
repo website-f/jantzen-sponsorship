@@ -8,5 +8,6 @@
 </head>
 <body>
     <p>Hi! There's a sponsorship request submitted for you to review.</p>
+    <p>Login <a href="https://general.jantzen.my/login">https://general.jantzen.my/login</a> to view</p>
 </body>
 </html>

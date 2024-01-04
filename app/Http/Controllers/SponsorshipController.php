@@ -12,11 +12,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
+use App\Mail\SubmitNotificationClient;
 use App\Notifications\RequestNotification;
 use Illuminate\Support\Facades\Notification;
 
 class SponsorshipController extends Controller
 {
+    public function submitted() {
+        return view("thankyou");
+    }
+
     public function sponsorshipFillRequest(Request $request) {
         // Retrieve the file names from the hidden input field
         if (BlockList::where('email', $request->email)->orWhere('company_name', $request->organization)->orWhere('contact_number', $request->contact)->orWhere('name', $request->name)->exists()) {
@@ -61,6 +66,7 @@ class SponsorshipController extends Controller
             }
         
             Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification());
+            Mail::to($request->email)->send(new SubmitNotificationClient());
               
             $sponsor = new Sponsorship;
             $sponsor->fullname = $request->name;
@@ -93,7 +99,7 @@ class SponsorshipController extends Controller
                 $user->save();
             }
         
-            return redirect("/login");
+            return redirect("/submitted");
 
         }
        
@@ -131,83 +137,90 @@ class SponsorshipController extends Controller
         $fileDataVideo = json_decode($fileDataJsonVideo);
         $filesVideo = [];
 
-        foreach ($fileDataReview as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataReview != null) {
+            foreach ($fileDataReview as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesReview[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesReview[] = "agreement/" . $fileName;
         }
 
-        foreach ($fileDataPhoto as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataPhoto != null) {
+            foreach ($fileDataPhoto as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesPhoto[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesPhoto[] = "agreement/" . $fileName;
         }
 
-        foreach ($fileDataVideo as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataVideo != null) {
+            foreach ($fileDataVideo as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesVideo[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesVideo[] = "agreement/" . $fileName;
         }
+
     
         $sponsor->attachements_agreement_proof_review = json_encode($filesReview);
         $sponsor->attachements_agreement_proof_photo = json_encode($filesPhoto);
@@ -246,82 +259,88 @@ class SponsorshipController extends Controller
         $fileDataVideo = json_decode($fileDataJsonVideo);
         $filesVideo = [];
 
-        foreach ($fileDataReview as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataReview != null) {
+            foreach ($fileDataReview as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesReview[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesReview[] = "agreement/" . $fileName;
         }
 
-        foreach ($fileDataPhoto as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataPhoto != null) {
+            foreach ($fileDataPhoto as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesPhoto[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesPhoto[] = "agreement/" . $fileName;
         }
 
-        foreach ($fileDataVideo as $fileInfo) {
-            // Extract information from the file data
-            $name = $fileInfo->name;
-            $base64Data = $fileInfo->data;
-            $extension = $fileInfo->extension;
-    
-            $currentDate = now(); // Use Laravel's now() helper function
-            $timestamp = $currentDate->timestamp; // Unique timestamp
-            $fileName = $name . $timestamp . '.' . $extension;
-    
-            if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
-                $image = Image::make($base64Data);
-                $image->encode($extension, 10);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                $image->save($path);
+        if ($fileDataVideo != null) {
+            foreach ($fileDataVideo as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesVideo[] = "agreement/" . $fileName;
             }
-            else {
-                $decodedData = base64_decode($base64Data);
-                $destinationPath = public_path('agreement');
-                $path = $destinationPath . '/' . $fileName;
-                file_put_contents($path, $decodedData);
-            }
-            $filesVideo[] = "agreement/" . $fileName;
         }
        
         $sponsor->after_events_attachments_review = json_encode($filesReview);

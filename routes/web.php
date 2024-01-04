@@ -26,6 +26,7 @@ Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgre
 Route::put('/collector-details/{id}', [SponsorshipController::class, 'collectorDetails'])->middleware('auth');
 Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->middleware('auth');
 Route::get('/Blacklisted', [SponsorshipController::class, 'blacklisted']);
+Route::get('/submitted', [SponsorshipController::class, 'submitted']);
 
 
 //------GENERAL ROUTES-----------------------------------------------------------------------

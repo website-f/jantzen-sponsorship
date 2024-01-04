@@ -34,7 +34,7 @@
                 <a href="#" class="button-12 w-button">Pending</a>
               </div>
             </div>
-            <div style="background-color: #FFF500; border-radius: 9px; padding: 10px; margin-top: 10px">
+            <div style="background-color: #FFF500; border-radius: 9px; padding: 20px; margin-top: 20px">
               <h3 class="heading-11" style="margin-top: 10px">Waiting For Approval</h3>
               <p class="paragraph-7">Be patient as our team reviews your application. Expect a response or further contact within <b>3 to 7 working days.</b></p>
             </div>
@@ -345,6 +345,13 @@
         <h3 class="heading-11">NOTICES</h3>
         <p class="paragraph-7">Please submit collector Information us a week in advance when the goods need to be collected, as we require time to prepare. We regret to inform you that if your team does not notify us a week prior to collection, we cannot guarantee that the goods will be ready on time.</p>
         <p class="paragraph-10">Factory Operating Days: <strong>Monday - Friday</strong><br>Working Hours: <strong>Weekdays 10am - 5pm</strong><br>Lunchtime: <strong>12pm - 2pm</strong><br>Public Holidays: <strong>Closed</strong></p>
+        <p><b>Collection time slot</b></p>
+
+        <p>10am - 11am</p>
+        <p>11am - 12pm</p>
+        <p>2pm - 3pm</p>
+        <p>3pm - 4pm</p>
+        <p>4pm - 5pm</p>
         <h3 class="heading-12">Collector Information</h3>
         <p class="paragraph-8">Please complete the collector information section to inform us about who will be collecting the sponsored goods. This ensures a smooth and secure pickup process, helping us to verify the identity of the individual authorized to receive the products.</p>
         <div class="w-form">
