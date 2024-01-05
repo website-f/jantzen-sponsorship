@@ -100,8 +100,10 @@ class DashboardController extends Controller
 
     public function requestSubmit(Request $request, $id) {
         $attending = explode(",", $request->attending);
+        $tags = explode(",", $request->tags);
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->attending = json_encode($attending);
+        $sponsor->tags = json_encode($tags);
         $sponsor->handle_by = $request->handle_by;
         $sponsor->booth_space = $request->booth_space;
         $sponsor->confirmro_200ml = $request->confirmro_200ml;
@@ -128,8 +130,10 @@ class DashboardController extends Controller
 
     public function requestUpdate(Request $request, $id) {
         $attending = explode(",", $request->attending);
+        $tags = explode(",", $request->tags);
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->attending = json_encode($attending);
+        $sponsor->tags = json_encode($tags);
         $sponsor->handle_by = $request->handle_by;
         $sponsor->booth_space = $request->booth_space;
         $sponsor->confirmro_200ml = $request->confirmro_200ml;

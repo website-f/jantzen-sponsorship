@@ -105,6 +105,8 @@
                 <label class="radio-button-field-2 w-radio">
                     <input type="radio" data-name="Radio 11" id="radio-12" name="booth" value="No" class="w-form-formradioinput w-radio-input"><span class="w-form-label" for="radio-12">No</span>
                 </label>
+                <label for="name-4" class="field-label-6">Tell us about your Event/project</label>
+                <textarea placeholder="Must more than 250 words" maxlength="5000" id="field" name="summary" data-name="Field" class="textarea w-input" rows="7" required></textarea>
                 <label for="" class="field-label-9">Sponsorship Attachments (optional)</label>
                   <div id="file-drop-area" class="div-block-5">
                     <div style="text-align: center;">

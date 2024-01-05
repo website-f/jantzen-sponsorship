@@ -72,7 +72,7 @@
               <a style="text-decoration: none" href="#proofAttachments" class="btn btn-info">View Proof Of Agreements</a>
           </div>
           
-          @elseif($sponsor->states == "Delay")
+          @elseif($sponsor->states == "Pending Collection")
 
           <div class="alert alert-primary alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">Hi!</h4>
@@ -205,6 +205,10 @@
                 <div class="col-lg-6">
                   <label class="form-label">Can we place booth in your event?</label>
                   <input type="text" class="form-control" readonly value="{{$sponsor->booth}}"><br>
+                </div>
+                <div class="col-lg-12">
+                  <label class="form-label">Tell us about your Event/project</label>
+                  <textarea class="form-control w-100" rows="7" readonly>{{$sponsor->summary}}</textarea><br>
                 </div>
                 <div class="col-lg-12 mb-3">
                   <label class="form-label">Sponsorhip Attachments</label><br>
@@ -346,7 +350,7 @@
                 @method('PUT')
 
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                       @foreach ($user as $item)
@@ -354,6 +358,17 @@
                       @endforeach
                     </select>
                     <input type="hidden" id="selectedValues" name="attending">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    <select class="select3" multiple="multiple" style="width: 100%;">
+                     <option value="Facebook">Facebook</option>
+                     <option value="Instagram">Instagram</option>
+                     <option value="LinkedIn">LinkedIn</option>
+                     <option value="EDM">EDM</option>
+                    </select>
+                    <input type="hidden" id="selectedValuesTags" name="tags">
                   </div>
 
                   <div class="col-lg-6 mb-3">
@@ -578,7 +593,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -592,6 +607,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -743,6 +773,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -758,7 +789,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -771,6 +802,22 @@ Jantzen Water Marketing Team
                     @endphp
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($tags !== null)
+                        <input type="text" class="form-control" value="{{$tag}}" readonly>
                     @endif
                   </div>
 
@@ -1001,7 +1048,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -1015,6 +1062,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -1166,6 +1228,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -1195,6 +1258,21 @@ Jantzen Water Marketing Team
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
                     @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                     @if ($tags !== null)
+                     <input type="text" class="form-control" value="{{$tag}}" readonly>
+                     @endif
                   </div>
 
                   <div class="col-lg-6 mb-3">
@@ -1325,7 +1403,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -1339,6 +1417,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -1490,6 +1583,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -1505,7 +1599,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -1518,6 +1612,22 @@ Jantzen Water Marketing Team
                     @endphp
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($tags !== null)
+                    <input type="text" class="form-control" value="{{$tag}}" readonly>
                     @endif
                   </div>
 
@@ -1803,7 +1913,7 @@ Jantzen Water Marketing Team
           </div>
         </div>
 
-        @elseif($sponsor->states == "Delay")
+        @elseif($sponsor->states == "Pending Collection")
         <div class="col-lg-5">
           <div class="card card-primary collapsed-card">
             <div class="card-header">
@@ -1864,7 +1974,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -1878,6 +1988,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -2029,6 +2154,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -2044,7 +2170,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -2057,6 +2183,22 @@ Jantzen Water Marketing Team
                     @endphp
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($tags !== null)
+                    <input type="text" class="form-control" value="{{$tag}}" readonly>
                     @endif
                   </div>
 
@@ -2476,7 +2618,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -2490,6 +2632,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -2641,6 +2798,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -2656,7 +2814,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -2669,6 +2827,22 @@ Jantzen Water Marketing Team
                     @endphp
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($tags !== null)
+                    <input type="text" class="form-control" value="{{$tag}}" readonly>
                     @endif
                   </div>
 
@@ -3063,7 +3237,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -3077,6 +3251,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -3228,6 +3417,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -3243,7 +3433,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -3256,6 +3446,21 @@ Jantzen Water Marketing Team
                     @endphp
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
+                    @endif
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                    @if ($tags !== null)
+                    <input type="text" class="form-control" value="{{$tag}}" readonly>
                     @endif
                   </div>
 
@@ -3361,7 +3566,7 @@ Jantzen Water Marketing Team
                       @elseif ($sponsor->states == "Rejected")  
                       <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
                       @elseif ($sponsor->states == "Completed")  
-                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button>
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
                       @else
                       {{$sponsor->states}}
                       @endif
@@ -3387,7 +3592,7 @@ Jantzen Water Marketing Team
                       @method('PUT')
                       <div class="modal-body">
                         <div class="row">
-                          <div class="col-lg-12 mb-3">
+                          <div class="col-lg-6 mb-3">
                             <label class="form-label">Attending</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
                               @php
@@ -3401,6 +3606,21 @@ Jantzen Water Marketing Team
                               @endforeach
                             </select>
                             <input type="hidden" id="selectedValues" name="attending" value="{{$selectedValues}}">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label class="form-label">Posted</label>
+                            <select class="select3" multiple="multiple" style="width: 100%;">
+                              @php
+                                $tags = json_decode($sponsor->tags);
+                                $tag = isset($tags) ? $tags : [];
+                                $selectedValuesTag = isset($tags) ? implode(',', $tags) : '';
+                              @endphp
+                             <option value="Facebook" {{ in_array('Facebook', $tag) ? 'selected' : '' }}>Facebook</option>
+                             <option value="Instagram" {{ in_array('Instagram', $tag) ? 'selected' : '' }}>Instagram</option>
+                             <option value="LinkedIn" {{ in_array('LinkedIn', $tag) ? 'selected' : '' }}>LinkedIn</option>
+                             <option value="EDM" {{ in_array('EDM', $tag) ? 'selected' : '' }}>EDM</option>
+                            </select>
+                            <input type="hidden" id="selectedValuesTags" name="tags">
                           </div>
         
                           <div class="col-lg-6 mb-3">
@@ -3552,6 +3772,7 @@ Jantzen Water Marketing Team
                                 <option value="Delay" {{$sponsor->states == 'Delay' ? 'selected' : ''}}>Delay</option>
                                 <option value="Rejected" {{$sponsor->states == 'Rejected' ? 'selected' : ''}}>Rejected</option>
                                 <option value="Blacklist" {{$sponsor->states == 'Blacklist' ? 'selected' : ''}}>Blacklist</option>
+                                <option value="Pending Collection" {{$sponsor->states == 'Pending Collection' ? 'selected' : ''}}>Pending Collection</option>
                               </select>
                             </div>
                           </div>
@@ -3567,7 +3788,7 @@ Jantzen Water Marketing Team
               </div>
               
                 <div class="row">
-                  <div class="col-lg-12 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label class="form-label">Attending</label>
                     @php
                         $attending = json_decode($sponsor->attending);
@@ -3581,6 +3802,22 @@ Jantzen Water Marketing Team
                     @if ($attending !== null)
                         <input type="text" class="form-control" value="{{$attendees}}" readonly>
                     @endif
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Posted</label>
+                    @php
+                        $tags = json_decode($sponsor->tags);
+                        $tag = "";
+                        if ($tags !== null) {
+                          foreach ($tags as $tagged) {
+                            $tag .= $tagged . ",";
+                          }
+                        }
+                    @endphp
+                   @if ($tags !== null)
+                   <input type="text" class="form-control" value="{{$tag}}" readonly>
+                   @endif
                   </div>
 
                   <div class="col-lg-6 mb-3">

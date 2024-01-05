@@ -78,6 +78,7 @@ class SponsorshipController extends Controller
             $sponsor->nature_event = $request->nature_event;
             $sponsor->from_date = $request->from_date;
             $sponsor->to_date = $request->to_date;
+            $sponsor->summary = $request->summary;
             $sponsor->eventAddress = $request->eventAddress;
             $sponsor->attendees = $request->attendees;
             $sponsor->explaination_product = $request->explaination_product;
@@ -239,7 +240,7 @@ class SponsorshipController extends Controller
         $sponsor->collector_IC = $request->collector_IC;
         $sponsor->collector_contact = $request->collector_contact;
         $sponsor->collector_plate_number = $request->collector_plate_number;
-        $sponsor->states = "Delay";
+        $sponsor->states = "Pending Collection";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
     }

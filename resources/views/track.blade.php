@@ -85,6 +85,8 @@
                   <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$spon->attendees}}" readonly id="name-2">
                   <label for="" class="field-label-8">Explanation of Product Use</label>
                   <input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" value="{{$spon->explaination_product}}" readonly id="name-2">
+                  <label for="" class="field-label-8">Tell us about your Event/project</label>
+                  <textarea placeholder="Example Text" maxlength="5000" id="field" name="field" data-name="Field" class="textarea w-input" readonly rows="10">{{$spon->summary}}</textarea>
                   <label for="name-2" class="field-label-9">Sponsorship Attachments</label><input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="3 - Files" id="name-2"></form>
                 <div class="w-form-done">
                   <div>Thank you! Your submission has been received!</div>
@@ -445,7 +447,7 @@
       </div>
     </div>
 
-    @elseif($spon->states == "Delay")
+    @elseif($spon->states == "Pending Collection")
     <div class="div-block-11">
       <div class="div-block-7">
         <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>

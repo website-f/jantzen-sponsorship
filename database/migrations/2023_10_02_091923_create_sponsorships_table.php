@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('attendees')->nullable();
             $table->string('explaination_product')->nullable();
             $table->string('booth')->nullable();
+            $table->text('summary')->nullable();
             $table->json('sponsorship_attachments')->nullable();
             $table->string('ro_200ml')->nullable();
             $table->string('ro_500ml')->nullable();
@@ -52,10 +53,11 @@ return new class extends Migration
             $table->json('after_events_attachments_photo')->nullable();
             $table->json('after_events_attachments_video')->nullable();
             // $table->enum('status', ['none','submit', 'approval', 'proof', 'collect', 'collected', 'complete', 'blacklist', 'reject'])->default('none');
-            $table->enum('states', ['Processing', 'Approved', 'Pending', 'Collected', 'MIA', 'Completed', 'Closed', 'Delay', 'Rejected', 'Blacklist'])->default('Processing');
+            $table->enum('states', ['Processing', 'Approved', 'Pending', 'Pending Collection', 'Collected', 'MIA', 'Completed', 'Closed', 'Delay', 'Rejected', 'Blacklist'])->default('Processing');
             $table->string('booth_space')->nullable();
             $table->string('remarks')->nullable();
             $table->json('attending')->nullable();
+            $table->json('tags')->nullable();
             $table->string('rating')->nullable();
             $table->timestamps();
         });

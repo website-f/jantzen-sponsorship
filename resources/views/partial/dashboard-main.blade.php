@@ -382,6 +382,15 @@
       $('#selectedValues').val(selectedValues);
     });
 
+    $('.select3').select2({
+      theme: 'bootstrap4'
+    })
+
+    $('.select3').on('change', function() {
+      var selectedValuesTags = $(this).val();
+      $('#selectedValuesTags').val(selectedValuesTags);
+    });
+
 
   });
 </script>
