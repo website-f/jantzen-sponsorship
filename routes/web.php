@@ -45,6 +45,7 @@ Route::prefix('')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth', 'only-admin']);
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware(['auth', 'only-admin']);
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware(['auth', 'only-admin']);
+    Route::put('/request-submit-confirm/{id}', [DashboardController::class, 'requestSubmitConfirm'])->middleware(['auth', 'only-admin']);
     Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware(['auth', 'only-admin']);
     Route::put('/status-update/{id}', [DashboardController::class, 'statusUpdate'])->middleware(['auth', 'only-admin']);
     Route::put('/request-update/{id}', [DashboardController::class, 'requestUpdate'])->middleware(['auth', 'only-admin']);

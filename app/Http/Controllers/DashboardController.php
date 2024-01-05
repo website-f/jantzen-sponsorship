@@ -99,12 +99,20 @@ class DashboardController extends Controller
 
 
     public function requestSubmit(Request $request, $id) {
-        $attending = explode(",", $request->attending);
         $tags = explode(",", $request->tags);
         $sponsor = Sponsorship::findOrFail($id);
-        $sponsor->attending = json_encode($attending);
         $sponsor->tags = json_encode($tags);
         $sponsor->handle_by = $request->handle_by;
+        $sponsor->remarks = $request->remarks;
+        $sponsor->states = "Approved";
+        $sponsor->save();
+        return redirect("/view-request/" . $id);
+    }
+
+    public function requestSubmitConfirm(Request $request, $id) {
+        $attending = explode(",", $request->attending);
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->attending = json_encode($attending);
         $sponsor->booth_space = $request->booth_space;
         $sponsor->confirmro_200ml = $request->confirmro_200ml;
         $sponsor->confirmro_500ml = $request->confirmro_500ml;
@@ -114,11 +122,7 @@ class DashboardController extends Controller
         $sponsor->goodies_bag = $request->goodies_bag;
         $sponsor->others = $request->others;
         $sponsor->remarks = $request->remarks;
-        // $sponsor->pickup_location = $request->pickup_location;
-        // $sponsor->pickup_address = $request->pickup_address;
-        // $sponsor->contact_person = $request->contact_person;
-        // $sponsor->pickup_phone_number = $request->pickup_phone_number;
-        $sponsor->states = "Approved";
+        $sponsor->status = "Filled";
         $sponsor->save();
         return redirect("/view-request/" . $id);
     }
@@ -191,7 +195,6 @@ class DashboardController extends Controller
         $blacklist->email = $sponsor->email;
         $blacklist->company_name = $sponsor->organization;
         $blacklist->contact_number = $sponsor->contact;
-        $blacklist->name = $sponsor->fullname;
         $blacklist->save();
         return redirect("/view-request/" . $id);
     }
