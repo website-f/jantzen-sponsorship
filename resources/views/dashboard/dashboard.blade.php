@@ -298,6 +298,7 @@
                 <thead>
                 <tr>
                   <th>#</th>
+                  <th>Submission Date</th>
                   <th>Event Name</th>
                   <th>Event Date</th>
                   <th>Location</th>
@@ -318,9 +319,9 @@
                   @endphp
                   <tr>
                     <td>
-                      <a href="/view-request/{{$sponsorship->id}}" class="btn btn-primary"><i class="ion ion-eye"></i></a>
+                      <a href="/view-request/{{$sponsorship->id}}" class="btn btn-primary btn-sm"><i class="ion ion-eye"></i></a>
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
+                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal{{$sponsorship->id}}">
                         <i class="ion ion-ios-trash"></i>
                       </button>
                       
@@ -345,6 +346,7 @@
                         </div>
                       </div>
                     </td>
+                    <td>{{$sponsorship->created_at->format('d-m-Y')}}</td>
                     <td>{{$sponsorship->event_name}}</td>
                     <td>
                       {{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}
