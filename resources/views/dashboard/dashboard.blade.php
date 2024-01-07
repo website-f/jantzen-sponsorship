@@ -353,10 +353,15 @@
                     </td>
                     <td>{{$sponsorship->eventAddress}}</td>
                     <td>
-                      @if ($inCharge !== null)
+                      {{-- @if ($inCharge !== null)
                       @foreach ($inCharge as $item)
                           - {{$item}} <br>
                       @endforeach
+                      @else
+                      None
+                      @endif --}}
+                      @if ($sponsorship->handle_by !== null)
+                      {{$sponsorship->handle_by}}
                       @else
                       None
                       @endif
