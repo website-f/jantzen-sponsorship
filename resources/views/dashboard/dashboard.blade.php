@@ -358,7 +358,7 @@
                           - {{$item}} <br>
                       @endforeach
                       @else
-                      Not approved yet
+                      None
                       @endif
                     </td>
                     <td>{{$sponsorCartons}}</td>
