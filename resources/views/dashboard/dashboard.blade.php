@@ -302,7 +302,7 @@
                   <th>Event Name</th>
                   <th>Event Date</th>
                   <th>Location</th>
-                  <th>In Charge</th>
+                  <th>Handle By</th>
                   <th>Sponsor Cartons</th>
                   <th>Status</th>
                 </tr>
