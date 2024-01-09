@@ -260,6 +260,13 @@
 @endif
               </textarea>
             </div>
+
+            @if ($spon->status == "agree")
+            <hr>
+            <p>Awesome, thanks for agreeing! We're super excited to team up with you. We'll get the 'Proof of Agreement' task details over to you. Look out for a WhatsApp message from our team member soon!
+            </p>
+            <hr>
+            <br>
             <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
@@ -307,9 +314,27 @@
               <button id="delete-file-videos">Delete Selected File</button>
               <button id="replace-file-videos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+              <button style="width: 100%; margin-top: 30px" type="submit" class="button-2 w-button">Submit Attachments</button>
+            </form><br>
+            <span>Made mistake ? Click on undo button below</span><br>
+            <a href="/undo/{{$spon->id}}" class="buttonAgree button2Agree">Undo</a>
+            @elseif ($spon->status == "notAgree") 
+            <hr>
+            <p>We're sorry to learn that our terms and conditions for sponsorship don't align with your views. Your opinion matters greatly to us. Could you please share your reasons for disagreement? We are eager to understand and address any concerns you may have. 😊 Once you've shared your thoughts, please look forward to a WhatsApp message from us soon!</p><br>
+            <form action="/reason-reject-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">
+               <label for="field">Reason:</label>
+               <textarea placeholder="Example Text" maxlength="5000" id="field" name="reason" data-name="Field" class="textarea w-input" rows="4"></textarea>
+               <button style="width: 100%;" type="submit" class="button-2 w-button">Submit</button>
+            </form>
+            <hr>
+            <span>Made mistake ? Click on undo button below</span><br>
+            <a href="/undo/{{$spon->id}}" class="buttonAgree button2Agree">Undo</a>
+            @else
+            <label for="field">Do you agree to provide proof of agreements ?</label>
+            <a href="/agreeProof/{{$spon->id}}" class="buttonAgree button2Agree">Yes</a>
+            <a href="/notagreeProof/{{$spon->id}}" class="buttonAgree button3Agree">No</a>
+            @endif
           </div>
-          <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</a>
-        </form>
         </div>
     </div>
 

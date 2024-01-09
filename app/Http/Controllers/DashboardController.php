@@ -9,6 +9,7 @@ use App\Models\BlockList;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Mail\SubmitNotification;
+use App\Mail\ApprovedNotification;
 use App\Models\ongoingEventReport;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -105,6 +106,7 @@ class DashboardController extends Controller
         $sponsor->handle_by = $request->handle_by;
         $sponsor->remarks = $request->remarks;
         $sponsor->states = "Approved";
+        $sponsor->status = "NotFilled";
         $sponsor->save();
         return redirect("/view-request/" . $id);
     }
@@ -122,8 +124,9 @@ class DashboardController extends Controller
         $sponsor->goodies_bag = $request->goodies_bag;
         $sponsor->others = $request->others;
         $sponsor->remarks = $request->remarks;
-        $sponsor->status = "Filled";
+        $sponsor->status = " ";
         $sponsor->save();
+        Mail::to($sponsor->email)->send(new ApprovedNotification());
         return redirect("/view-request/" . $id);
     }
 

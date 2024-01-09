@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\BlockList;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use App\Mail\AgreeNotification;
 use App\Mail\SubmitNotification;
+use App\Mail\NotagreeNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -348,6 +350,34 @@ class SponsorshipController extends Controller
         $sponsor->after_events_attachments_photo = json_encode($filesPhoto);
         $sponsor->after_events_attachments_video = json_encode($filesVideo);
         $sponsor->states = "Completed";
+        $sponsor->save();
+        return redirect("/sponsorship-tracking");
+    }
+
+    public function agreeProof($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = "agree";
+        $sponsor->stat = "proofApproved";
+        $sponsor->save();
+        $user = User::where('name', $sponsor->handle_by)->first();
+        Mail::to($user->email)->send(new AgreeNotification($sponsor->email, $sponsor->contact, $sponsor->fullname));
+        return redirect("/sponsorship-tracking");
+    }
+
+    public function notagreeProof($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = "notAgree";
+        $sponsor->stat = "proofRejected";
+        $sponsor->save();
+        $user = User::where('name', $sponsor->handle_by)->first();
+        Mail::to($user->email)->send(new NotagreeNotification($sponsor->email, $sponsor->contact, $sponsor->fullname));
+        return redirect("/sponsorship-tracking");
+    }
+
+    public function undo($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->status = " ";
+        $sponsor->stat = "none";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
     }

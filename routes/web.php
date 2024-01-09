@@ -22,11 +22,15 @@ Route::get('/sponsorship', function () {
 });
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
 Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack'])->middleware('auth');
-Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
+Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'reasonRejectAgreement'])->middleware('auth');
+Route::put('/reason-reject-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
 Route::put('/collector-details/{id}', [SponsorshipController::class, 'collectorDetails'])->middleware('auth');
 Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->middleware('auth');
 Route::get('/Blacklisted', [SponsorshipController::class, 'blacklisted']);
 Route::get('/submitted', [SponsorshipController::class, 'submitted']);
+Route::get('/agreeProof/{id}', [SponsorshipController::class, 'agreeProof']);
+Route::get('/notagreeProof/{id}', [SponsorshipController::class, 'notagreeProof']);
+Route::get('/undo/{id}', [SponsorshipController::class, 'undo']);
 
 
 //------GENERAL ROUTES-----------------------------------------------------------------------

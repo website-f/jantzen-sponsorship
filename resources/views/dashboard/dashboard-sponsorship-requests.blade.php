@@ -443,7 +443,213 @@
 
         @elseif($sponsor->states == "Approved")
         <div class="col-lg-5">
-          @if ($sponsor->status == "Filled")
+          @if ($sponsor->status == "NotFilled")
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approval</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <p>Current Status: 
+                      @if ($sponsor->states == "Processing")
+                      <button class="btn btn-warning btn-sm">{{$sponsor->states}}</button>            
+                      @elseif ($sponsor->states == "Approved")  
+                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Pending")  
+                      <button class="btn btn-info btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "Collected")  
+                      <button class="btn btn-primary btn-sm">{{$sponsor->states}}</button>   
+                      @elseif ($sponsor->states == "Blacklist")  
+                      <button class="btn btn-dark btn-sm">{{$sponsor->states}}</button> 
+                      @elseif ($sponsor->states == "MIA")  
+                      <button class="btn btn-secondary btn-sm">{{$sponsor->states}}</button>    
+                      @elseif ($sponsor->states == "Rejected")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @elseif ($sponsor->states == "Completed")  
+                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
+                      @else
+                      {{$sponsor->states}}
+                      @endif
+                  </p>
+                </div>
+              </div>
+              <form action="/request-submit-confirm/{{$sponsor->id}}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Attending</label>
+                    <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
+                      @foreach ($user as $item)
+                        <option value="{{$item->name}}">{{$item->name}}</option>
+                      @endforeach
+                    </select>
+                    <input type="hidden" id="selectedValues" name="attending">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Booth / Space</label>
+                      <select name="booth_space" class="form-control" required>
+                        <option value="">Select one...</option>
+                        <option value="None">None</option>
+                        <option value="Booth">Booth</option>
+                        <option value="Space">Space</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <h4>Confirm Sponsorship Products</h4>
+                    <hr>
+                  </div> 
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 200ml x Cartons</label>
+                    <input type="number" name="confirmro_200ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 500ml x Cartons</label>
+                    <input type="number" name="confirmro_500ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">RO 11L x Bottles</label>
+                    <input type="number" name="confirmro_11L" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Mineral 350ml x Cartons</label>
+                    <input type="number" name="confirmro_350ml" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Paper Cup</label>
+                    <input type="number" name="paper_cup" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label">Jantzen’s Goodie Bags</label>
+                    <input type="number" name="goodies_bag" class="form-control" value="0">
+                  </div>
+
+                  <div class="col-lg-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Others</label>
+                    <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>
+Dear ,
+Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor  cartons of 200ml,  cartons of 500ml, cartons of 11L,  cartons of 350ml(Mineral) Jantzen water for the  collection only.
+        
+In return, we kindly request the following from your teams:
+        
+1. Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.
+        
+2. If your team writes an article about the event on your school website, please hyperlink it to our website ( www.jantzen.com.my ).
+        
+3. Obtain 50 Google reviews from personal accounts. We will provide the copywriting, and you'll only need to copy and paste it. (To be completed within 3 weeks.)
+        
+4. Post 20 Instagram stories and tag @jantzenwater, while encouraging people to follow our account. Our goal is to have at least 20 people follow us. NEED SCREENSHOT
+        
+5. Take 30 photos of Jantzen being used at the event and send them to us within 3 days after the event. You can share them via Google Drive and provide me with the link.
+        
+6. Ensure that 50 people follow us on TikTok and provide screenshots for verification.
+  (https://www.tiktok.com/@jantzenwater?_t=8f4dGwUvMUE&amp;_r=1)
+        
+7. Can you create two pieces of content about sharing Jantzen? It can be related to your event or any content you prefer (TIKTOK / XHS) personal acc *send me draft before you posting *
+        
+If your team agrees to these terms and conditions, please let us know by replying to this message on WhatsApp as soon as possible. We are eagerly looking forward to collaborating with you!
+        
+Best regards,
+Naomis
+Jantzen Water Marketing Team
+                    </textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ...">{{$sponsor->remarks}}</textarea>
+                  </div>
+
+                  <div class="col-lg-12 mb-3">
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-check"></i> Submit</button>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectRequest">
+                      <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="rejectRequest" tabindex="-1" role="dialog" aria-labelledby="rejectRequest" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure want to reject {{$sponsor->event_name}} sponsorship ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#blockRequest">
+                      <i class="fas fa-minus-circle"></i> Add to Blocklist
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="blockRequest" tabindex="-1" role="dialog" aria-labelledby="blockRequest" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure want to add {{$sponsor->event_name}} sponsorship to blocklists ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          @else
+          
           <div class="card card-primary collapsed-card">
             <div class="card-header">
               <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approved</b></h3>
@@ -796,212 +1002,6 @@
             </div>
             <!-- /.card-body -->
           </div>
-          @else
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>Approval</b></h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                  <i class="fas fa-expand"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.card-tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <p>Current Status: 
-                      @if ($sponsor->states == "Processing")
-                      <button class="btn btn-warning btn-sm">{{$sponsor->states}}</button>            
-                      @elseif ($sponsor->states == "Approved")  
-                      <button class="btn btn-success btn-sm">{{$sponsor->states}}</button> 
-                      @elseif ($sponsor->states == "Pending")  
-                      <button class="btn btn-info btn-sm">{{$sponsor->states}}</button> 
-                      @elseif ($sponsor->states == "Collected")  
-                      <button class="btn btn-primary btn-sm">{{$sponsor->states}}</button>   
-                      @elseif ($sponsor->states == "Blacklist")  
-                      <button class="btn btn-dark btn-sm">{{$sponsor->states}}</button> 
-                      @elseif ($sponsor->states == "MIA")  
-                      <button class="btn btn-secondary btn-sm">{{$sponsor->states}}</button>    
-                      @elseif ($sponsor->states == "Rejected")  
-                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
-                      @elseif ($sponsor->states == "Completed")  
-                      <button class="btn btn-danger btn-sm">{{$sponsor->states}}</button>
-                      @else
-                      {{$sponsor->states}}
-                      @endif
-                  </p>
-                </div>
-              </div>
-              <form action="/request-submit-confirm/{{$sponsor->id}}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <div class="row">
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Attending</label>
-                    <select class="select2" multiple="multiple" data-placeholder="Select attendees for this event (if need to open booth)" style="width: 100%;">
-                      @foreach ($user as $item)
-                        <option value="{{$item->name}}">{{$item->name}}</option>
-                      @endforeach
-                    </select>
-                    <input type="hidden" id="selectedValues" name="attending">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <div class="form-group">
-                      <label class="form-label">Booth / Space</label>
-                      <select name="booth_space" class="form-control" required>
-                        <option value="">Select one...</option>
-                        <option value="None">None</option>
-                        <option value="Booth">Booth</option>
-                        <option value="Space">Space</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-12">
-                    <h4>Confirm Sponsorship Products</h4>
-                    <hr>
-                  </div> 
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 200ml x Cartons</label>
-                    <input type="number" name="confirmro_200ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 500ml x Cartons</label>
-                    <input type="number" name="confirmro_500ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">RO 11L x Bottles</label>
-                    <input type="number" name="confirmro_11L" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Mineral 350ml x Cartons</label>
-                    <input type="number" name="confirmro_350ml" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Jantzen’s Paper Cup</label>
-                    <input type="number" name="paper_cup" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-6 mb-3">
-                    <label class="form-label">Jantzen’s Goodie Bags</label>
-                    <input type="number" name="goodies_bag" class="form-control" value="0">
-                  </div>
-
-                  <div class="col-lg-12">
-                    <hr>
-                  </div>
-
-                  <div class="col-lg-12 mb-3">
-                    <label class="form-label">Others</label>
-                    <textarea name="others" class="form-control" rows="10" placeholder="Others ..." required>
-Dear ,
-Thank you for expressing interest in partnering with Jantzen! We're thrilled to announce that your sponsorship request has been approved, and we are delighted to provide and sponsor  cartons of 200ml,  cartons of 500ml, cartons of 11L,  cartons of 350ml(Mineral) Jantzen water for the  collection only.
-        
-In return, we kindly request the following from your teams:
-        
-1. Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.
-        
-2. If your team writes an article about the event on your school website, please hyperlink it to our website ( www.jantzen.com.my ).
-        
-3. Obtain 50 Google reviews from personal accounts. We will provide the copywriting, and you'll only need to copy and paste it. (To be completed within 3 weeks.)
-        
-4. Post 20 Instagram stories and tag @jantzenwater, while encouraging people to follow our account. Our goal is to have at least 20 people follow us. NEED SCREENSHOT
-        
-5. Take 30 photos of Jantzen being used at the event and send them to us within 3 days after the event. You can share them via Google Drive and provide me with the link.
-        
-6. Ensure that 50 people follow us on TikTok and provide screenshots for verification.
-  (https://www.tiktok.com/@jantzenwater?_t=8f4dGwUvMUE&amp;_r=1)
-        
-7. Can you create two pieces of content about sharing Jantzen? It can be related to your event or any content you prefer (TIKTOK / XHS) personal acc *send me draft before you posting *
-        
-If your team agrees to these terms and conditions, please let us know by replying to this message on WhatsApp as soon as possible. We are eagerly looking forward to collaborating with you!
-        
-Best regards,
-Naomis
-Jantzen Water Marketing Team
-                    </textarea>
-                  </div>
-
-                  <div class="col-lg-12 mb-3">
-                    <label class="form-label">Remarks</label>
-                    <textarea name="remarks" class="form-control" rows="3" placeholder="Remarks ...">{{$sponsor->remarks}}</textarea>
-                  </div>
-
-                  <div class="col-lg-12 mb-3">
-                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-check"></i> Submit</button>
-                  </div>
-                  <div class="col-lg-6 mb-3">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectRequest">
-                      <i class="fas fa-times-circle"></i> Reject
-                    </button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="rejectRequest" tabindex="-1" role="dialog" aria-labelledby="rejectRequest" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure want to reject {{$sponsor->event_name}} sponsorship ?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="/reject/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mb-3">
-                    <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#blockRequest">
-                      <i class="fas fa-minus-circle"></i> Add to Blocklist
-                    </button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="blockRequest" tabindex="-1" role="dialog" aria-labelledby="blockRequest" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure want to add {{$sponsor->event_name}} sponsorship to blocklists ?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="/block/{{$sponsor->id}}" class="btn btn-secondary"><i class="fas fa-minus-circle"></i> Add to Blocklist</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-            <!-- /.card-body -->
-          </div>
-              
           @endif
 
           <div class="card card-success collapsed-card">
@@ -1102,6 +1102,28 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-body -->
           </div>
+
+          @if ($sponsor->stat == "proofRejected")
+          <div class="card card-danger collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>User not agree</b></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              This user is not agree to provide proof of agreement
+            </div>
+            <!-- /.card-body -->
+          </div>   
+          @endif
         </div>
 
         @elseif($sponsor->states == "Rejected")
