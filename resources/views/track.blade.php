@@ -319,20 +319,32 @@
             <span>Made mistake ? Click on undo button below</span><br>
             <a href="/undo/{{$spon->id}}" class="buttonAgree button2Agree">Undo</a>
             @elseif ($spon->status == "notAgree") 
-            <hr>
-            <p>We're sorry to learn that our terms and conditions for sponsorship don't align with your views. Your opinion matters greatly to us. Could you please share your reasons for disagreement? We are eager to understand and address any concerns you may have. 😊 Once you've shared your thoughts, please look forward to a WhatsApp message from us soon!</p><br>
-            <form action="/reason-reject-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">
-               <label for="field">Reason:</label>
-               <textarea placeholder="Example Text" maxlength="5000" id="field" name="reason" data-name="Field" class="textarea w-input" rows="4"></textarea>
-               <button style="width: 100%;" type="submit" class="button-2 w-button">Submit</button>
-            </form>
-            <hr>
-            <span>Made mistake ? Click on undo button below</span><br>
-            <a href="/undo/{{$spon->id}}" class="buttonAgree button2Agree">Undo</a>
+            <div>
+              <hr>
+              <p>Thank you for your thoughts, please look forward to a WhatsApp message from us soon!</p><br>
+              <hr>
+              <span>Made mistake ? Click on undo button below</span><br>
+              <a href="/undo/{{$spon->id}}" class="buttonAgree button2Agree">Undo</a>
+            </div>
             @else
-            <label for="field">Do you agree to provide proof of agreements ?</label>
-            <a href="/agreeProof/{{$spon->id}}" class="buttonAgree button2Agree">Yes</a>
-            <a href="/notagreeProof/{{$spon->id}}" class="buttonAgree button3Agree">No</a>
+            <div class="agreementDiv">
+              <label for="field">Do you agree to provide proof of agreements ?</label>
+              <a href="/agreeProof/{{$spon->id}}" class="buttonAgree button2Agree">Yes</a>
+              <button type="button" id="NotAgreeBtn" class="buttonAgree button3Agree">No</button>
+            </div>
+            <div class="notAgreeDiv" style="display: none;">
+              <hr>
+              <p>We're sorry to learn that our terms and conditions for sponsorship don't align with your views. Your opinion matters greatly to us. Could you please share your reasons for disagreement? We are eager to understand and address any concerns you may have. 😊 Once you've shared your thoughts, please look forward to a WhatsApp message from us soon!</p><br>
+              <form action="/notagreeProof/{{$spon->id}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                 <label for="field">Reason:</label>
+                 <textarea placeholder="Example Text" maxlength="5000" id="field" name="reason" data-name="Field" class="textarea w-input" rows="4"></textarea>
+                 <button style="width: 100%;" type="submit" class="button-2 w-button">Submit</button>
+              </form>
+              <hr>
+              <span>Made mistake ? Click on undo button below</span><br>
+              <button type="button" id="undoAgree" class="buttonAgree button2Agree">Undo</button>
+            </div>
             @endif
           </div>
         </div>
@@ -951,5 +963,21 @@
       // Initial filtering when the page loads
       filterPosts();
   });
+</script>
+<script>
+  const agreementDiv = document.querySelector(".agreementDiv");
+  const notAgreeDiv = document.querySelector(".notAgreeDiv");
+  const undoAgree = document.getElementById("undoAgree");
+  const NotAgreeBtn = document.getElementById("NotAgreeBtn");
+
+  NotAgreeBtn.addEventListener('click', function() {
+    agreementDiv.style.display = "none";
+    notAgreeDiv.style.display = "block";
+  });
+
+  undoAgree.addEventListener('click', function() {
+    agreementDiv.style.display = "block";
+    notAgreeDiv.style.display = "none";
+  })
 </script>
 @endsection

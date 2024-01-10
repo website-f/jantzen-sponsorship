@@ -1119,7 +1119,9 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              This user is not agree to provide proof of agreement
+              <p>This user is not agree to provide proof of agreement</p>
+              <label class="form-label">reason: </label>
+              <input type="text" readonly class="form-control" value="{{$sponsor->reason}}">
             </div>
             <!-- /.card-body -->
           </div>   

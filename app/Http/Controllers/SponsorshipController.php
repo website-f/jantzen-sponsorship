@@ -364,10 +364,11 @@ class SponsorshipController extends Controller
         return redirect("/sponsorship-tracking");
     }
 
-    public function notagreeProof($id) {
+    public function notagreeProof(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->status = "notAgree";
         $sponsor->stat = "proofRejected";
+        $sponsor->reason = $request->reason;
         $sponsor->save();
         $user = User::where('name', $sponsor->handle_by)->first();
         Mail::to($user->email)->send(new NotagreeNotification($sponsor->email, $sponsor->contact, $sponsor->fullname));

@@ -29,7 +29,7 @@ Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->m
 Route::get('/Blacklisted', [SponsorshipController::class, 'blacklisted']);
 Route::get('/submitted', [SponsorshipController::class, 'submitted']);
 Route::get('/agreeProof/{id}', [SponsorshipController::class, 'agreeProof']);
-Route::get('/notagreeProof/{id}', [SponsorshipController::class, 'notagreeProof']);
+Route::post('/notagreeProof/{id}', [SponsorshipController::class, 'notagreeProof']);
 Route::get('/undo/{id}', [SponsorshipController::class, 'undo']);
 
 
