@@ -22,8 +22,8 @@ Route::get('/sponsorship', function () {
 });
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
 Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack'])->middleware('auth');
-Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'reasonRejectAgreement'])->middleware('auth');
-Route::put('/reason-reject-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
+Route::put('/proof-of-agreement/{id}', [SponsorshipController::class, 'proofAgreement'])->middleware('auth');
+Route::put('/proof-of-agreement-resubmit/{id}', [SponsorshipController::class, 'proofAgreementResubmit'])->middleware('auth');
 Route::put('/collector-details/{id}', [SponsorshipController::class, 'collectorDetails'])->middleware('auth');
 Route::put('/after-event/{id}', [SponsorshipController::class, 'afterEvent'])->middleware('auth');
 Route::get('/Blacklisted', [SponsorshipController::class, 'blacklisted']);
@@ -64,6 +64,8 @@ Route::prefix('')->group(function () {
     Route::get('/blacklists', [DashboardController::class, 'blocklists'])->middleware(['auth', 'only-admin']);
     Route::get('/reject/{id}', [DashboardController::class, 'reject'])->middleware(['auth', 'only-admin']);
     Route::get('/block/{id}', [DashboardController::class, 'block'])->middleware(['auth', 'only-admin']);
+    Route::get('/approvePOA/{id}', [DashboardController::class, 'approvePOA'])->middleware(['auth', 'only-admin']);
+    Route::get('/rejectPOA/{id}', [DashboardController::class, 'rejectPOA'])->middleware(['auth', 'only-admin']);
     Route::get('/remove-blacklist/{id}/{email}', [DashboardController::class, 'removeBlacklist'])->middleware(['auth', 'only-admin']);
 });
 

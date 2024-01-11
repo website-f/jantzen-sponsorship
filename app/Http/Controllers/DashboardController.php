@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use ZipArchive;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\ApprovedPOA;
 use App\Models\BlockList;
 use App\Models\Sponsorship;
+use App\Mail\AppointedEvent;
 use Illuminate\Http\Request;
 use App\Mail\SubmitNotification;
 use App\Mail\ApprovedNotification;
@@ -108,6 +110,8 @@ class DashboardController extends Controller
         $sponsor->states = "Approved";
         $sponsor->status = "NotFilled";
         $sponsor->save();
+        $user = User::where('name', $sponsor->handle_by)->first();
+        Mail::to($user->email)->send(new AppointedEvent($sponsor->handle_by, $sponsor->event_name));
         return redirect("/view-request/" . $id);
     }
 
@@ -435,5 +439,20 @@ class DashboardController extends Controller
             }
             rmdir($dir);
         }
+    }
+
+    public function approvePOA($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->stat = "proofApproved";
+        $sponsor->save();
+        Mail::to($sponsor->email)->send(new ApprovedPOA());
+        return redirect('/view-request/' . $id);
+    }
+
+    public function rejectPOA($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->stat = "proofRejected";
+        $sponsor->save();
+        return redirect('/view-request/' . $id);
     }
 }

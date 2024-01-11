@@ -1103,7 +1103,7 @@ Jantzen Water Marketing Team
             <!-- /.card-body -->
           </div>
 
-          @if ($sponsor->stat == "proofRejected")
+          @if ($sponsor->status == "notAgree")
           <div class="card card-danger collapsed-card">
             <div class="card-header">
               <h3 class="card-title"><i class="fas fa-check-circle"></i> <b>User not agree</b></h3>
@@ -1121,7 +1121,7 @@ Jantzen Water Marketing Team
             <div class="card-body">
               <p>This user is not agree to provide proof of agreement</p>
               <label class="form-label">reason: </label>
-              <input type="text" readonly class="form-control" value="{{$sponsor->reason}}">
+              <textarea class="form-control" rows="10" readonly>{{$sponsor->reason}}</textarea>
             </div>
             <!-- /.card-body -->
           </div>   
@@ -1981,6 +1981,61 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectPOA">
+                    <i class="fas fa-times-circle"></i> Reject
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="rejectPOA" tabindex="-1" role="dialog" aria-labelledby="rejectPOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to reject {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/rejectPOA/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#approvePOA">
+                    <i class="fas fa-check-circle"></i> Approve
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="approvePOA" tabindex="-1" role="dialog" aria-labelledby="approvePOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to approve {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/approvePOA/{{$sponsor->id}}" class="btn btn-success"><i class="fas fa-check-circle"></i> Approve</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <a href="/downloadAll/proof/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>

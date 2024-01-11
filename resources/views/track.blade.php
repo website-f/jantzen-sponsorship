@@ -381,106 +381,170 @@
             <a href="#" class="button-17 w-button">In Progress</a>
           </div>
         </div>
-        <h3 class="heading-11">NOTICES</h3>
-        <p class="paragraph-7">Please submit collector Information us a week in advance when the goods need to be collected, as we require time to prepare. We regret to inform you that if your team does not notify us a week prior to collection, we cannot guarantee that the goods will be ready on time.</p>
-        <p class="paragraph-10">Factory Operating Days: <strong>Monday - Friday</strong><br>Working Hours: <strong>Weekdays 10am - 5pm</strong><br>Lunchtime: <strong>12pm - 2pm</strong><br>Public Holidays: <strong>Closed</strong></p>
-        <p><b>Collection time slot</b></p>
-
-        <p>10am - 11am</p>
-        <p>11am - 12pm</p>
-        <p>2pm - 3pm</p>
-        <p>3pm - 4pm</p>
-        <p>4pm - 5pm</p>
-        <h3 class="heading-12">Collector Information</h3>
-        <p class="paragraph-8">Please complete the collector information section to inform us about who will be collecting the sponsored goods. This ensures a smooth and secure pickup process, helping us to verify the identity of the individual authorized to receive the products.</p>
-        <div class="w-form">
-          <form action="/collector-details/{{$spon->id}}" id="email-form" name="email-form" data-name="Email Form" method="POST" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="755869db-c9d2-baa0-bac4-55e8e267b9be">
-                @csrf
-                @method("PUT")
-            <div id="w-node-ecaacf26-9d06-d63f-b401-b0a26d279abe-135ef160" class="w-layout-layout quick-stack-8 wf-layout-layout">
-                  <div id="w-node-_67e156f1-9e69-65ef-580d-1e3d6ae653ef-135ef160" class="w-layout-cell">
-                    <label for="field">Collection Date</label>
-                    <input type="date" class="text-field-8 w-input" maxlength="256" name="collection_date" data-name="Field" placeholder="Example Text" id="field" required>
+        @if ($spon->stat == "proofApproved")
+        <div>
+          <h3 class="heading-11">NOTICES</h3>
+          <p class="paragraph-7">Please submit collector Information us a week in advance when the goods need to be collected, as we require time to prepare. We regret to inform you that if your team does not notify us a week prior to collection, we cannot guarantee that the goods will be ready on time.</p>
+          <p class="paragraph-10">Factory Operating Days: <strong>Monday - Friday</strong><br>Working Hours: <strong>Weekdays 10am - 5pm</strong><br>Lunchtime: <strong>12pm - 2pm</strong><br>Public Holidays: <strong>Closed</strong></p>
+          <p><b>Collection time slot</b></p>
+  
+          <p>10am - 11am</p>
+          <p>11am - 12pm</p>
+          <p>2pm - 3pm</p>
+          <p>3pm - 4pm</p>
+          <p>4pm - 5pm</p>
+          <h3 class="heading-12">Collector Information</h3>
+          <p class="paragraph-8">Please complete the collector information section to inform us about who will be collecting the sponsored goods. This ensures a smooth and secure pickup process, helping us to verify the identity of the individual authorized to receive the products.</p>
+          <div class="w-form">
+            <form action="/collector-details/{{$spon->id}}" id="email-form" name="email-form" data-name="Email Form" method="POST" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="755869db-c9d2-baa0-bac4-55e8e267b9be">
+                  @csrf
+                  @method("PUT")
+              <div id="w-node-ecaacf26-9d06-d63f-b401-b0a26d279abe-135ef160" class="w-layout-layout quick-stack-8 wf-layout-layout">
+                    <div id="w-node-_67e156f1-9e69-65ef-580d-1e3d6ae653ef-135ef160" class="w-layout-cell">
+                      <label for="field">Collection Date</label>
+                      <input type="date" class="text-field-8 w-input" maxlength="256" name="collection_date" data-name="Field" placeholder="Example Text" id="field" required>
+                    </div>
+                    <div id="w-node-_383f54d8-e8d2-d05f-4d86-0e15f88a2fe2-135ef160" class="w-layout-cell">
+                      <label for="field-2">Collection Time Slot</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="collection_time_slot" data-name="Field 2" placeholder="Example Text" id="field-2" required>
+                    </div>
+                    <div id="w-node-eda0622b-81d2-5d7d-86f4-b2971351bacd-135ef160" class="w-layout-cell">
+                      <label for="field">Collector’s name</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_name" data-name="Field" placeholder="Example Text" id="field" required>
+                    </div>
+                    <div id="w-node-_89f5612b-df97-c386-923a-92d96f2df5f7-135ef160" class="w-layout-cell">
+                      <label for="field">Collector’s IC No</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_IC" data-name="Field" placeholder="Example Text" id="field" required>
+                    </div>
+                    <div id="w-node-_1db2a402-1b0d-02bb-b11e-df60e459c356-135ef160" class="w-layout-cell">
+                      <label for="field">Collector’s contact number</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_contact" data-name="Field" placeholder="Example Text" id="field" required>
+                    </div>
+                    <div id="w-node-b61df816-5f01-6d5a-a6c9-683c35616739-135ef160" class="w-layout-cell">
+                      <label for="field">Collector’s Car Plate number</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_plate_number" data-name="Field" placeholder="Example Text" id="field" required>
+                    </div>
+                    <div id="w-node-_16f0378e-9cf8-8025-8b09-785ab1516dc6-135ef160" class="w-layout-cell">
+                      <label for="field">Name of the Event / Project</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->event_name}}" readonly>
+                    </div>
+                    <div id="w-node-b2c8b863-f67e-4662-bc1e-001136c56a1c-135ef160" class="w-layout-cell">
+                      <label for="field">Event Date</label>
+                      <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->from_date}} to {{$spon->to_date}}" readonly>
+                    </div>
                   </div>
-                  <div id="w-node-_383f54d8-e8d2-d05f-4d86-0e15f88a2fe2-135ef160" class="w-layout-cell">
-                    <label for="field-2">Collection Time Slot</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="collection_time_slot" data-name="Field 2" placeholder="Example Text" id="field-2" required>
-                  </div>
-                  <div id="w-node-eda0622b-81d2-5d7d-86f4-b2971351bacd-135ef160" class="w-layout-cell">
-                    <label for="field">Collector’s name</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_name" data-name="Field" placeholder="Example Text" id="field" required>
-                  </div>
-                  <div id="w-node-_89f5612b-df97-c386-923a-92d96f2df5f7-135ef160" class="w-layout-cell">
-                    <label for="field">Collector’s IC No</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_IC" data-name="Field" placeholder="Example Text" id="field" required>
-                  </div>
-                  <div id="w-node-_1db2a402-1b0d-02bb-b11e-df60e459c356-135ef160" class="w-layout-cell">
-                    <label for="field">Collector’s contact number</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_contact" data-name="Field" placeholder="Example Text" id="field" required>
-                  </div>
-                  <div id="w-node-b61df816-5f01-6d5a-a6c9-683c35616739-135ef160" class="w-layout-cell">
-                    <label for="field">Collector’s Car Plate number</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="collector_plate_number" data-name="Field" placeholder="Example Text" id="field" required>
-                  </div>
-                  <div id="w-node-_16f0378e-9cf8-8025-8b09-785ab1516dc6-135ef160" class="w-layout-cell">
-                    <label for="field">Name of the Event / Project</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->event_name}}" readonly>
-                  </div>
-                  <div id="w-node-b2c8b863-f67e-4662-bc1e-001136c56a1c-135ef160" class="w-layout-cell">
-                    <label for="field">Event Date</label>
-                    <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->from_date}} to {{$spon->to_date}}" readonly>
-                  </div>
+                
+              </div>
+              <button type="submit" style="width: 100%" class="button-2 w-button">Submit Information</button>
+            </form>
+          <h3 class="heading-14">Pickup Location</h3>
+          <p class="paragraph-9">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event..</p>
+          <div class="w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="57d63657-b5f2-aa05-a6b9-5be7504cb6d9">
+              <div id="w-node-_88014fb9-7e3d-34ea-4ff9-a964ddca77f4-135ef160" class="w-layout-layout quick-stack-9 wf-layout-layout">
+                <div id="w-node-_44cfb97f-aae7-a688-05ca-cc2087a8fedb-135ef160" class="w-layout-cell">
+                  <label for="field">Pick Up Location</label>
+                  @if ($spon->pickup_location !== null)
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_location}}" readonly>
+                  @else
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
+                  @endif
                 </div>
-              
+                <div id="w-node-e83f2ba4-62c7-3d06-510a-f3b331108f1e-135ef160" class="w-layout-cell">
+                  <label for="field">Pick Up Location Address</label>
+                  @if ($spon->pickup_address !== null)
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_address}}" readonly>
+                  @else
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
+                  @endif
+                </div>
+                <div id="w-node-_42dc478c-4726-af14-725c-4d5767d2c183-135ef160" class="w-layout-cell">
+                  <label for="field">Contact Person</label>
+                  @if ($spon->contact_person !== null)
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->contact_person}}" readonly>
+                  @else
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
+                  @endif
+                </div>
+                <div id="w-node-_2d621f14-8f40-866a-71d6-d3836b5051cd-135ef160" class="w-layout-cell">
+                  <label for="field">Phone Number</label>
+                  @if ($spon->pickup_phone_number !== null)
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_phone_number}}" readonly>
+                  @else
+                  <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
+                  @endif
+                </div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <div>Thank you! Your submission has been received!</div>
             </div>
-            <button type="submit" style="width: 100%" class="button-2 w-button">Submit Information</button>
-          </form>
-        <h3 class="heading-14">Pickup Location</h3>
-        <p class="paragraph-9">Upon approval, proceed to the designated pickup location to collect the goods or items sponsored for your event..</p>
-        <div class="w-form">
-          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="651a7bf5042f4d69135ef160" data-wf-element-id="57d63657-b5f2-aa05-a6b9-5be7504cb6d9">
-            <div id="w-node-_88014fb9-7e3d-34ea-4ff9-a964ddca77f4-135ef160" class="w-layout-layout quick-stack-9 wf-layout-layout">
-              <div id="w-node-_44cfb97f-aae7-a688-05ca-cc2087a8fedb-135ef160" class="w-layout-cell">
-                <label for="field">Pick Up Location</label>
-                @if ($spon->pickup_location !== null)
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_location}}" readonly>
-                @else
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
-                @endif
-              </div>
-              <div id="w-node-e83f2ba4-62c7-3d06-510a-f3b331108f1e-135ef160" class="w-layout-cell">
-                <label for="field">Pick Up Location Address</label>
-                @if ($spon->pickup_address !== null)
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_address}}" readonly>
-                @else
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
-                @endif
-              </div>
-              <div id="w-node-_42dc478c-4726-af14-725c-4d5767d2c183-135ef160" class="w-layout-cell">
-                <label for="field">Contact Person</label>
-                @if ($spon->contact_person !== null)
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->contact_person}}" readonly>
-                @else
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
-                @endif
-              </div>
-              <div id="w-node-_2d621f14-8f40-866a-71d6-d3836b5051cd-135ef160" class="w-layout-cell">
-                <label for="field">Phone Number</label>
-                @if ($spon->pickup_phone_number !== null)
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" value="{{$spon->pickup_phone_number}}" readonly>
-                @else
-                <input type="text" class="text-field-8 w-input" maxlength="256" name="field" data-name="Field" placeholder="Example Text" id="field" readonly>
-                @endif
-              </div>
+            <div class="w-form-fail">
+              <div>Oops! Something went wrong while submitting the form.</div>
             </div>
-          </form>
-          <div class="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
-          </div>
-          <div class="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
           </div>
         </div>
+        @elseif ($spon->stat == 'proofRejected')
+        <hr>
+            <p>We regret to inform you that you need to resubmit the proof of agreement
+            </p>
+            <hr>
+            <br>
+            <form action="/proof-of-agreement-resubmit/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
+              @csrf
+              @method("PUT")
+              <label>Reviews</label>
+              <div id="file-drop-area" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop review files here, or click to select review files</p>
+                    <label for="file-input" id="file-upload-label">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input" multiple style="display: none;">
+              </div>
+              <ul id="file-list"></ul>
+              <button id="delete-file">Delete Selected File</button>
+              <button id="replace-file">Replace Selected File</button>
+              <input type="hidden" id="file-names-input" name="file_names">
+
+              <label style="margin-top: 30px">Photos</label>
+              <div id="file-drop-area-photos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop photo files here, or click to select photo files</p>
+                    <label for="file-input-photos" id="file-upload-label-photos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-photos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-photos"></ul>
+              <button id="delete-file-photos">Delete Selected File</button>
+              <button id="replace-file-photos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-photos" name="file_names_photos">
+
+              <label style="margin-top: 30px">Videos</label>
+              <div id="file-drop-area-videos" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-videos" id="file-upload-label-videos">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-videos" multiple style="display: none;">
+              </div>
+              <ul id="file-list-videos"></ul>
+              <button id="delete-file-videos">Delete Selected File</button>
+              <button id="replace-file-videos">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+              <button style="width: 100%; margin-top: 30px" type="submit" class="button-2 w-button">Submit Attachments</button>
+            </form><br>
+        @else
+        <hr>
+        <p>Before you can fill in the collector's information, we need to review your attachments on 'Proof of Agreement' first. Once done, we will notify you either need to resubmit or proceed with filling the collector's information.</p>
+        <p>We will get back to you soon !</p>
+        <hr>
+        @endif
       </div>
     </div>
 

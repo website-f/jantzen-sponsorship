@@ -67,7 +67,8 @@ class SponsorshipController extends Controller
                 }
             }
         
-            Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification());
+            $currentDate = now()->format('d/m/Y');
+            Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification($request->event_name, $currentDate));
             Mail::to($request->email)->send(new SubmitNotificationClient());
               
             $sponsor = new Sponsorship;
@@ -234,6 +235,115 @@ class SponsorshipController extends Controller
 
     }
 
+
+    public function proofAgreementResubmit(Request $request, $id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        //Review
+        $fileDataJsonReview = $request->input('file_names');
+        $fileDataReview = json_decode($fileDataJsonReview);
+        $filesReview = [];
+        //Photo
+        $fileDataJsonPhoto = $request->input('file_names_photos');
+        $fileDataPhoto = json_decode($fileDataJsonPhoto);
+        $filesPhoto = [];
+        //Video
+        $fileDataJsonVideo = $request->input('file_names_videos');
+        $fileDataVideo = json_decode($fileDataJsonVideo);
+        $filesVideo = [];
+
+        if ($fileDataReview != null) {
+            foreach ($fileDataReview as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesReview[] = "agreement/" . $fileName;
+            }
+        }
+
+        if ($fileDataPhoto != null) {
+            foreach ($fileDataPhoto as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesPhoto[] = "agreement/" . $fileName;
+            }
+        }
+
+        if ($fileDataVideo != null) {
+            foreach ($fileDataVideo as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesVideo[] = "agreement/" . $fileName;
+            }
+        }
+
+    
+        $sponsor->attachements_agreement_proof_review = json_encode($filesReview);
+        $sponsor->attachements_agreement_proof_photo = json_encode($filesPhoto);
+        $sponsor->attachements_agreement_proof_video = json_encode($filesVideo);
+        $sponsor->save();
+        return redirect("/sponsorship-tracking");
+
+    }
+
     public function collectorDetails(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->collection_date = $request->collection_date;
@@ -357,7 +467,7 @@ class SponsorshipController extends Controller
     public function agreeProof($id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->status = "agree";
-        $sponsor->stat = "proofApproved";
+        // $sponsor->stat = "proofApproved";
         $sponsor->save();
         $user = User::where('name', $sponsor->handle_by)->first();
         Mail::to($user->email)->send(new AgreeNotification($sponsor->email, $sponsor->contact, $sponsor->fullname));
@@ -367,7 +477,7 @@ class SponsorshipController extends Controller
     public function notagreeProof(Request $request, $id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->status = "notAgree";
-        $sponsor->stat = "proofRejected";
+        // $sponsor->stat = "proofRejected";
         $sponsor->reason = $request->reason;
         $sponsor->save();
         $user = User::where('name', $sponsor->handle_by)->first();

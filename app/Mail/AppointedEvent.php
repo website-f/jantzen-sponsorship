@@ -9,22 +9,25 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SubmitNotification extends Mailable
+class AppointedEvent extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $user;
+    public $event;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($event, $date)
+    public function __construct($user, $event)
     {
+        $this->user = $user;
         $this->event = $event;
-        $this->date = $date;
     }
 
     public function build()
     {
-        return $this->view('emails.submission.submitNotification')
-                    ->subject('Sponsorship Request for ' . $this->event . ' event - ' . $this->date); // Create a blade template in resources/views/emails/marketing.blade.php
+        return $this->view('emails.submission.appointedEvent')
+                    ->subject('You will be handling sponsorship for ' . $this->event . ' event'); // Create a blade template in resources/views/emails/marketing.blade.php
     }
 }

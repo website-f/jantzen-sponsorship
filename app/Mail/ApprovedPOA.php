@@ -9,22 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SubmitNotification extends Mailable
+class ApprovedPOA extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($event, $date)
+    public function __construct()
     {
-        $this->event = $event;
-        $this->date = $date;
+        //
     }
 
     public function build()
     {
-        return $this->view('emails.submission.submitNotification')
-                    ->subject('Sponsorship Request for ' . $this->event . ' event - ' . $this->date); // Create a blade template in resources/views/emails/marketing.blade.php
+        return $this->view('emails.submission.approvedPOA')
+                    ->subject('Your proof of agreement is approved'); // Create a blade template in resources/views/emails/marketing.blade.php
     }
 }

@@ -7,7 +7,6 @@
     <title>Sponsorship Request</title>
 </head>
 <body>
-    <p>Hi! your sponsorship request is approved.</p>
-    <p>Login <a href="https://general.jantzen.my/login">https://general.jantzen.my/login</a> using your email and track you next step to complete the sponsorship request</p>
+    <p>Hi! {{$user}}, you you are going to handle sponsorship for {{$event}} event</p>
 </body>
 </html>
