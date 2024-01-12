@@ -1981,6 +1981,7 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              @if ($sponsor->stat == "proofSent")
               <div class="row">
                 <div class="col-lg-6 mb-3">
                   <!-- Button trigger modal -->
@@ -2036,6 +2037,11 @@ Jantzen Water Marketing Team
                   </div>
                 </div>
               </div>
+              @elseif ($sponsor->stat == "proofRejected")
+              <hr>
+              <p>You have rejected the proof of agreements, waiting for the client to resubmit</p>
+              <hr>
+              @endif
               <a href="/downloadAll/proof/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>

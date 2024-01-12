@@ -331,33 +331,37 @@ class DashboardController extends Controller
         $filename = "";
         $sponsorship = Sponsorship::findOrFail($id);
         $sponsorshipDate = date("mdy", strtotime($sponsorship->from_date));
-
+    
         if ($type == "proof") {
             $items1 = Sponsorship::findOrFail($id)->attachements_agreement_proof_review;
             $items2 = Sponsorship::findOrFail($id)->attachements_agreement_proof_photo;
             $items3 = Sponsorship::findOrFail($id)->attachements_agreement_proof_video;
+            $items4 = Sponsorship::findOrFail($id)->resubmissions;
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-proofOfAggreement";
         } elseif ($type == "after") {           
             $items1 = Sponsorship::findOrFail($id)->after_events_attachments_review;
             $items2 = Sponsorship::findOrFail($id)->after_events_attachments_photo;
             $items3 = Sponsorship::findOrFail($id)->after_events_attachments_video;
+            $items4 = "[]";
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-afterEvents";
         } elseif ($type == "events") {
             $items1 = Sponsorship::findOrFail($id)->sponsorship_attachments;
             $items2 = "[]";
             $items3 = "[]";
+            $items4 = "[]";
             $filename = $sponsorshipDate . "-" . $sponsorship->event_name . "-sponsorshipAttachments";
         }
-
+    
         // Create a unique temporary directory for the zip file
         $tempDirectory = storage_path('temp_download');
         if (!is_dir($tempDirectory)) {
             mkdir($tempDirectory);
         }
-
+    
         $data1 = json_decode($items1, true);
         $data2 = json_decode($items2, true);
         $data3 = json_decode($items3, true);
+        $data4 = json_decode($items4, true);
         // Extract and copy paths for both images and files for items1
         if (is_array($data1)) {
             $subfolderPath = $tempDirectory . '/Review';
@@ -367,7 +371,6 @@ class DashboardController extends Controller
                 $filePath = public_path($path);
                 copy($filePath, $subfolderPath . '/' . basename($filePath));
             }
-
         }
     
         // Extract and copy paths for both images and files for items2
@@ -379,7 +382,6 @@ class DashboardController extends Controller
                 $filePath = public_path($path);
                 copy($filePath, $subfolderPath . '/' . basename($filePath));
             }
-
         }
     
         // Extract and copy paths for both images and files for items3
@@ -391,37 +393,74 @@ class DashboardController extends Controller
                 $filePath = public_path($path);
                 copy($filePath, $subfolderPath . '/' . basename($filePath));
             }
-
         }
 
+        // Initialize a counter variable
+        $resubmissionCounter = 1;
+
+        if ($data4 !== null) {
+            // Loop through each resubmission count
+            foreach ($data4 as $resubmissionCount => $resubmissionPaths) {
+                // Increment the counter for the next iteration
+                $resubmissionCounter++;
+        
+                // Create a folder for each resubmission count
+                $resubmitFolder = "resubmit" . ($resubmissionCount > 0 ? $resubmissionCount : '');
+                $subfolderPath = $tempDirectory . '/' . $resubmitFolder;
+                if (!is_dir($subfolderPath)) {
+                    mkdir($subfolderPath);
+                }
+        
+                // Loop through each type (photo, video, review)
+                foreach ($resubmissionPaths['allpaths'] as $type => $paths) {
+                    // Create a subfolder for each type inside the resubmit folder
+                    $typeFolder = $subfolderPath . '/' . $type;
+                    if (!is_dir($typeFolder)) {
+                        mkdir($typeFolder);
+                    }
+        
+                    // Loop through each path in the current type
+                    foreach ($paths as $path) {
+                        // Ensure $path is a string before using it in public_path
+                        if (is_string($path)) {
+                            $filePath = public_path($path);
+                            copy($filePath, $typeFolder . '/' . basename($filePath));
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    
         // Create a zip file
         $zipFileName = $filename . ".zip";
         $zip = new ZipArchive;
         $zip->open(storage_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
+    
         $files = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($tempDirectory),
             \RecursiveIteratorIterator::LEAVES_ONLY
         );
     
-        
         foreach ($files as $name => $file) {
             if (!$file->isDir()) {
                 $filePath = $file->getRealPath();
                 $relativePath = substr($filePath, strlen($tempDirectory) + 1);
-
+    
                 $zip->addFile($filePath, $relativePath);
             }
         }
-
+    
         $zip->close();
-
+    
         // Cleanup: Delete the temporary directory
         $this->rrmdir($tempDirectory);
-
+    
         // Download the zip file
         return response()->download(storage_path($zipFileName))->deleteFileAfterSend(true);
     }
+
 
     // Recursive function to remove a directory and its contents
     private function rrmdir($dir)
@@ -441,6 +480,7 @@ class DashboardController extends Controller
         }
     }
 
+    //--APROVE AGREEMENT CONTROLLER------------------------------------------------------------------
     public function approvePOA($id) {
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->stat = "proofApproved";

@@ -230,6 +230,7 @@ class SponsorshipController extends Controller
         $sponsor->attachements_agreement_proof_photo = json_encode($filesPhoto);
         $sponsor->attachements_agreement_proof_video = json_encode($filesVideo);
         $sponsor->states = "Pending";
+        $sponsor->stat = "proofSent";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
 
@@ -335,10 +336,38 @@ class SponsorshipController extends Controller
             }
         }
 
+        // Retrieve existing attachments and decode JSON
+        $existingReviewAttachments = json_decode($sponsor->attachements_agreement_proof_review, true);
+        $existingPhotoAttachments = json_decode($sponsor->attachements_agreement_proof_photo, true);
+        $existingVideoAttachments = json_decode($sponsor->attachements_agreement_proof_video, true);
+
+        // Retrieve existing attachments and decode JSON
+        $existingResubmissions = json_decode($sponsor->resubmissions, true) ?? [];
     
-        $sponsor->attachements_agreement_proof_review = json_encode($filesReview);
-        $sponsor->attachements_agreement_proof_photo = json_encode($filesPhoto);
-        $sponsor->attachements_agreement_proof_video = json_encode($filesVideo);
+        // Increment the resubmission count
+        $resubmissionCount = count($existingResubmissions) + 1;
+    
+        // Append new attachments to existing ones
+        $resubmissionData = [
+            $resubmissionCount => [
+                "allpaths" => [
+                    "review" => $filesReview,
+                    "photo" => $filesPhoto,
+                    "video" => $filesVideo
+                ]
+            ]
+        ];
+
+        $existingReviewAttachments = array_merge($existingReviewAttachments, $filesReview);
+        $existingPhotoAttachments = array_merge($existingPhotoAttachments, $filesPhoto);
+        $existingVideoAttachments = array_merge($existingVideoAttachments, $filesVideo);
+    
+        $existingResubmissions = array_merge($existingResubmissions, $resubmissionData);
+        $sponsor->resubmissions = json_encode($existingResubmissions);
+        $sponsor->attachements_agreement_proof_review = json_encode($existingReviewAttachments);
+        $sponsor->attachements_agreement_proof_photo = json_encode($existingPhotoAttachments);
+        $sponsor->attachements_agreement_proof_video = json_encode($existingVideoAttachments);
+        $sponsor->stat = "proofSent";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
 
