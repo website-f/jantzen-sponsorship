@@ -68,7 +68,24 @@ class SponsorshipController extends Controller
             }
         
             $currentDate = now()->format('d/m/Y');
-            Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification($request->event_name, $currentDate));
+            Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification(
+                                                       $request->event_name, 
+                                                       $currentDate,
+                                                       $request->name,
+                                                       $request->contact,
+                                                       $request->email,
+                                                       $request->organization,
+                                                       $request->nature_event,
+                                                       $request->from_date,
+                                                       $request->to_date,
+                                                       $request->eventAddress,
+                                                       $request->attendees,
+                                                       $request->explaination_product,
+                                                       $request->booth,
+                                                       $request->ro_200ml,
+                                                       $request->ro_500ml,
+                                                       $request->ro_350ml,
+                                                       $request->ro_11L));
             Mail::to($request->email)->send(new SubmitNotificationClient());
               
             $sponsor = new Sponsorship;
@@ -499,7 +516,22 @@ class SponsorshipController extends Controller
         // $sponsor->stat = "proofApproved";
         $sponsor->save();
         $user = User::where('name', $sponsor->handle_by)->first();
-        Mail::to($user->email)->send(new AgreeNotification($sponsor->email, $sponsor->contact, $sponsor->fullname));
+        Mail::to($user->email)->send(new AgreeNotification($sponsor->event_name,
+                                                           $sponsor->fullname,
+                                                           $sponsor->contact,
+                                                           $sponsor->email,
+                                                           $sponsor->organization,
+                                                           $sponsor->nature_event,
+                                                           $sponsor->from_date,
+                                                           $sponsor->to_date,
+                                                           $sponsor->eventAddress,
+                                                           $sponsor->attendees,
+                                                           $sponsor->explaination_product,
+                                                           $sponsor->booth,
+                                                           $sponsor->confirmro_200ml,
+                                                           $sponsor->confirmro_500ml,
+                                                           $sponsor->confirmro_350ml,
+                                                           $sponsor->confirmro_11L));
         return redirect("/sponsorship-tracking");
     }
 

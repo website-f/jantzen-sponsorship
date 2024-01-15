@@ -111,7 +111,23 @@ class DashboardController extends Controller
         $sponsor->status = "NotFilled";
         $sponsor->save();
         $user = User::where('name', $sponsor->handle_by)->first();
-        Mail::to($user->email)->send(new AppointedEvent($sponsor->handle_by, $sponsor->event_name));
+        Mail::to($user->email)->send(new AppointedEvent($sponsor->handle_by, 
+                                                        $sponsor->event_name,
+                                                        $sponsor->fullname,
+                                                        $sponsor->contact,
+                                                        $sponsor->email,
+                                                        $sponsor->organization,
+                                                        $sponsor->nature_event,
+                                                        $sponsor->from_date,
+                                                        $sponsor->to_date,
+                                                        $sponsor->eventAddress,
+                                                        $sponsor->attendees,
+                                                        $sponsor->explaination_product,
+                                                        $sponsor->booth,
+                                                        $sponsor->ro_200ml,
+                                                        $sponsor->ro_500ml,
+                                                        $sponsor->ro_350ml,
+                                                        $sponsor->ro_11L));
         return redirect("/view-request/" . $id);
     }
 
@@ -130,7 +146,22 @@ class DashboardController extends Controller
         $sponsor->remarks = $request->remarks;
         $sponsor->status = " ";
         $sponsor->save();
-        Mail::to($sponsor->email)->send(new ApprovedNotification());
+        Mail::to($sponsor->email)->send(new ApprovedNotification($sponsor->event_name,
+                                                                 $sponsor->fullname,
+                                                                 $sponsor->contact,
+                                                                 $sponsor->email,
+                                                                 $sponsor->organization,
+                                                                 $sponsor->nature_event,
+                                                                 $sponsor->from_date,
+                                                                 $sponsor->to_date,
+                                                                 $sponsor->eventAddress,
+                                                                 $sponsor->attendees,
+                                                                 $sponsor->explaination_product,
+                                                                 $sponsor->booth,
+                                                                 $sponsor->confirmro_200ml,
+                                                                 $sponsor->confirmro_500ml,
+                                                                 $sponsor->confirmro_350ml,
+                                                                 $sponsor->confirmro_11L));
         return redirect("/view-request/" . $id);
     }
 
