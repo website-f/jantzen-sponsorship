@@ -30,6 +30,7 @@ class AppointedEvent extends Mailable
     public $ro500ml;
     public $m350ml;
     public $ro11L;
+    public $remarks;
 
     /**
      * Create a new message instance.
@@ -50,7 +51,8 @@ class AppointedEvent extends Mailable
                                 $ro200ml,
                                 $ro500ml,
                                 $m350ml,
-                                $ro11L)
+                                $ro11L,
+                                $remarks)
     {
         $this->user = $user;
         $this->event = $event;
@@ -69,6 +71,7 @@ class AppointedEvent extends Mailable
         $this->ro500ml = $ro500ml;
         $this->m350ml = $m350ml;
         $this->ro11L = $ro11L;
+        $this->remarks = $remarks;
     }
 
     public function build()

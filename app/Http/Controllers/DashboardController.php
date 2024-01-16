@@ -127,7 +127,8 @@ class DashboardController extends Controller
                                                         $sponsor->ro_200ml,
                                                         $sponsor->ro_500ml,
                                                         $sponsor->ro_350ml,
-                                                        $sponsor->ro_11L));
+                                                        $sponsor->ro_11L,
+                                                        $sponsor->remarks));
         return redirect("/view-request/" . $id);
     }
 

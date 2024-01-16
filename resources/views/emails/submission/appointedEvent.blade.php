@@ -90,6 +90,7 @@
             <p><b>R.O water 500ML: </b> {{$ro500ml}}</p>
             <p><b>R.O water 11L: </b> {{$ro11L}}</p>
             <p><b>Mineral water 350ML: </b> {{$m350ml}}</p>
+            <p><b>Remarks: </b> {{$remarks}}</p>
         </div>
         <footer>
             <hr>
