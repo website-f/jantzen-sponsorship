@@ -299,11 +299,12 @@
                 <tr>
                   <th>#</th>
                   <th>Submission Date</th>
+                  <th>Name</th>
                   <th>Event Name</th>
                   <th>Event Date</th>
                   <th>Location</th>
                   <th>Handle By</th>
-                  <th>Sponsor Cartons</th>
+                  {{-- <th>Sponsor Cartons</th> --}}
                   <th>Status</th>
                 </tr>
                 </thead>
@@ -348,6 +349,7 @@
                     </td>
                     <td>{{$sponsorship->created_at->format('d-m-Y')}}</td>
                     <td>{{$sponsorship->event_name}}</td>
+                    <td>{{$sponsorship->fullname}}</td>
                     <td>
                       {{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}
                     </td>
@@ -366,7 +368,7 @@
                       None
                       @endif
                     </td>
-                    <td>{{$sponsorCartons}}</td>
+                    {{-- <td>{{$sponsorCartons}}</td> --}}
                     <td>
                       @if ($sponsorship->states == "Processing")
                       <button class="btn btn-warning">{{$sponsorship->states}}</button>            
