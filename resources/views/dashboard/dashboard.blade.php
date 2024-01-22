@@ -348,8 +348,8 @@
                       </div>
                     </td>
                     <td>{{$sponsorship->created_at->format('d-m-Y')}}</td>
-                    <td>{{$sponsorship->event_name}}</td>
                     <td>{{$sponsorship->fullname}}</td>
+                    <td>{{$sponsorship->event_name}}</td>
                     <td>
                       {{date('M d, Y', strtotime($sponsorship->from_date))}} - {{date('M d, Y', strtotime($sponsorship->to_date))}}
                     </td>
