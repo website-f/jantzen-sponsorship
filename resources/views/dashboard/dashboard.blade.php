@@ -517,6 +517,7 @@
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 30,
       "buttons": ["copy", "excel", "pdf", "print"],
+      "order": [[1, "desc"]],
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
