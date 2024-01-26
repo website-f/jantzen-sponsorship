@@ -295,7 +295,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
-                <thead>
+                <thead class="bg-dark">
                 <tr>
                   <th>#</th>
                   <th>Submission Date</th>
@@ -306,6 +306,7 @@
                   <th>Handle By</th>
                   {{-- <th>Sponsor Cartons</th> --}}
                   <th>Status</th>
+                  <th>Tags</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -388,6 +389,13 @@
                       <button class="btn btn-success">{{$sponsorship->states}}</button>
                       @else
                       {{$sponsorship->states}}
+                      @endif
+                    </td>
+                    <td>
+                      @if ($sponsorship->tagging && $sponsorship->tagging->count() > 0)
+                          @foreach ($sponsorship->tagging as $item)
+                          <span class="badge badge-warning">{{$item->name}}</span><br>
+                          @endforeach
                       @endif
                     </td>
                   </tr>

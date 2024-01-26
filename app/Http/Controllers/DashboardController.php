@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use ZipArchive;
 use Carbon\Carbon;
+use App\Models\Tag;
 use App\Models\User;
 use App\Mail\ApprovedPOA;
 use App\Models\BlockList;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Session;
 class DashboardController extends Controller
 {
     public function dashboard() {
-        $sponsor = Sponsorship::orderBy('created_at', 'desc')->get();
+        $sponsor = Sponsorship::with('tagging')->orderBy('created_at', 'desc')->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
@@ -63,7 +64,7 @@ class DashboardController extends Controller
     }
 
     public function viewRequest($id) {
-        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor = Sponsorship::with('tagging')->find($id);     
         $user = User::where('role_id', 2)->get();
         $alluser = User::whereIn('role_id', [1, 2])->get();
         $templates = $this->getAvailableTemplates();
@@ -527,4 +528,37 @@ class DashboardController extends Controller
         $sponsor->save();
         return redirect('/view-request/' . $id);
     }
+
+    //Add Tag Controller
+    public function addTag(Request $request, $id) {
+        $sponsor = Sponsorship::with('tagging')->findOrFail($id);
+
+        $tagName = $request->tag;
+
+        $tag = Tag::firstOrCreate(['name' => $tagName]);
+
+        $sponsor->tagging()->syncWithoutDetaching($tag->id);
+
+        return redirect("/view-request/" . $id);
+       
+    }
+
+    public function removeTag($id, $tag) {
+        $sponsor = Sponsorship::with('tagging')->findOrFail($id);
+    
+        $tagName = $tag;
+    
+        $tag = Tag::where('name', $tagName)->first();
+    
+        if ($tag) {
+            $sponsor->tagging()->detach($tag->id);
+            // You may want to check if the tag is no longer associated with any sponsorships
+            if ($tag->sponsorships->isEmpty()) {
+                $tag->delete(); // Optionally delete the tag if it's not associated with any sponsorships
+            }
+        }
+    
+        return redirect("/view-request/" . $id);
+    }
+    
 }

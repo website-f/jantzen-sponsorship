@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Sponsorship extends Model
 {
     use HasFactory, SoftDeletes;
+
+    public function tagging()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

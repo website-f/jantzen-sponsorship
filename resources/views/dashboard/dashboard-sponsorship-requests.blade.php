@@ -144,6 +144,40 @@
               <h3 class="card-title">
                 <b>Person In Charge Details</b>
               </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTag">
+                  <i class="fas fa-plus"></i> Add Tag
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-labelledby="addTag" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Tag</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                       <form action="/add-tag/{{$sponsor->id}}" method="POST">
+                        @csrf
+                        <label>Tag Name</label>
+                        <input type="text" name="tag" class="form-control">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                @if ($sponsor->tagging && $sponsor->tagging->count() > 0)
+                    @foreach ($sponsor->tagging as $item)
+                    <a href="/remove-tag/{{$sponsor->id}}/{{$item->name}}" class="btn btn-warning">{{$item->name}}</a>
+                    @endforeach
+                @endif
+              </div>
             </div>
             <div class="card-body">
               <div class="row">

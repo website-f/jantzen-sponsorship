@@ -71,6 +71,8 @@ Route::prefix('')->group(function () {
 
 Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware(['auth', 'only-admin']);
 Route::get('downloadAll/{type}/{id}', [DashboardController::class, 'downloadAll'])->middleware(['auth', 'only-admin']);
+Route::post('/add-tag/{id}', [DashboardController::class, 'addTag'])->middleware(['auth', 'only-admin']);
+Route::get('/remove-tag/{id}/{tag}', [DashboardController::class, 'removeTag'])->middleware(['auth', 'only-admin']);
 
 
 
