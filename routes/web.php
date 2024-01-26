@@ -62,6 +62,7 @@ Route::prefix('')->group(function () {
     Route::post('/submit-report/{id}', [DashboardController::class, 'submitReport'])->middleware(['auth', 'only-admin']);
     Route::put('/edit-report/{id}/{repID}', [DashboardController::class, 'submitEditReport'])->middleware(['auth', 'only-admin']);
     Route::get('/blacklists', [DashboardController::class, 'blocklists'])->middleware(['auth', 'only-admin']);
+    Route::get('/rejected', [DashboardController::class, 'rejectedLists'])->middleware(['auth', 'only-admin']);
     Route::get('/reject/{id}', [DashboardController::class, 'reject'])->middleware(['auth', 'only-admin']);
     Route::get('/block/{id}', [DashboardController::class, 'block'])->middleware(['auth', 'only-admin']);
     Route::get('/approvePOA/{id}', [DashboardController::class, 'approvePOA'])->middleware(['auth', 'only-admin']);

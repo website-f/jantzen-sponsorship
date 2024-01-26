@@ -268,6 +268,12 @@
                   <p>Blacklists</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/rejected" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rejected</p>
+                </a>
+              </li>
             </ul>
           </li>
 

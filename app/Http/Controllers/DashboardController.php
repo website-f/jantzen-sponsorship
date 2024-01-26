@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Session;
 class DashboardController extends Controller
 {
     public function dashboard() {
-        $sponsor = Sponsorship::with('tagging')->orderBy('created_at', 'desc')->get();
+        $sponsor = Sponsorship::with('tagging')->where('states', '!=', 'Rejected')->orderBy('created_at', 'desc')->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
@@ -559,6 +559,13 @@ class DashboardController extends Controller
         }
     
         return redirect("/view-request/" . $id);
+    }
+
+    //Rejected Controller
+    public function rejectedLists() {
+        $sponsor = Sponsorship::where('states', 'Rejected')->get();
+
+        return view('dashboard.dashboard-sponsorship-rejected', ['sponsor' => $sponsor]);
     }
     
 }
