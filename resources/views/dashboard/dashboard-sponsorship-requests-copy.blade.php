@@ -866,7 +866,7 @@
         contact_person.value = "Lily"
         phone_number.value = "011-10607533"
       } else if(pickup_location.value == "Shah Alam") {
-        pickup_address.value = "75A, Jalan Snuker 13/28, Seksyen 13, 40100 Shah Alam, Selangor"
+        pickup_address.value = "12, Jalan Pasaran 23/5, Seksyen 23, 40300 Shah Alam, Selangor"
         contact_person.value = "Husniza | Yee Yong"
         phone_number.value = "011-10691533 | 012-7627066"
       }
