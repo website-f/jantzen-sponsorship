@@ -112,31 +112,111 @@
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-6 connectedSortable">
-           <!-- PIE CHART -->
-           <div class="card ">
-            <div class="card-header">
-              <h3 class="card-title"><i class="fas fa-chart-pie mr-1"></i> Status</h3>
-
-              {{-- <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div> --}}
+        <!-- /.col-md-6 -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="d-flex justify-content-between">
+                <h3 class="card-title">Status</h3>
+                {{-- <a href="javascript:void(0);">View Report</a> --}}
+              </div>
             </div>
             <div class="card-body">
-              <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              
+
+              <div class="position-relative mb-4">
+                <canvas id="sales-chart" height="200"></canvas>
+              </div>
+              
+              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                <p class="d-flex flex-column text-left">
+                  @php
+                    $sponsorApprovedBar = $sponsor->where('states', 'Approved')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorApprovedBar}}
+                  </span>
+                  <span class="text-muted">APPROVED</span>
+                </p>
+                <p class="d-flex flex-column text-right">
+                  @php
+                    $sponsorProcessingBar = $sponsor->where('states', 'Processing')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorProcessingBar}}
+                  </span>
+                  <span class="text-muted">PROCESSING</span>
+                </p>
+              </div>
+              <!-- /.d-flex -->
+              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                <p class="d-flex flex-column text-left">
+                  @php
+                    $sponsorPendingBar = $sponsor->where('states', 'Pending')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorPendingBar}}
+                  </span>
+                  <span class="text-muted">PENDING</span>
+                </p>
+                <p class="d-flex flex-column text-right">
+                  @php
+                    $sponsorPendingCollectionBar = $sponsor->where('states', 'Pending Collection')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorPendingCollectionBar}}
+                  </span>
+                  <span class="text-muted">PENDING COLLECTION</span>
+                </p>
+              </div>
+              <!-- /.d-flex -->
+              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                <p class="d-flex flex-column text-left">
+                  @php
+                    $sponsorCompletedBar = $sponsor->where('states', 'Completed')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorCompletedBar}}
+                  </span>
+                  <span class="text-muted">COMPLETED</span>
+                </p>
+                <p class="d-flex flex-column text-right">
+                  @php
+                    $sponsorCollectedBar = $sponsor->where('states', 'Collected')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorCollectedBar}}
+                  </span>
+                  <span class="text-muted">COLLECTED</span>
+                </p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-0">
+                <p class="d-flex flex-column text-left">
+                  @php
+                    $sponsorBlacklistBar = $sponsor->where('states', 'Blacklist')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorBlacklistBar}}
+                  </span>
+                  <span class="text-muted">BLACKLISTED</span>
+                </p>
+                <p class="d-flex flex-column text-right">
+                  @php
+                    $sponsorRejectedBar = $sponsor->where('states', 'Rejected')->count();
+                  @endphp
+                  <span class="font-weight-bold">
+                    {{$sponsorRejectedBar}}
+                  </span>
+                  <span class="text-muted">REJECTED</span>
+                </p>
+              </div>
+              <!-- /.d-flex -->
+              
             </div>
-            <!-- /.card-body -->
           </div>
           <!-- /.card -->
-          
-        </section>
-        <!-- /.Left col -->
+        </div>
+        <!-- /.col-md-6 -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-6 connectedSortable">
 
@@ -348,7 +428,7 @@
                         </div>
                       </div>
                     </td>
-                    <td>{{$sponsorship->created_at->format('d-m-Y')}}</td>
+                    <td>{{$sponsorship->created_at}}</td>
                     <td>{{$sponsorship->fullname}}</td>
                     <td>{{$sponsorship->event_name}}</td>
                     <td>
@@ -414,118 +494,89 @@
 <!-- /.content-wrapper -->
 
 <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+
 <script>
+  /* global Chart:false */
   const pageLabels = @json($statusCounts->keys());
   const pageData = @json($statusCounts->values());
-  $(function () {
-    /* ChartJS
-     * -------
-     * Here we will create a few charts using ChartJS
-     */
+$(function () {
+  'use strict'
 
-    
-    //-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutData        = {
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode = 'index'
+  var intersect = true
+
+  var $salesChart = $('#sales-chart')
+  // eslint-disable-next-line no-unused-vars
+  var salesChart = new Chart($salesChart, {
+    type: 'bar',
+    data: {
       labels: pageLabels,
       datasets: [
         {
-          data: pageData,
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          borderColor: '#007bff',
+          data: pageData
+        },
       ]
-    }
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions
-    })
-
-    // Sales graph chart
-  var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')
-  // $('#revenue-chart').get(0).getContext('2d');
-
-  var salesGraphChartData = {
-    labels: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2'],
-    datasets: [
-      {
-        label: 'Digital Goods',
-        fill: false,
-        borderWidth: 2,
-        lineTension: 0,
-        spanGaps: true,
-        borderColor: '#efefef',
-        pointRadius: 3,
-        pointHoverRadius: 7,
-        pointColor: '#efefef',
-        pointBackgroundColor: '#efefef',
-        data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432]
-      }
-    ]
-  }
-
-  var salesGraphChartOptions = {
-    maintainAspectRatio: false,
-    responsive: true,
-    legend: {
-      display: false
     },
-    scales: {
-      xAxes: [{
-        ticks: {
-          fontColor: '#efefef'
-        },
-        gridLines: {
-          display: false,
-          color: '#efefef',
-          drawBorder: false
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          stepSize: 5000,
-          fontColor: '#efefef'
-        },
-        gridLines: {
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        mode: mode,
+        intersect: intersect
+      },
+      hover: {
+        mode: mode,
+        intersect: intersect
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          // display: false,
+          gridLines: {
+            display: true,
+            lineWidth: '4px',
+            color: 'rgba(0, 0, 0, .2)',
+            zeroLineColor: 'transparent'
+          },
+          ticks: $.extend({
+            beginAtZero: true,
+
+            
+          }, ticksStyle)
+        }],
+        xAxes: [{
           display: true,
-          color: '#efefef',
-          drawBorder: false
-        }
-      }]
+          gridLines: {
+            display: false
+          },
+          ticks: ticksStyle
+        }]
+      },
     }
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
-    type: 'line',
-    data: salesGraphChartData,
-    options: salesGraphChartOptions
   })
 
-   
-  })
+})
+
+// lgtm [js/unused-local-variable]
+
 </script>
 <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 30,
       "buttons": ["copy", "excel", "pdf", "print"],
-      "order": [[1, "desc"]],
+      "columnDefs": [
+          { "type": "date", "targets": 1 } // Assuming the date column is the second column (index 1)
+      ],
+      "order": [[1, "desc"]]
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
