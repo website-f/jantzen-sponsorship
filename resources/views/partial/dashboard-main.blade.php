@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="{{asset('assets/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
+   <!-- Ekko Lightbox -->
+   <link rel="stylesheet" href="{{asset('assets/plugins/ekko-lightbox/ekko-lightbox.css')}}">
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -375,6 +377,8 @@
 <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
+<!-- Ekko Lightbox -->
+<script src="{{asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 
 <script>
   $(function () {
@@ -399,6 +403,23 @@
 
 
   });
+</script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
 </script>
 </body>
 </html>

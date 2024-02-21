@@ -2083,20 +2083,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Review</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
+                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                          <div class="col-sm-2">
+                            <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
                             </a>
                           </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                          @else
+                          <div class="col-sm-2">
+                            <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                            </a>
+                          </div>
+                          @endif
                       @endforeach
                   @endif
                 </div>
@@ -2105,20 +2104,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -2127,20 +2125,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -2654,20 +2651,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Review</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -2676,20 +2672,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -2698,20 +2693,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -3298,20 +3292,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Review</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -3320,20 +3313,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -3342,20 +3334,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -4272,20 +4263,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Review</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -4294,20 +4284,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
@@ -4316,20 +4305,19 @@ Jantzen Water Marketing Team
                   <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
-                         @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                         {{-- <a data-glightbox data-gallery="gallery" href="{{ asset($item) }}">
-                              <img class="img-fluid" src="{{ asset($item) }}" alt="Image" width="200px" height="200px"> 
-                          </a>                         --}}
-                          <div class="col-lg-3 mb-2">
-                            <a href="{{asset($item)}}">
-                              <img class="img-fluid" src="{{asset($item)}}" alt="Image" width="150px" height="150px">
-                            </a>
-                          </div>
-                         @else
-                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                         </div>
-                         @endif
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
                       @endforeach
                   @endif
                 </div>
