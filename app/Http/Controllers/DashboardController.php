@@ -567,5 +567,58 @@ class DashboardController extends Controller
 
         return view('dashboard.dashboard-sponsorship-rejected', ['sponsor' => $sponsor]);
     }
+
+    public function totalCartonReport(Request $request) {
+        $sponsor = Sponsorship::with('tagging')->where('states', '!=', 'Rejected')->orderBy('created_at', 'desc')->get();
+
+        $int_ro200ml = 0;
+        $int_ro500ml = 0;
+        $int_ro11L = 0;
+        $int_ro350ml = 0;
+
+        foreach ($sponsor as $spon) {
+            $int_ro200ml += (int)$spon->confirmro_200ml;
+            $int_ro500ml += (int)$spon->confirmro_500ml;
+            $int_ro11L += (int)$spon->confirmro_11L;
+            $int_ro350ml += (int)$spon->confirmro_350ml;
+        }
+
+        $currentMonth = Carbon::now()->format('Y-m');
+
+        $selectedStartDate = $request->input('start_date');
+        $selectedEndDate = $request->input('end_date');
+    
+        // If no date range is selected, use the current month
+        if (empty($selectedStartDate) || empty($selectedEndDate)) {
+            $selectedMonth = Carbon::now()->format('Y-m');
+        } else {
+            // If date range is selected, extract month from the start date
+            $selectedMonth = Carbon::parse($selectedStartDate)->format('Y-m');
+        }
+    
+        // Retrieve sponsorships based on the selected month
+        $sponsorships = Sponsorship::where('states', '!=', 'Rejected')
+            ->whereYear('created_at', '=', Carbon::parse($selectedMonth)->year)
+            ->whereMonth('created_at', '=', Carbon::parse($selectedMonth)->month)
+            ->get();
+    
+        // Initialize arrays to hold data for each carton type
+        $cartonLabels = ['200ml', '500ml', '1.5L', '11L', '350ml'];
+        $cartonData = [];
+    
+        // Loop through each carton type to calculate total for the selected month
+        foreach ($cartonLabels as $carton) {
+            $total = $sponsorships->sum("confirmro_$carton");
+            $cartonData[] = $total;
+        }
+
+        return view('dashboard.dashboard-carton-report', ['ro200ml' => $int_ro200ml,
+                                                          'ro500ml' => $int_ro500ml,
+                                                          'ro11l' => $int_ro11L,
+                                                          'min350ml' => $int_ro350ml,
+                                                          'cartonLabels' => $cartonLabels,
+                                                          'cartonData' => $cartonData,
+                                                          'selectedMonth' => $selectedMonth]);
+    }
     
 }

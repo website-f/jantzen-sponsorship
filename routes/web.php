@@ -68,6 +68,7 @@ Route::prefix('')->group(function () {
     Route::get('/approvePOA/{id}', [DashboardController::class, 'approvePOA'])->middleware(['auth', 'only-admin']);
     Route::get('/rejectPOA/{id}', [DashboardController::class, 'rejectPOA'])->middleware(['auth', 'only-admin']);
     Route::get('/remove-blacklist/{id}/{email}', [DashboardController::class, 'removeBlacklist'])->middleware(['auth', 'only-admin']);
+    Route::get('/total-carton-report', [DashboardController::class, 'totalCartonReport'])->middleware(['auth', 'only-admin']);
 });
 
 Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware(['auth', 'only-admin']);

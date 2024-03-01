@@ -66,28 +66,29 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              @php
-                $totalCartons = 0;
-                foreach ($sponsor as $spon) {
-                  $int_ro200ml = (int)$spon->confirmro_200ml;
-                  $int_ro500ml = (int)$spon->confirmro_500ml;
-                  $int_ro11L = (int)$spon->confirmro_11L;
-                  $int_ro350ml = (int)$spon->confirmro_350ml;
-                  $tots = $int_ro200ml + $int_ro500ml + $int_ro11L + $int_ro350ml;
-                  $totalCartons += $tots;
-                }
-               @endphp
-              <h3>{{$totalCartons}}</h3>
-
-              <p>Total Sponsor Cartons</p>
+          <a href="/total-carton-report">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                @php
+                  $totalCartons = 0;
+                  foreach ($sponsor as $spon) {
+                    $int_ro200ml = (int)$spon->confirmro_200ml;
+                    $int_ro500ml = (int)$spon->confirmro_500ml;
+                    $int_ro11L = (int)$spon->confirmro_11L;
+                    $int_ro350ml = (int)$spon->confirmro_350ml;
+                    $tots = $int_ro200ml + $int_ro500ml + $int_ro11L + $int_ro350ml;
+                    $totalCartons += $tots;
+                  }
+                 @endphp
+                <h3>{{$totalCartons}}</h3>
+  
+                <p>Total Sponsor Cartons</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-clipboard"></i>
+              </div>
             </div>
-            <div class="icon">
-              <i class="ion ion-clipboard"></i>
-            </div>
-           
-          </div>
+          </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
@@ -224,19 +225,19 @@
             <div class="card-header text-center p-0 pt-1">
               <ul class="nav nav-tabs justify-content-center" id="custom-tabs-one-tab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">BOOTH</a>
+                  <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">BOOTH</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">SPACE</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">NONE</a>
+                  <a class="nav-link active" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">NONE</a>
                 </li>
               </ul>
             </div>
             <div class="card-body">
               <div class="tab-content" id="custom-tabs-one-tabContent">
-                <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                <div class="tab-pane fade" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -284,7 +285,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                <div class="tab-pane fade show active" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
                   <table id="example4" class="table table-bordered table-hover">
                     <thead>
                     <tr>

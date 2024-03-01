@@ -1,0 +1,35 @@
+.div-block-5 {
+    text-align: center;
+    background-color: #eaeefa;
+    border: 2px dashed #3056d3;
+    padding: 60px 100px 40px;
+  }
+
+@media screen and (max-width: 479px) {
+    .div-block-5 {
+        align-self: stretch;
+        padding-left: 0;
+        padding-right: 0;
+      }
+}
+
+#file-upload-label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  /* Style the icon inside the label */
+  #file-upload-label i {
+    margin-right: 5px;
+  }
+
+.image-4 {
+  text-align: center;
+  margin-bottom: 10px;
+  display: inline;
+}
