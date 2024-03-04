@@ -158,8 +158,6 @@ $(function () {
           },
           ticks: $.extend({
             beginAtZero: true,
-
-            
           }, ticksStyle)
         }],
         xAxes: [{
@@ -167,7 +165,12 @@ $(function () {
           gridLines: {
             display: false
           },
-          ticks: ticksStyle
+          ticks: {
+        ...ticksStyle,
+        callback: function(value, index, values) {
+          return value + ' (' + pageData[index] + ')';
+        }
+      }
         }]
       },
     }

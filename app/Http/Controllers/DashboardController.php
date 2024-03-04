@@ -570,12 +570,10 @@ class DashboardController extends Controller
 
     public function totalCartonReport(Request $request) {
         $sponsor = Sponsorship::with('tagging')->where('states', '!=', 'Rejected')->orderBy('created_at', 'desc')->get();
-
         $int_ro200ml = 0;
         $int_ro500ml = 0;
         $int_ro11L = 0;
         $int_ro350ml = 0;
-
         foreach ($sponsor as $spon) {
             $int_ro200ml += (int)$spon->confirmro_200ml;
             $int_ro500ml += (int)$spon->confirmro_500ml;
@@ -584,7 +582,6 @@ class DashboardController extends Controller
         }
 
         $currentMonth = Carbon::now()->format('Y-m');
-
         $selectedStartDate = $request->input('start_date');
         $selectedEndDate = $request->input('end_date');
     
@@ -619,6 +616,11 @@ class DashboardController extends Controller
                                                           'cartonLabels' => $cartonLabels,
                                                           'cartonData' => $cartonData,
                                                           'selectedMonth' => $selectedMonth]);
+    }
+
+    public function gallery() {
+        $sponsors = Sponsorship::all();
+        return view('dashboard.dashboard-gallery', ['sponsors' => $sponsors]);
     }
     
 }

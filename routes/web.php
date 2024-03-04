@@ -47,7 +47,7 @@ Route::get('/collected/{id}', [DashboardController::class, 'collected'])->middle
 
 Route::prefix('')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth', 'only-admin']);
-    Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->middleware(['auth', 'only-admin']);
+    Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->name('view-request')->middleware(['auth', 'only-admin']);
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware(['auth', 'only-admin']);
     Route::put('/request-submit-confirm/{id}', [DashboardController::class, 'requestSubmitConfirm'])->middleware(['auth', 'only-admin']);
     Route::get('/calendar', [DashboardController::class, 'calendar'])->middleware(['auth', 'only-admin']);
@@ -69,6 +69,7 @@ Route::prefix('')->group(function () {
     Route::get('/rejectPOA/{id}', [DashboardController::class, 'rejectPOA'])->middleware(['auth', 'only-admin']);
     Route::get('/remove-blacklist/{id}/{email}', [DashboardController::class, 'removeBlacklist'])->middleware(['auth', 'only-admin']);
     Route::get('/total-carton-report', [DashboardController::class, 'totalCartonReport'])->middleware(['auth', 'only-admin']);
+    Route::get('/gallery', [DashboardController::class, 'gallery'])->middleware(['auth', 'only-admin']);
 });
 
 Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware(['auth', 'only-admin']);

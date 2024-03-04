@@ -235,6 +235,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/gallery" class="nav-link {{ Request::is('gallery') ? 'active' : ' ' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gallery</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/ongoing-event-report" class="nav-link {{ Request::is('ongoing-event-report') ? 'active' : ' ' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ongoing Event Report</p>
