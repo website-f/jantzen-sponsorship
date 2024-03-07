@@ -200,6 +200,45 @@
               </div>
             </div>
           </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <b>Another Person In Charge Details</b>
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="form-label">Second PIC Name</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->sec_PIC_name}}"><br>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Second PIC Contact Number</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->sec_PIC_number}}"><br>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Second PIC Email Address</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->sec_PIC_email}}"><br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="form-label">Third PIC Name</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->third_PIC_name}}"><br>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Third PIC Contact Number</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->third_PIC_number}}"><br>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Third PIC Email Address</label>
+                  <input type="text" class="form-control" readonly value="{{$sponsor->third_PIC_email}}"><br>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">

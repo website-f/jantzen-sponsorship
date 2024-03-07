@@ -59,6 +59,34 @@
                 <label for="" class="field-label-5">How did you know about Jantzen?</label>
                 <input type="text" class="text-field-3 w-input" maxlength="256" name="field-2" data-name="Field 2" value="{{$spon->about_jantzen}}" readonly>
             </div>
+            <br>
+            <hr>
+            <h3 class="heading-7">Another Person In Charge Details</h3>
+            <p class="paragraph-3">We will contact person in charge if we fail to reach the main</p>
+            <div class="form-block w-form">
+                  <label for="name-4" class="field-label-2">Second PIC Name</label>
+                  <input type="text" class="text-field w-input" maxlength="256" name="name-3" data-name="Name 3"  id="name-3" value="{{$spon->sec_PIC_name}}" readonly>
+                <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fccc-8a579776" class="w-layout-layout quick-stack-2 wf-layout-layout">
+                  <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fccd-8a579776" class="w-layout-cell">
+                      <label for="email-6" class="field-label">Second PIC Contact Number</label>
+                      <input type="text" class="text-field-2 w-input" maxlength="256" name="email-5" data-name="Email 5" value="{{$spon->sec_PIC_number}}" readonly></div>
+                  <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fcd1-8a579776" class="w-layout-cell">
+                      <label for="email-6" class="field-label-3">Second PIC Email Address</label>
+                      <input type="email" class="text-field-2 w-input" maxlength="256" name="email-2" data-name="Email 2" value="{{$spon->sec_PIC_email}}" readonly></div>
+                </div>
+            </div>
+            <div class="form-block w-form">
+              <label for="name-4" class="field-label-2">Third PIC Name</label>
+              <input type="text" class="text-field w-input" maxlength="256" name="name-3" data-name="Name 3"  id="name-3" value="{{$spon->third_PIC_name}}" readonly>
+            <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fccc-8a579776" class="w-layout-layout quick-stack-2 wf-layout-layout">
+              <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fccd-8a579776" class="w-layout-cell">
+                  <label for="email-6" class="field-label">Third PIC Contact Number</label>
+                  <input type="text" class="text-field-2 w-input" maxlength="256" name="email-5" data-name="Email 5" value="{{$spon->third_PIC_number}}" readonly></div>
+              <div id="w-node-a7e0691a-1eb7-72c1-cd83-41da11d4fcd1-8a579776" class="w-layout-cell">
+                  <label for="email-6" class="field-label-3">Third PIC Email Address</label>
+                  <input type="email" class="text-field-2 w-input" maxlength="256" name="email-2" data-name="Email 2" value="{{$spon->third_PIC_email}}" readonly></div>
+            </div>
+        </div>
           </div>
           <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4ae5a-8a579776" class="w-layout-layout quick-stack wf-layout-layout">
             <div id="w-node-_7e20e95b-e0b5-2b7b-2ac4-17e99fd4ae5b-8a579776" class="w-layout-cell cell-2 cell">

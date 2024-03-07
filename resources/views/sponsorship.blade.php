@@ -53,7 +53,34 @@
                     checkbox.value = inputElement.value;
                 }
             </script>
-  
+            <br>
+            <hr>
+            <h3 class="heading-7">Another Person In Charge Details</h3>
+            <p class="paragraph-3">We will contact another person in charge if the we fail to reach the main</p>
+            <label for="name-4" class="field-label-2">Second PIC Name </label>
+              <input type="text" class="text-field w-input" maxlength="256" name="sec_PIC_name" data-name="Name 3" placeholder="" id="name-3" required>
+              <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f141f-c21f1410" class="w-layout-layout quick-stack-2 wf-layout-layout">
+                <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1420-c21f1410" class="w-layout-cell">
+                    <label for="email-6" class="field-label">Second PIC Contact Number </label>
+                    <input type="text" class="text-field-2 w-input" maxlength="256" name="sec_PIC_number" data-name="Email 5" placeholder="E.g., (+60) 456-7890" id="email-5" required>
+                </div>
+                <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1424-c21f1410" class="w-layout-cell">
+                    <label for="email-6" class="field-label-3">Second PIC Email Address </label>
+                    <input type="email" class="text-field-2 w-input" maxlength="256" name="sec_PIC_email" data-name="Email 2" placeholder="E.g., johndoe@email.com" id="email-2" required>
+                </div>
+              </div>
+              <label for="name-4" class="field-label-2">Third PIC Name </label>
+              <input type="text" class="text-field w-input" maxlength="256" name="third_PIC_name" data-name="Name 3" placeholder="" id="name-3" required>
+              <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f141f-c21f1410" class="w-layout-layout quick-stack-2 wf-layout-layout">
+                <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1420-c21f1410" class="w-layout-cell">
+                    <label for="email-6" class="field-label">Third PIC Contact Number </label>
+                    <input type="text" class="text-field-2 w-input" maxlength="256" name="third_PIC_number" data-name="Email 5" placeholder="E.g., (+60) 456-7890" id="email-5" required>
+                </div>
+                <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1424-c21f1410" class="w-layout-cell">
+                    <label for="email-6" class="field-label-3">Third PIC Email Address </label>
+                    <input type="email" class="text-field-2 w-input" maxlength="256" name="third_PIC_email" data-name="Email 2" placeholder="E.g., johndoe@email.com" id="email-2" required>
+                </div>
+              </div>
         </div>
         </div>
         <div id="w-node-_969c18e7-ad77-d567-f01c-3704c21f1443-c21f1410" class="w-layout-layout quick-stack wf-layout-layout">

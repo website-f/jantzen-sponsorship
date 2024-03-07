@@ -92,6 +92,14 @@ class SponsorshipController extends Controller
             $sponsor->fullname = $request->name;
             $sponsor->contact = $request->contact;
             $sponsor->email = $request->email;
+
+            $sponsor->sec_PIC_name = $request->sec_PIC_name;
+            $sponsor->sec_PIC_number = $request->sec_PIC_number;
+            $sponsor->sec_PIC_email = $request->sec_PIC_email;
+            $sponsor->third_PIC_name = $request->third_PIC_name;
+            $sponsor->third_PIC_number = $request->third_PIC_number;
+            $sponsor->third_PIC_email = $request->third_PIC_email;
+
             $sponsor->organization = $request->organization;
             $sponsor->about_jantzen = $request->about_jantzen;
             $sponsor->event_name = $request->event_name;
