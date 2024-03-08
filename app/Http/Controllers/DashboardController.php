@@ -22,8 +22,10 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
-    public function dashboard() {
+    public function dashboard(Request $request) {
         $sponsor = Sponsorship::with('tagging')->where('states', '!=', 'Rejected')->orderBy('created_at', 'desc')->get();
+        
+        $alluser = User::whereIn('role_id', [1, 2])->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()
                  ->orderBy('month', 'asc')
@@ -52,7 +54,8 @@ class DashboardController extends Controller
                                             'booth' => $booth,
                                             'space' => $space,
                                             'none' => $none,
-                                            'statusCounts' => $statusCounts
+                                            'statusCounts' => $statusCounts,
+                                            'allUser' => $alluser
                                         ]);
     }
 

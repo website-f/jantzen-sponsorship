@@ -372,6 +372,72 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Sponsor Events</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFilter">
+                   Add Filter
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="addFilter" tabindex="-1" role="dialog" aria-labelledby="addFilter" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Filter</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                       <form action="/" method="GET">
+                        @csrf
+                          <label class="form-label">Handle By</label>
+                          <select name="handle_by" class="form-control" required>
+                            <option value="">Select one...</option>
+                            @foreach ($allUser as $item)
+                              <option value="{{$item->name}}">{{$item->name}}</option>
+                            @endforeach
+                          </select>
+                          <label class="form-label mt-4">Event Date (Month)</label>
+                          <select name="event_date" class="form-control" required>
+                            <option value="">Select one...</option>
+                            <option value="Jan">Jan</option>
+                            <option value="Feb">Feb</option>
+                            <option value="Mar">Mar</option>
+                            <option value="Apr">Apr</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="Jul">Jul</option>
+                            <option value="Aug">Aug</option>
+                            <option value="Sept">Sept</option>
+                            <option value="Oct">Oct</option>
+                            <option value="Nov">Nov</option>
+                            <option value="Dec">Dec</option>
+                          </select>
+                          <label class="form-label mt-4">Submission Date (Month)</label>
+                          <select name="handle_by" class="form-control" required>
+                            <option value="">Select one...</option>
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sept</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                          </select>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
