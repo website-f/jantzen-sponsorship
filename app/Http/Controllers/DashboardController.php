@@ -25,7 +25,7 @@ class DashboardController extends Controller
     public function dashboard(Request $request) {
         $query = Sponsorship::with('tagging')->where('states', '!=', 'Rejected');
 
-        if ($request->filled('handle_by') && !$request->filled('event_date')) {
+        if ($request->filled('handle_by')) {
             $query->where('handle_by', $request->input('handle_by'));
         }
     
