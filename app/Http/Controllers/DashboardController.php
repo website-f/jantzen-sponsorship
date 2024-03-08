@@ -23,8 +23,24 @@ use Illuminate\Support\Facades\Session;
 class DashboardController extends Controller
 {
     public function dashboard(Request $request) {
-        $sponsor = Sponsorship::with('tagging')->where('states', '!=', 'Rejected')->orderBy('created_at', 'desc')->get();
-        
+        $query = Sponsorship::with('tagging')->where('states', '!=', 'Rejected');
+
+        if ($request->filled('handle_by') && !$request->filled('event_date')) {
+            $query->where('handle_by', $request->input('handle_by'));
+        }
+    
+        if ($request->filled('event_date')) {
+            $month = $request->input('event_date');
+            $query->whereMonth('to_date', $month);
+        }
+    
+        if ($request->filled('submission_date')) {
+            $month = $request->input('submission_date');
+            $query->whereMonth('created_at', $month);
+        }
+    
+        $sponsor = $query->orderBy('created_at', 'desc')->get();
+    
         $alluser = User::whereIn('role_id', [1, 2])->get();
         $months = Sponsorship::selectRaw('MONTH(from_date) as month')
                  ->distinct()

@@ -397,23 +397,23 @@
                             @endforeach
                           </select>
                           <label class="form-label mt-4">Event Date (Month)</label>
-                          <select name="event_date" class="form-control" required>
+                          <select name="event_date" class="form-control">
                             <option value="">Select one...</option>
-                            <option value="Jan">Jan</option>
-                            <option value="Feb">Feb</option>
-                            <option value="Mar">Mar</option>
-                            <option value="Apr">Apr</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="Jul">Jul</option>
-                            <option value="Aug">Aug</option>
-                            <option value="Sept">Sept</option>
-                            <option value="Oct">Oct</option>
-                            <option value="Nov">Nov</option>
-                            <option value="Dec">Dec</option>
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sept</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
                           </select>
                           <label class="form-label mt-4">Submission Date (Month)</label>
-                          <select name="handle_by" class="form-control" required>
+                          <select name="submission_date" class="form-control">
                             <option value="">Select one...</option>
                             <option value="01">Jan</option>
                             <option value="02">Feb</option>
