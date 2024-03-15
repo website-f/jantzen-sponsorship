@@ -2028,6 +2028,8 @@ Jantzen Water Marketing Team
                     $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
                     $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
                     $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofTiktok = json_decode($sponsor->tiktok_proof);
+                    $proofXhs = json_decode($sponsor->xhs_proof);
                     $proofCounts = 0;
                     if ($proofReview !== null) {
                       $proofCounts += count($proofReview);
@@ -2039,6 +2041,14 @@ Jantzen Water Marketing Team
 
                     if ($proofVideo !== null) {
                       $proofCounts += count($proofVideo);
+                    } 
+
+                    if ($proofTiktok !== null) {
+                      $proofCounts += count($proofTiktok);
+                    } 
+
+                    if ($proofXhs !== null) {
+                      $proofCounts += count($proofXhs);
                     } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
@@ -2119,7 +2129,7 @@ Jantzen Water Marketing Team
                 Download All
               </a>
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Jantzen's logo in the event flyer, backdrop, booklet, and poster.</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
                           @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2140,7 +2150,7 @@ Jantzen Water Marketing Team
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>article about the event</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2161,9 +2171,51 @@ Jantzen Water Marketing Team
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Reviews</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Tiktok</h4></div>
+                  @if ($proofTiktok !== null)
+                      @foreach ($proofTiktok as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>XHS</h4></div>
+                  @if ($proofXhs !== null)
+                      @foreach ($proofXhs as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                       <div class="col-sm-2">
                         <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
@@ -2657,6 +2709,8 @@ Jantzen Water Marketing Team
                     $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
                     $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
                     $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofTiktok = json_decode($sponsor->tiktok_proof);
+                    $proofXhs = json_decode($sponsor->xhs_proof);
                     $proofCounts = 0;
                     if ($proofReview !== null) {
                       $proofCounts += count($proofReview);
@@ -2668,6 +2722,14 @@ Jantzen Water Marketing Team
 
                     if ($proofVideo !== null) {
                       $proofCounts += count($proofVideo);
+                    } 
+
+                    if ($proofTiktok !== null) {
+                      $proofCounts += count($proofTiktok);
+                    } 
+
+                    if ($proofXhs !== null) {
+                      $proofCounts += count($proofXhs);
                     } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
@@ -2683,32 +2745,93 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              @if ($sponsor->stat == "proofSent")
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectPOA">
+                    <i class="fas fa-times-circle"></i> Reject
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="rejectPOA" tabindex="-1" role="dialog" aria-labelledby="rejectPOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to reject {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/rejectPOA/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#approvePOA">
+                    <i class="fas fa-check-circle"></i> Approve
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="approvePOA" tabindex="-1" role="dialog" aria-labelledby="approvePOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to approve {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/approvePOA/{{$sponsor->id}}" class="btn btn-success"><i class="fas fa-check-circle"></i> Approve</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @elseif ($sponsor->stat == "proofRejected")
+              <hr>
+              <p>You have rejected the proof of agreements, waiting for the client to resubmit</p>
+              <hr>
+              @endif
               <a href="/downloadAll/proof/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Jantzen's logo in the event flyer, backdrop, booklet, and poster.</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                      <div class="col-sm-2">
-                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
-                        </a>
-                      </div>
-                      @else
-                      <div class="col-sm-2">
-                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                        </a>
-                      </div>
-                      @endif
+                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                          <div class="col-sm-2">
+                            <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                            </a>
+                          </div>
+                          @else
+                          <div class="col-sm-2">
+                            <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                            </a>
+                          </div>
+                          @endif
                       @endforeach
                   @endif
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>article about the event</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -2729,9 +2852,51 @@ Jantzen Water Marketing Team
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Reviews</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Tiktok</h4></div>
+                  @if ($proofTiktok !== null)
+                      @foreach ($proofTiktok as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>XHS</h4></div>
+                  @if ($proofXhs !== null)
+                      @foreach ($proofXhs as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                       <div class="col-sm-2">
                         <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
@@ -3298,6 +3463,8 @@ Jantzen Water Marketing Team
                     $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
                     $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
                     $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofTiktok = json_decode($sponsor->tiktok_proof);
+                    $proofXhs = json_decode($sponsor->xhs_proof);
                     $proofCounts = 0;
                     if ($proofReview !== null) {
                       $proofCounts += count($proofReview);
@@ -3309,6 +3476,14 @@ Jantzen Water Marketing Team
 
                     if ($proofVideo !== null) {
                       $proofCounts += count($proofVideo);
+                    } 
+
+                    if ($proofTiktok !== null) {
+                      $proofCounts += count($proofTiktok);
+                    } 
+
+                    if ($proofXhs !== null) {
+                      $proofCounts += count($proofXhs);
                     } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
@@ -3324,32 +3499,93 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              @if ($sponsor->stat == "proofSent")
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectPOA">
+                    <i class="fas fa-times-circle"></i> Reject
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="rejectPOA" tabindex="-1" role="dialog" aria-labelledby="rejectPOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to reject {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/rejectPOA/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#approvePOA">
+                    <i class="fas fa-check-circle"></i> Approve
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="approvePOA" tabindex="-1" role="dialog" aria-labelledby="approvePOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to approve {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/approvePOA/{{$sponsor->id}}" class="btn btn-success"><i class="fas fa-check-circle"></i> Approve</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @elseif ($sponsor->stat == "proofRejected")
+              <hr>
+              <p>You have rejected the proof of agreements, waiting for the client to resubmit</p>
+              <hr>
+              @endif
               <a href="/downloadAll/proof/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Jantzen's logo in the event flyer, backdrop, booklet, and poster.</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                      <div class="col-sm-2">
-                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
-                        </a>
-                      </div>
-                      @else
-                      <div class="col-sm-2">
-                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                        </a>
-                      </div>
-                      @endif
+                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                          <div class="col-sm-2">
+                            <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                            </a>
+                          </div>
+                          @else
+                          <div class="col-sm-2">
+                            <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                            </a>
+                          </div>
+                          @endif
                       @endforeach
                   @endif
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>article about the event</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -3370,9 +3606,51 @@ Jantzen Water Marketing Team
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Reviews</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Tiktok</h4></div>
+                  @if ($proofTiktok !== null)
+                      @foreach ($proofTiktok as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>XHS</h4></div>
+                  @if ($proofXhs !== null)
+                      @foreach ($proofXhs as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                       <div class="col-sm-2">
                         <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
@@ -4269,6 +4547,8 @@ Jantzen Water Marketing Team
                     $proofReview = json_decode($sponsor->attachements_agreement_proof_review);
                     $proofPhoto= json_decode($sponsor->attachements_agreement_proof_photo);
                     $proofVideo = json_decode($sponsor->attachements_agreement_proof_video);
+                    $proofTiktok = json_decode($sponsor->tiktok_proof);
+                    $proofXhs = json_decode($sponsor->xhs_proof);
                     $proofCounts = 0;
                     if ($proofReview !== null) {
                       $proofCounts += count($proofReview);
@@ -4280,6 +4560,14 @@ Jantzen Water Marketing Team
 
                     if ($proofVideo !== null) {
                       $proofCounts += count($proofVideo);
+                    } 
+
+                    if ($proofTiktok !== null) {
+                      $proofCounts += count($proofTiktok);
+                    } 
+
+                    if ($proofXhs !== null) {
+                      $proofCounts += count($proofXhs);
                     } 
               @endphp
               <h3 class="card-title"><i class="fas fa-file-archive"></i> <b>Proof of Agreements ({{$proofCounts}})</b></h3>
@@ -4295,32 +4583,93 @@ Jantzen Water Marketing Team
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              @if ($sponsor->stat == "proofSent")
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#rejectPOA">
+                    <i class="fas fa-times-circle"></i> Reject
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="rejectPOA" tabindex="-1" role="dialog" aria-labelledby="rejectPOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Reject</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to reject {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/rejectPOA/{{$sponsor->id}}" class="btn btn-danger"><i class="fas fa-times-circle"></i> Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#approvePOA">
+                    <i class="fas fa-check-circle"></i> Approve
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="approvePOA" tabindex="-1" role="dialog" aria-labelledby="approvePOA" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Block</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to approve {{$sponsor->event_name}} proof of agreement ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="/approvePOA/{{$sponsor->id}}" class="btn btn-success"><i class="fas fa-check-circle"></i> Approve</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @elseif ($sponsor->stat == "proofRejected")
+              <hr>
+              <p>You have rejected the proof of agreements, waiting for the client to resubmit</p>
+              <hr>
+              @endif
               <a href="/downloadAll/proof/{{$sponsor->id}}" class="btn btn-primary w-100 mb-3">
                 Download All
               </a>
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Review</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Jantzen's logo in the event flyer, backdrop, booklet, and poster.</h4></div>
                   @if ($proofReview !== null)
                       @foreach ($proofReview as $item)
-                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
-                      <div class="col-sm-2">
-                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
-                        </a>
-                      </div>
-                      @else
-                      <div class="col-sm-2">
-                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
-                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
-                        </a>
-                      </div>
-                      @endif
+                          @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                          <div class="col-sm-2">
+                            <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                            </a>
+                          </div>
+                          @else
+                          <div class="col-sm-2">
+                            <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                              <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                            </a>
+                          </div>
+                          @endif
                       @endforeach
                   @endif
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Photos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>article about the event</h4></div>
                   @if ($proofPhoto !== null)
                       @foreach ($proofPhoto as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
@@ -4341,9 +4690,51 @@ Jantzen Water Marketing Team
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center mb-2"><h4>Videos</h4></div>
+                  <div class="col-12 text-center mb-2"><h4>Reviews</h4></div>
                   @if ($proofVideo !== null)
                       @foreach ($proofVideo as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>Tiktok</h4></div>
+                  @if ($proofTiktok !== null)
+                      @foreach ($proofTiktok as $item)
+                      @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
+                      <div class="col-sm-2">
+                        <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <img src="{{asset($item)}}" class="img-fluid mb-2" alt="white sample"/>
+                        </a>
+                      </div>
+                      @else
+                      <div class="col-sm-2">
+                        <a href="{{ asset($item) }}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">
+                          <a class="btn btn-primary" href="{{ asset($item) }}" target="_blank">View File ({{pathinfo($item, PATHINFO_EXTENSION)}})</a>
+                        </a>
+                      </div>
+                      @endif
+                      @endforeach
+                  @endif
+                </div>
+
+                <div class="row">
+                  <div class="col-12 text-center mb-2"><h4>XHS</h4></div>
+                  @if ($proofXhs !== null)
+                      @foreach ($proofXhs as $item)
                       @if (pathinfo($item, PATHINFO_EXTENSION) === 'jpg' || pathinfo($item, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($item, PATHINFO_EXTENSION) === 'png' || pathinfo($item, PATHINFO_EXTENSION) === 'gif')     
                       <div class="col-sm-2">
                         <a href="{{asset($item)}}" data-toggle="lightbox" data-title="{{$item}}" data-gallery="gallery">

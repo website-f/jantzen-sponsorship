@@ -298,7 +298,7 @@
             <form action="/proof-of-agreement/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
-              <label>Reviews</label>
+              <label>Include Jantzen's logo in the event flyer, backdrop, booklet, and poster.</label>
               <div id="file-drop-area" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop review files here, or click to select review files</p>
@@ -309,11 +309,11 @@
                 <input type="file" id="file-input" multiple style="display: none;">
               </div>
               <ul id="file-list"></ul>
-              <button id="delete-file">Delete Selected File</button>
-              <button id="replace-file">Replace Selected File</button>
+              <button type="button" id="delete-file">Delete Selected File</button>
+              <button type="button" id="replace-file">Replace Selected File</button>
               <input type="hidden" id="file-names-input" name="file_names">
 
-              <label style="margin-top: 30px">Photos</label>
+              <label style="margin-top: 30px">If your team writes an article about the event on your school website, please hyperlink it to our website ( www.jantzen.com.my ). </label>
               <div id="file-drop-area-photos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop photo files here, or click to select photo files</p>
@@ -324,11 +324,11 @@
                 <input type="file" id="file-input-photos" multiple style="display: none;">
               </div>
               <ul id="file-list-photos"></ul>
-              <button id="delete-file-photos">Delete Selected File</button>
-              <button id="replace-file-photos">Replace Selected File</button>
+              <button type="button" id="delete-file-photos">Delete Selected File</button>
+              <button type="button" id="replace-file-photos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-photos" name="file_names_photos">
 
-              <label style="margin-top: 30px">Videos</label>
+              <label style="margin-top: 30px">Reviews</label>
               <div id="file-drop-area-videos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop video files here, or click to select video files</p>
@@ -339,9 +339,40 @@
                 <input type="file" id="file-input-videos" multiple style="display: none;">
               </div>
               <ul id="file-list-videos"></ul>
-              <button id="delete-file-videos">Delete Selected File</button>
-              <button id="replace-file-videos">Replace Selected File</button>
+              <button type="button" id="delete-file-videos">Delete Selected File</button>
+              <button type="button" id="replace-file-videos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+
+              <label style="margin-top: 30px">Tiktok follow us (optional)</label>
+              <div id="file-drop-area-tiktok" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-tiktok" id="file-upload-label-tiktok">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-tiktok" multiple style="display: none;">
+              </div>
+              <ul id="file-list-tiktok"></ul>
+              <button type="button" id="delete-file-tiktok">Delete Selected File</button>
+              <button type="button" id="replace-file-tiktok">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-tiktok" name="tiktok">
+
+              <label style="margin-top: 30px">XHS follow us (optional)</label>
+              <div id="file-drop-area-xhs" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-xhs" id="file-upload-label-xhs">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-xhs" multiple style="display: none;">
+              </div>
+              <ul id="file-list-xhs"></ul>
+              <button type="button" id="delete-file-xhs">Delete Selected File</button>
+              <button type="button" id="replace-file-xhs">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-xhs" name="xhs">
+
               <button style="width: 100%; margin-top: 30px" type="submit" class="button-2 w-button">Submit Attachments</button>
             </form><br>
             <span>Made mistake ? Click on undo button below</span><br>
@@ -628,7 +659,7 @@
             <form action="/after-event/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
-              <label>Reviews</label>
+              <label>Tiktok or xhs follow us (if got extra)</label>
               <div id="file-drop-area" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop review files here, or click to select review files</p>
@@ -643,7 +674,7 @@
               <button id="replace-file">Replace Selected File</button>
               <input type="hidden" id="file-names-input" name="file_names">
 
-              <label style="margin-top: 30px">Photos</label>
+              <label style="margin-top: 30px">Photo using Jantzen </label>
               <div id="file-drop-area-photos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop photo files here, or click to select photo files</p>
@@ -658,7 +689,7 @@
               <button id="replace-file-photos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-photos" name="file_names_photos">
 
-              <label style="margin-top: 30px">Videos</label>
+              <label style="margin-top: 30px">Reviews</label>
               <div id="file-drop-area-videos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop video files here, or click to select video files</p>
@@ -672,6 +703,43 @@
               <button id="delete-file-videos">Delete Selected File</button>
               <button id="replace-file-videos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+
+              <label style="margin-top: 30px">Tiktok Content (posted link)</label>
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="tiktok_link" data-name="Field 2" id="field-2">
+
+              <label style="margin-top: 30px">Tiktok Content (video)</label>
+              <div id="file-drop-area-tiktok" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-tiktok" id="file-upload-label-tiktok">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-tiktok" multiple style="display: none;">
+              </div>
+              <ul id="file-list-tiktok"></ul>
+              <button id="delete-file-tiktok">Delete Selected File</button>
+              <button id="replace-file-tiktok">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-tiktok" name="tiktok">
+
+              <label style="margin-top: 30px">XHS Content (posted link)</label>
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="xhs_link" data-name="Field 2" id="field-2">
+
+              <label style="margin-top: 30px">XHS Content (photo/video)</label>
+              <div id="file-drop-area-xhs" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-xhs" id="file-upload-label-xhs">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-xhs" multiple style="display: none;">
+              </div>
+              <ul id="file-list-xhs"></ul>
+              <button id="delete-file-xhs">Delete Selected File</button>
+              <button id="replace-file-xhs">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-xhs" name="xhs">
+
           </div>
         </div>
         <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</button>
@@ -731,7 +799,7 @@
             <form action="/after-event/{{$spon->id}}" method="POST" enctype="multipart/form-data">  
               @csrf
               @method("PUT")
-              <label>Reviews</label>
+              <label>Tiktok or xhs follow us (if got extra)</label>
               <div id="file-drop-area" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop review files here, or click to select review files</p>
@@ -742,11 +810,11 @@
                 <input type="file" id="file-input" multiple style="display: none;">
               </div>
               <ul id="file-list"></ul>
-              <button id="delete-file">Delete Selected File</button>
-              <button id="replace-file">Replace Selected File</button>
+              <button type="button" id="delete-file">Delete Selected File</button>
+              <button type="button" id="replace-file">Replace Selected File</button>
               <input type="hidden" id="file-names-input" name="file_names">
 
-              <label style="margin-top: 30px">Photos</label>
+              <label style="margin-top: 30px">Photo using Jantzen </label>
               <div id="file-drop-area-photos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop photo files here, or click to select photo files</p>
@@ -757,11 +825,11 @@
                 <input type="file" id="file-input-photos" multiple style="display: none;">
               </div>
               <ul id="file-list-photos"></ul>
-              <button id="delete-file-photos">Delete Selected File</button>
-              <button id="replace-file-photos">Replace Selected File</button>
+              <button type="button" id="delete-file-photos">Delete Selected File</button>
+              <button type="button" id="replace-file-photos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-photos" name="file_names_photos">
 
-              <label style="margin-top: 30px">Videos</label>
+              <label style="margin-top: 30px">Reviews</label>
               <div id="file-drop-area-videos" class="div-block-5">
                 <div style="text-align: center;">
                     <p>Drag and drop video files here, or click to select video files</p>
@@ -772,9 +840,46 @@
                 <input type="file" id="file-input-videos" multiple style="display: none;">
               </div>
               <ul id="file-list-videos"></ul>
-              <button id="delete-file-videos">Delete Selected File</button>
-              <button id="replace-file-videos">Replace Selected File</button>
+              <button type="button" id="delete-file-videos">Delete Selected File</button>
+              <button type="button" id="replace-file-videos">Replace Selected File</button>
               <input type="hidden" id="file-names-input-videos" name="file_names_videos">
+
+              <label style="margin-top: 30px">Tiktok Content (posted link)</label>
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="tiktok_link" data-name="Field 2" id="field-2">
+
+              <label style="margin-top: 30px">Tiktok Content (video)</label>
+              <div id="file-drop-area-tiktok" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-tiktok" id="file-upload-label-tiktok">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-tiktok" multiple style="display: none;">
+              </div>
+              <ul id="file-list-tiktok"></ul>
+              <button type="button" id="delete-file-tiktok">Delete Selected File</button>
+              <button type="button" id="replace-file-tiktok">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-tiktok" name="tiktok">
+
+              <label style="margin-top: 30px">XHS Content (posted link)</label>
+              <input type="text" class="text-field-3 w-input" maxlength="256" name="xhs_link" data-name="Field 2" id="field-2">
+
+              <label style="margin-top: 30px">XHS Content (photo/video)</label>
+              <div id="file-drop-area-xhs" class="div-block-5">
+                <div style="text-align: center;">
+                    <p>Drag and drop video files here, or click to select video files</p>
+                    <label for="file-input-xhs" id="file-upload-label-xhs">
+                        <img src="{{asset('assets/images/upload-icon.png')}}" loading="lazy" width="41" alt="" class="image-4">
+                    </label>
+                </div>
+                <input type="file" id="file-input-xhs" multiple style="display: none;">
+              </div>
+              <ul id="file-list-xhs"></ul>
+              <button type="button" id="delete-file-xhs">Delete Selected File</button>
+              <button type="button" id="replace-file-xhs">Replace Selected File</button>
+              <input type="hidden" id="file-names-input-xhs" name="xhs">
+
           </div>
         </div>
         <button style="width: 100%" type="submit" class="button-2 w-button">Submit Attachments</button>

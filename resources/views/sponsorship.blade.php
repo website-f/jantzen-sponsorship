@@ -4,9 +4,14 @@
     
 @section('content')
 <div class="div-block-2">
+  <div style="background-color: #F0FFFF; border-radius: 9px; padding: 20px; margin-bottom: 20px">
+    <h3 class="heading-11" style="margin-top: 10px">Attention !</h3>
+    <p class="paragraph-7">- Jantzen does not provide any financial sponsorship.</p>
+    <p class="paragraph-7">- Jantzen does not offer delivery or manpower services for the collection of sponsored products.</p>
+  </div>
     <div class="div-block">
       <h3 class="heading-6">Sponsorship Request Form</h3>
-      <p class="paragraph-2">Call for In-Kind Sponsorship Applications: Please Note We Do Not Offer Financial Support</p>
+      {{-- <p class="paragraph-2">Call for In-Kind Sponsorship Applications: Please Note We Do Not Offer Financial Support</p> --}}
       <hr>
       <h3 class="heading-7">Person In Charge Details</h3>
       <p class="paragraph-3">We will contact person in charge for further information</p>

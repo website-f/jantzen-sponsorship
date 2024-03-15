@@ -129,90 +129,6 @@
                 <canvas id="sales-chart" height="200"></canvas>
               </div>
               
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="d-flex flex-column text-left">
-                  @php
-                    $sponsorApprovedBar = $sponsor->where('states', 'Approved')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorApprovedBar}}
-                  </span>
-                  <span class="text-muted">APPROVED</span>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  @php
-                    $sponsorProcessingBar = $sponsor->where('states', 'Processing')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorProcessingBar}}
-                  </span>
-                  <span class="text-muted">PROCESSING</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="d-flex flex-column text-left">
-                  @php
-                    $sponsorPendingBar = $sponsor->where('states', 'Pending')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorPendingBar}}
-                  </span>
-                  <span class="text-muted">PENDING</span>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  @php
-                    $sponsorPendingCollectionBar = $sponsor->where('states', 'Pending Collection')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorPendingCollectionBar}}
-                  </span>
-                  <span class="text-muted">PENDING COLLECTION</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="d-flex flex-column text-left">
-                  @php
-                    $sponsorCompletedBar = $sponsor->where('states', 'Completed')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorCompletedBar}}
-                  </span>
-                  <span class="text-muted">COMPLETED</span>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  @php
-                    $sponsorCollectedBar = $sponsor->where('states', 'Collected')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorCollectedBar}}
-                  </span>
-                  <span class="text-muted">COLLECTED</span>
-                </p>
-              </div>
-              <div class="d-flex justify-content-between align-items-center mb-0">
-                <p class="d-flex flex-column text-left">
-                  @php
-                    $sponsorBlacklistBar = $sponsor->where('states', 'Blacklist')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorBlacklistBar}}
-                  </span>
-                  <span class="text-muted">BLACKLISTED</span>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  @php
-                    $sponsorRejectedBar = $sponsor->where('states', 'Rejected')->count();
-                  @endphp
-                  <span class="font-weight-bold">
-                    {{$sponsorRejectedBar}}
-                  </span>
-                  <span class="text-muted">REJECTED</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-              
             </div>
           </div>
           <!-- /.card -->
@@ -225,19 +141,19 @@
             <div class="card-header text-center p-0 pt-1">
               <ul class="nav nav-tabs justify-content-center" id="custom-tabs-one-tab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">BOOTH</a>
+                  <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">BOOTH</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">SPACE</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">NONE</a>
+                  <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">NONE</a>
                 </li>
               </ul>
             </div>
             <div class="card-body">
               <div class="tab-content" id="custom-tabs-one-tabContent">
-                <div class="tab-pane fade" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -285,7 +201,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="tab-pane fade show active" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
                   <table id="example4" class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -624,7 +540,12 @@ $(function () {
           gridLines: {
             display: false
           },
-          ticks: ticksStyle
+          ticks: {
+        ...ticksStyle,
+        callback: function(value, index, values) {
+          return value + ' (' + pageData[index] + ')';
+        }
+      }
         }]
       },
     }

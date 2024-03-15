@@ -182,3 +182,7 @@ initializeFileUpload('file-drop-area', 'file-input', 'file-list', 'delete-file',
 initializeFileUpload('file-drop-area-photos', 'file-input-photos', 'file-list-photos', 'delete-file-photos', 'replace-file-photos', 'file-names-input-photos');
 
 initializeFileUpload('file-drop-area-videos', 'file-input-videos', 'file-list-videos', 'delete-file-videos', 'replace-file-videos', 'file-names-input-videos');
+
+initializeFileUpload('file-drop-area-tiktok', 'file-input-tiktok', 'file-list-tiktok', 'delete-file-tiktok', 'replace-file-tiktok', 'file-names-input-tiktok');
+
+initializeFileUpload('file-drop-area-xhs', 'file-input-xhs', 'file-list-xhs', 'delete-file-xhs', 'replace-file-xhs', 'file-names-input-xhs');

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tags', function (Blueprint $table) {
-            $table->string('color')->nullable();
+        Schema::table('sponsorships', function (Blueprint $table) {
+            $table->text('tiktok_link')->nullable();
+            $table->text('xhs_link')->nullable();
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tags', function (Blueprint $table) {
-            $table->dropColumn('color');
+        Schema::table('sponsorships', function (Blueprint $table) {
+            $table->dropColumn('tiktok_link');
+            $table->dropColumn('xhs_link');
         });
     }
 };
