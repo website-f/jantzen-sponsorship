@@ -483,7 +483,6 @@ class DashboardController extends Controller
             }
         }
         
-        
     
         // Create a zip file
         $zipFileName = $filename . ".zip";

@@ -8,6 +8,7 @@
     <h3 class="heading-11" style="margin-top: 10px">Attention !</h3>
     <p class="paragraph-7">- Jantzen does not provide any financial sponsorship.</p>
     <p class="paragraph-7">- Jantzen does not offer delivery or manpower services for the collection of sponsored products.</p>
+    <p class="paragraph-7">- Collection point Puchong and shah Alam only.</p>
   </div>
     <div class="div-block">
       <h3 class="heading-6">Sponsorship Request Form</h3>
