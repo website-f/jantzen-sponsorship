@@ -491,6 +491,14 @@ class SponsorshipController extends Controller
         $fileDataJsonVideo = $request->input('file_names_videos');
         $fileDataVideo = json_decode($fileDataJsonVideo);
         $filesVideo = [];
+        //Tiktok
+        $fileDataJsonTiktok = $request->input('tiktok');
+        $fileDataTiktok = json_decode($fileDataJsonTiktok);
+        $filesTiktok = [];
+        //XHS
+        $fileDataJsonXhs = $request->input('xhs');
+        $fileDataXhs = json_decode($fileDataJsonXhs);
+        $filesXhs = [];
 
         if ($fileDataReview != null) {
             foreach ($fileDataReview as $fileInfo) {
@@ -575,10 +583,70 @@ class SponsorshipController extends Controller
                 $filesVideo[] = "agreement/" . $fileName;
             }
         }
+
+        if ($fileDataTiktok != null) {
+            foreach ($fileDataTiktok as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesTiktok[] = "agreement/" . $fileName;
+            }
+        }
+
+        if ($fileDataXhs != null) {
+            foreach ($fileDataXhs as $fileInfo) {
+                // Extract information from the file data
+                $name = $fileInfo->name;
+                $base64Data = $fileInfo->data;
+                $extension = $fileInfo->extension;
+        
+                $currentDate = now(); // Use Laravel's now() helper function
+                $timestamp = $currentDate->timestamp; // Unique timestamp
+                $fileName = $name . $timestamp . '.' . $extension;
+        
+                if ($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif") {
+                    $image = Image::make($base64Data);
+                    $image->encode($extension, 10);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    $image->save($path);
+                }
+                else {
+                    $decodedData = base64_decode($base64Data);
+                    $destinationPath = public_path('agreement');
+                    $path = $destinationPath . '/' . $fileName;
+                    file_put_contents($path, $decodedData);
+                }
+                $filesXhs[] = "agreement/" . $fileName;
+            }
+        }
        
         $sponsor->after_events_attachments_review = json_encode($filesReview);
         $sponsor->after_events_attachments_photo = json_encode($filesPhoto);
         $sponsor->after_events_attachments_video = json_encode($filesVideo);
+        $sponsor->tiktok_after_event = json_encode($filesTiktok);
+        $sponsor->xhs_after_event = json_encode($filesXhs);
+        $sponsor->tiktok_link = $request->input('tiktok_link');
+        $sponsor->xhs_link = $request->input('xhs_link');
         $sponsor->states = "Completed";
         $sponsor->save();
         return redirect("/sponsorship-tracking");
