@@ -11,6 +11,7 @@ use App\Models\BlockList;
 use App\Models\Sponsorship;
 use App\Mail\AppointedEvent;
 use Illuminate\Http\Request;
+use App\Mail\RejectNotification;
 use App\Mail\SubmitNotification;
 use App\Mail\ApprovedNotification;
 use App\Models\ongoingEventReport;
@@ -277,6 +278,7 @@ class DashboardController extends Controller
         $sponsor = Sponsorship::findOrFail($id);
         $sponsor->states = 'Rejected';
         $sponsor->save();
+        Mail::to($sponsor->email)->send(new RejectNotification($sponsor->fullname, $sponsor->remarks));
         return redirect('/view-request/' . $id);
     }
 
