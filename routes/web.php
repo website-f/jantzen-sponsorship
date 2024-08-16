@@ -18,7 +18,7 @@ use App\Http\Controllers\SponsorshipController;
 
 //---------CLIENT SIDE ROUTES--------------------------------------------
 Route::get('/sponsorship', function () {
-    return view('sponsorship');
+    return view('sponsorships');
 });
 Route::post('/sponsorship-fill-request', [SponsorshipController::class, 'sponsorshipFillRequest']);
 Route::get('/sponsorship-tracking', [SponsorshipController::class, 'sponsorshiptrack'])->middleware('auth');
@@ -47,6 +47,7 @@ Route::get('/collected/{id}', [DashboardController::class, 'collected'])->middle
 
 Route::prefix('')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth', 'only-admin']);
+   
     Route::get('/view-request/{id}', [DashboardController::class, 'viewRequest'])->name('view-request')->middleware(['auth', 'only-admin']);
     Route::put('/request-submit/{id}', [DashboardController::class, 'requestSubmit'])->middleware(['auth', 'only-admin']);
     Route::put('/request-submit-confirm/{id}', [DashboardController::class, 'requestSubmitConfirm'])->middleware(['auth', 'only-admin']);
@@ -70,12 +71,22 @@ Route::prefix('')->group(function () {
     Route::get('/remove-blacklist/{id}/{email}', [DashboardController::class, 'removeBlacklist'])->middleware(['auth', 'only-admin']);
     Route::get('/total-carton-report', [DashboardController::class, 'totalCartonReport'])->middleware(['auth', 'only-admin']);
     Route::get('/gallery', [DashboardController::class, 'gallery'])->middleware(['auth', 'only-admin']);
+    //New Update
+    Route::get('/new-requests', [DashboardController::class, 'newRequest']);
+    Route::get('/approved-requests', [DashboardController::class, 'approvedRequest']);
+    Route::get('/agreed-requests', [DashboardController::class, 'agreedRequest']);
+    Route::get('/preTask-requests', [DashboardController::class, 'preTaskRequest']);
+    Route::get('/collection-requests', [DashboardController::class, 'collectionRequest']);
+    Route::get('/postEvent-requests', [DashboardController::class, 'postEventRequest']);
+    Route::get('/completed-requests', [DashboardController::class, 'completedRequest']);
+    Route::get('/rejected-requests', [DashboardController::class, 'rejectedRequest']);
+    Route::put('/approve-new-requests/{id}', [DashboardController::class, 'approveNewRequest']);
+    Route::get('/agreed/{id}', [SponsorshipController::class, 'agreedRequest']);
+    Route::get('/notagreed/{id}', [SponsorshipController::class, 'notAgreedRequest']);
+    Route::put('/pretask/{id}', [DashboardController::class, 'pretask']);
 });
 
 Route::post('/save-template/{templateName}/{id}', [DashboardController::class, 'saveTemplate'])->middleware(['auth', 'only-admin']);
 Route::get('downloadAll/{type}/{id}', [DashboardController::class, 'downloadAll'])->middleware(['auth', 'only-admin']);
 Route::post('/add-tag/{id}', [DashboardController::class, 'addTag'])->middleware(['auth', 'only-admin']);
 Route::get('/remove-tag/{id}/{tag}', [DashboardController::class, 'removeTag'])->middleware(['auth', 'only-admin']);
-
-
-

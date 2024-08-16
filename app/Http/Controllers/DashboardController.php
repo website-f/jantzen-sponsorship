@@ -64,18 +64,107 @@ class DashboardController extends Controller
                  ->where("states", "!=", "Completed")
                  ->orderBy('created_at', 'desc')
                  ->get();
-             
-        $statusCounts = $sponsor->groupBy('states')->map->count();
-        return view('dashboard.dashboard', ['sponsor' => $sponsor, 
+                 
+        return view('dashboard.dashboard-index', ['sponsor' => $sponsor, 
                                             'month' => $months,
                                             'booth' => $booth,
                                             'space' => $space,
                                             'none' => $none,
-                                            'statusCounts' => $statusCounts,
                                             'allUser' => $alluser
                                         ]);
     }
 
+    //New Changes
+    public function newRequest() {
+        $new = Sponsorship::where('states', 'New')->orderBy('created_at', 'desc')->get();
+        $newCount = Sponsorship::where('states', 'New')->count();
+        $alluser = User::whereIn('role_id', [1, 2])->get();
+        return view('dashboard.dashboard-new-request', ['new' => $new, 'newCount' => $newCount, 'allUser' => $alluser]);
+    }
+
+    public function approvedRequest() {
+        $approved = Sponsorship::where('states', 'Approved')->orderBy('created_at', 'desc')->get();
+        $approvedCount = Sponsorship::where('states', 'Approved')->count();
+        return view('dashboard.dashboard-approved-request', ['approved' => $approved, 'approvedCount' => $approvedCount]);
+    }
+
+    public function agreedRequest() {
+        $agreed = Sponsorship::where('states', 'Agreed')->orderBy('created_at', 'desc')->get();
+        $agreedCount = Sponsorship::where('states', 'Agreed')->count();
+        return view('dashboard.dashboard-agreed-request', ['agreed' => $agreed, 'agreedCount' => $agreedCount]);
+    }
+
+    public function preTaskRequest() {
+        $preTask = Sponsorship::where('states', 'Pre Task')->orderBy('created_at', 'desc')->get();
+        $preTaskCount = Sponsorship::where('states', 'Pre Task')->count();
+        return view('dashboard.dashboard-preTask-request', ['preTask' => $preTask, 'preTaskCount' => $preTaskCount]);
+    }
+
+    public function collectionRequest() {
+        $collection = Sponsorship::where('states', 'Collection')->orderBy('created_at', 'desc')->get();
+        $collectionCount = Sponsorship::where('states', 'Collection')->count();
+        return view('dashboard.dashboard-collection-request', ['collection' => $collection, 'collectionCount' => $collectionCount]);
+    }
+
+    public function postEventRequest() {
+        $postEvent = Sponsorship::where('states', 'Post Events')->orderBy('created_at', 'desc')->get();
+        $postEventCount = Sponsorship::where('states', 'Post Events')->count();
+        return view('dashboard.dashboard-postEvent-request', ['postEvent' => $postEvent, 'postEventCount' => $postEventCount]);
+    }
+
+    public function completedRequest() {
+        $completed = Sponsorship::where('states', 'Completed')->orderBy('created_at', 'desc')->get();
+        $completedCount = Sponsorship::where('states', 'Completed')->count();
+        return view('dashboard.dashboard-completed-request', ['completed' => $completed, 'completedCount' => $completedCount]);
+    }
+
+    public function rejectedRequest() {
+        $rejected = Sponsorship::where('states', 'Rejected')->orderBy('created_at', 'desc')->get();
+        $rejectedCount = Sponsorship::where('states', 'Rejected')->count();
+        return view('dashboard.dashboard-rejected-request', ['rejected' => $rejected, 'rejectedCount' => $rejectedCount]);
+    }
+
+    public function approveNewRequest(Request $request, $id) {
+
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->handle_by = $request->handle_by;
+        $sponsor->remarks = $request->remarks;
+        $sponsor->confirmro_200ml = $request->confirmro_200ml;
+        $sponsor->confirmro_500ml = $request->confirmro_500ml;
+        $sponsor->confirmro_11L = $request->confirmro_11L;
+        $sponsor->confirmro_350ml = $request->confirmro_350ml;
+        $sponsor->others = $request->others;
+        $sponsor->states = "Approved";
+        $sponsor->save();
+        Mail::to($sponsor->email)->send(new ApprovedNotification($sponsor->event_name,
+                                                                 $sponsor->fullname,
+                                                                 $sponsor->contact,
+                                                                 $sponsor->email,
+                                                                 $sponsor->organization,
+                                                                 $sponsor->nature_event,
+                                                                 $sponsor->from_date,
+                                                                 $sponsor->to_date,
+                                                                 $sponsor->eventAddress,
+                                                                 $sponsor->attendees,
+                                                                 $sponsor->explaination_product,
+                                                                 $sponsor->booth,
+                                                                 $sponsor->confirmro_200ml,
+                                                                 $sponsor->confirmro_500ml,
+                                                                 $sponsor->confirmro_350ml,
+                                                                 $sponsor->confirmro_11L));
+        return redirect("/new-requests");
+
+    }
+
+    public function pretask(Request $request, $id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->states = "Pre Task";
+        $sponsor->tasks = $request->tasks;
+        $sponsor->save();
+        return redirect("/preTask-requests");
+    }
+
+    //End New Changes
     public function getAvailableTemplates()
     {
         $templatePath = resource_path('views/emails/template');

@@ -3,7 +3,7 @@
 @section('content')
 
 
-    @if ($spon->states == "Processing")
+    @if ($spon->states == "New")
     <div class="div-block-6">
         <div class="div-block-7">
             <h3 class="heading-9">Your Guide to the Sponsorship Application Process</h3>

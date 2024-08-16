@@ -10,6 +10,8 @@ class Sponsorship extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'sponsorships';
+
     public function tagging()
     {
         return $this->belongsToMany(Tag::class);

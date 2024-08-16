@@ -66,6 +66,35 @@ class SponsorshipController extends Controller
                     // Optionally, you can save the $uniqueFileName to your database for future reference
                 }
             }
+
+            if ($request->has('explaination_product')) {
+                $sponExProduct = implode(', ', $request->explaination_product);
+            } else {
+                $sponExProduct = null;
+            }
+
+            if ($request->has('about_jantzen')) {
+                $aboutJant = implode(', ', $request->about_jantzen);
+            } else {
+                $aboutJant = null;
+            }
+
+            // Combine the address parts
+            $fullAddress = implode(', ', array_filter([
+                $request->input('street'),
+                $request->input('city'),
+                $request->input('state'),
+                $request->input('zipCode'),
+                $request->input('country')
+            ]));
+
+            // Retrieve dates from the request
+            $fromDate = $request->input('from_date');
+            $toDate = $request->input('to_date');
+            
+            // Convert dates to YYYY-MM-DD format
+            $fromDateFormatted = Carbon::createFromFormat('j M, Y', $fromDate)->format('Y-m-d');
+            $toDateFormatted = Carbon::createFromFormat('j M, Y', $toDate)->format('Y-m-d');
         
             $currentDate = now()->format('d/m/Y');
             Mail::to('thezhencreative@gmail.com')->send(new SubmitNotification(
@@ -78,9 +107,9 @@ class SponsorshipController extends Controller
                                                        $request->nature_event,
                                                        $request->from_date,
                                                        $request->to_date,
-                                                       $request->eventAddress,
+                                                       $fullAddress,
                                                        $request->attendees,
-                                                       $request->explaination_product,
+                                                       $sponExProduct,
                                                        $request->booth,
                                                        $request->ro_200ml,
                                                        $request->ro_500ml,
@@ -101,21 +130,21 @@ class SponsorshipController extends Controller
             $sponsor->third_PIC_email = $request->third_PIC_email;
 
             $sponsor->organization = $request->organization;
-            $sponsor->about_jantzen = $request->about_jantzen;
+            $sponsor->about_jantzen = $aboutJant;
             $sponsor->event_name = $request->event_name;
             $sponsor->nature_event = $request->nature_event;
-            $sponsor->from_date = $request->from_date;
-            $sponsor->to_date = $request->to_date;
+            $sponsor->from_date = $fromDateFormatted;
+            $sponsor->to_date = $toDateFormatted;
             $sponsor->summary = $request->summary;
-            $sponsor->eventAddress = $request->eventAddress;
+            $sponsor->eventAddress = $fullAddress;
             $sponsor->attendees = $request->attendees;
-            $sponsor->explaination_product = $request->explaination_product;
-            $sponsor->booth = $request->booth;
+            $sponsor->explaination_product = $sponExProduct;
             $sponsor->sponsorship_attachments = json_encode($files);
             $sponsor->ro_200ml = $request->ro_200ml;
             $sponsor->ro_500ml = $request->ro_500ml;
             $sponsor->ro_11L = $request->ro_11L;
             $sponsor->ro_350ml = $request->ro_350ml;
+            $sponsor->states = "New";
             $sponsor->save();
         
             $existingUser = User::where('email', $request->email)->first();
@@ -148,7 +177,23 @@ class SponsorshipController extends Controller
                  ->map(function ($monthNumber) {
                      return Carbon::create()->month($monthNumber)->format('F');
                  });
-        return view('track', ['spon' => $sponsor, 'sponsor' => $sponsors, 'month' => $months]);
+        return view('tracks', ['spon' => $sponsor, 'sponsor' => $sponsors, 'month' => $months]);
+    }
+
+    public function agreedRequest($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->states = "Agreed";
+        $sponsor->save();
+        return redirect("/sponsorship-tracking");
+
+    }
+
+    public function notAgreedRequest($id) {
+        $sponsor = Sponsorship::findOrFail($id);
+        $sponsor->states = "Not Agree";
+        $sponsor->save();
+        return redirect("/sponsorship-tracking");
+
     }
 
     public function proofAgreement(Request $request, $id) {
